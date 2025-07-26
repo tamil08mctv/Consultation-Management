@@ -152,24 +152,25 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(response => response.json())
             .then(data => {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = submitBtn.id === 'consumerSubmitBtn' ? 'Submit Now' : submitBtn.id === 'businessSubmitBtn' ? 'Apply Now' : 'Submit Feedback';
                 if (data.success) {
                     formStatus.innerHTML = '<div class="alert alert-success">' + data.message + '</div>';
                     form.reset();
                     setTimeout(() => {
                         const modal = bootstrap.Modal.getInstance(form.closest('.modal'));
                         if (modal) modal.hide();
-                        window.location.reload();
+                        formStatus.innerHTML = '';
+                        inputs.forEach(input => input.classList.remove('is-invalid'));
                     }, 2000);
                 } else {
                     formStatus.innerHTML = '<div class="alert alert-danger">' + data.message + '<ul>' + Object.entries(data.errors || {}).map(([field, error]) => `<li>${field}: ${error}</li>`).join('') + '</ul></div>';
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = submitBtn.id === 'consumerSubmitBtn' ? 'Submit Now' : submitBtn.id === 'businessSubmitBtn' ? 'Apply Now' : 'Submit Feedback';
                 }
             })
             .catch(error => {
-                formStatus.innerHTML = '<div class="alert alert-danger">An error occurred. Please try again.</div>';
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = submitBtn.id === 'consumerSubmitBtn' ? 'Submit Now' : submitBtn.id === 'businessSubmitBtn' ? 'Apply Now' : 'Submit Feedback';
+                formStatus.innerHTML = '<div class="alert alert-danger">An error occurred. Please try again.</div>';
             });
         });
     });

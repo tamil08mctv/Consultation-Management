@@ -62,6 +62,17 @@ body {
     object-fit: contain;
     margin-bottom: 10px;
 }
+.carousel-item {
+    transition: transform 0.6s ease-in-out;
+}
+.carousel-control-prev, .carousel-control-next {
+    width: 5%;
+    background: rgba(0, 0, 0, 0.3);
+}
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    background-color: #007bff;
+    border-radius: 50%;
+}
 @media (max-width: 576px) {
     .container { padding: 0 15px; }
     .hero-text { font-size: 1.8rem; }

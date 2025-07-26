@@ -22,14 +22,14 @@
                     <p>Personalized solutions tailored to your needs.</p>
                 </div>
             </div>
-            <div class="col-md-4" data-aos="fade-right" data-aos-delay="100">
+            <div class="col-md-4" data-aos="flip-left" data-aos-delay="100">
                 <div class="card p-3 mb-4 text-center">
                     <i class="fas fa-link fa-2x mb-3"></i>
                     <h5>Service Matching</h5>
                     <p>Seamlessly connect with trusted partners.</p>
                 </div>
             </div>
-            <div class="col-md-4" data-aos="fade-left" data-aos-delay="200">
+            <div class="col-md-4" data-aos="flip-left" data-aos-delay="200">
                 <div class="card p-3 mb-4 text-center">
                     <i class="fas fa-check-circle fa-2x mb-3"></i>
                     <h5>Trusted Partners</h5>
@@ -70,33 +70,58 @@
                 {% endfor %}
             </select>
         </form>
-        <div class="row">
-            {% for partner in partners %}
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="{% cycle '100' '200' '300' %}">
-                    <div class="card p-3 mb-4 text-center">
-                        {% if partner.logo and partner.logo.url %}
-                            <img src="{{ partner.logo.url }}" alt="{{ partner.name }} Logo" class="partner-logo">
-                            <h5 class="mt-2">{{ partner.name }}</h5>
-                        {% else %}
-                            {% if partner.category == 'Food' %}
-                                <i class="fas fa-utensils fa-2x mb-3"></i>
-                            {% elif partner.category == 'Retail' %}
-                                <i class="fas fa-shopping-bag fa-2x mb-3"></i>
-                            {% elif partner.category == 'Services' %}
-                                <i class="fas fa-tools fa-2x mb-3"></i>
+        {% if partners.count > 3 %}
+            <div id="partnersCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    {% for partner in partners %}
+                        {% if forloop.counter0|divisibleby:3 %}
+                            <div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}">
+                                <div class="row">
+                        {% endif %}
+                                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="{% cycle '100' '200' '300' %}">
+                                        <div class="card p-3 mb-4 text-center">
+                                            {% if partner.logo and partner.logo.url %}
+                                                <img src="{{ partner.logo.url }}" alt="{{ partner.name }} Logo" class="partner-logo">
+                                            {% else %}
+                                                <i class="fas fa-store fa-2x mb-3"></i>
+                                            {% endif %}
+                                            <h5 class="mt-2">{{ partner.name }}</h5>
+                                        </div>
+                                    </div>
+                        {% if forloop.counter|divisibleby:3 or forloop.last %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#partnersCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#partnersCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        {% else %}
+            <div class="row">
+                {% for partner in partners %}
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="{% cycle '100' '200' '300' %}">
+                        <div class="card p-3 mb-4 text-center">
+                            {% if partner.logo and partner.logo.url %}
+                                <img src="{{ partner.logo.url }}" alt="{{ partner.name }} Logo" class="partner-logo">
                             {% else %}
                                 <i class="fas fa-store fa-2x mb-3"></i>
                             {% endif %}
                             <h5 class="mt-2">{{ partner.name }}</h5>
-                        {% endif %}
-                        <p>{{ partner.description }}</p>
-                        <p>Category: {{ partner.category }}</p>
+                        </div>
                     </div>
-                </div>
-            {% empty %}
-                <p class="text-center">No partners found. <button class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#businessModal">Apply Now</button></p>
-            {% endfor %}
-        </div>
+                {% endfor %}
+                {% if not partners %}
+                    <p class="text-center">No partners found. <button class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#businessModal">Apply Now</button></p>
+                {% endif %}
+            </div>
+        {% endif %}
     </div>
 </section>
 <section id="contact" class="py-5 bg-light">

@@ -4,12 +4,12 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
 from .forms import ConsumerForm, BusinessForm, FeedbackForm
-from .models import Partner, Testimonial
+from .models import Business, Testimonial
 
 def home(request):
     category = request.GET.get('category', '')
-    partners = Partner.objects.filter(category__icontains=category) if category else Partner.objects.all()
-    categories = Partner.objects.values_list('category', flat=True).distinct()
+    partners = Business.objects.filter(status='approved', category__icontains=category) if category else Business.objects.filter(status='approved')
+    categories = Business.objects.filter(status='approved').values_list('category', flat=True).distinct()
     testimonials = Testimonial.objects.all()[:3]
     consumer_form = ConsumerForm()
     business_form = BusinessForm()
@@ -25,7 +25,7 @@ def home(request):
                     'Thank You for Your Submission',
                     f'Dear {consumer_form.cleaned_data["name"]},\n\nWe have received your request. Our team will contact you soon.\n\nBest regards,\nNTLS Group',
                     settings.DEFAULT_FROM_EMAIL,
-                    [consumer_form.cleaned_data['contact']],
+                    [consumer_form.cleaned_data["contact"]],
                     fail_silently=True,
                 )
                 return JsonResponse({'success': True, 'message': 'Your request has been submitted successfully!'})
@@ -41,7 +41,7 @@ def home(request):
                     'Business Application Received',
                     f'Dear {business_form.cleaned_data["name"]},\n\nThank you for applying. We will review your application soon.\n\nBest regards,\nNTLS Group',
                     settings.DEFAULT_FROM_EMAIL,
-                    [business_form.cleaned_data['contact']],
+                    [business_form.cleaned_data["contact"]],
                     fail_silently=True,
                 )
                 return JsonResponse({'success': True, 'message': 'Your application has been submitted successfully!'})
@@ -57,7 +57,7 @@ def home(request):
                     'Thank You for Your Feedback',
                     f'Dear {feedback_form.cleaned_data["name"]},\n\nThank you for your feedback. We value your input!\n\nBest regards,\nNTLS Group',
                     settings.DEFAULT_FROM_EMAIL,
-                    [feedback_form.cleaned_data['email']],
+                    [feedback_form.cleaned_data["email"]],
                     fail_silently=True,
                 )
                 return JsonResponse({'success': True, 'message': 'Thank you for your feedback!'})

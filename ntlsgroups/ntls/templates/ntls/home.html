@@ -1,0 +1,159 @@
+{% extends 'ntls/base.html' %}
+{% load static %}
+{% block title %} - Home{% endblock %}
+{% block content %}
+<section id="home" class="hero-section" style="background: linear-gradient(135deg, #007bff, #00c4b4); position: relative;">
+    <div id="particles-js" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;"></div>
+    <div class="container text-center" style="padding: 120px 0; position: relative;">
+        <h1 class="hero-text" style="color: #fff;" data-aos="fade-down">Welcome to NTLS Group</h1>
+        <p class="hero-text" style="color: #fff;" data-aos="fade-up" data-aos-delay="200">Connecting You with Trusted Services</p>
+        <button class="btn btn-light btn-custom mt-3" data-bs-toggle="modal" data-bs-target="#consumerModal" data-aos="zoom-in">Submit Your Needs</button>
+        <button class="btn btn-outline-light btn-custom mt-3" data-bs-toggle="modal" data-bs-target="#businessModal" data-aos="zoom-in" data-aos-delay="100">Become a Partner</button>
+    </div>
+</section>
+<section id="services" class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-4" data-aos="fade-right">Our Services</h2>
+        <div class="row">
+            <div class="col-md-4" data-aos="flip-left">
+                <div class="card p-3 mb-4 text-center">
+                    <i class="fas fa-handshake fa-2x mb-3"></i>
+                    <h5>Consultation</h5>
+                    <p>Personalized solutions tailored to your needs.</p>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-right" data-aos-delay="100">
+                <div class="card p-3 mb-4 text-center">
+                    <i class="fas fa-link fa-2x mb-3"></i>
+                    <h5>Service Matching</h5>
+                    <p>Seamlessly connect with trusted partners.</p>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-left" data-aos-delay="200">
+                <div class="card p-3 mb-4 text-center">
+                    <i class="fas fa-check-circle fa-2x mb-3"></i>
+                    <h5>Trusted Partners</h5>
+                    <p>Work with validated businesses for quality services.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="testimonials" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-4" data-aos="fade-left">What Our Clients Say</h2>
+        <div class="row">
+            {% for testimonial in testimonials %}
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="{% cycle '100' '200' '300' %}">
+                    <div class="card p-3 mb-4 text-center">
+                        <i class="fas fa-quote-left fa-2x mb-3"></i>
+                        <p>{{ testimonial.message }}</p>
+                        <h6>{{ testimonial.name }}</h6>
+                        <p>{{ testimonial.category }}</p>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="text-center">No testimonials yet. Be the first!</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<section id="partners" class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-4" data-aos="fade-right">Our Trusted Partners</h2>
+        <p class="text-center">{{ partner_count }} Partners Joined</p>
+        <form method="get" class="mb-4 text-center">
+            <select name="category" onchange="this.form.submit()" class="form-select" style="width: 200px; margin: 0 auto;">
+                <option value="">All Categories</option>
+                {% for category in categories %}
+                    <option value="{{ category }}" {% if category == request.GET.category %}selected{% endif %}>{{ category }}</option>
+                {% endfor %}
+            </select>
+        </form>
+        <div class="row">
+            {% for partner in partners %}
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="{% cycle '100' '200' '300' %}">
+                    <div class="card p-3 mb-4 text-center">
+                        {% if partner.logo and partner.logo.url %}
+                            <img src="{{ partner.logo.url }}" alt="{{ partner.name }} Logo" class="partner-logo">
+                            <h5 class="mt-2">{{ partner.name }}</h5>
+                        {% else %}
+                            {% if partner.category == 'Food' %}
+                                <i class="fas fa-utensils fa-2x mb-3"></i>
+                            {% elif partner.category == 'Retail' %}
+                                <i class="fas fa-shopping-bag fa-2x mb-3"></i>
+                            {% elif partner.category == 'Services' %}
+                                <i class="fas fa-tools fa-2x mb-3"></i>
+                            {% else %}
+                                <i class="fas fa-store fa-2x mb-3"></i>
+                            {% endif %}
+                            <h5 class="mt-2">{{ partner.name }}</h5>
+                        {% endif %}
+                        <p>{{ partner.description }}</p>
+                        <p>Category: {{ partner.category }}</p>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="text-center">No partners found. <button class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#businessModal">Apply Now</button></p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<section id="contact" class="py-5 bg-light">
+    <div class="container text-center">
+        <h2 class="mb-4" data-aos="fade-left">Contact Us</h2>
+        <p>Have questions? We'd love to hear from you!</p>
+        <button class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#feedbackModal">Send Feedback</button>
+    </div>
+</section>
+<!-- Consumer Modal -->
+<div class="modal fade" id="consumerModal" tabindex="-1" aria-labelledby="consumerModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="consumerModalLabel">Submit Your Needs</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="consumerFormStatus" class="form-status"></div>
+                {% include 'ntls/consumer_form.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Business Modal -->
+<div class="modal fade" id="businessModal" tabindex="-1" aria-labelledby="businessModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="businessModalLabel">Become a Partner</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="businessFormStatus" class="form-status"></div>
+                {% include 'ntls/business_form.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Feedback Modal -->
+<div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="feedbackModalLabel">Send Feedback</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="feedbackFormStatus" class="form-status"></div>
+                <form method="post" id="feedbackForm">
+                    {% csrf_token %}
+                    {{ feedback_form.as_p }}
+                    <input type="hidden" name="feedback_form" value="1">
+                    <button type="submit" class="btn btn-custom" id="feedbackSubmitBtn">Submit Feedback</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

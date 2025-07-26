@@ -1,0 +1,37 @@
+{% load static %}
+<div class="progress mb-4">
+    <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">Step 1: Enter Details</div>
+</div>
+<form method="post" id="consumerForm" novalidate>
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="id_name" class="form-label">Name <span class="text-danger">*</span></label>
+        <input type="text" name="name" class="form-control" id="id_name" placeholder="Your Name" required data-bs-toggle="tooltip" title="Enter your full name">
+        {% if consumer_form.name.errors %}
+            <div class="invalid-feedback d-block">{{ consumer_form.name.errors.as_text }}</div>
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        <label for="id_contact" class="form-label">Email <span class="text-danger">*</span></label>
+        <input type="email" name="contact" class="form-control" id="id_contact" placeholder="your.email@example.com" required data-bs-toggle="tooltip" title="Enter a valid email address">
+        {% if consumer_form.contact.errors %}
+            <div class="invalid-feedback d-block">{{ consumer_form.contact.errors.as_text }}</div>
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        <label for="id_services" class="form-label">Services Needed <span class="text-danger">*</span></label>
+        <textarea name="services" rows="4" class="form-control" id="id_services" placeholder="Describe your needs (e.g., catering for 100 guests)" required data-bs-toggle="tooltip" title="Describe the services you need"></textarea>
+        {% if consumer_form.services.errors %}
+            <div class="invalid-feedback d-block">{{ consumer_form.services.errors.as_text }}</div>
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        <label for="id_budget" class="form-label">Budget <span class="text-danger">*</span></label>
+        <input type="text" name="budget" class="form-control" id="id_budget" placeholder="e.g., ₹10,000" required data-bs-toggle="tooltip" title="Enter your budget (e.g., ₹10,000)">
+        {% if consumer_form.budget.errors %}
+            <div class="invalid-feedback d-block">{{ consumer_form.budget.errors.as_text }}</div>
+        {% endif %}
+    </div>
+    <input type="hidden" name="consumer_form" value="1">
+    <button type="submit" class="btn btn-custom" id="consumerSubmitBtn">Submit Now</button>
+</form>

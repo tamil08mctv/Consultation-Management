@@ -1,0 +1,57 @@
+{% load static %}
+<div class="progress mb-4">
+    <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">Step 1: Submit Application</div>
+</div>
+<form method="post" enctype="multipart/form-data" id="businessForm" novalidate>
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="id_name" class="form-label">Business Name <span class="text-danger">*</span></label>
+        <input type="text" name="name" class="form-control" id="id_name" placeholder="Business Name" required data-bs-toggle="tooltip" title="Enter your business name">
+        {% if business_form.name.errors %}
+            <div class="invalid-feedback d-block">{{ business_form.name.errors.as_text }}</div>
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        <label for="id_contact" class="form-label">Email <span class="text-danger">*</span></label>
+        <input type="email" name="contact" class="form-control" id="id_contact" placeholder="business.email@example.com" required data-bs-toggle="tooltip" title="Enter a valid business email">
+        {% if business_form.contact.errors %}
+            <div class="invalid-feedback d-block">{{ business_form.contact.errors.as_text }}</div>
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        <label for="id_services" class="form-label">Services Offered <span class="text-danger">*</span></label>
+        <textarea name="services" rows="4" class="form-control" id="id_services" placeholder="Describe your services" required data-bs-toggle="tooltip" title="Describe the services your business offers"></textarea>
+        {% if business_form.services.errors %}
+            <div class="invalid-feedback d-block">{{ business_form.services.errors.as_text }}</div>
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        <label for="id_category" class="form-label">Category <span class="text-danger">*</span></label>
+        <select name="category" class="form-select" id="id_category" required data-bs-toggle="tooltip" title="Select your business category">
+            <option value="" disabled selected>Select a category</option>
+            <option value="Food">Food</option>
+            <option value="Retail">Retail</option>
+            <option value="Services">Services</option>
+            <option value="Other">Other</option>
+        </select>
+        {% if business_form.category.errors %}
+            <div class="invalid-feedback d-block">{{ business_form.category.errors.as_text }}</div>
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        <label for="id_file_upload" class="form-label">Business License (PDF) <span class="text-danger">*</span></label>
+        <input type="file" name="file_upload" class="form-control" id="id_file_upload" accept=".pdf" required data-bs-toggle="tooltip" title="Upload a PDF file (e.g., business license)">
+        {% if business_form.file_upload.errors %}
+            <div class="invalid-feedback d-block">{{ business_form.file_upload.errors.as_text }}</div>
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        <label for="id_logo" class="form-label">Logo (JPG/PNG)</label>
+        <input type="file" name="logo" class="form-control" id="id_logo" accept=".jpg,.jpeg,.png" data-bs-toggle="tooltip" title="Upload a JPG/PNG logo, max 5MB">
+        {% if business_form.logo.errors %}
+            <div class="invalid-feedback d-block">{{ business_form.logo.errors.as_text }}</div>
+        {% endif %}
+    </div>
+    <input type="hidden" name="business_form" value="1">
+    <button type="submit" class="btn btn-custom" id="businessSubmitBtn">Apply Now</button>
+</form>

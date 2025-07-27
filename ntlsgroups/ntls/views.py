@@ -1,76 +1,92 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from django.contrib import messages
+from django.views.decorators.csrf import csrf_exempt
 from django.core.mail import send_mail
-from django.conf import settings
+from django.utils import timezone
 from .forms import ConsumerForm, BusinessForm, FeedbackForm
-from .models import Business, Testimonial
+from .models import Consumer, Business, Testimonial, Feedback, EmailConfig
 
+@csrf_exempt
 def home(request):
-    category = request.GET.get('category', '')
-    partners = Business.objects.filter(status='approved', category__icontains=category) if category else Business.objects.filter(status='approved')
+    testimonials = Testimonial.objects.all()
     categories = Business.objects.filter(status='approved').values_list('category', flat=True).distinct()
-    testimonials = Testimonial.objects.all()[:3]
-    consumer_form = ConsumerForm()
-    business_form = BusinessForm()
-    feedback_form = FeedbackForm()
+    selected_category = request.GET.get('category', '')
+    if selected_category:
+        partners = Business.objects.filter(status='approved', category=selected_category)
+    else:
+        partners = Business.objects.filter(status='approved')
+    partner_count = partners.count()
+    
+    def get_email_config(purpose):
+        return EmailConfig.objects.filter(purpose=purpose, is_active=True).first() or EmailConfig.objects.filter(purpose='general', is_active=True).first()
 
     if request.method == 'POST':
         if 'consumer_form' in request.POST:
-            consumer_form = ConsumerForm(request.POST)
-            if consumer_form.is_valid():
-                consumer_form.save()
-                messages.success(request, 'Your request has been submitted successfully!')
-                send_mail(
-                    'Thank You for Your Submission',
-                    f'Dear {consumer_form.cleaned_data["name"]},\n\nWe have received your request. Our team will contact you soon.\n\nBest regards,\nNTLS Group',
-                    settings.DEFAULT_FROM_EMAIL,
-                    [consumer_form.cleaned_data["contact"]],
-                    fail_silently=True,
-                )
-                return JsonResponse({'success': True, 'message': 'Your request has been submitted successfully!'})
+            form = ConsumerForm(request.POST)
+            if form.is_valid():
+                consumer = form.save()
+                email_config = get_email_config('form_submission')
+                if email_config:
+                    send_mail(
+                        subject='Consumer Form Submission Confirmation',
+                        message=f'Dear {consumer.name},\n\nThank you for submitting your needs to NTLS Group.\n\nDetails:\n- Services: {consumer.services}\n- Budget: {consumer.budget}\n\nWe will connect you with a suitable partner soon.\n\nBest regards,\nNTLS Group',
+                        from_email=email_config.email_id,
+                        recipient_list=[consumer.contact],
+                        fail_silently=False,
+                        auth_user=email_config.email_id,
+                        auth_password=email_config.password,
+                    )
+                return JsonResponse({'success': True, 'message': 'Form submitted successfully!'})
             else:
-                errors = {field: error[0] for field, error in consumer_form.errors.items()}
-                return JsonResponse({'success': False, 'message': 'Please correct the errors in the Consumer form.', 'errors': errors})
+                return JsonResponse({'success': False, 'message': 'Form submission failed.', 'errors': form.errors})
+        
         elif 'business_form' in request.POST:
-            business_form = BusinessForm(request.POST, request.FILES)
-            if business_form.is_valid():
-                business_form.save()
-                messages.success(request, 'Your application has been submitted successfully!')
-                send_mail(
-                    'Business Application Received',
-                    f'Dear {business_form.cleaned_data["name"]},\n\nThank you for applying. We will review your application soon.\n\nBest regards,\nNTLS Group',
-                    settings.DEFAULT_FROM_EMAIL,
-                    [business_form.cleaned_data["contact"]],
-                    fail_silently=True,
-                )
-                return JsonResponse({'success': True, 'message': 'Your application has been submitted successfully!'})
+            form = BusinessForm(request.POST, request.FILES)
+            if form.is_valid():
+                business = form.save()
+                email_config = get_email_config('form_submission')
+                if email_config:
+                    send_mail(
+                        subject='Business Application Received',
+                        message=f'Dear {business.name},\n\nThank you for applying to become a partner with NTLS Group.\n\nDetails:\n- Services: {business.description}\n- Category: {business.category}\n\nWe will review your application and notify you of the status.\n\nBest regards,\nNTLS Group',
+                        from_email=email_config.email_id,
+                        recipient_list=[business.contact],
+                        fail_silently=False,
+                        auth_user=email_config.email_id,
+                        auth_password=email_config.password,
+                    )
+                return JsonResponse({'success': True, 'message': 'Application submitted successfully!'})
             else:
-                errors = {field: error[0] for field, error in business_form.errors.items()}
-                return JsonResponse({'success': False, 'message': 'Please correct the errors in the Business form.', 'errors': errors})
+                return JsonResponse({'success': False, 'message': 'Application submission failed.', 'errors': form.errors})
+        
         elif 'feedback_form' in request.POST:
-            feedback_form = FeedbackForm(request.POST)
-            if feedback_form.is_valid():
-                feedback_form.save()
-                messages.success(request, 'Thank you for your feedback!')
-                send_mail(
-                    'Thank You for Your Feedback',
-                    f'Dear {feedback_form.cleaned_data["name"]},\n\nThank you for your feedback. We value your input!\n\nBest regards,\nNTLS Group',
-                    settings.DEFAULT_FROM_EMAIL,
-                    [feedback_form.cleaned_data["email"]],
-                    fail_silently=True,
-                )
-                return JsonResponse({'success': True, 'message': 'Thank you for your feedback!'})
+            form = FeedbackForm(request.POST)
+            if form.is_valid():
+                feedback = form.save()
+                email_config = get_email_config('notifications')
+                if email_config:
+                    send_mail(
+                        subject='Feedback Submission Confirmation',
+                        message=f'Dear {feedback.name},\n\nThank you for your feedback to NTLS Group.\n\nMessage:\n{feedback.message}\n\nWe value your input and will get back to you soon.\n\nBest regards,\nNTLS Group',
+                        from_email=email_config.email_id,
+                        recipient_list=[feedback.email],
+                        fail_silently=False,
+                        auth_user=email_config.email_id,
+                        auth_password=email_config.password,
+                    )
+                return JsonResponse({'success': True, 'message': 'Feedback submitted successfully!'})
             else:
-                errors = {field: error[0] for field, error in feedback_form.errors.items()}
-                return JsonResponse({'success': False, 'message': 'Please correct the errors in the Feedback form.', 'errors': errors})
+                return JsonResponse({'success': False, 'message': 'Feedback submission failed.', 'errors': form.errors})
 
+    consumer_form = ConsumerForm()
+    business_form = BusinessForm()
+    feedback_form = FeedbackForm()
     return render(request, 'ntls/home.html', {
-        'partners': partners,
-        'categories': categories,
         'testimonials': testimonials,
+        'partners': partners,
+        'partner_count': partner_count,
+        'categories': categories,
         'consumer_form': consumer_form,
         'business_form': business_form,
         'feedback_form': feedback_form,
-        'partner_count': partners.count(),
     })

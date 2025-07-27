@@ -1,0 +1,8 @@
+Dear {{ name }},
+
+Your partnership with NTLS Group has been suspended.
+
+Please contact us for further details.
+
+Best regards,
+NTLS Group

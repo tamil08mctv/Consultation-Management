@@ -6,28 +6,23 @@ class ConsumerForm(forms.ModelForm):
         model = Consumer
         fields = ['name', 'contact', 'services', 'budget']
         widgets = {
-            'name': forms.TextInput(attrs={'placeholder': 'Your Name', 'class': 'form-control', 'required': 'required'}),
-            'contact': forms.EmailInput(attrs={'placeholder': 'your.email@example.com', 'class': 'form-control', 'required': 'required'}),
-            'services': forms.Textarea(attrs={'rows': 4, 'placeholder': 'Describe your needs (e.g., catering for 100 guests)', 'class': 'form-control', 'required': 'required'}),
-            'budget': forms.TextInput(attrs={'placeholder': 'e.g., ₹10,000', 'class': 'form-control', 'required': 'required'}),
+            'name': forms.TextInput(attrs={'placeholder': 'Your Name', 'class': 'form-control form-control-sm'}),
+            'contact': forms.EmailInput(attrs={'placeholder': 'your.email@example.com', 'class': 'form-control form-control-sm'}),
+            'services': forms.Textarea(attrs={'placeholder': 'Describe your needs', 'rows': 3, 'class': 'form-control form-control-sm'}),
+            'budget': forms.TextInput(attrs={'placeholder': 'e.g., ₹10,000', 'class': 'form-control form-control-sm'}),
         }
 
 class BusinessForm(forms.ModelForm):
     class Meta:
         model = Business
-        fields = ['name', 'contact', 'services', 'category', 'file_upload', 'logo']
+        fields = ['name', 'contact', 'description', 'category', 'file_upload', 'logo']
         widgets = {
-            'name': forms.TextInput(attrs={'placeholder': 'Business Name', 'class': 'form-control', 'required': 'required'}),
-            'contact': forms.EmailInput(attrs={'placeholder': 'business.email@example.com', 'class': 'form-control', 'required': 'required'}),
-            'services': forms.Textarea(attrs={'rows': 4, 'placeholder': 'Describe your services', 'class': 'form-control', 'required': 'required'}),
-            'category': forms.Select(choices=[
-                ('Food', 'Food'),
-                ('Retail', 'Retail'),
-                ('Services', 'Services'),
-                ('Other', 'Other'),
-            ], attrs={'class': 'form-select', 'required': 'required'}),
-            'file_upload': forms.FileInput(attrs={'data-bs-toggle': 'tooltip', 'title': 'Upload PDF only', 'class': 'form-control', 'accept': '.pdf', 'required': 'required'}),
-            'logo': forms.FileInput(attrs={'data-bs-toggle': 'tooltip', 'title': 'Upload JPG/PNG, max 5MB', 'class': 'form-control', 'accept': '.jpg,.jpeg,.png'}),
+            'name': forms.TextInput(attrs={'placeholder': 'Business Name', 'class': 'form-control form-control-sm'}),
+            'contact': forms.EmailInput(attrs={'placeholder': 'business.email@example.com', 'class': 'form-control form-control-sm'}),
+            'description': forms.Textarea(attrs={'placeholder': 'Describe your services', 'rows': 3, 'class': 'form-control form-control-sm'}),
+            'category': forms.Select(attrs={'class': 'form-select form-select-sm'}),
+            'file_upload': forms.FileInput(attrs={'class': 'form-control form-control-sm', 'accept': '.pdf'}),
+            'logo': forms.FileInput(attrs={'class': 'form-control form-control-sm', 'accept': '.jpg,.jpeg,.png'}),
         }
 
 class FeedbackForm(forms.ModelForm):
@@ -35,7 +30,7 @@ class FeedbackForm(forms.ModelForm):
         model = Feedback
         fields = ['name', 'email', 'message']
         widgets = {
-            'name': forms.TextInput(attrs={'placeholder': 'Your Name', 'class': 'form-control', 'required': 'required'}),
-            'email': forms.EmailInput(attrs={'placeholder': 'your.email@example.com', 'class': 'form-control', 'required': 'required'}),
-            'message': forms.Textarea(attrs={'rows': 3, 'placeholder': 'Your feedback', 'class': 'form-control', 'required': 'required'}),
+            'name': forms.TextInput(attrs={'placeholder': 'Your Name', 'class': 'form-control form-control-sm'}),
+            'email': forms.EmailInput(attrs={'placeholder': 'your.email@example.com', 'class': 'form-control form-control-sm'}),
+            'message': forms.Textarea(attrs={'placeholder': 'Your feedback', 'rows': 3, 'class': 'form-control form-control-sm'}),
         }

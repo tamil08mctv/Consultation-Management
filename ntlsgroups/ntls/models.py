@@ -1,77 +1,90 @@
 from django.db import models
+from django.utils import timezone
 from django.core.exceptions import ValidationError
+import os
 
-def validate_pdf(file):
-    if not file.name.endswith('.pdf'):
-        raise ValidationError('File must be a PDF.')
+def validate_pdf(value):
+    """Validate that the uploaded file is a PDF."""
+    ext = os.path.splitext(value.name)[1].lower()
+    if ext != '.pdf':
+        raise ValidationError('Only PDF files are allowed.')
 
-def validate_image(file):
+def validate_image(value):
+    """Validate that the uploaded file is an image (jpg, jpeg, png)."""
+    ext = os.path.splitext(value.name)[1].lower()
     valid_extensions = ['.jpg', '.jpeg', '.png']
-    if not any(file.name.lower().endswith(ext) for ext in valid_extensions):
-        raise ValidationError('File must be JPG, JPEG, or PNG.')
-    if file.size > 5 * 1024 * 1024:  # 5MB limit
-        raise ValidationError('File size must be under 5MB.')
+    if ext not in valid_extensions:
+        raise ValidationError('Only JPG, JPEG, or PNG files are allowed.')
+
+class EmailConfig(models.Model):
+    PURPOSE_CHOICES = (
+        ('form_submission', 'Form Submission'),
+        ('status_update', 'Status Update'),
+        ('general', 'General'),
+        ('notifications', 'Notifications'),
+    )
+    BACKEND_CHOICES = (
+        ('django.core.mail.backends.smtp.EmailBackend', 'SMTP'),
+        ('django.core.mail.backends.console.EmailBackend', 'Console'),
+    )
+    email_id = models.EmailField(max_length=254, unique=True)
+    password = models.CharField(max_length=100, blank=True)
+    host = models.CharField(max_length=100, default='smtp.zoho.com')
+    port = models.PositiveIntegerField(default=587)
+    use_tls = models.BooleanField(default=True)
+    purpose = models.CharField(max_length=20, choices=PURPOSE_CHOICES)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.email_id} ({self.get_purpose_display()})"
 
 class Consumer(models.Model):
     name = models.CharField(max_length=100)
-    contact = models.EmailField()
+    contact = models.EmailField(max_length=254)
     services = models.TextField()
     budget = models.CharField(max_length=50)
-    submission_date = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
-
-    class Meta:
-        verbose_name = 'Consumer'
-        verbose_name_plural = 'Consumers'
 
 class Business(models.Model):
-    STATUS_CHOICES = [
+    STATUS_CHOICES = (
         ('pending', 'Pending'),
         ('approved', 'Approved'),
+        ('suspended', 'Suspended'),
         ('rejected', 'Rejected'),
-        ('suspend', 'Suspended'),
-    ]
+    )
     name = models.CharField(max_length=100)
-    contact = models.EmailField()
-    services = models.TextField()
+    contact = models.EmailField(max_length=254)
+    description = models.TextField()
     category = models.CharField(max_length=50)
     file_upload = models.FileField(upload_to='uploads/', validators=[validate_pdf])
-    logo = models.ImageField(upload_to='logos/', validators=[validate_image], blank=True, null=True)
+    logo = models.ImageField(upload_to='logos/', blank=True, null=True, validators=[validate_image])
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
-    submission_date = models.DateTimeField(auto_now_add=True)
-    approved_date = models.DateTimeField(blank=True, null=True, editable=False)
-    suspended_date = models.DateTimeField(blank=True, null=True, editable=False)
+    approved_date = models.DateTimeField(blank=True, null=True)
+    suspended_date = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
-
-    class Meta:
-        verbose_name = 'Business'
-        verbose_name_plural = 'Businesses'
 
 class Testimonial(models.Model):
     name = models.CharField(max_length=100)
-    message = models.TextField()
     category = models.CharField(max_length=50)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
-
-    class Meta:
-        verbose_name = 'Testimonial'
-        verbose_name_plural = 'Testimonials'
 
 class Feedback(models.Model):
     name = models.CharField(max_length=100)
-    email = models.EmailField()
+    email = models.EmailField(max_length=254)
     message = models.TextField()
-    submission_date = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
-
-    class Meta:
-        verbose_name = 'Feedback'
-        verbose_name_plural = 'Feedback'

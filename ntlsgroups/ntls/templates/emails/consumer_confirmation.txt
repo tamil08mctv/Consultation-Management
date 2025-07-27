@@ -1,0 +1,12 @@
+Dear {{ name }},
+
+Thank you for submitting your needs to NTLS Group.
+
+Details:
+- Services: {{ services }}
+- Budget: {{ budget }}
+
+We will connect you soon.
+
+Best regards,
+NTLS Group

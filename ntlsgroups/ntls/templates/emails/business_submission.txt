@@ -1,0 +1,12 @@
+Dear {{ name }},
+
+Thank you for applying to become a partner with NTLS Group.
+
+Details:
+- Services: {{ description }}
+- Category: {{ category }}
+
+We will review your application and notify you of the status.
+
+Best regards,
+NTLS Group

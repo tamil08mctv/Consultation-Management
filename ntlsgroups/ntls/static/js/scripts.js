@@ -1,34 +1,35 @@
 document.addEventListener('DOMContentLoaded', function() {
     // GSAP Loading Animation
-    gsap.to("#loading", { opacity: 0, duration: 1, delay: 1.5, onComplete: function() {
+    gsap.to("#loading", { opacity: 0, duration: 1.5, delay: 2, onComplete: function() {
         document.getElementById("loading").style.display = "none";
     }});
 
-    // Particles.js Hero Section
+    // Enhanced Particles.js Hero Section
     particlesJS("particles-js", {
         particles: {
-            number: { value: 100, density: { enable: true, value_area: 800 } },
-            color: { value: "#ffffff" },
-            shape: { type: "circle" },
-            opacity: { value: 0.8, random: true },
-            size: { value: 5, random: true },
-            move: { enable: true, speed: 100, direction: "none", random: false }
+            number: { value: 150, density: { enable: true, value_area: 800 } },
+            color: { value: ["#ffffff", "#f472b6", "#3b82f6"] },
+            shape: { type: "circle", stroke: { width: 1, color: "#fff" } },
+            opacity: { value: 0.9, random: true },
+            size: { value: 6, random: true },
+            move: { enable: true, speed: 2, direction: "none", random: true, straight: false }
         },
         interactivity: {
             detect_on: "canvas",
-            events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" } },
-            modes: { repulse: { distance: 120 }, push: { particles_nb: 4 } }
+            events: { onhover: { enable: true, mode: "grab" }, onclick: { enable: true, mode: "push" } },
+            modes: { grab: { distance: 150 }, push: { particles_nb: 5 } }
         }
     });
 
     // GSAP Animations
-    gsap.to(".hero-text", { opacity: 1, y: 0, duration: 1.2, stagger: 0.3, ease: "power3.out" });
-    gsap.from(".card", { y: 50, opacity: 0, duration: 1, stagger: 0.2, ease: "power3.out" });
-    gsap.from(".btn-custom", { scale: 0.8, opacity: 0, duration: 0.8, stagger: 0.2, ease: "bounce.out" });
+    gsap.from(".hero-section .display-4", { opacity: 0, y: 50, duration: 1.5, ease: "power3.out" });
+    gsap.from(".hero-section .lead", { opacity: 0, y: 30, duration: 1.5, delay: 0.5, ease: "power3.out" });
+    gsap.from(".hero-section .btn-custom", { opacity: 0, scale: 0.8, duration: 1, delay: 1, stagger: 0.3, ease: "bounce.out" });
+    gsap.from(".card", { y: 60, opacity: 0, duration: 1.2, stagger: 0.3, ease: "power3.out" });
 
     // AOS Initialization
     AOS.init({
-        duration: 100,
+        duration: 1200,
         once: true,
         easing: 'ease-in-out'
     });
@@ -37,12 +38,12 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.btn-custom').forEach(btn => {
         btn.addEventListener('mouseenter', () => {
             if (!btn.disabled) {
-                gsap.to(btn, { scale: 1.15, duration: 0.3, ease: "power3.out" });
+                gsap.to(btn, { scale: 1.1, duration: 0.4, ease: "power3.out" });
             }
         });
         btn.addEventListener('mouseleave', () => {
             if (!btn.disabled) {
-                gsap.to(btn, { scale: 1, duration: 0.3, ease: "power3.out" });
+                gsap.to(btn, { scale: 1, duration: 0.4, ease: "power3.out" });
             }
         });
     });
@@ -79,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 progressBar.style.width = `${((stepNumber + 1) / totalSteps) * 100}%`;
                 progressBar.setAttribute('aria-valuenow', ((stepNumber + 1) / totalSteps) * 100);
                 progressBar.textContent = `Step ${stepNumber + 1} of ${totalSteps}`;
-                gsap.from(nextStep, { opacity: 0, x: 30, duration: 0.4, ease: "power2.out" });
+                gsap.from(nextStep, { opacity: 0, x: 50, duration: 0.5, ease: "power2.out" });
             }
         });
     });
@@ -99,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 progressBar.style.width = `${((stepNumber - 1) / totalSteps) * 100}%`;
                 progressBar.setAttribute('aria-valuenow', ((stepNumber - 1) / totalSteps) * 100);
                 progressBar.textContent = `Step ${stepNumber - 1} of ${totalSteps}`;
-                gsap.from(prevStep, { opacity: 0, x: -30, duration: 0.4, ease: "power2.out" });
+                gsap.from(prevStep, { opacity: 0, x: -50, duration: 0.5, ease: "power2.out" });
             }
         });
     });
@@ -205,7 +206,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         progressBar.style.width = `${(1 / form.querySelectorAll('.form-step').length) * 100}%`;
                         progressBar.setAttribute('aria-valuenow', (1 / form.querySelectorAll('.form-step').length) * 100);
                         progressBar.textContent = `Step 1 of ${form.querySelectorAll('.form-step').length}`;
-                    }, 2000);
+                    }, 2500);
                 } else {
                     formStatus.innerHTML = '<div class="alert alert-danger">' + data.message + '<ul>' + Object.entries(data.errors || {}).map(([field, error]) => `<li>${field}: ${error}</li>`).join('') + '</ul></div>';
                 }
@@ -234,7 +235,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const doc = parser.parseFromString(html, 'text/html');
                 const newPartnersContainer = doc.getElementById('partnersContainer');
                 partnersContainer.innerHTML = newPartnersContainer.innerHTML;
-                gsap.fromTo(partnersContainer, { opacity: 0.3 }, { opacity: 1, duration: 0.6 });
+                gsap.fromTo(partnersContainer, { opacity: 0.3 }, { opacity: 1, duration: 0.8 });
                 AOS.refresh();
             })
             .catch(error => {
@@ -244,12 +245,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Initialize Blog Modals
+    // Initialize Blog Modals with Auto-Slide
     document.querySelectorAll('.blog-image').forEach(image => {
         image.addEventListener('click', () => {
             const blogId = image.closest('.card').querySelector('.blog-image').getAttribute('data-bs-target').replace('#blogModal-', '');
             const modal = new bootstrap.Modal(document.getElementById(`blogModal-${blogId}`));
             modal.show();
+            const carousel = document.querySelector(`#blogCarousel-${blogId}`);
+            if (carousel && carousel.querySelectorAll('.carousel-item').length > 1) {
+                new bootstrap.Carousel(carousel, { interval: 3000, ride: 'carousel' });
+            }
         });
     });
 });

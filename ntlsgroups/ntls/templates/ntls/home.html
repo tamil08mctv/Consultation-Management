@@ -2,38 +2,42 @@
 {% load static %}
 {% block title %} - Home{% endblock %}
 {% block content %}
-<section id="home" class="hero-section" style="background: linear-gradient(135deg, #007bff, #00c4b4); position: relative;">
+<section id="home" class="hero-section" style="background: linear-gradient(135deg, #1e3a8a, #3b82f6); min-height: 100vh; position: relative; overflow: hidden;">
     <div id="particles-js" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;"></div>
-    <div class="container text-center" style="padding: 120px 0; position: relative;">
-        <h1 class="hero-text" style="color: #fff;" data-aos="fade-down">Welcome to NTLS Group</h1>
-        <p class="hero-text" style="color: #fff;" data-aos="fade-up" data-aos-delay="200">Connecting You with Trusted Services</p>
-        <button class="btn btn-light btn-custom mt-3" data-bs-toggle="modal" data-bs-target="#consumerModal" data-aos="zoom-in">Submit Your Needs</button>
-        <button class="btn btn-outline-light btn-custom mt-3" data-bs-toggle="modal" data-bs-target="#businessModal" data-aos="zoom-in" data-aos-delay="100">Become a Partner</button>
+    <div class="container d-flex align-items-center justify-content-center" style="min-height: 100vh; position: relative; z-index: 1;">
+        <div class="text-center text-white" data-aos="fade-up">
+            <h1 class="display-4 fw-bold" style="text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);">Welcome to NTLS Group</h1>
+            <p class="lead mt-3" style="text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);">Connecting You with Trusted Services</p>
+            <div class="mt-4">
+                <button class="btn btn-light btn-custom me-2" data-bs-toggle="modal" data-bs-target="#consumerModal" data-aos="zoom-in">Submit Your Needs</button>
+                <button class="btn btn-outline-light btn-custom" data-bs-toggle="modal" data-bs-target="#businessModal" data-aos="zoom-in" data-aos-delay="100">Become a Partner</button>
+            </div>
+        </div>
     </div>
 </section>
 <section id="services" class="py-5">
     <div class="container">
-        <h2 class="text-center mb-4" data-aos="fade-right">Our Services</h2>
-        <div class="row">
+        <h2 class="text-center mb-5 fw-bold" data-aos="fade-right" style="color: #1e3a8a;">Our Services</h2>
+        <div class="row g-4">
             <div class="col-md-4" data-aos="flip-left">
-                <div class="card p-3 mb-4 text-center">
-                    <i class="fas fa-handshake fa-2x mb-3"></i>
-                    <h5>Consultation</h5>
-                    <p>Personalized solutions tailored to your needs.</p>
+                <div class="card p-4 h-100 shadow-sm border-0" style="background: #fff; border-radius: 15px;">
+                    <i class="fas fa-handshake fa-3x mb-3 text-primary"></i>
+                    <h5 class="card-title">Consultation</h5>
+                    <p class="card-text">Personalized solutions tailored to your needs.</p>
                 </div>
             </div>
             <div class="col-md-4" data-aos="flip-left" data-aos-delay="100">
-                <div class="card p-3 mb-4 text-center">
-                    <i class="fas fa-link fa-2x mb-3"></i>
-                    <h5>Service Matching</h5>
-                    <p>Seamlessly connect with trusted partners.</p>
+                <div class="card p-4 h-100 shadow-sm border-0" style="background: #fff; border-radius: 15px;">
+                    <i class="fas fa-link fa-3x mb-3 text-primary"></i>
+                    <h5 class="card-title">Service Matching</h5>
+                    <p class="card-text">Seamlessly connect with trusted partners.</p>
                 </div>
             </div>
             <div class="col-md-4" data-aos="flip-left" data-aos-delay="200">
-                <div class="card p-3 mb-4 text-center">
-                    <i class="fas fa-check-circle fa-2x mb-3"></i>
-                    <h5>Trusted Partners</h5>
-                    <p>Work with validated businesses for quality services.</p>
+                <div class="card p-4 h-100 shadow-sm border-0" style="background: #fff; border-radius: 15px;">
+                    <i class="fas fa-check-circle fa-3x mb-3 text-primary"></i>
+                    <h5 class="card-title">Trusted Partners</h5>
+                    <p class="card-text">Work with validated businesses for quality services.</p>
                 </div>
             </div>
         </div>
@@ -41,29 +45,29 @@
 </section>
 <section id="testimonials" class="py-5 bg-light">
     <div class="container">
-        <h2 class="text-center mb-4" data-aos="fade-left">What Our Clients Say</h2>
-        <div class="row">
+        <h2 class="text-center mb-5 fw-bold" data-aos="fade-left" style="color: #1e3a8a;">What Our Clients Say</h2>
+        <div class="row g-4">
             {% for testimonial in testimonials %}
                 <div class="col-md-4" data-aos="fade-up" data-aos-delay="{% cycle '100' '200' '300' %}">
-                    <div class="card p-3 mb-4 text-center">
-                        <i class="fas fa-quote-left fa-2x mb-3"></i>
-                        <p>{{ testimonial.message }}</p>
-                        <h6>{{ testimonial.name }}</h6>
-                        <p>{{ testimonial.category }}</p>
+                    <div class="card p-4 h-100 shadow-sm border-0" style="background: #fff; border-radius: 15px;">
+                        <i class="fas fa-quote-left fa-2x mb-3 text-muted"></i>
+                        <p class="card-text">{{ testimonial.message }}</p>
+                        <h6 class="card-title fw-bold">{{ testimonial.name }}</h6>
+                        <p class="text-muted">{{ testimonial.category }}</p>
                     </div>
                 </div>
             {% empty %}
-                <p class="text-center">No testimonials yet. Be the first!</p>
+                <p class="text-center text-muted">No testimonials yet. Be the first!</p>
             {% endfor %}
         </div>
     </div>
 </section>
 <section id="partners" class="py-5">
     <div class="container">
-        <h2 class="text-center mb-4" data-aos="fade-right">Our Trusted Partners</h2>
-        <p class="text-center">{{ partner_count }} Partners Joined</p>
+        <h2 class="text-center mb-5 fw-bold" data-aos="fade-right" style="color: #1e3a8a;">Our Trusted Partners</h2>
+        <p class="text-center text-muted mb-4">{{ partner_count }} Partners Joined</p>
         <form method="get" class="mb-4 text-center">
-            <select name="category" onchange="this.form.submit()" class="form-select" style="width: 200px; margin: 0 auto;">
+            <select name="category" onchange="this.form.submit()" class="form-select w-auto mx-auto" style="max-width: 250px;">
                 <option value="">All Categories</option>
                 {% for category in categories %}
                     <option value="{{ category }}" {% if category == request.GET.category %}selected{% endif %}>{{ category }}</option>
@@ -79,13 +83,13 @@
                                 <div class="row">
                         {% endif %}
                                     <div class="col-md-4" data-aos="fade-up" data-aos-delay="{% cycle '100' '200' '300' %}">
-                                        <div class="card p-3 mb-4 text-center">
+                                        <div class="card p-4 h-100 shadow-sm border-0" style="background: #fff; border-radius: 15px;">
                                             {% if partner.logo and partner.logo.url %}
                                                 <img src="{{ partner.logo.url }}" alt="{{ partner.name }} Logo" class="partner-logo">
                                             {% else %}
-                                                <i class="fas fa-store fa-2x mb-3"></i>
+                                                <i class="fas fa-store fa-3x mb-3 text-primary"></i>
                                             {% endif %}
-                                            <h5 class="mt-2">{{ partner.name }}</h5>
+                                            <h5 class="card-title mt-2">{{ partner.name }}</h5>
                                         </div>
                                     </div>
                         {% if forloop.counter|divisibleby:3 or forloop.last %}
@@ -104,21 +108,21 @@
                 </button>
             </div>
         {% else %}
-            <div class="row">
+            <div class="row g-4">
                 {% for partner in partners %}
                     <div class="col-md-4" data-aos="fade-up" data-aos-delay="{% cycle '100' '200' '300' %}">
-                        <div class="card p-3 mb-4 text-center">
+                        <div class="card p-4 h-100 shadow-sm border-0" style="background: #fff; border-radius: 15px;">
                             {% if partner.logo and partner.logo.url %}
                                 <img src="{{ partner.logo.url }}" alt="{{ partner.name }} Logo" class="partner-logo">
                             {% else %}
-                                <i class="fas fa-store fa-2x mb-3"></i>
+                                <i class="fas fa-store fa-3x mb-3 text-primary"></i>
                             {% endif %}
-                            <h5 class="mt-2">{{ partner.name }}</h5>
+                            <h5 class="card-title mt-2">{{ partner.name }}</h5>
                         </div>
                     </div>
                 {% endfor %}
                 {% if not partners %}
-                    <p class="text-center">No partners found. <button class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#businessModal">Apply Now</button></p>
+                    <p class="text-center text-muted">No partners found. <button class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#businessModal">Apply Now</button></p>
                 {% endif %}
             </div>
         {% endif %}
@@ -126,58 +130,62 @@
 </section>
 <section id="blogs" class="py-5">
     <div class="container">
-        <h2 class="text-center mb-4" data-aos="fade-right">Explore Our Latest Blogs</h2>
+        <h2 class="text-center mb-5 fw-bold" data-aos="fade-right" style="color: #1e3a8a;">Explore Our Latest Blogs</h2>
         {% if blogs %}
-            <div class="row">
+            <div class="row g-4">
                 {% for blog in blogs %}
                     <div class="col-md-4" data-aos="fade-up" data-aos-delay="{% cycle '100' '200' '300' %}">
-                        <div class="card p-3 mb-4 text-center blog-card">
+                        <div class="card p-4 h-100 shadow-sm border-0" style="background: #fff; border-radius: 15px;">
                             {% if blog.images.all|length > 0 %}
-                                <img src="{{ blog.images.all.0.image.url }}" alt="{{ blog.title }}" class="blog-image" data-bs-toggle="modal" data-bs-target="#blogModal-{{ blog.id }}">
+                                <img src="{{ blog.images.all.0.image.url }}" alt="{{ blog.title }}" class="blog-image w-100" data-bs-toggle="modal" data-bs-target="#blogModal-{{ blog.id }}">
                             {% else %}
-                                <img src="{% static 'img/default.jpg' %}" alt="{{ blog.title }}" class="blog-image" data-bs-toggle="modal" data-bs-target="#blogModal-{{ blog.id }}">
+                                <img src="{% static 'img/default.jpg' %}" alt="{{ blog.title }}" class="blog-image w-100" data-bs-toggle="modal" data-bs-target="#blogModal-{{ blog.id }}">
                             {% endif %}
-                            <h5 class="mt-2">{{ blog.title }}</h5>
+                            <h5 class="card-title mt-3">{{ blog.title }}</h5>
                         </div>
                     </div>
                     <!-- Blog Modal -->
                     <div class="modal fade" id="blogModal-{{ blog.id }}" tabindex="-1" aria-labelledby="blogModalLabel-{{ blog.id }}" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
+                            <div class="modal-content" style="border-radius: 20px;">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="blogModalLabel-{{ blog.id }}">{{ blog.title }}</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <div class="modal-body">
-                                    <p>{{ blog.content|linebreaks }}</p>
-                                    {% if blog.images.all %}
-                                        <div id="blogCarousel-{{ blog.id }}" class="carousel slide" data-bs-ride="carousel">
-                                            <div class="carousel-inner">
-                                                {% for image in blog.images.all %}
-                                                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                                                        <img src="{{ image.image.url }}" alt="{{ image.caption|default:blog.title }}" class="d-block w-100">
-                                                        {% if image.caption %}
-                                                            <div class="carousel-caption d-none d-md-block">
-                                                                <p>{{ image.caption }}</p>
-                                                            </div>
-                                                        {% endif %}
-                                                    </div>
-                                                {% endfor %}
+                                <div class="modal-body row">
+                                    <div class="col-md-8">
+                                        <p class="text-dark">{{ blog.content|linebreaks }}</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        {% if blog.images.all %}
+                                            <div id="blogCarousel-{{ blog.id }}" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+                                                <div class="carousel-inner">
+                                                    {% for image in blog.images.all %}
+                                                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                                            <img src="{{ image.image.url }}" alt="{{ image.caption|default:blog.title }}" class="d-block w-100" style="border-radius: 10px;">
+                                                            {% if image.caption %}
+                                                                <div class="carousel-caption d-md-block">
+                                                                    <p class="bg-dark bg-opacity-75 text-white p-2 rounded">{{ image.caption }}</p>
+                                                                </div>
+                                                            {% endif %}
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                                {% if blog.images.all|length > 1 %}
+                                                    <button class="carousel-control-prev" type="button" data-bs-target="#blogCarousel-{{ blog.id }}" data-bs-slide="prev">
+                                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Previous</span>
+                                                    </button>
+                                                    <button class="carousel-control-next" type="button" data-bs-target="#blogCarousel-{{ blog.id }}" data-bs-slide="next">
+                                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Next</span>
+                                                    </button>
+                                                {% endif %}
                                             </div>
-                                            {% if blog.images.all|length > 1 %}
-                                                <button class="carousel-control-prev" type="button" data-bs-target="#blogCarousel-{{ blog.id }}" data-bs-slide="prev">
-                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                    <span class="visually-hidden">Previous</span>
-                                                </button>
-                                                <button class="carousel-control-next" type="button" data-bs-target="#blogCarousel-{{ blog.id }}" data-bs-slide="next">
-                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                    <span class="visually-hidden">Next</span>
-                                                </button>
-                                            {% endif %}
-                                        </div>
-                                    {% else %}
-                                        <p>No images available for this event.</p>
-                                    {% endif %}
+                                        {% else %}
+                                            <p class="text-muted">No images available for this event.</p>
+                                        {% endif %}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -185,21 +193,21 @@
                 {% endfor %}
             </div>
         {% else %}
-            <p class="text-center">No blogs available yet.</p>
+            <p class="text-center text-muted">No blogs available yet.</p>
         {% endif %}
     </div>
 </section>
 <section id="contact" class="py-5 bg-light">
     <div class="container text-center">
-        <h2 class="mb-4" data-aos="fade-left">Contact Us</h2>
-        <p>Have questions? We'd love to hear from you!</p>
+        <h2 class="mb-4 fw-bold" data-aos="fade-left" style="color: #1e3a8a;">Contact Us</h2>
+        <p class="lead mb-4 text-muted">Have questions? We'd love to hear from you!</p>
         <button class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#feedbackModal">Send Feedback</button>
     </div>
 </section>
 <!-- Consumer Modal -->
 <div class="modal fade" id="consumerModal" tabindex="-1" aria-labelledby="consumerModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content" style="border-radius: 20px;">
             <div class="modal-header">
                 <h5 class="modal-title" id="consumerModalLabel">Submit Your Needs</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -214,7 +222,7 @@
 <!-- Business Modal -->
 <div class="modal fade" id="businessModal" tabindex="-1" aria-labelledby="businessModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content" style="border-radius: 20px;">
             <div class="modal-header">
                 <h5 class="modal-title" id="businessModalLabel">Become a Partner</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -229,7 +237,7 @@
 <!-- Feedback Modal -->
 <div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content" style="border-radius: 20px;">
             <div class="modal-header">
                 <h5 class="modal-title" id="feedbackModalLabel">Send Feedback</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

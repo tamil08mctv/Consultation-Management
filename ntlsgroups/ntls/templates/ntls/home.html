@@ -135,11 +135,11 @@
             <div class="row g-4">
                 {% for blog in blogs %}
                     <div class="col-md-4" data-aos="fade-up" data-aos-delay="{% cycle '100' '200' '300' %}">
-                        <div class="card p-4 h-100 shadow-sm border-0" style="background: #fff; border-radius: 15px;">
+                        <div class="card p-4 h-100 shadow-sm border-0" style="background: #fff; border-radius: 15px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#blogModal-{{ blog.id }}">
                             {% if blog.images.all|length > 0 %}
-                                <img src="{{ blog.images.all.0.image.url }}" alt="{{ blog.title }}" class="blog-image w-100" data-bs-toggle="modal" data-bs-target="#blogModal-{{ blog.id }}">
+                                <img src="{{ blog.images.all.0.image.url }}" alt="{{ blog.title }}" class="blog-image w-100">
                             {% else %}
-                                <img src="{% static 'img/default.jpg' %}" alt="{{ blog.title }}" class="blog-image w-100" data-bs-toggle="modal" data-bs-target="#blogModal-{{ blog.id }}">
+                                <img src="{% static 'img/default.jpg' %}" alt="{{ blog.title }}" class="blog-image w-100">
                             {% endif %}
                             <h5 class="card-title mt-3">{{ blog.title }}</h5>
                         </div>
@@ -155,6 +155,7 @@
                                 <div class="modal-body row">
                                     <div class="col-md-8">
                                         <p class="text-dark">{{ blog.content|linebreaks }}</p>
+                                        <p class="text-muted"><strong>Created by:</strong> {{ blog.created_by.username|default:"Admin" }}</p>
                                     </div>
                                     <div class="col-md-4">
                                         {% if blog.images.all %}
@@ -162,7 +163,7 @@
                                                 <div class="carousel-inner">
                                                     {% for image in blog.images.all %}
                                                         <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                                                            <img src="{{ image.image.url }}" alt="{{ image.caption|default:blog.title }}" class="d-block w-100" style="border-radius: 10px;">
+                                                            <img src="{{ image.image.url }}" alt="{{ image.caption|default:blog.title }}" class="d-block w-100" style="border-radius: 10px; height: 300px; object-fit: cover;">
                                                             {% if image.caption %}
                                                                 <div class="carousel-caption d-md-block">
                                                                     <p class="bg-dark bg-opacity-75 text-white p-2 rounded">{{ image.caption }}</p>
@@ -183,7 +184,7 @@
                                                 {% endif %}
                                             </div>
                                         {% else %}
-                                            <p class="text-muted">No images available for this event.</p>
+                                            <p class="text-muted">No images available for this blog.</p>
                                         {% endif %}
                                     </div>
                                 </div>

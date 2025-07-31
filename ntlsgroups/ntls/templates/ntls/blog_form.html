@@ -1,49 +1,45 @@
-{% extends 'ntls/base.html' %}
 {% load static %}
-{% block title %} - Blog{% endblock %}
-{% block content %}
-<div class="modal fade" id="blogFormModal-{{ blog.id }}" tabindex="-1" aria-labelledby="blogFormModalLabel-{{ blog.id }}" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content rounded-xl bg-white shadow-2xl">
-            <div class="modal-header">
-                <h5 class="modal-title text-3xl font-bold text-gray-800" id="blogFormModalLabel-{{ blog.id }}">{{ blog.title }}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div class="modal-dialog modal-lg">
+    <div class="modal-content" style="border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);">
+        <div class="modal-header">
+            <h5 class="modal-title" id="blogFormModalLabel">{{ blog.title }}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body row">
+            <div class="col-md-8">
+                <p class="text-dark">{{ blog.content|linebreaks }}</p>
+                <p class="text-muted"><strong>Created by:</strong> {{ blog.created_by.username|default:"Admin" }}</p>
             </div>
-            <div class="modal-body p-6">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="prose max-w-none text-gray-700 leading-relaxed">
-                        {{ blog.content|linebreaks }}
-                    </div>
-                    {% if blog.images.all %}
-                        <div id="blogCarouselForm-{{ blog.id }}" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
-                            <div class="carousel-inner">
-                                {% for image in blog.images.all %}
-                                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                                        <img src="{{ image.image.url }}" alt="{{ image.caption|default:blog.title }}" class="d-block w-full h-64 object-cover rounded-md">
-                                        {% if image.caption %}
-                                            <div class="carousel-caption d-none d-md-block bg-black bg-opacity-50 text-white p-2 rounded">
-                                                <p>{{ image.caption }}</p>
-                                            </div>
-                                        {% endif %}
-                                    </div>
-                                {% endfor %}
-                            </div>
-                            {% if blog.images.all|length > 1 %}
-                                <button class="carousel-control-prev" type="button" data-bs-target="#blogCarouselForm-{{ blog.id }}" data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon bg-blue-600 rounded-full" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Previous</span>
-                                </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#blogCarouselForm-{{ blog.id }}" data-bs-slide="next">
-                                    <span class="carousel-control-next-icon bg-blue-600 rounded-full" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Next</span>
-                                </button>
-                            {% endif %}
+            <div class="col-md-4">
+                {% if blog.images.all %}
+                    <div id="blogCarousel-{{ blog.id }}" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+                        <div class="carousel-inner">
+                            {% for image in blog.images.all %}
+                                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                    <img src="{{ image.image.url }}" alt="{{ image.caption|default:blog.title }}" class="d-block w-100" style="border-radius: 10px; height: 300px; object-fit: cover;">
+                                    {% if image.caption %}
+                                        <div class="carousel-caption d-md-block">
+                                            <p class="bg-dark bg-opacity-75 text-white p-2 rounded">{{ image.caption }}</p>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
                         </div>
-                    {% else %}
-                        <p class="text-gray-600">No images available for this blog.</p>
-                    {% endif %}
-                </div>
+                        {% if blog.images.all|length > 1 %}
+                            <button class="carousel-control-prev" type="button" data-bs-target="#blogCarousel-{{ blog.id }}" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#blogCarousel-{{ blog.id }}" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        {% endif %}
+                    </div>
+                {% else %}
+                    <p class="text-muted">No images available for this blog.</p>
+                {% endif %}
             </div>
         </div>
     </div>
-{% endblock %}
+</div>

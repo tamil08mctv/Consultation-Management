@@ -125,11 +125,26 @@ body {
     background-color: #004aad;
     border-radius: 50%;
 }
+.blog-image {
+    max-height: 200px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+.blog-image:hover {
+    transform: scale(1.05);
+}
+#blogCarousel-{ blog.id .carousel-item img {
+    height: 300px;
+    object-fit: cover;
+} }
 @media (min-width: 768px) {
     .container { max-width: 1140px; }
     h3 { font-size: 2rem; }
     .card { padding: 1.5rem; }
     .partner-logo { max-height: 100px; }
+    .blog-image { max-height: 200px; }
+    #blogCarousel-{ blog.id .carousel-item img { height: 400px; }}
 }
 @media (max-width: 767.98px) {
     .container { padding: 0 15px; }
@@ -137,4 +152,6 @@ body {
     .btn-custom { padding: 6px 15px; font-size: 0.85rem; }
     #particles-js { height: 50vh; }
     .partner-logo { max-height: 80px; }
+    .blog-image { max-height: 150px; }
+    #blogCarousel-{blog.id  .carousel-item img { height: 200px; }}
 }

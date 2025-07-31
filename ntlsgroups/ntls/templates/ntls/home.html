@@ -124,6 +124,71 @@
         {% endif %}
     </div>
 </section>
+<section id="blogs" class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-4" data-aos="fade-right">Explore Our Latest Blogs</h2>
+        {% if blogs %}
+            <div class="row">
+                {% for blog in blogs %}
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="{% cycle '100' '200' '300' %}">
+                        <div class="card p-3 mb-4 text-center blog-card">
+                            {% if blog.images.all|length > 0 %}
+                                <img src="{{ blog.images.all.0.image.url }}" alt="{{ blog.title }}" class="blog-image" data-bs-toggle="modal" data-bs-target="#blogModal-{{ blog.id }}">
+                            {% else %}
+                                <img src="{% static 'img/default.jpg' %}" alt="{{ blog.title }}" class="blog-image" data-bs-toggle="modal" data-bs-target="#blogModal-{{ blog.id }}">
+                            {% endif %}
+                            <h5 class="mt-2">{{ blog.title }}</h5>
+                        </div>
+                    </div>
+                    <!-- Blog Modal -->
+                    <div class="modal fade" id="blogModal-{{ blog.id }}" tabindex="-1" aria-labelledby="blogModalLabel-{{ blog.id }}" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="blogModalLabel-{{ blog.id }}">{{ blog.title }}</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>{{ blog.content|linebreaks }}</p>
+                                    {% if blog.images.all %}
+                                        <div id="blogCarousel-{{ blog.id }}" class="carousel slide" data-bs-ride="carousel">
+                                            <div class="carousel-inner">
+                                                {% for image in blog.images.all %}
+                                                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                                        <img src="{{ image.image.url }}" alt="{{ image.caption|default:blog.title }}" class="d-block w-100">
+                                                        {% if image.caption %}
+                                                            <div class="carousel-caption d-none d-md-block">
+                                                                <p>{{ image.caption }}</p>
+                                                            </div>
+                                                        {% endif %}
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                            {% if blog.images.all|length > 1 %}
+                                                <button class="carousel-control-prev" type="button" data-bs-target="#blogCarousel-{{ blog.id }}" data-bs-slide="prev">
+                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                    <span class="visually-hidden">Previous</span>
+                                                </button>
+                                                <button class="carousel-control-next" type="button" data-bs-target="#blogCarousel-{{ blog.id }}" data-bs-slide="next">
+                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                    <span class="visually-hidden">Next</span>
+                                                </button>
+                                            {% endif %}
+                                        </div>
+                                    {% else %}
+                                        <p>No images available for this event.</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-center">No blogs available yet.</p>
+        {% endif %}
+    </div>
+</section>
 <section id="contact" class="py-5 bg-light">
     <div class="container text-center">
         <h2 class="mb-4" data-aos="fade-left">Contact Us</h2>

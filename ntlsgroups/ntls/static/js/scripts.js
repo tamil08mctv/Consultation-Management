@@ -10,9 +10,9 @@ document.addEventListener('DOMContentLoaded', function() {
             number: { value: 100, density: { enable: true, value_area: 800 } },
             color: { value: "#ffffff" },
             shape: { type: "circle" },
-            opacity: { value: 0.6, random: true },
-            size: { value: 4, random: true },
-            move: { enable: true, speed: 20, direction: "none", random: false }
+            opacity: { value: 0.8, random: true },
+            size: { value: 5, random: true },
+            move: { enable: true, speed: 100, direction: "none", random: false }
         },
         interactivity: {
             detect_on: "canvas",
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // AOS Initialization
     AOS.init({
-        duration: 1000,
+        duration: 100,
         once: true,
         easing: 'ease-in-out'
     });
@@ -113,7 +113,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const submitBtn = form.querySelector('button[type="submit"]');
             const formStatus = form.parentElement.querySelector('.form-status');
 
-            // Client-side validation
             const inputs = form.querySelectorAll('input[required], textarea[required], select[required]');
             inputs.forEach(input => {
                 if (!input.value.trim()) {
@@ -124,7 +123,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
 
-            // Email validation
             const emailInputs = form.querySelectorAll('input[type="email"]');
             emailInputs.forEach(email => {
                 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -138,7 +136,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
 
-            // File validation for business form
             const fileInput = form.querySelector('#id_file_upload');
             if (fileInput) {
                 const file = fileInput.files[0];
@@ -179,12 +176,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            // Disable button without spinner
             submitBtn.disabled = true;
             submitBtn.innerHTML = submitBtn.id === 'consumerSubmitBtn' ? 'Submitting...' : submitBtn.id === 'businessSubmitBtn' ? 'Applying...' : 'Submitting Feedback...';
             formStatus.innerHTML = '';
 
-            // Submit form via fetch
             fetch(form.action, {
                 method: 'POST',
                 body: new FormData(form),
@@ -248,4 +243,13 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
+
+    // Initialize Blog Modals
+    document.querySelectorAll('.blog-image').forEach(image => {
+        image.addEventListener('click', () => {
+            const blogId = image.closest('.card').querySelector('.blog-image').getAttribute('data-bs-target').replace('#blogModal-', '');
+            const modal = new bootstrap.Modal(document.getElementById(`blogModal-${blogId}`));
+            modal.show();
+        });
+    });
 });

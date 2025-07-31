@@ -16,6 +16,13 @@ def validate_image(value):
     if ext not in valid_extensions:
         raise ValidationError('Only JPG, JPEG, or PNG files are allowed.')
 
+def validate_address_proof(value):
+    """Validate that the uploaded file is a PDF, JPG, JPEG, or PNG."""
+    ext = os.path.splitext(value.name)[1].lower()
+    valid_extensions = ['.pdf', '.jpg', '.jpeg', '.png']
+    if ext not in valid_extensions:
+        raise ValidationError('Only PDF, JPG, JPEG, or PNG files are allowed.')
+
 class EmailConfig(models.Model):
     PURPOSE_CHOICES = (
         ('form_submission', 'Form Submission'),
@@ -29,7 +36,7 @@ class EmailConfig(models.Model):
     )
     email_id = models.EmailField(max_length=254, unique=True)
     password = models.CharField(max_length=100, blank=True)
-    host = models.CharField(max_length=100, default='smtp.zoho.com')
+    host = models.CharField(max_length=100, default='smtp.gmail.com')
     port = models.PositiveIntegerField(default=587)
     use_tls = models.BooleanField(default=True)
     purpose = models.CharField(max_length=20, choices=PURPOSE_CHOICES)
@@ -44,7 +51,6 @@ class Consumer(models.Model):
     name = models.CharField(max_length=100)
     contact = models.EmailField(max_length=254)
     services = models.TextField()
-    budget = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -57,11 +63,43 @@ class Business(models.Model):
         ('suspended', 'Suspended'),
         ('rejected', 'Rejected'),
     )
+    MODE_CHOICES = (
+        ('online', 'Online'),
+        ('offline', 'Offline'),
+        ('mixed', 'Mixed'),
+    )
+    CATEGORY_CHOICES = (
+        ('agriculture_farming', 'Agriculture & Farming'),
+        ('mining_extraction', 'Mining & Extraction'),
+        ('manufacturing', 'Manufacturing'),
+        ('construction_infrastructure', 'Construction & Infrastructure'),
+        ('retail_wholesale', 'Retail & Wholesale'),
+        ('food_beverage', 'Food & Beverage Services'),
+        ('hospitality_tourism', 'Hospitality & Tourism'),
+        ('healthcare_wellness', 'Healthcare & Wellness'),
+        ('financial_services', 'Financial Services'),
+        ('education_training', 'Education & Training'),
+        ('it_ites', 'Information Technology (IT & ITeS)'),
+        ('media_entertainment', 'Media & Entertainment'),
+        ('logistics_transportation', 'Logistics & Transportation'),
+        ('professional_consulting', 'Professional & Consulting Services'),
+        ('telecommunications', 'Telecommunications'),
+        ('energy_utilities', 'Energy & Utilities'),
+        ('real_estate', 'Real Estate & Property Services'),
+        ('security_safety', 'Security & Safety Services'),
+        ('creative_design', 'Creative & Design Services'),
+        ('non_profit', 'Non-Profit & Social Enterprises'),
+    )
     name = models.CharField(max_length=100)
     contact = models.EmailField(max_length=254)
-    description = models.TextField()
-    category = models.CharField(max_length=50)
-    file_upload = models.FileField(upload_to='uploads/', validators=[validate_pdf])
+    state = models.CharField(max_length=50, null=True, blank=True)
+    district = models.CharField(max_length=50, null=True, blank=True)
+    business_mode = models.CharField(max_length=20, choices=MODE_CHOICES, null=True, blank=True)
+    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, null=True, blank=True)
+    contact_number = models.CharField(max_length=15, null=True, blank=True)
+    applier_designation = models.CharField(max_length=100, null=True, blank=True)
+    registration_proof = models.FileField(upload_to='uploads/registration/', validators=[validate_pdf], null=True, blank=True)
+    address_proof = models.FileField(upload_to='uploads/address/', validators=[validate_address_proof], null=True, blank=True)
     logo = models.ImageField(upload_to='logos/', blank=True, null=True, validators=[validate_image])
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
     approved_date = models.DateTimeField(blank=True, null=True)
@@ -88,3 +126,19 @@ class Feedback(models.Model):
 
     def __str__(self):
         return self.name
+
+class BlogImage(models.Model):
+    blog = models.ForeignKey('Blog', related_name='images', on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='blogs/', validators=[validate_image])
+    caption = models.CharField(max_length=200, blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.blog.title} - Image {self.id}"
+
+class Blog(models.Model):
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title

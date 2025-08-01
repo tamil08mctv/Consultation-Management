@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.core.mail import send_mail, get_connection
 from django.utils import timezone
 from django import forms
-from .models import Consumer, Business, Testimonial, Feedback, EmailConfig, Blog, BlogImage
+from .models import Consumer, Business, Testimonial, Feedback, EmailConfig, Blog, BlogImage, SocialPlatform, Service
 import logging
 import smtplib
 import re
@@ -326,3 +326,16 @@ class BlogAdmin(admin.ModelAdmin):
     list_display = ('title', 'created_at')
     search_fields = ('title', 'content')
     inlines = [BlogImageInline]
+
+@admin.register(SocialPlatform)
+class SocialPlatformAdmin(admin.ModelAdmin):
+    list_display = ('name', 'link', 'is_active', 'created_at')
+    list_filter = ('is_active', 'name')
+    search_fields = ('name', 'link')
+
+@admin.register(Service)
+class ServiceAdmin(admin.ModelAdmin):
+    list_display = ('name', 'icon', 'icon_image', 'is_active', 'created_at')
+    list_filter = ('is_active',)
+    search_fields = ('name', 'icon')
+    fields = ('name', 'icon', 'icon_image', 'description', 'is_active')

@@ -2,15 +2,20 @@
 {% load static %}
 {% block title %} - Home{% endblock %}
 {% block content %}
-<section id="home" class="hero-section" style="background: linear-gradient(135deg, #1e3a8a, #3b82f6); min-height: 100vh; position: relative; overflow: hidden;">
+<section id="home" class="hero-section" style="background: linear-gradient(135deg, #1e3a8a, #3b82f6); min-height: 100vh; position: relative; overflow: hidden; display: flex; align-items: center; padding: 50px 0;">
     <div id="particles-js" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;"></div>
-    <div class="container d-flex align-items-center justify-content-center" style="min-height: 100vh; position: relative; z-index: 1;">
-        <div class="text-center text-white" data-aos="fade-up">
-            <h1 class="display-4 fw-bold" style="text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);">Welcome to NTLS Group</h1>
-            <p class="lead mt-3" style="text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);">Connecting You with Trusted Services</p>
-            <div class="mt-4">
+    <div class="container text-center" style="position: relative; z-index: 1;">
+        <div class="hero-content" data-aos="fade-up">
+            <h1 class="display-4 fw-bold text-white" style="text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);">Welcome to NTLS Group</h1>
+            <p class="lead text-white mt-3" style="text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);">Connecting You with Trusted Services</p>
+            <div class="mt-4 d-flex justify-content-center gap-3">
                 <button class="btn btn-light btn-custom me-2" data-bs-toggle="modal" data-bs-target="#consumerModal" data-aos="zoom-in">Submit Your Needs</button>
                 <button class="btn btn-outline-light btn-custom" data-bs-toggle="modal" data-bs-target="#businessModal" data-aos="zoom-in" data-aos-delay="100">Become a Partner</button>
+            </div>
+            <div class="mt-4 social-icons">
+                {% for social in social_platforms %}
+                    <a href="{{ social.link }}" class="text-white me-3" target="_blank"><i class="fab fa-{{ social.name }} fa-2x"></i></a>
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -19,27 +24,23 @@
     <div class="container">
         <h2 class="text-center mb-5 fw-bold" data-aos="fade-right" style="color: #1e3a8a;">Our Services</h2>
         <div class="row g-4">
-            <div class="col-md-4" data-aos="flip-left">
-                <div class="card p-4 h-100 shadow-sm border-0" style="background: #fff; border-radius: 15px;">
-                    <i class="fas fa-handshake fa-3x mb-3 text-primary"></i>
-                    <h5 class="card-title">Consultation</h5>
-                    <p class="card-text">Personalized solutions tailored to your needs.</p>
+            {% for service in services %}
+                <div class="col-md-4" data-aos="flip-left" data-aos-delay="{% if forloop.counter == 1 %}0{% elif forloop.counter == 2 %}100{% else %}200{% endif %}">
+                    <div class="card p-4 h-100 shadow-sm border-0" style="background: #fff; border-radius: 15px;">
+                        {% if service.icon_image %}
+                            <img src="{{ service.icon_image.url }}" alt="{{ service.name }} Icon" class="service-icon mb-3" style="max-height: 48px; max-width: 48px;">
+                        {% elif service.icon %}
+                            <i class="{{ service.icon }} fa-3x mb-3 text-primary"></i>
+                        {% else %}
+                            <i class="fas fa-cogs fa-3x mb-3 text-primary"></i> <!-- Default icon if none provided -->
+                        {% endif %}
+                        <h5 class="card-title">{{ service.name }}</h5>
+                        <p class="card-text">{{ service.description }}</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-4" data-aos="flip-left" data-aos-delay="100">
-                <div class="card p-4 h-100 shadow-sm border-0" style="background: #fff; border-radius: 15px;">
-                    <i class="fas fa-link fa-3x mb-3 text-primary"></i>
-                    <h5 class="card-title">Service Matching</h5>
-                    <p class="card-text">Seamlessly connect with trusted partners.</p>
-                </div>
-            </div>
-            <div class="col-md-4" data-aos="flip-left" data-aos-delay="200">
-                <div class="card p-4 h-100 shadow-sm border-0" style="background: #fff; border-radius: 15px;">
-                    <i class="fas fa-check-circle fa-3x mb-3 text-primary"></i>
-                    <h5 class="card-title">Trusted Partners</h5>
-                    <p class="card-text">Work with validated businesses for quality services.</p>
-                </div>
-            </div>
+            {% empty %}
+                <p class="text-center text-muted">No services available yet.</p>
+            {% endfor %}
         </div>
     </div>
 </section>

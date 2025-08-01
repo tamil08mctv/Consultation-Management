@@ -142,3 +142,32 @@ class Blog(models.Model):
 
     def __str__(self):
         return self.title
+
+class SocialPlatform(models.Model):
+    PLATFORM_CHOICES = (
+        ('facebook', 'Facebook'),
+        ('twitter', 'Twitter'),
+        ('instagram', 'Instagram'),
+        ('linkedin', 'LinkedIn'),
+        ('youtube', 'YouTube'),
+        ('pinterest', 'Pinterest'),
+        ('tiktok', 'TikTok'),
+    )
+    name = models.CharField(max_length=50, choices=PLATFORM_CHOICES, unique=True)
+    link = models.URLField(max_length=200)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.get_name_display()} - {self.link}"
+
+class Service(models.Model):
+    icon = models.CharField(max_length=50, blank=True, null=True, help_text="Enter Font Awesome icon class (e.g., 'fas fa-handshake') or leave blank if uploading an icon image.")
+    icon_image = models.ImageField(upload_to='service_icons/', blank=True, null=True, validators=[validate_image], help_text="Upload a custom icon image (JPG, JPEG, PNG) if preferred.")
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name

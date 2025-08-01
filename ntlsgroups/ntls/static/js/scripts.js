@@ -7,17 +7,24 @@ document.addEventListener('DOMContentLoaded', function() {
     // Enhanced Particles.js Hero Section
     particlesJS("particles-js", {
         particles: {
-            number: { value: 150, density: { enable: true, value_area: 800 } },
-            color: { value: ["#ffffff", "#f472b6", "#3b82f6"] },
+            number: { value: 200, density: { enable: true, value_area: 600 } },
+            color: { value: ["#ffffff", "#f472b6", "#3b82f6", "#10b981"] },
             shape: { type: "circle", stroke: { width: 1, color: "#fff" } },
-            opacity: { value: 0.9, random: true },
-            size: { value: 6, random: true },
-            move: { enable: true, speed: 2, direction: "none", random: true, straight: false }
+            opacity: { value: 0.8, random: true },
+            size: { value: 8, random: true },
+            move: { enable: true, speed: 3, direction: "none", random: true, straight: false, bounce: true, attract: { enable: true, rotateX: 600, rotateY: 1200 } }
         },
         interactivity: {
             detect_on: "canvas",
-            events: { onhover: { enable: true, mode: "grab" }, onclick: { enable: true, mode: "push" } },
-            modes: { grab: { distance: 150 }, push: { particles_nb: 5 } }
+            events: {
+                onhover: { enable: true, mode: "repulse" },
+                onclick: { enable: true, mode: "push" },
+                resize: true
+            },
+            modes: {
+                repulse: { distance: 200, duration: 0.4 },
+                push: { particles_nb: 10 }
+            }
         }
     });
 
@@ -253,7 +260,7 @@ document.addEventListener('DOMContentLoaded', function() {
             modal.show();
             const carousel = document.querySelector(`#blogCarousel-${blogId}`);
             if (carousel && carousel.querySelectorAll('.carousel-item').length > 1) {
-                new bootstrap.Carousel(carousel, { interval: 3000, ride: 'carousel' });
+                new bootstrap.Carousel(carousel, { interval: 4000, ride: 'carousel' });
             }
         });
     });

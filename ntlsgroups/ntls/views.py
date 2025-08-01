@@ -6,7 +6,7 @@ from django.utils import timezone
 import logging
 import smtplib
 from .forms import ConsumerForm, BusinessForm, FeedbackForm
-from .models import Consumer, Business, Testimonial, Feedback, EmailConfig, Blog
+from .models import Consumer, Business, Testimonial, Feedback, EmailConfig, Blog, SocialPlatform, Service
 from ntlsgroups.settings import get_email_config
 
 # Set up logging
@@ -23,6 +23,8 @@ def home(request):
         partners = Business.objects.filter(status='approved')
     partner_count = partners.count()
     blogs = Blog.objects.all().order_by('-created_at').prefetch_related('images')
+    social_platforms = SocialPlatform.objects.filter(is_active=True)
+    services = Service.objects.filter(is_active=True)
 
     if request.method == 'POST':
         if 'consumer_form' in request.POST:
@@ -181,4 +183,6 @@ def home(request):
         'business_form': business_form,
         'feedback_form': feedback_form,
         'blogs': blogs,
+        'social_platforms': social_platforms,
+        'services': services,
     })

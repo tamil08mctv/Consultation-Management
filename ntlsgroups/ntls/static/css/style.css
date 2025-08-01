@@ -35,6 +35,23 @@ body {
     min-height: 100vh;
     position: relative;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: 50px 0;
+}
+.hero-content {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+.social-icons a {
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+.social-icons a:hover {
+    transform: scale(1.2);
+    color: #f472b6;
 }
 .card {
     border-radius: 15px;
@@ -47,23 +64,24 @@ body {
 }
 .btn-custom {
     border-radius: 25px;
-    padding: 10px 25px;
+    padding: 12px 30px;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 1.1rem;
     transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 1px;
-}
-.btn-primary.btn-custom {
+    display: inline-block;
     background: #3b82f6;
+    color: #fff;
     border: none;
 }
-.btn-primary.btn-custom:hover {
+.btn-custom:hover {
     background: #1e40af;
     transform: translateY(-3px);
     box-shadow: 0 6px 15px rgba(59, 130, 246, 0.4);
 }
 .btn-outline-light.btn-custom {
+    background: transparent;
     border: 2px solid #ffffff;
     color: #ffffff;
 }
@@ -140,37 +158,51 @@ body {
     border-radius: 50%;
     padding: 10px;
 }
+.blog-card {
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+.blog-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 15px 40px rgba(30, 58, 138, 0.3);
+}
+.blog-title {
+    font-size: 1.5rem;
+    color: #1e3a8a;
+    text-transform: uppercase;
+}
 .blog-image {
-    max-height: 220px;
+    max-height: 200px;
     object-fit: cover;
     cursor: pointer;
     transition: transform 0.3s ease;
     border-radius: 10px;
 }
 .blog-image:hover {
-    transform: scale(1.05);
+    transform: scale(1.1);
 }
-#blogCarousel-{ blog.id  .carousel-item img {
-    height: 300px;
+.modal-xl .modal-body img {
+    height: 400px;
     object-fit: cover;
     border-radius: 10px;
-}}
+}
 @media (min-width: 768px) {
     .container { max-width: 1200px; }
-    h2 { font-size: 2.5rem; }
-    .card { padding: 2rem; }
+    h2 { font-size: 2.8rem; }
+    .card { padding: 2.5rem; }
     .partner-logo { max-height: 120px; }
-    .blog-image { max-height: 220px; }
-    #blogCarousel-{blog.id .carousel-item img { height: 400px; }}
+    .blog-image { max-height: 200px; }
+    .modal-xl .modal-body img { height: 450px; }
     .hero-section .container { padding: 0 50px; }
+    .btn-custom { padding: 12px 30px; font-size: 1.1rem; }
 }
 @media (max-width: 767.98px) {
     .container { padding: 0 10px; }
     .hero-section .display-4 { font-size: 2rem; }
     .btn-custom { padding: 8px 20px; font-size: 0.9rem; }
     .partner-logo { max-height: 90px; }
-    .blog-image { max-height: 180px; }
-    #blogCarousel-{blog.id  .carousel-item img { height: 250px; }}
+    .blog-image { max-height: 150px; }
+    .modal-xl .modal-body img { height: 250px; }
     .navbar-brand img { height: 40px; }
     .nav-link { font-size: 1rem; }
+    .blog-title { font-size: 1.2rem; }
 }

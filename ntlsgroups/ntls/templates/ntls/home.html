@@ -3,16 +3,16 @@
 {% block title %} - Home{% endblock %}
 {% block content %}
 <section id="home" class="hero-section">
-    <div id="particles-js" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 1;"></div>
+    <div id="particles-js" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 0; opacity: 0.4;"></div>
     <div class="container text-center">
-        <div class="hero-content" data-aos="fade-up">
+        <div class="hero-content" data-aos="fade-up" style="z-index: 10;">
             <h1 class="display-4 fw-bold text-white">Welcome to NTLS Group</h1>
             <p class="lead text-white mt-3">Connecting You with Trusted Services</p>
-            <div class="mt-4 d-flex justify-content-center gap-3" style="z-index: 3;">
+            <div class="mt-4 d-flex justify-content-center gap-3" style="z-index: 15;">
                 <button class="btn btn-light btn-custom" data-bs-toggle="modal" data-bs-target="#consumerModal" data-aos="zoom-in">Submit Your Needs</button>
                 <button class="btn btn-outline-light btn-custom" data-bs-toggle="modal" data-bs-target="#businessModal" data-aos="zoom-in" data-aos-delay="100">Become a Partner</button>
             </div>
-            <div class="mt-4 social-icons" style="z-index: 3;">
+            <div class="mt-4 social-icons" style="z-index: 15;">
                 {% for social in social_platforms %}
                     <a href="{{ social.link }}" class="text-white me-3" target="_blank"><i class="fab fa-{{ social.name }} fa-2x"></i></a>
                 {% endfor %}
@@ -29,85 +29,89 @@
 <section id="services" class="services-section">
     <div class="container">
         <h2 class="text-center mb-5 fw-bold" data-aos="fade-up">Our Services</h2>
-        <div id="servicesCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
-            <div class="carousel-inner">
-                {% for service in services %}
-                    {% if forloop.counter0|divisibleby:8 %}
-                        <div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}">
-                            <div class="row g-3 justify-content-center align-items-stretch">
-                    {% endif %}
-                                <div class="col-auto">
-                                    <div class="service-card" data-aos="zoom-in">
-                                        {% if service.icon_image %}
-                                            <img src="{{ service.icon_image.url }}" alt="{{ service.name }} Icon">
-                                        {% elif service.icon %}
-                                            <i class="{{ service.icon }} fa-3x text-primary"></i>
-                                        {% else %}
-                                            <i class="fas fa-cogs fa-3x text-primary"></i>
-                                        {% endif %}
-                                        <h5>{{ service.name }}</h5>
-                                        <p>{{ service.description }}</p>
+        {% if services %}
+            <div id="servicesCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+                <div class="carousel-inner" style="min-height: 450px;">
+                    {% for service in services %}
+                        {% if forloop.counter0|divisibleby:8 %}
+                            <div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}">
+                                <div class="row g-3 justify-content-center align-items-stretch">
+                        {% endif %}
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="service-card" data-aos="zoom-in" data-aos-delay="{% cycle '100' '200' '300' '400' '100' '200' '300' '400' %}">
+                                            {% if service.icon_image %}
+                                                <img src="{{ service.icon_image.url }}" alt="{{ service.name }} Icon">
+                                            {% elif service.icon %}
+                                                <i class="{{ service.icon }} fa-3x text-primary"></i>
+                                            {% else %}
+                                                <i class="fas fa-cogs fa-3x text-primary"></i>
+                                            {% endif %}
+                                            <h5>{{ service.name }}</h5>
+                                            <p>{{ service.description }}</p>
+                                        </div>
                                     </div>
+                        {% if forloop.counter|divisibleby:8 or forloop.last %}
                                 </div>
-                    {% if forloop.counter|divisibleby:8 or forloop.last %}
                             </div>
-                        </div>
-                    {% endif %}
-                {% empty %}
-                    <p class="text-center text-muted">No services available yet.</p>
-                {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                {% if services|length > 8 %}
+                    <button class="carousel-control-prev" type="button" data-bs-target="#servicesCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#servicesCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                {% endif %}
             </div>
-            {% if services|length > 8 %}
-                <button class="carousel-control-prev" type="button" data-bs-target="#servicesCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#servicesCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            {% endif %}
-        </div>
+        {% else %}
+            <p class="text-center text-muted">No services available. Please check the database or view context.</p>
+        {% endif %}
     </div>
 </section>
 
 <section id="testimonials" class="testimonials-section">
     <div class="container">
         <h2 class="text-center mb-5 fw-bold" data-aos="fade-up">What Our Clients Say</h2>
-        <div id="testimonialsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
-            <div class="carousel-inner">
-                {% for testimonial in testimonials %}
-                    {% if forloop.counter0|divisibleby:3 %}
-                        <div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}">
-                            <div class="row g-3 justify-content-center">
-                    {% endif %}
-                                <div class="col-auto">
-                                    <div class="testimonial-card" data-aos="zoom-in">
-                                        <i class="fas fa-quote-left fa-2x text-primary"></i>
-                                        <p>{{ testimonial.message }}</p>
-                                        <h6>{{ testimonial.name }}</h6>
-                                        <p class="text-muted">{{ testimonial.category }}</p>
+        {% if testimonials %}
+            <div id="testimonialsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+                <div class="carousel-inner">
+                    {% for testimonial in testimonials %}
+                        {% if forloop.counter0|divisibleby:3 %}
+                            <div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}">
+                                <div class="row g-3 justify-content-center">
+                        {% endif %}
+                                    <div class="col-md-4">
+                                        <div class="testimonial-card" data-aos="zoom-in" data-aos-delay="{% cycle '100' '200' '300' %}">
+                                            <i class="fas fa-quote-left fa-2x text-primary"></i>
+                                            <p>{{ testimonial.message }}</p>
+                                            <h6>{{ testimonial.name }}</h6>
+                                            <p class="text-muted">{{ testimonial.category }}</p>
+                                        </div>
                                     </div>
+                        {% if forloop.counter|divisibleby:3 or forloop.last %}
                                 </div>
-                    {% if forloop.counter|divisibleby:3 or forloop.last %}
                             </div>
-                        </div>
-                    {% endif %}
-                {% empty %}
-                    <p class="text-center text-muted">No testimonials yet. Be the first!</p>
-                {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                {% if testimonials|length > 3 %}
+                    <button class="carousel-control-prev" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                {% endif %}
             </div>
-            {% if testimonials|length > 3 %}
-                <button class="carousel-control-prev" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            {% endif %}
-        </div>
+        {% else %}
+            <p class="text-center text-muted">No testimonials available. Please check the database or view context.</p>
+        {% endif %}
     </div>
 </section>
 
@@ -123,60 +127,86 @@
                 {% endfor %}
             </select>
         </form>
-        <div id="partnersCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
-            <div class="carousel-inner">
-                {% for partner in partners %}
-                    {% if forloop.counter0|divisibleby:4 %}
-                        <div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}">
-                            <div class="row g-3 justify-content-center">
-                    {% endif %}
-                                <div class="col-auto">
-                                    <div class="partner-card" data-aos="zoom-in">
-                                        {% if partner.logo and partner.logo.url %}
-                                            <img src="{{ partner.logo.url }}" alt="{{ partner.name }} Logo">
-                                        {% else %}
-                                            <i class="fas fa-store fa-3x text-primary"></i>
-                                        {% endif %}
-                                        <h5>{{ partner.name }}</h5>
+        {% if partners %}
+            <div id="partnersCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+                <div class="carousel-inner">
+                    {% for partner in partners %}
+                        {% if forloop.counter0|divisibleby:4 %}
+                            <div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}">
+                                <div class="row g-3 justify-content-center">
+                        {% endif %}
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="partner-card" data-aos="zoom-in" data-aos-delay="{% cycle '100' '200' '300' '400' %}">
+                                            {% if partner.logo and partner.logo.url %}
+                                                <img src="{{ partner.logo.url }}" alt="{{ partner.name }} Logo">
+                                            {% else %}
+                                                <i class="fas fa-store fa-3x text-primary"></i>
+                                            {% endif %}
+                                            <h5>{{ partner.name }}</h5>
+                                        </div>
                                     </div>
+                        {% if forloop.counter|divisibleby:4 or forloop.last %}
                                 </div>
-                    {% if forloop.counter|divisibleby:4 or forloop.last %}
                             </div>
-                        </div>
-                    {% endif %}
-                {% empty %}
-                    <p class="text-center text-muted">No partners found. <button class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#businessModal">Apply Now</button></p>
-                {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                {% if partners|length > 4 %}
+                    <button class="carousel-control-prev" type="button" data-bs-target="#partnersCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#partnersCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                {% endif %}
             </div>
-            {% if partners|length > 4 %}
-                <button class="carousel-control-prev" type="button" data-bs-target="#partnersCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#partnersCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            {% endif %}
-        </div>
+        {% else %}
+            <p class="text-center text-muted">No partners found. Please check the database or view context. <button class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#businessModal">Apply Now</button></p>
+        {% endif %}
     </div>
 </section>
 
 <section id="blogs" class="blogs-section">
     <div class="container">
         <h2 class="text-center mb-5 fw-bold" data-aos="fade-up">Explore Our Latest Blogs</h2>
-        <div class="row g-4 justify-content-center">
-            {% for blog in blogs|slice:":3" %}
-                <div class="col-md-4">
-                    <div class="blog-card" data-aos="zoom-in" data-aos-delay="{% cycle '100' '200' '300' %}" data-bs-toggle="modal" data-bs-target="#blogModal-{{ blog.id }}">
-                        {% if blog.images.all|length > 0 %}
-                            <img src="{{ blog.images.all.0.image.url }}" alt="{{ blog.title }}" class="blog-image w-100">
-                        {% else %}
-                            <img src="{% static 'img/default.jpg' %}" alt="{{ blog.title }}" class="blog-image w-100">
+        {% if blogs %}
+            <div id="blogsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+                <div class="carousel-inner">
+                    {% for blog in blogs %}
+                        {% if forloop.counter0|divisibleby:3 %}
+                            <div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}">
+                                <div class="row g-3 justify-content-center">
                         {% endif %}
-                        <h5 class="card-title mt-3 blog-title">{{ blog.title }}</h5>
-                    </div>
+                                    <div class="col-md-4">
+                                        <div class="blog-card" data-aos="zoom-in" data-aos-delay="{% cycle '100' '200' '300' %}" data-bs-toggle="modal" data-bs-target="#blogModal-{{ blog.id }}">
+                                            {% if blog.images.all|length > 0 %}
+                                                <img src="{{ blog.images.all.0.image.url }}" alt="{{ blog.title }}" class="blog-image w-100">
+                                            {% else %}
+                                                <img src="{% static 'img/default.jpg' %}" alt="{{ blog.title }}" class="blog-image w-100">
+                                            {% endif %}
+                                            <h5 class="card-title mt-3 blog-title">{{ blog.title }}</h5>
+                                        </div>
+                                    </div>
+                        {% if forloop.counter|divisibleby:3 or forloop.last %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
                 </div>
+                {% if blogs|length > 3 %}
+                    <button class="carousel-control-prev" type="button" data-bs-target="#blogsCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#blogsCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                {% endif %}
+            </div>
+            {% for blog in blogs %}
                 <div class="modal fade" id="blogModal-{{ blog.id }}" tabindex="-1" aria-labelledby="blogModalLabel-{{ blog.id }}" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
@@ -224,13 +254,11 @@
                     </div>
                 </div>
             {% endfor %}
-            {% if not blogs %}
-                <p class="text-center text-muted">No blogs available yet.</p>
-            {% endif %}
-        </div>
+        {% else %}
+            <p class="text-center text-muted">No blogs available. Please check the database or view context.</p>
+        {% endif %}
     </div>
 </section>
-
 
 <section id="contact" class="py-5 bg-light">
     <div class="container text-center">

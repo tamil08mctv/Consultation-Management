@@ -906,3 +906,4 @@ WARNING 2025-08-02 12:57:28,988 log Not Found: /favicon.ico
 DEBUG 2025-08-02 12:58:06,166 PngImagePlugin STREAM b'IHDR' 16 13
 DEBUG 2025-08-02 12:58:06,168 PngImagePlugin STREAM b'IDAT' 41 8192
 WARNING 2025-08-02 12:58:43,024 log Not Found: /favicon.ico
+INFO 2025-08-02 18:01:22,674 autoreload Watching for file changes with StatReloader

@@ -3,24 +3,19 @@
 {% block title %} - Home{% endblock %}
 {% block content %}
 <section id="home" class="hero-section">
-    <div id="particles-js" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 0; opacity: 0.4;"></div>
+    <div id="particles-js" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 0; opacity: 0.3;"></div>
     <div class="container text-center">
-        <div class="hero-content" data-aos="fade-up" style="z-index: 10;">
+        <div class="hero-content" data-aos="fade-up">
             <h1 class="display-4 fw-bold text-white">Welcome to NTLS Group</h1>
             <p class="lead text-white mt-3">Connecting You with Trusted Services</p>
-            <div class="mt-4 d-flex justify-content-center gap-3" style="z-index: 15;">
+            <div class="mt-4 d-flex flex-wrap justify-content-center gap-3">
                 <button class="btn btn-light btn-custom" data-bs-toggle="modal" data-bs-target="#consumerModal" data-aos="zoom-in">Submit Your Needs</button>
                 <button class="btn btn-outline-light btn-custom" data-bs-toggle="modal" data-bs-target="#businessModal" data-aos="zoom-in" data-aos-delay="100">Become a Partner</button>
             </div>
-            <div class="mt-4 social-icons" style="z-index: 15;">
+            <div class="mt-4 social-icons">
                 {% for social in social_platforms %}
-                    <a href="{{ social.link }}" class="text-white me-3" target="_blank"><i class="fab fa-{{ social.name }} fa-2x"></i></a>
+                    <a href="{{ social.link }}" class="text-white me-3" target="_blank" aria-label="{{ social.name }}"><i class="fab fa-{{ social.name }} fa-2x"></i></a>
                 {% endfor %}
-                {% if not social_platforms %}
-                    <a href="https://facebook.com" class="text-white me-3" target="_blank"><i class="fab fa-facebook fa-2x"></i></a>
-                    <a href="https://twitter.com" class="text-white me-3" target="_blank"><i class="fab fa-twitter fa-2x"></i></a>
-                    <a href="https://linkedin.com" class="text-white me-3" target="_blank"><i class="fab fa-linkedin fa-2x"></i></a>
-                {% endif %}
             </div>
         </div>
     </div>
@@ -31,16 +26,16 @@
         <h2 class="text-center mb-5 fw-bold" data-aos="fade-up">Our Services</h2>
         {% if services %}
             <div id="servicesCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
-                <div class="carousel-inner" style="min-height: 450px;">
+                <div class="carousel-inner">
                     {% for service in services %}
-                        {% if forloop.counter0|divisibleby:8 %}
+                        {% if forloop.counter0|divisibleby:3 %}
                             <div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}">
                                 <div class="row g-3 justify-content-center align-items-stretch">
                         {% endif %}
-                                    <div class="col-md-3 col-sm-6">
-                                        <div class="service-card" data-aos="zoom-in" data-aos-delay="{% cycle '100' '200' '300' '400' '100' '200' '300' '400' %}">
+                                    <div class="col-12 col-sm-6 col-md-4">
+                                        <div class="service-card" data-aos="zoom-in" data-aos-delay="{% cycle '100' '200' '300' %}">
                                             {% if service.icon_image %}
-                                                <img src="{{ service.icon_image.url }}" alt="{{ service.name }} Icon">
+                                                <img src="{{ service.icon_image.url }}" alt="{{ service.name }} Icon" class="card-icon">
                                             {% elif service.icon %}
                                                 <i class="{{ service.icon }} fa-3x text-primary"></i>
                                             {% else %}
@@ -50,25 +45,23 @@
                                             <p>{{ service.description }}</p>
                                         </div>
                                     </div>
-                        {% if forloop.counter|divisibleby:8 or forloop.last %}
+                        {% if forloop.counter|divisibleby:3 or forloop.last %}
                                 </div>
                             </div>
                         {% endif %}
                     {% endfor %}
                 </div>
-                {% if services|length > 8 %}
-                    <button class="carousel-control-prev" type="button" data-bs-target="#servicesCarousel" data-bs-slide="prev">
+                {% if services|length > 3 %}
+                    <button class="carousel-control-prev" type="button" data-bs-target="#servicesCarousel" data-bs-slide="prev" aria-label="Previous">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#servicesCarousel" data-bs-slide="next">
+                    <button class="carousel-control-next" type="button" data-bs-target="#servicesCarousel" data-bs-slide="next" aria-label="Next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
                     </button>
                 {% endif %}
             </div>
         {% else %}
-            <p class="text-center text-muted">No services available. Please check the database or view context.</p>
+            <p class="text-center text-muted">No services available yet.</p>
         {% endif %}
     </div>
 </section>
@@ -84,7 +77,7 @@
                             <div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}">
                                 <div class="row g-3 justify-content-center">
                         {% endif %}
-                                    <div class="col-md-4">
+                                    <div class="col-12 col-sm-6 col-md-4">
                                         <div class="testimonial-card" data-aos="zoom-in" data-aos-delay="{% cycle '100' '200' '300' %}">
                                             <i class="fas fa-quote-left fa-2x text-primary"></i>
                                             <p>{{ testimonial.message }}</p>
@@ -99,18 +92,16 @@
                     {% endfor %}
                 </div>
                 {% if testimonials|length > 3 %}
-                    <button class="carousel-control-prev" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="prev">
+                    <button class="carousel-control-prev" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="prev" aria-label="Previous">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="next">
+                    <button class="carousel-control-next" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="next" aria-label="Next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
                     </button>
                 {% endif %}
             </div>
         {% else %}
-            <p class="text-center text-muted">No testimonials available. Please check the database or view context.</p>
+            <p class="text-center text-muted">No testimonials yet. Be the first!</p>
         {% endif %}
     </div>
 </section>
@@ -120,7 +111,7 @@
         <h2 class="text-center mb-5 fw-bold" data-aos="fade-up">Our Trusted Partners</h2>
         <p class="text-center text-muted mb-4">{{ partner_count }} Partners Joined</p>
         <form method="get" class="mb-4 text-center">
-            <select name="category" onchange="this.form.submit()" class="form-select w-auto mx-auto" style="max-width: 250px;">
+            <select name="category" onchange="this.form.submit()" class="form-select w-auto mx-auto" style="max-width: 250px;" aria-label="Filter by category">
                 <option value="">All Categories</option>
                 {% for category in categories %}
                     <option value="{{ category }}" {% if category == request.GET.category %}selected{% endif %}>{{ category }}</option>
@@ -135,10 +126,10 @@
                             <div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}">
                                 <div class="row g-3 justify-content-center">
                         {% endif %}
-                                    <div class="col-md-3 col-sm-6">
+                                    <div class="col-6 col-sm-4 col-md-3">
                                         <div class="partner-card" data-aos="zoom-in" data-aos-delay="{% cycle '100' '200' '300' '400' %}">
                                             {% if partner.logo and partner.logo.url %}
-                                                <img src="{{ partner.logo.url }}" alt="{{ partner.name }} Logo">
+                                                <img src="{{ partner.logo.url }}" alt="{{ partner.name }} Logo" class="card-icon">
                                             {% else %}
                                                 <i class="fas fa-store fa-3x text-primary"></i>
                                             {% endif %}
@@ -152,18 +143,16 @@
                     {% endfor %}
                 </div>
                 {% if partners|length > 4 %}
-                    <button class="carousel-control-prev" type="button" data-bs-target="#partnersCarousel" data-bs-slide="prev">
+                    <button class="carousel-control-prev" type="button" data-bs-target="#partnersCarousel" data-bs-slide="prev" aria-label="Previous">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#partnersCarousel" data-bs-slide="next">
+                    <button class="carousel-control-next" type="button" data-bs-target="#partnersCarousel" data-bs-slide="next" aria-label="Next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
                     </button>
                 {% endif %}
             </div>
         {% else %}
-            <p class="text-center text-muted">No partners found. Please check the database or view context. <button class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#businessModal">Apply Now</button></p>
+            <p class="text-center text-muted">No partners found. <button class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#businessModal">Apply Now</button></p>
         {% endif %}
     </div>
 </section>
@@ -179,12 +168,12 @@
                             <div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}">
                                 <div class="row g-3 justify-content-center">
                         {% endif %}
-                                    <div class="col-md-4">
-                                        <div class="blog-card" data-aos="zoom-in" data-aos-delay="{% cycle '100' '200' '300' %}" data-bs-toggle="modal" data-bs-target="#blogModal-{{ blog.id }}">
+                                    <div class="col-12 col-sm-6 col-md-4">
+                                        <div class="blog-card" data-aos="zoom-in" data-aos-delay="{% cycle '100' '200' '300' %}">
                                             {% if blog.images.all|length > 0 %}
-                                                <img src="{{ blog.images.all.0.image.url }}" alt="{{ blog.title }}" class="blog-image w-100">
+                                                <img src="{{ blog.images.all.0.image.url }}" alt="{{ blog.title }}" class="blog-image w-100" data-bs-toggle="modal" data-bs-target="#blogModal-{{ blog.id }}">
                                             {% else %}
-                                                <img src="{% static 'img/default.jpg' %}" alt="{{ blog.title }}" class="blog-image w-100">
+                                                <img src="{% static 'img/default.jpg' %}" alt="{{ blog.title }}" class="blog-image w-100" data-bs-toggle="modal" data-bs-target="#blogModal-{{ blog.id }}">
                                             {% endif %}
                                             <h5 class="card-title mt-3 blog-title">{{ blog.title }}</h5>
                                         </div>
@@ -196,13 +185,11 @@
                     {% endfor %}
                 </div>
                 {% if blogs|length > 3 %}
-                    <button class="carousel-control-prev" type="button" data-bs-target="#blogsCarousel" data-bs-slide="prev">
+                    <button class="carousel-control-prev" type="button" data-bs-target="#blogsCarousel" data-bs-slide="prev" aria-label="Previous">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#blogsCarousel" data-bs-slide="next">
+                    <button class="carousel-control-next" type="button" data-bs-target="#blogsCarousel" data-bs-slide="next" aria-label="Next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
                     </button>
                 {% endif %}
             </div>
@@ -221,7 +208,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     {% if blog.images.all %}
-                                        <div id="blogCarousel-{{ blog.id }}" class="carousel slide">
+                                        <div id="blogCarousel-{{ blog.id }}" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
                                             <div class="carousel-inner">
                                                 {% for image in blog.images.all %}
                                                     <div class="carousel-item {% if forloop.first %}active{% endif %}">
@@ -235,13 +222,11 @@
                                                 {% endfor %}
                                             </div>
                                             {% if blog.images.all|length > 1 %}
-                                                <button class="carousel-control-prev" type="button" data-bs-target="#blogCarousel-{{ blog.id }}" data-bs-slide="prev">
+                                                <button class="carousel-control-prev" type="button" data-bs-target="#blogCarousel-{{ blog.id }}" data-bs-slide="prev" aria-label="Previous">
                                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                    <span class="visually-hidden">Previous</span>
                                                 </button>
-                                                <button class="carousel-control-next" type="button" data-bs-target="#blogCarousel-{{ blog.id }}" data-bs-slide="next">
+                                                <button class="carousel-control-next" type="button" data-bs-target="#blogCarousel-{{ blog.id }}" data-bs-slide="next" aria-label="Next">
                                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                    <span class="visually-hidden">Next</span>
                                                 </button>
                                             {% endif %}
                                         </div>
@@ -255,7 +240,7 @@
                 </div>
             {% endfor %}
         {% else %}
-            <p class="text-center text-muted">No blogs available. Please check the database or view context.</p>
+            <p class="text-center text-muted">No blogs available yet.</p>
         {% endif %}
     </div>
 </section>

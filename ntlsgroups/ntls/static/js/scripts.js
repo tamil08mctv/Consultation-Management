@@ -4,53 +4,47 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById("loading").style.display = "none";
     }});
 
-    // Enhanced Particles.js Hero Section
+    // Particles.js Hero Section
     particlesJS("particles-js", {
         particles: {
-            number: { value: 200, density: { enable: true, value_area: 600 } },
-            color: { value: ["#ffffff", "#f472b6", "#3b82f6", "#10b981"] },
-            shape: { type: "circle", stroke: { width: 1, color: "#fff" } },
-            opacity: { value: 0.8, random: true },
-            size: { value: 8, random: true },
-            move: { enable: true, speed: 3, direction: "none", random: true, straight: false, bounce: true, attract: { enable: true, rotateX: 600, rotateY: 1200 } }
+            number: { value: 80, density: { enable: true, value_area: 800 } },
+            color: { value: ["#ffffff", "#90caf9", "#3f51b5"] },
+            shape: { type: "circle", stroke: { width: 0 } },
+            opacity: { value: 0.6, random: true },
+            size: { value: 5, random: true },
+            move: { enable: true, speed: 2, direction: "none", random: true }
         },
         interactivity: {
             detect_on: "canvas",
-            events: {
-                onhover: { enable: true, mode: "repulse" },
-                onclick: { enable: true, mode: "push" },
-                resize: true
-            },
-            modes: {
-                repulse: { distance: 200, duration: 0.4 },
-                push: { particles_nb: 10 }
-            }
+            events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" } },
+            modes: { repulse: { distance: 150, duration: 0.4 }, push: { particles_nb: 4 } }
         }
     });
 
     // GSAP Animations
-    gsap.from(".hero-section .display-4", { opacity: 0, y: 50, duration: 1.5, ease: "power3.out" });
-    gsap.from(".hero-section .lead", { opacity: 0, y: 30, duration: 1.5, delay: 0.5, ease: "power3.out" });
-    gsap.from(".hero-section .btn-custom", { opacity: 0, scale: 0.8, duration: 1, delay: 1, stagger: 0.3, ease: "bounce.out" });
+    gsap.from(".hero-content .display-4", { opacity: 0, y: 50, duration: 1.2, ease: "power3.out" });
+    gsap.from(".hero-content .lead", { opacity: 0, y: 30, duration: 1.2, delay: 0.3, ease: "power3.out" });
+    gsap.from(".hero-content .btn-custom", { opacity: 0, scale: 0.8, duration: 1, delay: 0.6, stagger: 0.2, ease: "elastic.out(1, 0.5)" });
+    gsap.from(".social-icons a", { opacity: 0, y: 20, duration: 1, delay: 0.8, stagger: 0.1, ease: "power3.out" });
     gsap.from(".card", { y: 60, opacity: 0, duration: 1.2, stagger: 0.3, ease: "power3.out" });
 
     // AOS Initialization
     AOS.init({
-        duration: 1200,
+        duration: 1000,
         once: true,
-        easing: 'ease-in-out'
+        easing: 'ease-out'
     });
 
     // Button Hover Animation
     document.querySelectorAll('.btn-custom').forEach(btn => {
         btn.addEventListener('mouseenter', () => {
             if (!btn.disabled) {
-                gsap.to(btn, { scale: 1.1, duration: 0.4, ease: "power3.out" });
+                gsap.to(btn, { scale: 1.05, duration: 0.3, ease: "power2.out" });
             }
         });
         btn.addEventListener('mouseleave', () => {
             if (!btn.disabled) {
-                gsap.to(btn, { scale: 1, duration: 0.4, ease: "power3.out" });
+                gsap.to(btn, { scale: 1, duration: 0.3, ease: "power2.out" });
             }
         });
     });
@@ -63,53 +57,6 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             navbar.classList.remove('sticky');
         }
-    });
-
-    // Initialize Tooltips
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-    tooltipTriggerList.forEach(function (tooltipTriggerEl) {
-        new bootstrap.Tooltip(tooltipTriggerEl);
-    });
-
-    // Multi-Step Form Handling
-    document.querySelectorAll('.next-step').forEach(button => {
-        button.addEventListener('click', () => {
-            const form = button.closest('form');
-            const currentStep = button.closest('.form-step');
-            const stepNumber = parseInt(currentStep.dataset.step);
-            const nextStep = form.querySelector(`.form-step[data-step="${stepNumber + 1}"]`);
-            const progressBar = form.querySelector('.progress-bar');
-            const totalSteps = form.querySelectorAll('.form-step').length;
-
-            if (nextStep) {
-                currentStep.classList.remove('active');
-                nextStep.classList.add('active');
-                progressBar.style.width = `${((stepNumber + 1) / totalSteps) * 100}%`;
-                progressBar.setAttribute('aria-valuenow', ((stepNumber + 1) / totalSteps) * 100);
-                progressBar.textContent = `Step ${stepNumber + 1} of ${totalSteps}`;
-                gsap.from(nextStep, { opacity: 0, x: 50, duration: 0.5, ease: "power2.out" });
-            }
-        });
-    });
-
-    document.querySelectorAll('.prev-step').forEach(button => {
-        button.addEventListener('click', () => {
-            const form = button.closest('form');
-            const currentStep = button.closest('.form-step');
-            const stepNumber = parseInt(currentStep.dataset.step);
-            const prevStep = form.querySelector(`.form-step[data-step="${stepNumber - 1}"]`);
-            const progressBar = form.querySelector('.progress-bar');
-            const totalSteps = form.querySelectorAll('.form-step').length;
-
-            if (prevStep) {
-                currentStep.classList.remove('active');
-                prevStep.classList.add('active');
-                progressBar.style.width = `${((stepNumber - 1) / totalSteps) * 100}%`;
-                progressBar.setAttribute('aria-valuenow', ((stepNumber - 1) / totalSteps) * 100);
-                progressBar.textContent = `Step ${stepNumber - 1} of ${totalSteps}`;
-                gsap.from(prevStep, { opacity: 0, x: -50, duration: 0.5, ease: "power2.out" });
-            }
-        });
     });
 
     // Form Submission Handling
@@ -191,9 +138,7 @@ document.addEventListener('DOMContentLoaded', function() {
             fetch(form.action, {
                 method: 'POST',
                 body: new FormData(form),
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
-                }
+                headers: { 'X-Requested-With': 'XMLHttpRequest' }
             })
             .then(response => response.json())
             .then(data => {
@@ -206,14 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         const modal = bootstrap.Modal.getInstance(form.closest('.modal'));
                         if (modal) modal.hide();
                         formStatus.innerHTML = '';
-                        inputs.forEach(input => input.classList.remove('is-invalid'));
-                        form.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
-                        form.querySelector('.form-step[data-step="1"]').classList.add('active');
-                        const progressBar = form.querySelector('.progress-bar');
-                        progressBar.style.width = `${(1 / form.querySelectorAll('.form-step').length) * 100}%`;
-                        progressBar.setAttribute('aria-valuenow', (1 / form.querySelectorAll('.form-step').length) * 100);
-                        progressBar.textContent = `Step 1 of ${form.querySelectorAll('.form-step').length}`;
-                    }, 2500);
+                    }, 2000);
                 } else {
                     formStatus.innerHTML = '<div class="alert alert-danger">' + data.message + '<ul>' + Object.entries(data.errors || {}).map(([field, error]) => `<li>${field}: ${error}</li>`).join('') + '</ul></div>';
                 }
@@ -226,36 +164,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Category Filter Handling
-    const categoryFilter = document.getElementById('categoryFilter');
-    if (categoryFilter) {
-        categoryFilter.addEventListener('change', function() {
-            const category = this.value;
-            const partnersContainer = document.getElementById('partnersContainer');
-            partnersContainer.style.opacity = '0.3';
-            fetch(`/?category=${encodeURIComponent(category)}`, {
-                headers: { 'X-Requested-With': 'XMLHttpRequest' }
-            })
-            .then(response => response.text())
-            .then(html => {
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                const newPartnersContainer = doc.getElementById('partnersContainer');
-                partnersContainer.innerHTML = newPartnersContainer.innerHTML;
-                gsap.fromTo(partnersContainer, { opacity: 0.3 }, { opacity: 1, duration: 0.8 });
-                AOS.refresh();
-            })
-            .catch(error => {
-                console.error('Error filtering partners:', error);
-                partnersContainer.style.opacity = '1';
-            });
-        });
-    }
-
-    // Initialize Blog Modals with Auto-Slide
+    // Blog Modals
     document.querySelectorAll('.blog-image').forEach(image => {
         image.addEventListener('click', () => {
-            const blogId = image.closest('.card').querySelector('.blog-image').getAttribute('data-bs-target').replace('#blogModal-', '');
+            const blogId = image.closest('.card').getAttribute('data-bs-target').replace('#blogModal-', '');
             const modal = new bootstrap.Modal(document.getElementById(`blogModal-${blogId}`));
             modal.show();
             const carousel = document.querySelector(`#blogCarousel-${blogId}`);

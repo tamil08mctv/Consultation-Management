@@ -2,70 +2,118 @@
 {% load static %}
 {% block title %} - Home{% endblock %}
 {% block content %}
-<section id="home" class="hero-section" style="background: linear-gradient(135deg, #1e3a8a, #3b82f6); min-height: 100vh; position: relative; overflow: hidden; display: flex; align-items: center; padding: 50px 0;">
-    <div id="particles-js" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;"></div>
-    <div class="container text-center" style="position: relative; z-index: 1;">
+<section id="home" class="hero-section">
+    <div id="particles-js" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 1;"></div>
+    <div class="container text-center">
         <div class="hero-content" data-aos="fade-up">
-            <h1 class="display-4 fw-bold text-white" style="text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);">Welcome to NTLS Group</h1>
-            <p class="lead text-white mt-3" style="text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);">Connecting You with Trusted Services</p>
-            <div class="mt-4 d-flex justify-content-center gap-3">
-                <button class="btn btn-light btn-custom me-2" data-bs-toggle="modal" data-bs-target="#consumerModal" data-aos="zoom-in">Submit Your Needs</button>
+            <h1 class="display-4 fw-bold text-white">Welcome to NTLS Group</h1>
+            <p class="lead text-white mt-3">Connecting You with Trusted Services</p>
+            <div class="mt-4 d-flex justify-content-center gap-3" style="z-index: 3;">
+                <button class="btn btn-light btn-custom" data-bs-toggle="modal" data-bs-target="#consumerModal" data-aos="zoom-in">Submit Your Needs</button>
                 <button class="btn btn-outline-light btn-custom" data-bs-toggle="modal" data-bs-target="#businessModal" data-aos="zoom-in" data-aos-delay="100">Become a Partner</button>
             </div>
-            <div class="mt-4 social-icons">
+            <div class="mt-4 social-icons" style="z-index: 3;">
                 {% for social in social_platforms %}
                     <a href="{{ social.link }}" class="text-white me-3" target="_blank"><i class="fab fa-{{ social.name }} fa-2x"></i></a>
                 {% endfor %}
+                {% if not social_platforms %}
+                    <a href="https://facebook.com" class="text-white me-3" target="_blank"><i class="fab fa-facebook fa-2x"></i></a>
+                    <a href="https://twitter.com" class="text-white me-3" target="_blank"><i class="fab fa-twitter fa-2x"></i></a>
+                    <a href="https://linkedin.com" class="text-white me-3" target="_blank"><i class="fab fa-linkedin fa-2x"></i></a>
+                {% endif %}
             </div>
         </div>
     </div>
 </section>
-<section id="services" class="py-5">
+
+<section id="services" class="services-section">
     <div class="container">
-        <h2 class="text-center mb-5 fw-bold" data-aos="fade-right" style="color: #1e3a8a;">Our Services</h2>
-        <div class="row g-4">
-            {% for service in services %}
-                <div class="col-md-4" data-aos="flip-left" data-aos-delay="{% if forloop.counter == 1 %}0{% elif forloop.counter == 2 %}100{% else %}200{% endif %}">
-                    <div class="card p-4 h-100 shadow-sm border-0" style="background: #fff; border-radius: 15px;">
-                        {% if service.icon_image %}
-                            <img src="{{ service.icon_image.url }}" alt="{{ service.name }} Icon" class="service-icon mb-3" style="max-height: 48px; max-width: 48px;">
-                        {% elif service.icon %}
-                            <i class="{{ service.icon }} fa-3x mb-3 text-primary"></i>
-                        {% else %}
-                            <i class="fas fa-cogs fa-3x mb-3 text-primary"></i> <!-- Default icon if none provided -->
-                        {% endif %}
-                        <h5 class="card-title">{{ service.name }}</h5>
-                        <p class="card-text">{{ service.description }}</p>
-                    </div>
-                </div>
-            {% empty %}
-                <p class="text-center text-muted">No services available yet.</p>
-            {% endfor %}
+        <h2 class="text-center mb-5 fw-bold" data-aos="fade-up">Our Services</h2>
+        <div id="servicesCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+            <div class="carousel-inner">
+                {% for service in services %}
+                    {% if forloop.counter0|divisibleby:8 %}
+                        <div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}">
+                            <div class="row g-3 justify-content-center align-items-stretch">
+                    {% endif %}
+                                <div class="col-auto">
+                                    <div class="service-card" data-aos="zoom-in">
+                                        {% if service.icon_image %}
+                                            <img src="{{ service.icon_image.url }}" alt="{{ service.name }} Icon">
+                                        {% elif service.icon %}
+                                            <i class="{{ service.icon }} fa-3x text-primary"></i>
+                                        {% else %}
+                                            <i class="fas fa-cogs fa-3x text-primary"></i>
+                                        {% endif %}
+                                        <h5>{{ service.name }}</h5>
+                                        <p>{{ service.description }}</p>
+                                    </div>
+                                </div>
+                    {% if forloop.counter|divisibleby:8 or forloop.last %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% empty %}
+                    <p class="text-center text-muted">No services available yet.</p>
+                {% endfor %}
+            </div>
+            {% if services|length > 8 %}
+                <button class="carousel-control-prev" type="button" data-bs-target="#servicesCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#servicesCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            {% endif %}
         </div>
     </div>
 </section>
-<section id="testimonials" class="py-5 bg-light">
+
+<section id="testimonials" class="testimonials-section">
     <div class="container">
-        <h2 class="text-center mb-5 fw-bold" data-aos="fade-left" style="color: #1e3a8a;">What Our Clients Say</h2>
-        <div class="row g-4">
-            {% for testimonial in testimonials %}
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="{% cycle '100' '200' '300' %}">
-                    <div class="card p-4 h-100 shadow-sm border-0" style="background: #fff; border-radius: 15px;">
-                        <i class="fas fa-quote-left fa-2x mb-3 text-muted"></i>
-                        <p class="card-text">{{ testimonial.message }}</p>
-                        <h6 class="card-title fw-bold">{{ testimonial.name }}</h6>
-                        <p class="text-muted">{{ testimonial.category }}</p>
-                    </div>
-                </div>
-            {% empty %}
-                <p class="text-center text-muted">No testimonials yet. Be the first!</p>
-            {% endfor %}
+        <h2 class="text-center mb-5 fw-bold" data-aos="fade-up">What Our Clients Say</h2>
+        <div id="testimonialsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+            <div class="carousel-inner">
+                {% for testimonial in testimonials %}
+                    {% if forloop.counter0|divisibleby:3 %}
+                        <div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}">
+                            <div class="row g-3 justify-content-center">
+                    {% endif %}
+                                <div class="col-auto">
+                                    <div class="testimonial-card" data-aos="zoom-in">
+                                        <i class="fas fa-quote-left fa-2x text-primary"></i>
+                                        <p>{{ testimonial.message }}</p>
+                                        <h6>{{ testimonial.name }}</h6>
+                                        <p class="text-muted">{{ testimonial.category }}</p>
+                                    </div>
+                                </div>
+                    {% if forloop.counter|divisibleby:3 or forloop.last %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% empty %}
+                    <p class="text-center text-muted">No testimonials yet. Be the first!</p>
+                {% endfor %}
+            </div>
+            {% if testimonials|length > 3 %}
+                <button class="carousel-control-prev" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            {% endif %}
         </div>
     </div>
 </section>
-<section id="partners" class="py-5">
+
+<section id="partners" class="partners-section">
     <div class="container">
-        <h2 class="text-center mb-5 fw-bold" data-aos="fade-right" style="color: #1e3a8a;">Our Trusted Partners</h2>
+        <h2 class="text-center mb-5 fw-bold" data-aos="fade-up">Our Trusted Partners</h2>
         <p class="text-center text-muted mb-4">{{ partner_count }} Partners Joined</p>
         <form method="get" class="mb-4 text-center">
             <select name="category" onchange="this.form.submit()" class="form-select w-auto mx-auto" style="max-width: 250px;">
@@ -75,30 +123,32 @@
                 {% endfor %}
             </select>
         </form>
-        {% if partners.count > 3 %}
-            <div id="partnersCarousel" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    {% for partner in partners %}
-                        {% if forloop.counter0|divisibleby:3 %}
-                            <div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}">
-                                <div class="row">
-                        {% endif %}
-                                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="{% cycle '100' '200' '300' %}">
-                                        <div class="card p-4 h-100 shadow-sm border-0" style="background: #fff; border-radius: 15px;">
-                                            {% if partner.logo and partner.logo.url %}
-                                                <img src="{{ partner.logo.url }}" alt="{{ partner.name }} Logo" class="partner-logo">
-                                            {% else %}
-                                                <i class="fas fa-store fa-3x mb-3 text-primary"></i>
-                                            {% endif %}
-                                            <h5 class="card-title mt-2">{{ partner.name }}</h5>
-                                        </div>
+        <div id="partnersCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+            <div class="carousel-inner">
+                {% for partner in partners %}
+                    {% if forloop.counter0|divisibleby:4 %}
+                        <div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}">
+                            <div class="row g-3 justify-content-center">
+                    {% endif %}
+                                <div class="col-auto">
+                                    <div class="partner-card" data-aos="zoom-in">
+                                        {% if partner.logo and partner.logo.url %}
+                                            <img src="{{ partner.logo.url }}" alt="{{ partner.name }} Logo">
+                                        {% else %}
+                                            <i class="fas fa-store fa-3x text-primary"></i>
+                                        {% endif %}
+                                        <h5>{{ partner.name }}</h5>
                                     </div>
-                        {% if forloop.counter|divisibleby:3 or forloop.last %}
                                 </div>
+                    {% if forloop.counter|divisibleby:4 or forloop.last %}
                             </div>
-                        {% endif %}
-                    {% endfor %}
-                </div>
+                        </div>
+                    {% endif %}
+                {% empty %}
+                    <p class="text-center text-muted">No partners found. <button class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#businessModal">Apply Now</button></p>
+                {% endfor %}
+            </div>
+            {% if partners|length > 4 %}
                 <button class="carousel-control-prev" type="button" data-bs-target="#partnersCarousel" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
@@ -107,109 +157,92 @@
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
-            </div>
-        {% else %}
-            <div class="row g-4">
-                {% for partner in partners %}
-                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="{% cycle '100' '200' '300' %}">
-                        <div class="card p-4 h-100 shadow-sm border-0" style="background: #fff; border-radius: 15px;">
-                            {% if partner.logo and partner.logo.url %}
-                                <img src="{{ partner.logo.url }}" alt="{{ partner.name }} Logo" class="partner-logo">
-                            {% else %}
-                                <i class="fas fa-store fa-3x mb-3 text-primary"></i>
-                            {% endif %}
-                            <h5 class="card-title mt-2">{{ partner.name }}</h5>
-                        </div>
-                    </div>
-                {% endfor %}
-                {% if not partners %}
-                    <p class="text-center text-muted">No partners found. <button class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#businessModal">Apply Now</button></p>
-                {% endif %}
-            </div>
-        {% endif %}
+            {% endif %}
+        </div>
     </div>
 </section>
-<section id="blogs" class="py-5">
+
+<section id="blogs" class="blogs-section">
     <div class="container">
-        <h2 class="text-center mb-5 fw-bold" data-aos="fade-right" style="color: #1e3a8a;">Explore Our Latest Blogs</h2>
-        {% if blogs %}
-            <div class="row g-4">
-                {% for blog in blogs %}
-                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="{% cycle '100' '200' '300' %}">
-                        <div class="card p-4 h-100 shadow-sm border-0" style="background: #fff; border-radius: 15px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#blogModal-{{ blog.id }}">
-                            {% if blog.images.all|length > 0 %}
-                                <img src="{{ blog.images.all.0.image.url }}" alt="{{ blog.title }}" class="blog-image w-100">
-                            {% else %}
-                                <img src="{% static 'img/default.jpg' %}" alt="{{ blog.title }}" class="blog-image w-100">
-                            {% endif %}
-                            <h5 class="card-title mt-3">{{ blog.title }}</h5>
-                        </div>
+        <h2 class="text-center mb-5 fw-bold" data-aos="fade-up">Explore Our Latest Blogs</h2>
+        <div class="row g-4 justify-content-center">
+            {% for blog in blogs|slice:":3" %}
+                <div class="col-md-4">
+                    <div class="blog-card" data-aos="zoom-in" data-aos-delay="{% cycle '100' '200' '300' %}" data-bs-toggle="modal" data-bs-target="#blogModal-{{ blog.id }}">
+                        {% if blog.images.all|length > 0 %}
+                            <img src="{{ blog.images.all.0.image.url }}" alt="{{ blog.title }}" class="blog-image w-100">
+                        {% else %}
+                            <img src="{% static 'img/default.jpg' %}" alt="{{ blog.title }}" class="blog-image w-100">
+                        {% endif %}
+                        <h5 class="card-title mt-3 blog-title">{{ blog.title }}</h5>
                     </div>
-                    <!-- Blog Modal -->
-                    <div class="modal fade" id="blogModal-{{ blog.id }}" tabindex="-1" aria-labelledby="blogModalLabel-{{ blog.id }}" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content" style="border-radius: 20px;">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="blogModalLabel-{{ blog.id }}">{{ blog.title }}</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal fade" id="blogModal-{{ blog.id }}" tabindex="-1" aria-labelledby="blogModalLabel-{{ blog.id }}" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="blogModalLabel-{{ blog.id }}">{{ blog.title }}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body row">
+                                <div class="col-md-8">
+                                    <p class="text-dark">{{ blog.content|linebreaks }}</p>
+                                    <p class="text-muted"><strong>Created by:</strong> {{ blog.created_by.username|default:"Admin" }}</p>
                                 </div>
-                                <div class="modal-body row">
-                                    <div class="col-md-8">
-                                        <p class="text-dark">{{ blog.content|linebreaks }}</p>
-                                        <p class="text-muted"><strong>Created by:</strong> {{ blog.created_by.username|default:"Admin" }}</p>
-                                    </div>
-                                    <div class="col-md-4">
-                                        {% if blog.images.all %}
-                                            <div id="blogCarousel-{{ blog.id }}" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
-                                                <div class="carousel-inner">
-                                                    {% for image in blog.images.all %}
-                                                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                                                            <img src="{{ image.image.url }}" alt="{{ image.caption|default:blog.title }}" class="d-block w-100" style="border-radius: 10px; height: 300px; object-fit: cover;">
-                                                            {% if image.caption %}
-                                                                <div class="carousel-caption d-md-block">
-                                                                    <p class="bg-dark bg-opacity-75 text-white p-2 rounded">{{ image.caption }}</p>
-                                                                </div>
-                                                            {% endif %}
-                                                        </div>
-                                                    {% endfor %}
-                                                </div>
-                                                {% if blog.images.all|length > 1 %}
-                                                    <button class="carousel-control-prev" type="button" data-bs-target="#blogCarousel-{{ blog.id }}" data-bs-slide="prev">
-                                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                        <span class="visually-hidden">Previous</span>
-                                                    </button>
-                                                    <button class="carousel-control-next" type="button" data-bs-target="#blogCarousel-{{ blog.id }}" data-bs-slide="next">
-                                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                        <span class="visually-hidden">Next</span>
-                                                    </button>
-                                                {% endif %}
+                                <div class="col-md-4">
+                                    {% if blog.images.all %}
+                                        <div id="blogCarousel-{{ blog.id }}" class="carousel slide">
+                                            <div class="carousel-inner">
+                                                {% for image in blog.images.all %}
+                                                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                                        <img src="{{ image.image.url }}" alt="{{ image.caption|default:blog.title }}" class="d-block w-100" style="border-radius: 10px; height: 300px; object-fit: cover;">
+                                                        {% if image.caption %}
+                                                            <div class="carousel-caption d-md-block">
+                                                                <p class="bg-dark bg-opacity-75 text-white p-2 rounded">{{ image.caption }}</p>
+                                                            </div>
+                                                        {% endif %}
+                                                    </div>
+                                                {% endfor %}
                                             </div>
-                                        {% else %}
-                                            <p class="text-muted">No images available for this blog.</p>
-                                        {% endif %}
-                                    </div>
+                                            {% if blog.images.all|length > 1 %}
+                                                <button class="carousel-control-prev" type="button" data-bs-target="#blogCarousel-{{ blog.id }}" data-bs-slide="prev">
+                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                    <span class="visually-hidden">Previous</span>
+                                                </button>
+                                                <button class="carousel-control-next" type="button" data-bs-target="#blogCarousel-{{ blog.id }}" data-bs-slide="next">
+                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                    <span class="visually-hidden">Next</span>
+                                                </button>
+                                            {% endif %}
+                                        </div>
+                                    {% else %}
+                                        <p class="text-muted">No images available for this blog.</p>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
                     </div>
-                {% endfor %}
-            </div>
-        {% else %}
-            <p class="text-center text-muted">No blogs available yet.</p>
-        {% endif %}
+                </div>
+            {% endfor %}
+            {% if not blogs %}
+                <p class="text-center text-muted">No blogs available yet.</p>
+            {% endif %}
+        </div>
     </div>
 </section>
+
+
 <section id="contact" class="py-5 bg-light">
     <div class="container text-center">
-        <h2 class="mb-4 fw-bold" data-aos="fade-left" style="color: #1e3a8a;">Contact Us</h2>
+        <h2 class="mb-4 fw-bold" data-aos="fade-up">Contact Us</h2>
         <p class="lead mb-4 text-muted">Have questions? We'd love to hear from you!</p>
-        <button class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#feedbackModal">Send Feedback</button>
+        <button class="btn btn-custom btn-primary" data-bs-toggle="modal" data-bs-target="#feedbackModal">Send Feedback</button>
     </div>
 </section>
-<!-- Consumer Modal -->
+
 <div class="modal fade" id="consumerModal" tabindex="-1" aria-labelledby="consumerModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content" style="border-radius: 20px;">
+        <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="consumerModalLabel">Submit Your Needs</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -221,10 +254,10 @@
         </div>
     </div>
 </div>
-<!-- Business Modal -->
+
 <div class="modal fade" id="businessModal" tabindex="-1" aria-labelledby="businessModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content" style="border-radius: 20px;">
+        <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="businessModalLabel">Become a Partner</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -236,10 +269,10 @@
         </div>
     </div>
 </div>
-<!-- Feedback Modal -->
+
 <div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content" style="border-radius: 20px;">
+        <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="feedbackModalLabel">Send Feedback</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -250,7 +283,7 @@
                     {% csrf_token %}
                     {{ feedback_form.as_p }}
                     <input type="hidden" name="feedback_form" value="1">
-                    <button type="submit" class="btn btn-custom" id="feedbackSubmitBtn">Submit Feedback</button>
+                    <button type="submit" class="btn btn-custom btn-primary" id="feedbackSubmitBtn">Submit Feedback</button>
                 </form>
             </div>
         </div>

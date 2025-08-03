@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 import os
 from pathlib import Path
-from django.core.mail import get_connection
 import logging
 
 # Set up logging
@@ -21,7 +20,7 @@ logger = logging.getLogger(__name__)
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-l(&&+6d+g#)lo1_2t7vlzp)+)h#e$onroczjxeen=-n^h=f9v0'
+SECRET_KEY = 'django-insecure-l(&&+6d+g#)lo1_2t7vlzp)+)h#e$onroczjxeen=-n^h=f9v0'  # Replace with a secure key in production
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -69,17 +68,24 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ntlsgroups.wsgi.application'
 
-# Database
+# Multiple Databases
 DATABASES = {
     'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',  # Local backup database
+    },
+    'server': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ntlsgroups_db',
-        'USER': 'postgres',
+        'NAME': 'ntlsgroups_db',  # Replace with your database name
+        'USER': 'postgres',  # Replace with your PostgreSQL username
         'PASSWORD': 'mctv@2002',  # Replace with your PostgreSQL password
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
+        'HOST': '127.0.0.1',  # Replace with your PostgreSQL host if different
+        'PORT': '5432',  # Replace with your PostgreSQL port if different
+    },
 }
+
+# Database Router
+DATABASE_ROUTERS = ['ntls.db_routers.DualWriteRouter']
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
@@ -146,21 +152,21 @@ LOGGING = {
     },
 }
 
-# Email configuration
+# Email configuration (fallback settings)
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'tamil08mctv@gmail.com'
-EMAIL_HOST_PASSWORD = ''  # Set via EmailConfig at runtime
+EMAIL_HOST_PASSWORD = ''  # Will be overridden by get_email_config
 
-# Function to load email config at runtime
-def get_email_config():
+# Function to load email config at runtime with purpose
+def get_email_config(purpose='general'):
     try:
         from ntls.models import EmailConfig
-        config = EmailConfig.objects.filter(purpose='general', is_active=True).first()
+        config = EmailConfig.objects.using('server').filter(purpose=purpose, is_active=True).first()
         if config:
-            logger.info(f"Loaded email configuration: {config.email_id}")
+            logger.info(f"Loaded email configuration for {purpose}: {config.email_id}")
             return {
                 'EMAIL_HOST': config.host,
                 'EMAIL_PORT': config.port,
@@ -169,9 +175,9 @@ def get_email_config():
                 'EMAIL_HOST_PASSWORD': config.password,
             }
         else:
-            logger.warning("No active EmailConfig found for 'general' purpose. Using fallback settings.")
+            logger.warning(f"No active EmailConfig found for '{purpose}' purpose on server. Using fallback settings.")
     except Exception as e:
-        logger.error(f"Failed to load EmailConfig: {str(e)}")
+        logger.error(f"Failed to load EmailConfig for {purpose} from server: {str(e)}")
     return {
         'EMAIL_HOST': 'smtp.gmail.com',
         'EMAIL_PORT': 587,

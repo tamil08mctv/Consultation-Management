@@ -14,17 +14,17 @@ logger = logging.getLogger(__name__)
 
 @csrf_exempt
 def home(request):
-    testimonials = Testimonial.objects.all()
-    categories = Business.objects.filter(status='approved').values_list('category', flat=True).distinct()
+    testimonials = Testimonial.objects.using('server').all()
+    categories = Business.objects.using('server').filter(status='approved').values_list('category', flat=True).distinct()
     selected_category = request.GET.get('category', '')
     if selected_category:
-        partners = Business.objects.filter(status='approved', category=selected_category)
+        partners = Business.objects.using('server').filter(status='approved', category=selected_category)
     else:
-        partners = Business.objects.filter(status='approved')
+        partners = Business.objects.using('server').filter(status='approved')
     partner_count = partners.count()
-    blogs = Blog.objects.all().order_by('-created_at').prefetch_related('images')
-    social_platforms = SocialPlatform.objects.filter(is_active=True)
-    services = Service.objects.filter(is_active=True)
+    blogs = Blog.objects.using('server').all().order_by('-created_at').prefetch_related('images')
+    social_platforms = SocialPlatform.objects.using('server').filter(is_active=True)
+    services = Service.objects.using('server').filter(is_active=True)
 
     if request.method == 'POST':
         if 'consumer_form' in request.POST:
@@ -32,6 +32,12 @@ def home(request):
             form = ConsumerForm(request.POST)
             if form.is_valid():
                 consumer = form.save()
+                consumer.save(using='server')
+                try:
+                    consumer.save(using='default')
+                except Exception as e:
+                    logger.error(f"Failed to save consumer to local database: {str(e)}")
+                    return JsonResponse({'success': False, 'message': 'Form submitted on server, but failed to save to local database. Please contact support.'})
                 email_config = get_email_config()
                 if email_config and email_config['EMAIL_HOST_PASSWORD']:
                     try:
@@ -80,6 +86,12 @@ def home(request):
             form = BusinessForm(request.POST, request.FILES)
             if form.is_valid():
                 business = form.save()
+                business.save(using='server')
+                try:
+                    business.save(using='default')
+                except Exception as e:
+                    logger.error(f"Failed to save business to local database: {str(e)}")
+                    return JsonResponse({'success': False, 'message': 'Application submitted on server, but failed to save to local database. Please contact support.'})
                 email_config = get_email_config()
                 if email_config and email_config['EMAIL_HOST_PASSWORD']:
                     try:
@@ -128,6 +140,12 @@ def home(request):
             form = FeedbackForm(request.POST)
             if form.is_valid():
                 feedback = form.save()
+                feedback.save(using='server')
+                try:
+                    feedback.save(using='default')
+                except Exception as e:
+                    logger.error(f"Failed to save feedback to local database: {str(e)}")
+                    return JsonResponse({'success': False, 'message': 'Feedback submitted on server, but failed to save to local database. Please contact support.'})
                 email_config = get_email_config()
                 if email_config and email_config['EMAIL_HOST_PASSWORD']:
                     try:

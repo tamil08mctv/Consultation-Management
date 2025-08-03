@@ -34,7 +34,7 @@ class BusinessForm(forms.ModelForm):
         if contact_number and (not contact_number.startswith('+91') or len(contact_number) != 13 or not contact_number[3:].isdigit()):
             raise forms.ValidationError('Contact number must be in the format +91XXXXXXXXXX (12 digits).')
         return contact_number
-    
+
 class FeedbackForm(forms.ModelForm):
     class Meta:
         model = Feedback

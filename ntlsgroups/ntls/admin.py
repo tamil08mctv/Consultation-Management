@@ -168,7 +168,12 @@ class BusinessAdmin(admin.ModelAdmin):
                 business.status = 'approved'
                 business.approved_date = timezone.now()
                 business.suspended_date = None
-                business.save()
+                business.save(using='server')
+                try:
+                    business.save(using='default')
+                except Exception as e:
+                    logger.error(f"Failed to save to local database for approval: {str(e)}")
+                    self.message_user(request, f'Business approved on server, but failed to save to local: {str(e)}.', level='error')
                 email_config = self.get_email_config()
                 if email_config:
                     try:
@@ -216,7 +221,12 @@ class BusinessAdmin(admin.ModelAdmin):
                 business.status = 'suspended'
                 business.suspended_date = timezone.now()
                 business.approved_date = None
-                business.save()
+                business.save(using='server')
+                try:
+                    business.save(using='default')
+                except Exception as e:
+                    logger.error(f"Failed to save to local database for suspension: {str(e)}")
+                    self.message_user(request, f'Business suspended on server, but failed to save to local: {str(e)}.', level='error')
                 email_config = self.get_email_config()
                 if email_config:
                     try:
@@ -264,7 +274,12 @@ class BusinessAdmin(admin.ModelAdmin):
                 business.status = 'rejected'
                 business.approved_date = None
                 business.suspended_date = None
-                business.save()
+                business.save(using='server')
+                try:
+                    business.save(using='default')
+                except Exception as e:
+                    logger.error(f"Failed to save to local database for rejection: {str(e)}")
+                    self.message_user(request, f'Business rejected on server, but failed to save to local: {str(e)}.', level='error')
                 email_config = self.get_email_config()
                 if email_config:
                     try:

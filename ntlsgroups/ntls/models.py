@@ -2,6 +2,9 @@ from django.db import models
 from django.utils import timezone
 from django.core.exceptions import ValidationError
 import os
+import logging
+
+logger = logging.getLogger(__name__)
 
 def validate_pdf(value):
     """Validate that the uploaded file is a PDF."""
@@ -47,6 +50,14 @@ class EmailConfig(models.Model):
     def __str__(self):
         return f"{self.email_id} ({self.get_purpose_display()})"
 
+    def save(self, *args, **kwargs):
+        super().save(using='server', *args, **kwargs)
+        try:
+            super().save(using='default', *args, **kwargs)
+        except Exception as e:
+            logger.error(f"Failed to save to local database: {str(e)}")
+            raise
+
 class Consumer(models.Model):
     name = models.CharField(max_length=100)
     contact = models.EmailField(max_length=254)
@@ -55,6 +66,14 @@ class Consumer(models.Model):
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        super().save(using='server', *args, **kwargs)
+        try:
+            super().save(using='default', *args, **kwargs)
+        except Exception as e:
+            logger.error(f"Failed to save to local database: {str(e)}")
+            raise
 
 class Business(models.Model):
     STATUS_CHOICES = (
@@ -109,6 +128,14 @@ class Business(models.Model):
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        super().save(using='server', *args, **kwargs)
+        try:
+            super().save(using='default', *args, **kwargs)
+        except Exception as e:
+            logger.error(f"Failed to save to local database: {str(e)}")
+            raise
+
 class Testimonial(models.Model):
     name = models.CharField(max_length=100)
     category = models.CharField(max_length=50)
@@ -117,6 +144,14 @@ class Testimonial(models.Model):
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        super().save(using='server', *args, **kwargs)
+        try:
+            super().save(using='default', *args, **kwargs)
+        except Exception as e:
+            logger.error(f"Failed to save to local database: {str(e)}")
+            raise
 
 class Feedback(models.Model):
     name = models.CharField(max_length=100)
@@ -127,6 +162,14 @@ class Feedback(models.Model):
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        super().save(using='server', *args, **kwargs)
+        try:
+            super().save(using='default', *args, **kwargs)
+        except Exception as e:
+            logger.error(f"Failed to save to local database: {str(e)}")
+            raise
+
 class BlogImage(models.Model):
     blog = models.ForeignKey('Blog', related_name='images', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='blogs/', validators=[validate_image])
@@ -135,6 +178,14 @@ class BlogImage(models.Model):
     def __str__(self):
         return f"{self.blog.title} - Image {self.id}"
 
+    def save(self, *args, **kwargs):
+        super().save(using='server', *args, **kwargs)
+        try:
+            super().save(using='default', *args, **kwargs)
+        except Exception as e:
+            logger.error(f"Failed to save to local database: {str(e)}")
+            raise
+
 class Blog(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
@@ -142,6 +193,14 @@ class Blog(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        super().save(using='server', *args, **kwargs)
+        try:
+            super().save(using='default', *args, **kwargs)
+        except Exception as e:
+            logger.error(f"Failed to save to local database: {str(e)}")
+            raise
 
 class SocialPlatform(models.Model):
     PLATFORM_CHOICES = (
@@ -161,6 +220,14 @@ class SocialPlatform(models.Model):
     def __str__(self):
         return f"{self.get_name_display()} - {self.link}"
 
+    def save(self, *args, **kwargs):
+        super().save(using='server', *args, **kwargs)
+        try:
+            super().save(using='default', *args, **kwargs)
+        except Exception as e:
+            logger.error(f"Failed to save to local database: {str(e)}")
+            raise
+
 class Service(models.Model):
     icon = models.CharField(max_length=50, blank=True, null=True, help_text="Enter Font Awesome icon class (e.g., 'fas fa-handshake') or leave blank if uploading an icon image.")
     icon_image = models.ImageField(upload_to='service_icons/', blank=True, null=True, validators=[validate_image], help_text="Upload a custom icon image (JPG, JPEG, PNG) if preferred.")
@@ -171,3 +238,11 @@ class Service(models.Model):
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        super().save(using='server', *args, **kwargs)
+        try:
+            super().save(using='default', *args, **kwargs)
+        except Exception as e:
+            logger.error(f"Failed to save to local database: {str(e)}")
+            raise

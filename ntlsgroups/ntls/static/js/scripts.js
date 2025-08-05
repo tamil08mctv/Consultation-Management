@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Loading Animation Control
     const loadingElement = document.getElementById('loading');
     if (loadingElement) {
-        // Simplified timeout to hide spinner after 2 seconds, with debug
         console.log('Loading element found, setting timeout');
         setTimeout(() => {
             console.log('Hiding loading spinner');
@@ -13,10 +12,8 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
                 loadingElement.style.display = 'none';
                 console.log('Loading spinner hidden');
-            }, 500); // Fade out duration
-        }, 2000); // Initial delay
-
-        // Optional: Check for library loading (debug only)
+            }, 200);
+        }, 2000);
         const checkResources = setInterval(() => {
             console.log('Checking resources:', {
                 gsap: typeof gsap !== 'undefined',
@@ -41,21 +38,21 @@ document.addEventListener('DOMContentLoaded', function() {
         console.warn('AOS library not loaded. Animations disabled.');
     }
 
-    // Initialize Particles.js
+    // Initialize Particles.js with more particles and interactivity
     if (typeof particlesJS !== 'undefined') {
         particlesJS("particles-js", {
             particles: {
-                number: { value: 80, density: { enable: true, value_area: 800 } },
+                number: { value: 150, density: { enable: true, value_area: 600 } },
                 color: { value: ["#ffffff", "#90caf9", "#3f51b5"] },
                 shape: { type: "circle", stroke: { width: 0 } },
-                opacity: { value: 0.6, random: true },
-                size: { value: 5, random: true },
-                move: { enable: true, speed: 2, direction: "none", random: true }
+                opacity: { value: 0.7, random: true },
+                size: { value: 6, random: true },
+                move: { enable: true, speed: 3, direction: "none", random: true }
             },
             interactivity: {
                 detect_on: "canvas",
                 events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" } },
-                modes: { repulse: { distance: 150, duration: 0.4 }, push: { particles_nb: 4 } }
+                modes: { repulse: { distance: 200, duration: 0.4 }, push: { particles_nb: 6 } }
             }
         });
         console.log('Particles.js initialized');
@@ -246,8 +243,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 submitBtn.innerHTML = form.id === 'consumerForm' ? 'Submit' : form.id === 'businessForm' ? 'Submit Application' : 'Submit Feedback';
                 if (data.success) {
                     formStatus.innerHTML = '<div class="alert alert-success">' + data.message + '</div>';
-                    form.reset(); // Reset form fields
-                    form.classList.remove('was-validated'); // Clear validation state
+                    form.reset();
+                    form.classList.remove('was-validated');
                     setTimeout(() => {
                         const modal = bootstrap.Modal.getInstance(form.closest('.modal'));
                         if (modal) modal.hide();

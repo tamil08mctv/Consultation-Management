@@ -1078,3 +1078,60 @@ WARNING 2025-08-05 18:02:39,646 log Not Found: /favicon.ico
 INFO 2025-08-05 21:20:56,956 autoreload Watching for file changes with StatReloader
 INFO 2025-08-05 21:21:56,060 autoreload Watching for file changes with StatReloader
 INFO 2025-08-05 21:26:27,061 autoreload Watching for file changes with StatReloader
+INFO 2025-08-05 21:32:04,541 views Business form POST data: <QueryDict: {'csrfmiddlewaretoken': ['1nrdwMdjG0Dw1dKHmCVzVJVqto9lvs1w5nayy2Dn6diXC3ULl9VzI687wYo8jpkG', '1nrdwMdjG0Dw1dKHmCVzVJVqto9lvs1w5nayy2Dn6diXC3ULl9VzI687wYo8jpkG'], 'business_form': ['1'], 'name': ['tv ef'], 'contact': ['tamilmctv81@gmail.com'], 'state': ['TN'], 'district': ['CBE'], 'business_mode': ['online'], 'category': ['it_ites'], 'contact_number': ['+91865625986'], 'applier_designation': ['CEIO']}>, FILES: <MultiValueDict: {'registration_proof': [<InMemoryUploadedFile: final doc batch 8.pdf (application/pdf)>], 'address_proof': [<InMemoryUploadedFile: final doc batch 8.pdf (application/pdf)>], 'logo': [<InMemoryUploadedFile: Screenshot 2022-10-12 220000.jpg (image/jpeg)>]}>
+DEBUG 2025-08-05 21:32:04,999 Image Importing AvifImagePlugin
+DEBUG 2025-08-05 21:32:05,010 Image Importing BlpImagePlugin
+DEBUG 2025-08-05 21:32:05,020 Image Importing BmpImagePlugin
+DEBUG 2025-08-05 21:32:05,021 Image Importing BufrStubImagePlugin
+DEBUG 2025-08-05 21:32:05,036 Image Importing CurImagePlugin
+DEBUG 2025-08-05 21:32:05,047 Image Importing DcxImagePlugin
+DEBUG 2025-08-05 21:32:05,080 Image Importing DdsImagePlugin
+DEBUG 2025-08-05 21:32:05,119 Image Importing EpsImagePlugin
+DEBUG 2025-08-05 21:32:05,134 Image Importing FitsImagePlugin
+DEBUG 2025-08-05 21:32:05,142 Image Importing FliImagePlugin
+DEBUG 2025-08-05 21:32:05,150 Image Importing FpxImagePlugin
+DEBUG 2025-08-05 21:32:05,167 Image Image: failed to import FpxImagePlugin: No module named 'olefile'
+DEBUG 2025-08-05 21:32:05,170 Image Importing FtexImagePlugin
+DEBUG 2025-08-05 21:32:05,180 Image Importing GbrImagePlugin
+DEBUG 2025-08-05 21:32:05,189 Image Importing GifImagePlugin
+DEBUG 2025-08-05 21:32:05,190 Image Importing GribStubImagePlugin
+DEBUG 2025-08-05 21:32:05,207 Image Importing Hdf5StubImagePlugin
+DEBUG 2025-08-05 21:32:05,220 Image Importing IcnsImagePlugin
+DEBUG 2025-08-05 21:32:05,264 Image Importing IcoImagePlugin
+DEBUG 2025-08-05 21:32:05,279 Image Importing ImImagePlugin
+DEBUG 2025-08-05 21:32:05,290 Image Importing ImtImagePlugin
+DEBUG 2025-08-05 21:32:05,311 Image Importing IptcImagePlugin
+DEBUG 2025-08-05 21:32:05,326 Image Importing JpegImagePlugin
+DEBUG 2025-08-05 21:32:05,328 Image Importing Jpeg2KImagePlugin
+DEBUG 2025-08-05 21:32:05,330 Image Importing McIdasImagePlugin
+DEBUG 2025-08-05 21:32:05,341 Image Importing MicImagePlugin
+DEBUG 2025-08-05 21:32:05,355 Image Image: failed to import MicImagePlugin: No module named 'olefile'
+DEBUG 2025-08-05 21:32:05,357 Image Importing MpegImagePlugin
+DEBUG 2025-08-05 21:32:05,367 Image Importing MpoImagePlugin
+DEBUG 2025-08-05 21:32:05,406 Image Importing MspImagePlugin
+DEBUG 2025-08-05 21:32:05,419 Image Importing PalmImagePlugin
+DEBUG 2025-08-05 21:32:05,441 Image Importing PcdImagePlugin
+DEBUG 2025-08-05 21:32:05,458 Image Importing PcxImagePlugin
+DEBUG 2025-08-05 21:32:05,458 Image Importing PdfImagePlugin
+DEBUG 2025-08-05 21:32:05,501 Image Importing PixarImagePlugin
+DEBUG 2025-08-05 21:32:05,509 Image Importing PngImagePlugin
+DEBUG 2025-08-05 21:32:05,512 Image Importing PpmImagePlugin
+DEBUG 2025-08-05 21:32:05,513 Image Importing PsdImagePlugin
+DEBUG 2025-08-05 21:32:05,520 Image Importing QoiImagePlugin
+DEBUG 2025-08-05 21:32:05,532 Image Importing SgiImagePlugin
+DEBUG 2025-08-05 21:32:05,538 Image Importing SpiderImagePlugin
+DEBUG 2025-08-05 21:32:05,553 Image Importing SunImagePlugin
+DEBUG 2025-08-05 21:32:05,564 Image Importing TgaImagePlugin
+DEBUG 2025-08-05 21:32:05,577 Image Importing TiffImagePlugin
+DEBUG 2025-08-05 21:32:05,578 Image Importing WebPImagePlugin
+DEBUG 2025-08-05 21:32:05,618 Image Importing WmfImagePlugin
+DEBUG 2025-08-05 21:32:05,629 Image Importing XbmImagePlugin
+DEBUG 2025-08-05 21:32:05,642 Image Importing XpmImagePlugin
+DEBUG 2025-08-05 21:32:05,655 Image Importing XVThumbImagePlugin
+DEBUG 2025-08-05 21:32:05,666 views Business instance before save: {'_state': <django.db.models.base.ModelState object at 0x000002305721B890>, 'id': None, 'name': 'tv ef', 'contact': 'tamilmctv81@gmail.com', 'state': 'TN', 'district': 'CBE', 'business_mode': 'online', 'category': 'it_ites', 'contact_number': '+91865625986', 'applier_designation': 'CEIO', 'registration_proof': <FieldFile: final doc batch 8.pdf>, 'address_proof': <FieldFile: final doc batch 8.pdf>, 'logo': <ImageFieldFile: Screenshot 2022-10-12 220000.jpg>, 'status': 'pending', 'approved_date': None, 'suspended_date': None, 'created_at': None}
+INFO 2025-08-05 21:32:05,788 views Business saved: tv ef, tamilmctv81@gmail.com
+INFO 2025-08-05 21:32:05,828 settings Loaded email configuration for general: tamil08mctv@gmail.com
+INFO 2025-08-05 21:32:12,164 views Business email sent to tamilmctv81@gmail.com from tamil08mctv@gmail.com
+WARNING 2025-08-05 21:35:42,953 log Not Found: /favicon.ico
+INFO 2025-08-05 22:05:58,534 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\models.py changed, reloading.
+INFO 2025-08-05 22:06:01,746 autoreload Watching for file changes with StatReloader

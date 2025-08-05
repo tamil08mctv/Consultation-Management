@@ -17,6 +17,7 @@ body {
 }
 .navbar-brand img {
     transition: transform 0.3s ease;
+    height: 80px; /* Increased brand icon size */
 }
 .navbar-brand img:hover {
     transform: scale(1.15);
@@ -55,16 +56,17 @@ body {
     font-size: clamp(1.8rem, 5vw, 2.5rem);
     font-weight: 700;
     color: #fff;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+    text-shadow: 0 0 15px #90caf9, 0 0 30px #3f51b5;
 }
 .hero-content p {
     font-size: clamp(1rem, 3vw, 1.2rem);
     color: #e3f2fd;
+    text-shadow: 0 0 10px #90caf9;
 }
 .social-icons a {
     color: #fff;
-    font-size: clamp(1.5rem, 4vw, 2rem);
-    margin: 0 0.75rem;
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    margin: 0 0.5rem;
     transition: all 0.3s ease;
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
 }
@@ -100,9 +102,15 @@ body {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 .card-icon, .service-card i, .partner-card i {
-    max-height: 48px;
-    max-width: 48px;
+    max-height: 80px;
+    max-width: 80px;
     margin-bottom: 1rem;
+}
+.partner-icon {
+    height: 100px;
+    width: 100px; /* Uniform square size, no circular styling */
+    margin-bottom: 1rem;
+    object-fit: contain; /* Ensures uniform scaling */
 }
 .service-card h5, .testimonial-card h6, .partner-card h5, .blog-card h5 {
     font-size: clamp(0.9rem, 2.5vw, 1rem);
@@ -160,7 +168,7 @@ body {
     margin-bottom: 0.25rem;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
     border: 2px solid #e5e7eb;
-    width: 100%; /* Ensure full width within columns */
+    width: 100%;
 }
 
 .form-control:focus, .form-select:focus {
@@ -186,30 +194,34 @@ body {
 /* Enhanced Modal Content Height */
 .modal-dialog.modal-lg .modal-content,
 .modal-dialog.modal-xl .modal-content {
-    padding: 0.5rem; /* Reduced padding to fit more content */
-    min-height: 90vh; /* Increased to 90vh to ensure all fields are visible */
-    max-height: 95vh; /* Cap to prevent overflow on very tall screens */
+    padding: 0.5rem;
+    min-height: 90vh;
+    max-height: 95vh;
 }
 
 .modal-body {
-    max-height: 85vh; /* Increased from 80vh to allow more content */
-    overflow-y: auto; /* Scrollable if content exceeds height */
-    padding: 0.25rem; /* Further reduced padding for more vertical space */
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 0.25rem;
     display: flex;
     flex-direction: column;
+}
+
+.modal-dialog-scrollable .modal-content {
+    max-height: 80vh;
 }
 
 /* Handle Long Labels */
 .form-label {
     font-size: 0.9rem;
-    word-wrap: break-word; /* Allow long labels to wrap */
+    word-wrap: break-word;
     max-width: 100%;
-    margin-bottom: 0.25rem; /* Reduced margin for tighter layout */
+    margin-bottom: 0.25rem;
 }
 
 /* Debug Class for Inspection */
 .modal-debug {
-    border: 2px dashed red; /* Add this class to modal for debugging */
+    border: 2px dashed red;
     outline: 1px solid yellow;
 }
 
@@ -217,38 +229,23 @@ body {
 @media (min-width: 1200px) {
     .container { max-width: 1140px; }
     .hero-section { min-height: 70vh; }
-    .modal-body {
-        max-height: 90vh; /* Higher for large screens */
-    }
-    .modal-dialog.modal-lg .modal-content,
-    .modal-dialog.modal-xl .modal-content {
-        min-height: 95vh;
-    }
+    .modal-body { max-height: 90vh; }
+    .modal-dialog-scrollable .modal-content { max-height: 85vh; }
 }
 @media (min-width: 992px) and (max-width: 1199.98px) {
     .container { max-width: 960px; }
     .hero-content h1 { font-size: 2.2rem; }
     .hero-content p { font-size: 1.1rem; }
-    .modal-body {
-        max-height: 85vh;
-    }
-    .modal-dialog.modal-lg .modal-content,
-    .modal-dialog.modal-xl .modal-content {
-        min-height: 90vh;
-    }
+    .modal-body { max-height: 85vh; }
+    .modal-dialog-scrollable .modal-content { max-height: 80vh; }
 }
 @media (min-width: 768px) and (max-width: 991.98px) {
     .container { max-width: 720px; }
     .hero-content h1 { font-size: 2rem; }
     .hero-content p { font-size: 1rem; }
     .btn-custom { padding: 0.6rem 1.8rem; font-size: 0.95rem; }
-    .modal-body {
-        max-height: 80vh;
-    }
-    .modal-dialog.modal-lg .modal-content,
-    .modal-dialog.modal-xl .modal-content {
-        min-height: 85vh;
-    }
+    .modal-body { max-height: 80vh; }
+    .modal-dialog-scrollable .modal-content { max-height: 75vh; }
 }
 @media (max-width: 767.98px) {
     .container { padding: 0 15px; }
@@ -256,28 +253,13 @@ body {
     .hero-content h1 { font-size: 1.6rem; }
     .hero-content p { font-size: 0.9rem; }
     .btn-custom { padding: 0.5rem 1.5rem; font-size: 0.85rem; }
-    .social-icons a { font-size: 1.5rem; }
-    .modal-dialog {
-        margin: 0.5rem;
-    }
-    .modal-body .col-md-6 {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
-    .modal-body .p-4 {
-        padding: 1rem;
-    }
-    .container.my-5 {
-        margin-top: 1rem !important;
-        margin-bottom: 1rem !important;
-    }
-    .modal-body {
-        max-height: 75vh; /* Adjusted for mobile to fit more content */
-    }
-    .modal-dialog.modal-lg .modal-content,
-    .modal-dialog.modal-xl .modal-content {
-        min-height: 80vh;
-    }
+    .social-icons a { font-size: 1.2rem; }
+    .modal-dialog { margin: 0.5rem; }
+    .modal-body .col-md-6 { flex: 0 0 100%; max-width: 100%; }
+    .modal-body .p-4 { padding: 1rem; }
+    .container.my-5 { margin-top: 1rem !important; margin-bottom: 1rem !important; }
+    .modal-body { max-height: 75vh; }
+    .modal-dialog-scrollable .modal-content { max-height: 70vh; }
 }
 
 .carousel-control-prev, .carousel-control-next {

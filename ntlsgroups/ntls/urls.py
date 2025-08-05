@@ -1,7 +1,8 @@
 from django.urls import path
-from .views import home
+from . import views
 
 urlpatterns = [
-    path('', home, name='home'),
-    
+    path('', views.home, name='home'),
+    path('privacy/', views.privacy, name='privacy'),  # Ensure this exists
+    path('terms/', views.terms, name='terms'),        # Ensure this exists
 ]

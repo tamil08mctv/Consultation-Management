@@ -1,5 +1,5 @@
+{% load static %}
 <div class="container my-5" data-aos="fade-up">
-    <h2 class="text-center mb-4">Become a Partner</h2>
     <form id="businessForm" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
         {% csrf_token %}
         <input type="hidden" name="business_form" value="1">
@@ -17,12 +17,12 @@
         </div>
         <div class="row">
             <div class="col-md-6 mb-3">
-                <label for="{{ business_form.state.id_for_label }}" class="form-label">State</label>
+                <label for="{{ business_form.state.id_for_label }}" class="form-label">Business Location - State</label>
                 {{ business_form.state }}
                 <div class="invalid-feedback">Please enter a state.</div>
             </div>
             <div class="col-md-6 mb-3">
-                <label for="{{ business_form.district.id_for_label }}" class="form-label">District</label>
+                <label for="{{ business_form.district.id_for_label }}" class="form-label">Business Location - District</label>
                 {{ business_form.district }}
                 <div class="invalid-feedback">Please enter a district.</div>
             </div>
@@ -34,7 +34,7 @@
                 <div class="invalid-feedback">Please select a business mode.</div>
             </div>
             <div class="col-md-6 mb-3">
-                <label for="{{ business_form.category.id_for_label }}" class="form-label">Business Category</label>
+                <label for="{{ business_form.category.id_for_label }}" class="form-label">Business Category </label>
                 {{ business_form.category }}
                 <div class="invalid-feedback">Please select a category.</div>
             </div>
@@ -53,28 +53,27 @@
         </div>
         <div class="row">
             <div class="col-md-6 mb-3">
-                <label for="{{ business_form.registration_proof.id_for_label }}" class="form-label">Company Registration Proof (PDF)</label>
+                <label for="{{ business_form.registration_proof.id_for_label }}" class="form-label">Company Registration Proof (ex. Company incorporated certificate, MSME certificate or any other government approved certificate)</label>
                 {{ business_form.registration_proof }}
                 <div class="invalid-feedback">Please upload a valid PDF file.</div>
             </div>
             <div class="col-md-6 mb-3">
-                <label for="{{ business_form.address_proof.id_for_label }}" class="form-label">Company Address Proof (PDF/JPG/PNG)</label>
+                <label for="{{ business_form.address_proof.id_for_label }}" class="form-label">Company Address Proof (Electricity bill, Company operations photo with banner)</label>
                 {{ business_form.address_proof }}
                 <div class="invalid-feedback">Please upload a valid PDF, JPG, or PNG file.</div>
             </div>
         </div>
         <div class="mb-3">
-            <label for="{{ business_form.logo.id_for_label }}" class="form-label">Company Logo (JPG/PNG, optional)</label>
+            <label for="{{ business_form.logo.id_for_label }}" class="form-label">Company Logo</label>
             {{ business_form.logo }}
             <div class="invalid-feedback">Please upload a valid JPG or PNG file.</div>
         </div>
         <div class="text-center">
-            <button type="submit" class="btn btn-primary">Submit Application</button>
+            <button type="submit" class="btn btn-primary" id="businessSubmitBtn">Submit Application</button>
         </div>
     </form>
 </div>
 <script>
-    // Bootstrap form validation
     (function () {
         'use strict';
         const form = document.getElementById('businessForm');

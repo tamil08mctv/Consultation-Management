@@ -252,31 +252,32 @@
         <button class="btn btn-custom btn-primary" data-bs-toggle="modal" data-bs-target="#feedbackModal">Send Feedback</button>
     </div>
 </section>
-
+<!-- Consumer Modal -->
 <div class="modal fade" id="consumerModal" tabindex="-1" aria-labelledby="consumerModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="consumerModalLabel">Submit Your Needs</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div id="consumerFormStatus" class="form-status"></div>
+                <div id="consumerFormStatus" class="form-status mb-3"></div>
                 {% include 'ntls/consumer_form.html' %}
             </div>
         </div>
     </div>
 </div>
 
+<!-- Business Modal -->
 <div class="modal fade" id="businessModal" tabindex="-1" aria-labelledby="businessModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-xl"> <!-- Upgraded to modal-xl for more space -->
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="businessModalLabel">Become a Partner</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div id="businessFormStatus" class="form-status"></div>
+                <div id="businessFormStatus" class="form-status mb-3"></div>
                 {% include 'ntls/business_form.html' %}
             </div>
         </div>

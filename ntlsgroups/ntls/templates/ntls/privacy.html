@@ -1,0 +1,87 @@
+{% extends 'ntls/base.html' %}
+{% load static %}
+{% block title %} - Privacy Policy{% endblock %}
+{% block content %}
+<section id="privacy" class="py-5" style="background: #f0f4f8; color: #1f2937;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8">
+                <div class="policy-header" data-aos="fade-down" style="color: #1a237e;">
+                    <h1 class="fw-bold">Privacy Policy</h1>
+                    <p>Effective from August 3, 2025</p>
+                </div>
+                <div class="card p-4 shadow-lg policy-card" data-aos="fade-up" data-aos-delay="100" style="background: #f5f7fa; color: #1f2937;">
+                    <h2 class="h4 fw-bold mt-4">Commitment to Privacy</h2>
+                    <p>NTLS CONSULTANCY (OPC) PRIVATE LIMITED is committed to protecting the privacy of students, users, partners, and institutions across all platforms.</p>
+                    
+                    <h2 class="h4 fw-bold mt-4">Information We Collect</h2>
+                    <ul>
+                        <li>Personal details: name, email, phone, institution</li>
+                        <li>Program participation data</li>
+                        <li>Technical usage data</li>
+                    </ul>
+                    
+                    <h2 class="h4 fw-bold mt-4">How We Use It</h2>
+                    <ul>
+                        <li>Service delivery and certification</li>
+                        <li>Communication and scheduling</li>
+                        <li>Internal analysis and compliance</li>
+                    </ul>
+                    
+                    <h2 class="h4 fw-bold mt-4">Data Confidentiality</h2>
+                    <p>We do not share, sell, or misuse any data. Information is shared only with consent or legal obligation.</p>
+                    
+                    <h2 class="h4 fw-bold mt-4">Security</h2>
+                    <p>Data is stored securely with encryption and access controls. Only authorized staff access sensitive records.</p>
+                    
+                    <h2 class="h4 fw-bold mt-4">Your Rights</h2>
+                    <p>You may request to access or delete your data at any time by contacting: <a href="mailto:sujeeth.cbde@ntlsgroups.org" class="text-primary">sujeeth.cbde@ntlsgroups.org</a></p>
+                    
+                    <h2 class="h4 fw-bold mt-4">Changes to Policy</h2>
+                    <p>We may revise this policy periodically. All updates will be posted on this page. By using NTLS, you accept our privacy practices.</p>
+                    
+                    <h2 class="h4 fw-bold mt-4">Disclaimer</h2>
+                    <h3 class="h5 fw-bold mt-3">Educational Purpose</h3>
+                    <p>All NTLS services are intended for educational, research, or training purposes. They do not substitute formal degrees unless specified.</p>
+                    
+                    <h3 class="h5 fw-bold mt-3">Accuracy</h3>
+                    <p>While efforts are made to ensure accuracy, NTLS does not guarantee the completeness or reliability of content.</p>
+                    
+                    <h3 class="h5 fw-bold mt-3">No Guarantees</h3>
+                    <p>Completion of NTLS programs does not guarantee:</p>
+                    <ul>
+                        <li>Employment or job placement</li>
+                        <li>Academic recognition (unless via MoU)</li>
+                        <li>Any specific business or technical outcome</li>
+                    </ul>
+                    
+                    <h3 class="h5 fw-bold mt-3">Third-party Links</h3>
+                    <p>NTLS is not responsible for content on linked external platforms.</p>
+                    
+                    <h3 class="h5 fw-bold mt-3">Liability</h3>
+                    <p>NTLS is not liable for:</p>
+                    <ul>
+                        <li>Loss or misuse of data by users</li>
+                        <li>Outcomes resulting from training usage</li>
+                        <li>External failures or disruptions</li>
+                    </ul>
+                    <p>By engaging with NTLS, you acknowledge and accept this disclaimer.</p>
+                    
+                    <h2 class="h4 fw-bold mt-4">Contact Information</h2>
+                    <p>NTLS CONSULTANCY (OPC) PRIVATE LIMITED<br>
+                    MARUKKALAMPATTI, VELAGOUNDAMPATTI POST,<br>
+                    NAMAKKAL-637212, TAMILNADU<br>
+                    Phone: <a href="tel:+917339389123" class="text-primary">+91 7339389123</a><br>
+                    Email: <a href="mailto:info@ntlsgroups.org" class="text-primary">info@ntlsgroups.org</a></p>
+                    <p class="text-muted"><em>This data is for internal meeting use only. Unauthorized use will lead to legal action.</em></p>
+                    
+                    <div class="mt-5 text-center">
+                        <a href="{% url 'terms' %}" class="btn btn-custom btn-primary me-2" aria-label="View Terms and Conditions">View Terms and Conditions</a>
+                        <a href="{% url 'home' %}" class="btn btn-outline-primary btn-custom" aria-label="Back to Home">Back to Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

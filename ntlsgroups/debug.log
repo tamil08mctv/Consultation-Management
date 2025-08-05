@@ -284,3 +284,797 @@ WARNING 2025-08-03 22:53:33,218 log Forbidden (CSRF token from POST incorrect.):
 WARNING 2025-08-03 22:59:23,025 log Not Found: /favicon.ico
 ERROR 2025-08-03 22:59:33,454 admin SMTP authentication failed for test email to tamil08mctv@gmail.com: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-241e8975c89sm89225905ad.96 - gsmtp')
 INFO 2025-08-03 23:01:07,693 admin Test email sent successfully to tamil08mctv@gmail.com
+INFO 2025-08-04 13:55:02,535 autoreload Watching for file changes with StatReloader
+INFO 2025-08-04 13:55:42,568 admin Test email sent successfully to tamil08mctv@gmail.com
+INFO 2025-08-04 13:55:53,921 views Feedback form POST data: <QueryDict: {'csrfmiddlewaretoken': ['JvLron9lAVh49Cg9SgqFpI4dWDdW2kF2NvuMqDzp08WvKsqdRNqFc5hUZdsJQhYc'], 'name': ['fdsf'], 'email': ['tamilmctv81@gmail.com'], 'message': ['gxc'], 'feedback_form': ['1']}>
+ERROR 2025-08-04 13:55:54,120 log Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\views.py", line 143, in home
+    feedback.save(using='server')
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\models.py", line 166, in save
+    super().save(using='server', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: django.db.models.base.Model.save() got multiple values for keyword argument 'using'
+INFO 2025-08-04 14:24:56,247 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\views.py changed, reloading.
+INFO 2025-08-04 14:24:58,487 autoreload Watching for file changes with StatReloader
+INFO 2025-08-04 14:25:05,337 views Feedback form POST data: <QueryDict: {'csrfmiddlewaretoken': ['JvLron9lAVh49Cg9SgqFpI4dWDdW2kF2NvuMqDzp08WvKsqdRNqFc5hUZdsJQhYc'], 'name': ['fdsf'], 'email': ['tamilmctv81@gmail.com'], 'message': ['gxc'], 'feedback_form': ['1']}>
+INFO 2025-08-04 14:25:05,411 settings Loaded email configuration for general: tamil08mctv@gmail.com
+INFO 2025-08-04 14:25:09,963 views Feedback email sent to tamilmctv81@gmail.com from tamil08mctv@gmail.com
+INFO 2025-08-04 14:32:31,309 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\views.py changed, reloading.
+INFO 2025-08-04 14:32:32,623 autoreload Watching for file changes with StatReloader
+INFO 2025-08-04 14:32:36,029 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\views.py changed, reloading.
+INFO 2025-08-04 14:32:37,077 autoreload Watching for file changes with StatReloader
+INFO 2025-08-04 14:32:41,591 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\views.py changed, reloading.
+INFO 2025-08-04 14:32:42,476 autoreload Watching for file changes with StatReloader
+INFO 2025-08-04 14:32:50,033 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\views.py changed, reloading.
+INFO 2025-08-04 14:32:50,919 autoreload Watching for file changes with StatReloader
+INFO 2025-08-04 14:45:30,677 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\views.py changed, reloading.
+INFO 2025-08-04 14:45:31,828 autoreload Watching for file changes with StatReloader
+INFO 2025-08-04 14:51:07,782 views Consumer form POST data: <QueryDict: {'csrfmiddlewaretoken': ['AmzPDNUXsSWd56wopjJpVixLtIA6q0hVEmiaF3k1S5BEGWGsoQJpIFKswiPTeXA5', 'AmzPDNUXsSWd56wopjJpVixLtIA6q0hVEmiaF3k1S5BEGWGsoQJpIFKswiPTeXA5'], 'consumer_form': ['1'], 'name': ['fcadv'], 'contact': ['tamilmctv02@gmail.com'], 'services': ['kd kcd skj ']}>
+DEBUG 2025-08-04 14:51:07,895 views Consumer instance before save: {'_state': <django.db.models.base.ModelState object at 0x000001D168F27830>, 'id': None, 'name': 'fcadv', 'contact': 'tamilmctv02@gmail.com', 'services': 'kd kcd skj', 'created_at': None}
+INFO 2025-08-04 14:51:07,997 views Consumer saved: fcadv, tamilmctv02@gmail.com
+INFO 2025-08-04 14:51:08,021 settings Loaded email configuration for general: tamil08mctv@gmail.com
+INFO 2025-08-04 14:51:14,688 views Consumer email sent to tamilmctv02@gmail.com from tamil08mctv@gmail.com
+INFO 2025-08-04 14:52:38,576 views Business form POST data: <QueryDict: {'csrfmiddlewaretoken': ['AmzPDNUXsSWd56wopjJpVixLtIA6q0hVEmiaF3k1S5BEGWGsoQJpIFKswiPTeXA5', 'AmzPDNUXsSWd56wopjJpVixLtIA6q0hVEmiaF3k1S5BEGWGsoQJpIFKswiPTeXA5'], 'business_form': ['1'], 'name': ['safnjl'], 'contact': ['tamilmctv02@gmail.com'], 'state': ['nflanl'], 'district': ['njlnl'], 'business_mode': ['online'], 'category': ['hospitality_tourism'], 'contact_number': ['2623365365'], 'applier_designation': ['ajcbjsbjkjhif m']}>, FILES: <MultiValueDict: {'registration_proof': [<InMemoryUploadedFile: Certificate TAMIL M.pdf (application/pdf)>], 'address_proof': [<InMemoryUploadedFile: IMG20230405163441.jpg (image/jpeg)>], 'logo': [<InMemoryUploadedFile: WhatsApp Image 2023-08-05 at 08.01.03.jpg (image/jpeg)>]}>
+DEBUG 2025-08-04 14:52:39,454 Image Importing AvifImagePlugin
+DEBUG 2025-08-04 14:52:39,474 Image Importing BlpImagePlugin
+DEBUG 2025-08-04 14:52:39,484 Image Importing BmpImagePlugin
+DEBUG 2025-08-04 14:52:39,485 Image Importing BufrStubImagePlugin
+DEBUG 2025-08-04 14:52:39,492 Image Importing CurImagePlugin
+DEBUG 2025-08-04 14:52:39,501 Image Importing DcxImagePlugin
+DEBUG 2025-08-04 14:52:39,517 Image Importing DdsImagePlugin
+DEBUG 2025-08-04 14:52:39,553 Image Importing EpsImagePlugin
+DEBUG 2025-08-04 14:52:39,567 Image Importing FitsImagePlugin
+DEBUG 2025-08-04 14:52:39,575 Image Importing FliImagePlugin
+DEBUG 2025-08-04 14:52:39,589 Image Importing FpxImagePlugin
+DEBUG 2025-08-04 14:52:39,609 Image Image: failed to import FpxImagePlugin: No module named 'olefile'
+DEBUG 2025-08-04 14:52:39,613 Image Importing FtexImagePlugin
+DEBUG 2025-08-04 14:52:39,623 Image Importing GbrImagePlugin
+DEBUG 2025-08-04 14:52:39,632 Image Importing GifImagePlugin
+DEBUG 2025-08-04 14:52:39,634 Image Importing GribStubImagePlugin
+DEBUG 2025-08-04 14:52:39,644 Image Importing Hdf5StubImagePlugin
+DEBUG 2025-08-04 14:52:39,660 Image Importing IcnsImagePlugin
+DEBUG 2025-08-04 14:52:39,693 Image Importing IcoImagePlugin
+DEBUG 2025-08-04 14:52:39,705 Image Importing ImImagePlugin
+DEBUG 2025-08-04 14:52:39,717 Image Importing ImtImagePlugin
+DEBUG 2025-08-04 14:52:39,730 Image Importing IptcImagePlugin
+DEBUG 2025-08-04 14:52:39,740 Image Importing JpegImagePlugin
+DEBUG 2025-08-04 14:52:39,740 Image Importing Jpeg2KImagePlugin
+DEBUG 2025-08-04 14:52:39,741 Image Importing McIdasImagePlugin
+DEBUG 2025-08-04 14:52:39,747 Image Importing MicImagePlugin
+DEBUG 2025-08-04 14:52:39,761 Image Image: failed to import MicImagePlugin: No module named 'olefile'
+DEBUG 2025-08-04 14:52:39,766 Image Importing MpegImagePlugin
+DEBUG 2025-08-04 14:52:39,778 Image Importing MpoImagePlugin
+DEBUG 2025-08-04 14:52:39,835 Image Importing MspImagePlugin
+DEBUG 2025-08-04 14:52:39,848 Image Importing PalmImagePlugin
+DEBUG 2025-08-04 14:52:39,882 Image Importing PcdImagePlugin
+DEBUG 2025-08-04 14:52:39,894 Image Importing PcxImagePlugin
+DEBUG 2025-08-04 14:52:39,896 Image Importing PdfImagePlugin
+DEBUG 2025-08-04 14:52:39,933 Image Importing PixarImagePlugin
+DEBUG 2025-08-04 14:52:39,940 Image Importing PngImagePlugin
+DEBUG 2025-08-04 14:52:39,943 Image Importing PpmImagePlugin
+DEBUG 2025-08-04 14:52:39,944 Image Importing PsdImagePlugin
+DEBUG 2025-08-04 14:52:39,953 Image Importing QoiImagePlugin
+DEBUG 2025-08-04 14:52:39,964 Image Importing SgiImagePlugin
+DEBUG 2025-08-04 14:52:39,974 Image Importing SpiderImagePlugin
+DEBUG 2025-08-04 14:52:39,984 Image Importing SunImagePlugin
+DEBUG 2025-08-04 14:52:39,998 Image Importing TgaImagePlugin
+DEBUG 2025-08-04 14:52:40,006 Image Importing TiffImagePlugin
+DEBUG 2025-08-04 14:52:40,008 Image Importing WebPImagePlugin
+DEBUG 2025-08-04 14:52:40,034 Image Importing WmfImagePlugin
+DEBUG 2025-08-04 14:52:40,046 Image Importing XbmImagePlugin
+DEBUG 2025-08-04 14:52:40,059 Image Importing XpmImagePlugin
+DEBUG 2025-08-04 14:52:40,069 Image Importing XVThumbImagePlugin
+ERROR 2025-08-04 14:52:40,395 views Business form errors: <ul class="errorlist"><li>contact_number<ul class="errorlist" id="id_contact_number_error"><li>Contact number must be in the format +91XXXXXXXXXX (12 digits).</li></ul></li></ul>
+INFO 2025-08-04 14:53:23,563 views Business form POST data: <QueryDict: {'csrfmiddlewaretoken': ['AmzPDNUXsSWd56wopjJpVixLtIA6q0hVEmiaF3k1S5BEGWGsoQJpIFKswiPTeXA5', 'AmzPDNUXsSWd56wopjJpVixLtIA6q0hVEmiaF3k1S5BEGWGsoQJpIFKswiPTeXA5'], 'business_form': ['1'], 'name': ['safnjl'], 'contact': ['tamilmctv02@gmail.com'], 'state': ['nflanl'], 'district': ['njlnl'], 'business_mode': ['online'], 'category': ['hospitality_tourism'], 'contact_number': ['2623365365'], 'applier_designation': ['ajcbjsbjkjhif m']}>, FILES: <MultiValueDict: {'registration_proof': [<InMemoryUploadedFile: Certificate TAMIL M.pdf (application/pdf)>], 'address_proof': [<InMemoryUploadedFile: IMG20230405163441.jpg (image/jpeg)>], 'logo': [<InMemoryUploadedFile: WhatsApp Image 2023-08-05 at 08.01.03.jpg (image/jpeg)>]}>
+ERROR 2025-08-04 14:53:23,598 views Business form errors: <ul class="errorlist"><li>contact_number<ul class="errorlist" id="id_contact_number_error"><li>Contact number must be in the format +91XXXXXXXXXX (12 digits).</li></ul></li></ul>
+INFO 2025-08-04 14:53:45,811 views Business form POST data: <QueryDict: {'csrfmiddlewaretoken': ['AmzPDNUXsSWd56wopjJpVixLtIA6q0hVEmiaF3k1S5BEGWGsoQJpIFKswiPTeXA5', 'AmzPDNUXsSWd56wopjJpVixLtIA6q0hVEmiaF3k1S5BEGWGsoQJpIFKswiPTeXA5'], 'business_form': ['1'], 'name': ['safnjl'], 'contact': ['tamilmctv02@gmail.com'], 'state': ['nflanl'], 'district': ['njlnl'], 'business_mode': ['online'], 'category': ['hospitality_tourism'], 'contact_number': ['919629828969'], 'applier_designation': ['ajcbjsbjkjhif m']}>, FILES: <MultiValueDict: {'registration_proof': [<InMemoryUploadedFile: Certificate TAMIL M.pdf (application/pdf)>], 'address_proof': [<InMemoryUploadedFile: IMG20230405163441.jpg (image/jpeg)>], 'logo': [<InMemoryUploadedFile: WhatsApp Image 2023-08-05 at 08.01.03.jpg (image/jpeg)>]}>
+ERROR 2025-08-04 14:53:45,818 views Business form errors: <ul class="errorlist"><li>contact_number<ul class="errorlist" id="id_contact_number_error"><li>Contact number must be in the format +91XXXXXXXXXX (12 digits).</li></ul></li></ul>
+INFO 2025-08-04 14:53:48,751 views Business form POST data: <QueryDict: {'csrfmiddlewaretoken': ['AmzPDNUXsSWd56wopjJpVixLtIA6q0hVEmiaF3k1S5BEGWGsoQJpIFKswiPTeXA5', 'AmzPDNUXsSWd56wopjJpVixLtIA6q0hVEmiaF3k1S5BEGWGsoQJpIFKswiPTeXA5'], 'business_form': ['1'], 'name': ['safnjl'], 'contact': ['tamilmctv02@gmail.com'], 'state': ['nflanl'], 'district': ['njlnl'], 'business_mode': ['online'], 'category': ['hospitality_tourism'], 'contact_number': ['919629828969'], 'applier_designation': ['ajcbjsbjkjhif m']}>, FILES: <MultiValueDict: {'registration_proof': [<InMemoryUploadedFile: Certificate TAMIL M.pdf (application/pdf)>], 'address_proof': [<InMemoryUploadedFile: IMG20230405163441.jpg (image/jpeg)>], 'logo': [<InMemoryUploadedFile: WhatsApp Image 2023-08-05 at 08.01.03.jpg (image/jpeg)>]}>
+ERROR 2025-08-04 14:53:48,759 views Business form errors: <ul class="errorlist"><li>contact_number<ul class="errorlist" id="id_contact_number_error"><li>Contact number must be in the format +91XXXXXXXXXX (12 digits).</li></ul></li></ul>
+INFO 2025-08-04 14:53:49,607 views Business form POST data: <QueryDict: {'csrfmiddlewaretoken': ['AmzPDNUXsSWd56wopjJpVixLtIA6q0hVEmiaF3k1S5BEGWGsoQJpIFKswiPTeXA5', 'AmzPDNUXsSWd56wopjJpVixLtIA6q0hVEmiaF3k1S5BEGWGsoQJpIFKswiPTeXA5'], 'business_form': ['1'], 'name': ['safnjl'], 'contact': ['tamilmctv02@gmail.com'], 'state': ['nflanl'], 'district': ['njlnl'], 'business_mode': ['online'], 'category': ['hospitality_tourism'], 'contact_number': ['919629828969'], 'applier_designation': ['ajcbjsbjkjhif m']}>, FILES: <MultiValueDict: {'registration_proof': [<InMemoryUploadedFile: Certificate TAMIL M.pdf (application/pdf)>], 'address_proof': [<InMemoryUploadedFile: IMG20230405163441.jpg (image/jpeg)>], 'logo': [<InMemoryUploadedFile: WhatsApp Image 2023-08-05 at 08.01.03.jpg (image/jpeg)>]}>
+ERROR 2025-08-04 14:53:49,617 views Business form errors: <ul class="errorlist"><li>contact_number<ul class="errorlist" id="id_contact_number_error"><li>Contact number must be in the format +91XXXXXXXXXX (12 digits).</li></ul></li></ul>
+INFO 2025-08-04 14:54:06,545 views Business form POST data: <QueryDict: {'csrfmiddlewaretoken': ['4oc4Rj2PQytGOPSYAeOtAF6jDOfI12Ji8oVpTzsTgL87pF22zLOtn2j0GouvPZ2s', '4oc4Rj2PQytGOPSYAeOtAF6jDOfI12Ji8oVpTzsTgL87pF22zLOtn2j0GouvPZ2s'], 'business_form': ['1'], 'name': ['safnjl'], 'contact': ['tamilmctv02@gmail.com'], 'state': ['nflanl'], 'district': ['njlnl'], 'business_mode': ['online'], 'category': ['hospitality_tourism'], 'contact_number': ['919629828969'], 'applier_designation': ['ajcbjsbjkjhif m']}>, FILES: <MultiValueDict: {'registration_proof': [<InMemoryUploadedFile: Certificate TAMIL M.pdf (application/pdf)>], 'address_proof': [<InMemoryUploadedFile: IMG20230405163441.jpg (image/jpeg)>], 'logo': [<InMemoryUploadedFile: WhatsApp Image 2023-08-05 at 08.01.03.jpg (image/jpeg)>]}>
+ERROR 2025-08-04 14:54:06,553 views Business form errors: <ul class="errorlist"><li>contact_number<ul class="errorlist" id="id_contact_number_error"><li>Contact number must be in the format +91XXXXXXXXXX (12 digits).</li></ul></li></ul>
+INFO 2025-08-04 18:16:44,070 autoreload Watching for file changes with StatReloader
+WARNING 2025-08-04 18:16:49,716 log Not Found: /favicon.ico
+INFO 2025-08-04 18:17:07,762 views Consumer form POST data: <QueryDict: {'csrfmiddlewaretoken': ['4oc4Rj2PQytGOPSYAeOtAF6jDOfI12Ji8oVpTzsTgL87pF22zLOtn2j0GouvPZ2s', '4oc4Rj2PQytGOPSYAeOtAF6jDOfI12Ji8oVpTzsTgL87pF22zLOtn2j0GouvPZ2s'], 'consumer_form': ['1'], 'name': ['vdsv'], 'contact': ['tamilmctv02@gmail.com'], 'services': ['sbdfb ']}>
+DEBUG 2025-08-04 18:17:07,911 views Consumer instance before save: {'_state': <django.db.models.base.ModelState object at 0x000001FA89E1E570>, 'id': None, 'name': 'vdsv', 'contact': 'tamilmctv02@gmail.com', 'services': 'sbdfb', 'created_at': None}
+INFO 2025-08-04 18:17:08,007 views Consumer saved: vdsv, tamilmctv02@gmail.com
+INFO 2025-08-04 18:17:08,034 settings Loaded email configuration for general: tamil08mctv@gmail.com
+INFO 2025-08-04 18:17:13,318 views Consumer email sent to tamilmctv02@gmail.com from tamil08mctv@gmail.com
+INFO 2025-08-04 18:17:32,163 views Business form POST data: <QueryDict: {'csrfmiddlewaretoken': ['4oc4Rj2PQytGOPSYAeOtAF6jDOfI12Ji8oVpTzsTgL87pF22zLOtn2j0GouvPZ2s', '4oc4Rj2PQytGOPSYAeOtAF6jDOfI12Ji8oVpTzsTgL87pF22zLOtn2j0GouvPZ2s'], 'business_form': ['1'], 'name': ['safnjl'], 'contact': ['tamilmctv02@gmail.com'], 'state': ['nflanl'], 'district': ['njlnl'], 'business_mode': ['online'], 'category': ['hospitality_tourism'], 'contact_number': ['919629828969'], 'applier_designation': ['ajcbjsbjkjhif m']}>, FILES: <MultiValueDict: {'registration_proof': [<InMemoryUploadedFile: Certificate TAMIL M.pdf (application/pdf)>], 'address_proof': [<InMemoryUploadedFile: IMG20230405163441.jpg (image/jpeg)>], 'logo': [<InMemoryUploadedFile: WhatsApp Image 2023-08-05 at 08.01.03.jpg (image/jpeg)>]}>
+DEBUG 2025-08-04 18:17:32,393 Image Importing AvifImagePlugin
+DEBUG 2025-08-04 18:17:32,399 Image Importing BlpImagePlugin
+DEBUG 2025-08-04 18:17:32,411 Image Importing BmpImagePlugin
+DEBUG 2025-08-04 18:17:32,411 Image Importing BufrStubImagePlugin
+DEBUG 2025-08-04 18:17:32,414 Image Importing CurImagePlugin
+DEBUG 2025-08-04 18:17:32,427 Image Importing DcxImagePlugin
+DEBUG 2025-08-04 18:17:32,448 Image Importing DdsImagePlugin
+DEBUG 2025-08-04 18:17:32,476 Image Importing EpsImagePlugin
+DEBUG 2025-08-04 18:17:32,489 Image Importing FitsImagePlugin
+DEBUG 2025-08-04 18:17:32,504 Image Importing FliImagePlugin
+DEBUG 2025-08-04 18:17:32,512 Image Importing FpxImagePlugin
+DEBUG 2025-08-04 18:17:32,529 Image Image: failed to import FpxImagePlugin: No module named 'olefile'
+DEBUG 2025-08-04 18:17:32,530 Image Importing FtexImagePlugin
+DEBUG 2025-08-04 18:17:32,542 Image Importing GbrImagePlugin
+DEBUG 2025-08-04 18:17:32,549 Image Importing GifImagePlugin
+DEBUG 2025-08-04 18:17:32,551 Image Importing GribStubImagePlugin
+DEBUG 2025-08-04 18:17:32,564 Image Importing Hdf5StubImagePlugin
+DEBUG 2025-08-04 18:17:32,572 Image Importing IcnsImagePlugin
+DEBUG 2025-08-04 18:17:32,610 Image Importing IcoImagePlugin
+DEBUG 2025-08-04 18:17:32,626 Image Importing ImImagePlugin
+DEBUG 2025-08-04 18:17:32,639 Image Importing ImtImagePlugin
+DEBUG 2025-08-04 18:17:32,655 Image Importing IptcImagePlugin
+DEBUG 2025-08-04 18:17:32,671 Image Importing JpegImagePlugin
+DEBUG 2025-08-04 18:17:32,673 Image Importing Jpeg2KImagePlugin
+DEBUG 2025-08-04 18:17:32,675 Image Importing McIdasImagePlugin
+DEBUG 2025-08-04 18:17:32,692 Image Importing MicImagePlugin
+DEBUG 2025-08-04 18:17:32,703 Image Image: failed to import MicImagePlugin: No module named 'olefile'
+DEBUG 2025-08-04 18:17:32,709 Image Importing MpegImagePlugin
+DEBUG 2025-08-04 18:17:32,726 Image Importing MpoImagePlugin
+DEBUG 2025-08-04 18:17:32,760 Image Importing MspImagePlugin
+DEBUG 2025-08-04 18:17:32,772 Image Importing PalmImagePlugin
+DEBUG 2025-08-04 18:17:32,796 Image Importing PcdImagePlugin
+DEBUG 2025-08-04 18:17:32,810 Image Importing PcxImagePlugin
+DEBUG 2025-08-04 18:17:32,813 Image Importing PdfImagePlugin
+DEBUG 2025-08-04 18:17:32,868 Image Importing PixarImagePlugin
+DEBUG 2025-08-04 18:17:32,881 Image Importing PngImagePlugin
+DEBUG 2025-08-04 18:17:32,883 Image Importing PpmImagePlugin
+DEBUG 2025-08-04 18:17:32,884 Image Importing PsdImagePlugin
+DEBUG 2025-08-04 18:17:32,900 Image Importing QoiImagePlugin
+DEBUG 2025-08-04 18:17:32,921 Image Importing SgiImagePlugin
+DEBUG 2025-08-04 18:17:32,937 Image Importing SpiderImagePlugin
+DEBUG 2025-08-04 18:17:32,949 Image Importing SunImagePlugin
+DEBUG 2025-08-04 18:17:32,964 Image Importing TgaImagePlugin
+DEBUG 2025-08-04 18:17:32,987 Image Importing TiffImagePlugin
+DEBUG 2025-08-04 18:17:32,988 Image Importing WebPImagePlugin
+DEBUG 2025-08-04 18:17:33,012 Image Importing WmfImagePlugin
+DEBUG 2025-08-04 18:17:33,018 Image Importing XbmImagePlugin
+DEBUG 2025-08-04 18:17:33,036 Image Importing XpmImagePlugin
+DEBUG 2025-08-04 18:17:33,045 Image Importing XVThumbImagePlugin
+ERROR 2025-08-04 18:17:33,077 views Business form errors: <ul class="errorlist"><li>contact_number<ul class="errorlist" id="id_contact_number_error"><li>Contact number must be in a valid international format (e.g., +911234567890, +1-123-456-7890, or +442071234567).</li></ul></li></ul>
+INFO 2025-08-04 18:38:20,570 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\forms.py changed, reloading.
+INFO 2025-08-04 18:38:23,808 autoreload Watching for file changes with StatReloader
+INFO 2025-08-04 18:38:42,065 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\forms.py changed, reloading.
+INFO 2025-08-04 18:38:43,000 autoreload Watching for file changes with StatReloader
+INFO 2025-08-04 18:38:48,530 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\forms.py changed, reloading.
+INFO 2025-08-04 18:38:49,243 autoreload Watching for file changes with StatReloader
+INFO 2025-08-04 18:38:59,822 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\forms.py changed, reloading.
+INFO 2025-08-04 18:39:00,638 autoreload Watching for file changes with StatReloader
+INFO 2025-08-04 18:40:23,646 views Business form POST data: <QueryDict: {'csrfmiddlewaretoken': ['xKx3Dv31tgxfKjR8AsIl67JFYvJ1t4okBKgoFLt5TtcGl91czZIlTuWm15YOh1Hu', 'xKx3Dv31tgxfKjR8AsIl67JFYvJ1t4okBKgoFLt5TtcGl91czZIlTuWm15YOh1Hu'], 'business_form': ['1'], 'name': ['safnjl'], 'contact': ['tamilmctv02@gmail.com'], 'state': ['nflanl'], 'district': ['njlnl'], 'business_mode': ['online'], 'category': ['hospitality_tourism'], 'contact_number': ['+919629828969'], 'applier_designation': ['ajcbjsbjkjhif m']}>, FILES: <MultiValueDict: {'registration_proof': [<InMemoryUploadedFile: Certificate TAMIL M.pdf (application/pdf)>], 'address_proof': [<InMemoryUploadedFile: IMG20230405163441.jpg (image/jpeg)>], 'logo': [<InMemoryUploadedFile: WhatsApp Image 2023-08-05 at 08.01.03.jpg (image/jpeg)>]}>
+DEBUG 2025-08-04 18:40:24,174 Image Importing AvifImagePlugin
+DEBUG 2025-08-04 18:40:24,182 Image Importing BlpImagePlugin
+DEBUG 2025-08-04 18:40:24,193 Image Importing BmpImagePlugin
+DEBUG 2025-08-04 18:40:24,193 Image Importing BufrStubImagePlugin
+DEBUG 2025-08-04 18:40:24,199 Image Importing CurImagePlugin
+DEBUG 2025-08-04 18:40:24,206 Image Importing DcxImagePlugin
+DEBUG 2025-08-04 18:40:24,217 Image Importing DdsImagePlugin
+DEBUG 2025-08-04 18:40:24,242 Image Importing EpsImagePlugin
+DEBUG 2025-08-04 18:40:24,251 Image Importing FitsImagePlugin
+DEBUG 2025-08-04 18:40:24,264 Image Importing FliImagePlugin
+DEBUG 2025-08-04 18:40:24,269 Image Importing FpxImagePlugin
+DEBUG 2025-08-04 18:40:24,305 Image Image: failed to import FpxImagePlugin: No module named 'olefile'
+DEBUG 2025-08-04 18:40:24,310 Image Importing FtexImagePlugin
+DEBUG 2025-08-04 18:40:24,317 Image Importing GbrImagePlugin
+DEBUG 2025-08-04 18:40:24,325 Image Importing GifImagePlugin
+DEBUG 2025-08-04 18:40:24,326 Image Importing GribStubImagePlugin
+DEBUG 2025-08-04 18:40:24,332 Image Importing Hdf5StubImagePlugin
+DEBUG 2025-08-04 18:40:24,338 Image Importing IcnsImagePlugin
+DEBUG 2025-08-04 18:40:24,363 Image Importing IcoImagePlugin
+DEBUG 2025-08-04 18:40:24,371 Image Importing ImImagePlugin
+DEBUG 2025-08-04 18:40:24,383 Image Importing ImtImagePlugin
+DEBUG 2025-08-04 18:40:24,387 Image Importing IptcImagePlugin
+DEBUG 2025-08-04 18:40:24,400 Image Importing JpegImagePlugin
+DEBUG 2025-08-04 18:40:24,401 Image Importing Jpeg2KImagePlugin
+DEBUG 2025-08-04 18:40:24,402 Image Importing McIdasImagePlugin
+DEBUG 2025-08-04 18:40:24,410 Image Importing MicImagePlugin
+DEBUG 2025-08-04 18:40:24,469 Image Image: failed to import MicImagePlugin: No module named 'olefile'
+DEBUG 2025-08-04 18:40:24,475 Image Importing MpegImagePlugin
+DEBUG 2025-08-04 18:40:24,500 Image Importing MpoImagePlugin
+DEBUG 2025-08-04 18:40:24,543 Image Importing MspImagePlugin
+DEBUG 2025-08-04 18:40:24,560 Image Importing PalmImagePlugin
+DEBUG 2025-08-04 18:40:24,598 Image Importing PcdImagePlugin
+DEBUG 2025-08-04 18:40:24,607 Image Importing PcxImagePlugin
+DEBUG 2025-08-04 18:40:24,609 Image Importing PdfImagePlugin
+DEBUG 2025-08-04 18:40:24,652 Image Importing PixarImagePlugin
+DEBUG 2025-08-04 18:40:24,663 Image Importing PngImagePlugin
+DEBUG 2025-08-04 18:40:24,663 Image Importing PpmImagePlugin
+DEBUG 2025-08-04 18:40:24,664 Image Importing PsdImagePlugin
+DEBUG 2025-08-04 18:40:24,679 Image Importing QoiImagePlugin
+DEBUG 2025-08-04 18:40:24,693 Image Importing SgiImagePlugin
+DEBUG 2025-08-04 18:40:24,703 Image Importing SpiderImagePlugin
+DEBUG 2025-08-04 18:40:24,713 Image Importing SunImagePlugin
+DEBUG 2025-08-04 18:40:24,722 Image Importing TgaImagePlugin
+DEBUG 2025-08-04 18:40:24,734 Image Importing TiffImagePlugin
+DEBUG 2025-08-04 18:40:24,735 Image Importing WebPImagePlugin
+DEBUG 2025-08-04 18:40:24,940 Image Importing WmfImagePlugin
+DEBUG 2025-08-04 18:40:24,944 Image Importing XbmImagePlugin
+DEBUG 2025-08-04 18:40:24,951 Image Importing XpmImagePlugin
+DEBUG 2025-08-04 18:40:24,959 Image Importing XVThumbImagePlugin
+DEBUG 2025-08-04 18:40:24,968 views Business instance before save: {'_state': <django.db.models.base.ModelState object at 0x0000021C6F277170>, 'id': None, 'name': 'safnjl', 'contact': 'tamilmctv02@gmail.com', 'state': 'nflanl', 'district': 'njlnl', 'business_mode': 'online', 'category': 'hospitality_tourism', 'contact_number': '+919629828969', 'applier_designation': 'ajcbjsbjkjhif m', 'registration_proof': <FieldFile: Certificate TAMIL M.pdf>, 'address_proof': <FieldFile: IMG20230405163441.jpg>, 'logo': <ImageFieldFile: WhatsApp Image 2023-08-05 at 08.01.03.jpg>, 'status': 'pending', 'approved_date': None, 'suspended_date': None, 'created_at': None}
+INFO 2025-08-04 18:40:25,105 views Business saved: safnjl, tamilmctv02@gmail.com
+INFO 2025-08-04 18:40:25,136 settings Loaded email configuration for general: tamil08mctv@gmail.com
+INFO 2025-08-04 18:40:29,953 views Business email sent to tamilmctv02@gmail.com from tamil08mctv@gmail.com
+INFO 2025-08-04 18:50:14,084 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\forms.py changed, reloading.
+INFO 2025-08-04 18:50:15,748 autoreload Watching for file changes with StatReloader
+INFO 2025-08-04 18:50:21,309 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\forms.py changed, reloading.
+INFO 2025-08-04 18:50:22,187 autoreload Watching for file changes with StatReloader
+INFO 2025-08-04 18:51:28,745 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\forms.py changed, reloading.
+INFO 2025-08-04 18:51:29,523 autoreload Watching for file changes with StatReloader
+INFO 2025-08-04 18:51:45,174 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\forms.py changed, reloading.
+INFO 2025-08-04 18:51:46,004 autoreload Watching for file changes with StatReloader
+INFO 2025-08-04 18:51:48,446 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\forms.py changed, reloading.
+INFO 2025-08-04 18:51:49,309 autoreload Watching for file changes with StatReloader
+WARNING 2025-08-04 19:03:33,518 log Not Found: /favicon.ico
+ERROR 2025-08-04 19:32:11,339 log Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\views.py", line 161, in home
+    return render(request, 'ntls/home.html', {
+        'testimonials': testimonials,
+    ...<8 lines>...
+        'services': services,
+    })
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'privacy' not found. 'privacy' is not a valid view function or pattern name.
+INFO 2025-08-04 19:33:25,163 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\urls.py changed, reloading.
+INFO 2025-08-04 19:33:26,926 autoreload Watching for file changes with StatReloader
+INFO 2025-08-04 19:34:01,398 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\views.py changed, reloading.
+INFO 2025-08-04 19:34:02,075 autoreload Watching for file changes with StatReloader
+INFO 2025-08-04 19:34:07,508 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\views.py changed, reloading.
+INFO 2025-08-04 19:34:08,345 autoreload Watching for file changes with StatReloader
+INFO 2025-08-04 19:34:12,724 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\views.py changed, reloading.
+INFO 2025-08-04 19:34:13,469 autoreload Watching for file changes with StatReloader
+INFO 2025-08-04 19:34:22,005 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\views.py changed, reloading.
+INFO 2025-08-04 19:34:22,679 autoreload Watching for file changes with StatReloader
+INFO 2025-08-04 19:34:24,006 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\views.py changed, reloading.
+INFO 2025-08-04 19:34:24,701 autoreload Watching for file changes with StatReloader
+INFO 2025-08-04 19:34:30,182 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\views.py changed, reloading.
+INFO 2025-08-04 19:34:30,872 autoreload Watching for file changes with StatReloader
+INFO 2025-08-04 19:34:33,237 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\views.py changed, reloading.
+INFO 2025-08-04 19:34:34,048 autoreload Watching for file changes with StatReloader
+INFO 2025-08-04 19:34:40,552 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\views.py changed, reloading.
+INFO 2025-08-04 19:34:41,215 autoreload Watching for file changes with StatReloader
+DEBUG 2025-08-04 19:39:42,564 Image Importing AvifImagePlugin
+DEBUG 2025-08-04 19:39:42,570 Image Importing BlpImagePlugin
+DEBUG 2025-08-04 19:39:42,573 Image Importing BmpImagePlugin
+DEBUG 2025-08-04 19:39:42,573 Image Importing BufrStubImagePlugin
+DEBUG 2025-08-04 19:39:42,577 Image Importing CurImagePlugin
+DEBUG 2025-08-04 19:39:42,580 Image Importing DcxImagePlugin
+DEBUG 2025-08-04 19:39:42,586 Image Importing DdsImagePlugin
+DEBUG 2025-08-04 19:39:42,596 Image Importing EpsImagePlugin
+DEBUG 2025-08-04 19:39:42,600 Image Importing FitsImagePlugin
+DEBUG 2025-08-04 19:39:42,605 Image Importing FliImagePlugin
+DEBUG 2025-08-04 19:39:42,608 Image Importing FpxImagePlugin
+DEBUG 2025-08-04 19:39:42,612 Image Image: failed to import FpxImagePlugin: No module named 'olefile'
+DEBUG 2025-08-04 19:39:42,612 Image Importing FtexImagePlugin
+DEBUG 2025-08-04 19:39:42,615 Image Importing GbrImagePlugin
+DEBUG 2025-08-04 19:39:42,618 Image Importing GifImagePlugin
+DEBUG 2025-08-04 19:39:42,618 Image Importing GribStubImagePlugin
+DEBUG 2025-08-04 19:39:42,621 Image Importing Hdf5StubImagePlugin
+DEBUG 2025-08-04 19:39:42,624 Image Importing IcnsImagePlugin
+DEBUG 2025-08-04 19:39:42,631 Image Importing IcoImagePlugin
+DEBUG 2025-08-04 19:39:42,640 Image Importing ImImagePlugin
+DEBUG 2025-08-04 19:39:42,643 Image Importing ImtImagePlugin
+DEBUG 2025-08-04 19:39:42,646 Image Importing IptcImagePlugin
+DEBUG 2025-08-04 19:39:42,649 Image Importing JpegImagePlugin
+DEBUG 2025-08-04 19:39:42,649 Image Importing Jpeg2KImagePlugin
+DEBUG 2025-08-04 19:39:42,650 Image Importing McIdasImagePlugin
+DEBUG 2025-08-04 19:39:42,653 Image Importing MicImagePlugin
+DEBUG 2025-08-04 19:39:42,656 Image Image: failed to import MicImagePlugin: No module named 'olefile'
+DEBUG 2025-08-04 19:39:42,657 Image Importing MpegImagePlugin
+DEBUG 2025-08-04 19:39:42,659 Image Importing MpoImagePlugin
+DEBUG 2025-08-04 19:39:42,667 Image Importing MspImagePlugin
+DEBUG 2025-08-04 19:39:42,672 Image Importing PalmImagePlugin
+DEBUG 2025-08-04 19:39:42,680 Image Importing PcdImagePlugin
+DEBUG 2025-08-04 19:39:42,683 Image Importing PcxImagePlugin
+DEBUG 2025-08-04 19:39:42,684 Image Importing PdfImagePlugin
+DEBUG 2025-08-04 19:39:42,697 Image Importing PixarImagePlugin
+DEBUG 2025-08-04 19:39:42,702 Image Importing PngImagePlugin
+DEBUG 2025-08-04 19:39:42,703 Image Importing PpmImagePlugin
+DEBUG 2025-08-04 19:39:42,703 Image Importing PsdImagePlugin
+DEBUG 2025-08-04 19:39:42,706 Image Importing QoiImagePlugin
+DEBUG 2025-08-04 19:39:42,709 Image Importing SgiImagePlugin
+DEBUG 2025-08-04 19:39:42,712 Image Importing SpiderImagePlugin
+DEBUG 2025-08-04 19:39:42,715 Image Importing SunImagePlugin
+DEBUG 2025-08-04 19:39:42,719 Image Importing TgaImagePlugin
+DEBUG 2025-08-04 19:39:42,722 Image Importing TiffImagePlugin
+DEBUG 2025-08-04 19:39:42,722 Image Importing WebPImagePlugin
+DEBUG 2025-08-04 19:39:42,890 Image Importing WmfImagePlugin
+DEBUG 2025-08-04 19:39:42,893 Image Importing XbmImagePlugin
+DEBUG 2025-08-04 19:39:42,896 Image Importing XpmImagePlugin
+DEBUG 2025-08-04 19:39:42,901 Image Importing XVThumbImagePlugin
+WARNING 2025-08-04 19:41:47,760 log Not Found: /favicon.ico
+INFO 2025-08-05 07:26:10,947 autoreload Watching for file changes with StatReloader
+WARNING 2025-08-05 07:26:44,669 log Not Found: /favicon.ico
+INFO 2025-08-05 07:32:37,086 views Consumer form POST data: <QueryDict: {'csrfmiddlewaretoken': ['Vf3sClUm8Jn2C6Nw7kHzW0gbm4SFHj5ZZfMNEBkqyW2tdWXA6RHzJntSpE7svgo9', 'Vf3sClUm8Jn2C6Nw7kHzW0gbm4SFHj5ZZfMNEBkqyW2tdWXA6RHzJntSpE7svgo9'], 'consumer_form': ['1'], 'name': ['mslkam'], 'contact': ['tamilmctv02@gmail.com'], 'services': ['klmklfsmlf']}>
+DEBUG 2025-08-05 07:32:37,180 views Consumer instance before save: {'_state': <django.db.models.base.ModelState object at 0x0000021D4A41D2B0>, 'id': None, 'name': 'mslkam', 'contact': 'tamilmctv02@gmail.com', 'services': 'klmklfsmlf', 'created_at': None}
+INFO 2025-08-05 07:32:37,287 views Consumer saved: mslkam, tamilmctv02@gmail.com
+INFO 2025-08-05 07:32:37,320 settings Loaded email configuration for general: tamil08mctv@gmail.com
+INFO 2025-08-05 07:32:42,987 views Consumer email sent to tamilmctv02@gmail.com from tamil08mctv@gmail.com
+ERROR 2025-08-05 07:43:38,922 log Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\views.py", line 162, in home
+    return render(request, 'ntls/home.html', {
+        'testimonials': testimonials,
+    ...<8 lines>...
+        'services': services,
+    })
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 199, in render
+    template = context.template.engine.select_template(template_name)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 208, in select_template
+    return self.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 489, in parse
+    raise self.error(token, e)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 487, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 609, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 705, in __init__
+    filter_func = parser.find_filter(filter_name)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 615, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'add_class'
+INFO 2025-08-05 07:45:37,532 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\forms.py changed, reloading.
+INFO 2025-08-05 07:45:39,826 autoreload Watching for file changes with StatReloader
+ERROR 2025-08-05 07:45:55,428 log Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\views.py", line 162, in home
+    return render(request, 'ntls/home.html', {
+        'testimonials': testimonials,
+    ...<8 lines>...
+        'services': services,
+    })
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 199, in render
+    template = context.template.engine.select_template(template_name)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 208, in select_template
+    return self.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 489, in parse
+    raise self.error(token, e)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 487, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 609, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 705, in __init__
+    filter_func = parser.find_filter(filter_name)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 615, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'add_class'
+ERROR 2025-08-05 07:45:58,543 log Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\views.py", line 162, in home
+    return render(request, 'ntls/home.html', {
+        'testimonials': testimonials,
+    ...<8 lines>...
+        'services': services,
+    })
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 199, in render
+    template = context.template.engine.select_template(template_name)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 208, in select_template
+    return self.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 489, in parse
+    raise self.error(token, e)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 487, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 609, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 705, in __init__
+    filter_func = parser.find_filter(filter_name)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 615, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'add_class'
+ERROR 2025-08-05 07:46:15,459 log Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\views.py", line 162, in home
+    return render(request, 'ntls/home.html', {
+        'testimonials': testimonials,
+    ...<8 lines>...
+        'services': services,
+    })
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 199, in render
+    template = context.template.engine.select_template(template_name)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 208, in select_template
+    return self.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 489, in parse
+    raise self.error(token, e)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 487, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 609, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 705, in __init__
+    filter_func = parser.find_filter(filter_name)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 615, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'add_class'
+INFO 2025-08-05 08:22:51,911 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\forms.py changed, reloading.
+INFO 2025-08-05 08:22:53,315 autoreload Watching for file changes with StatReloader
+INFO 2025-08-05 08:23:00,813 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\forms.py changed, reloading.
+INFO 2025-08-05 08:23:01,601 autoreload Watching for file changes with StatReloader
+INFO 2025-08-05 08:23:05,003 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\forms.py changed, reloading.
+INFO 2025-08-05 08:23:05,609 autoreload Watching for file changes with StatReloader
+INFO 2025-08-05 08:23:07,953 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\forms.py changed, reloading.
+INFO 2025-08-05 08:23:08,687 autoreload Watching for file changes with StatReloader
+INFO 2025-08-05 08:23:13,100 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\forms.py changed, reloading.
+INFO 2025-08-05 08:23:13,846 autoreload Watching for file changes with StatReloader
+INFO 2025-08-05 08:23:25,480 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\forms.py changed, reloading.
+INFO 2025-08-05 08:23:26,109 autoreload Watching for file changes with StatReloader
+INFO 2025-08-05 08:23:28,492 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\forms.py changed, reloading.
+INFO 2025-08-05 08:23:29,173 autoreload Watching for file changes with StatReloader
+INFO 2025-08-05 08:23:35,686 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\forms.py changed, reloading.
+INFO 2025-08-05 08:23:36,477 autoreload Watching for file changes with StatReloader
+INFO 2025-08-05 08:23:54,296 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\forms.py changed, reloading.
+INFO 2025-08-05 08:23:55,018 autoreload Watching for file changes with StatReloader
+INFO 2025-08-05 08:23:56,339 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\forms.py changed, reloading.
+INFO 2025-08-05 08:23:57,042 autoreload Watching for file changes with StatReloader
+INFO 2025-08-05 08:24:01,500 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\forms.py changed, reloading.
+INFO 2025-08-05 08:24:02,124 autoreload Watching for file changes with StatReloader
+INFO 2025-08-05 08:26:06,733 views Business form POST data: <QueryDict: {'csrfmiddlewaretoken': ['QKeh63P7GVeD3cUiTXygS9dmp0cvdQ6qUKXC8jfb68T4E24mSuygFwq3sAri1NpA', 'QKeh63P7GVeD3cUiTXygS9dmp0cvdQ6qUKXC8jfb68T4E24mSuygFwq3sAri1NpA'], 'business_form': ['1'], 'name': ['TV Technology'], 'contact': ['tamilmctv81@gmail.com'], 'state': ['mkjnkk '], 'district': [' knkn'], 'business_mode': ['online'], 'category': ['healthcare_wellness'], 'contact_number': ['+915655684128'], 'applier_designation': ['m lmkm']}>, FILES: <MultiValueDict: {'registration_proof': [<InMemoryUploadedFile: Certificate TAMIL M.pdf (application/pdf)>], 'address_proof': [<InMemoryUploadedFile: final doc batch 8.pdf (application/pdf)>], 'logo': [<InMemoryUploadedFile: WhatsApp Image 2023-08-05 at 08.01.03.jpg (image/jpeg)>]}>
+DEBUG 2025-08-05 08:26:07,038 Image Importing AvifImagePlugin
+DEBUG 2025-08-05 08:26:07,047 Image Importing BlpImagePlugin
+DEBUG 2025-08-05 08:26:07,059 Image Importing BmpImagePlugin
+DEBUG 2025-08-05 08:26:07,061 Image Importing BufrStubImagePlugin
+DEBUG 2025-08-05 08:26:07,067 Image Importing CurImagePlugin
+DEBUG 2025-08-05 08:26:07,083 Image Importing DcxImagePlugin
+DEBUG 2025-08-05 08:26:07,105 Image Importing DdsImagePlugin
+DEBUG 2025-08-05 08:26:07,146 Image Importing EpsImagePlugin
+DEBUG 2025-08-05 08:26:07,159 Image Importing FitsImagePlugin
+DEBUG 2025-08-05 08:26:07,167 Image Importing FliImagePlugin
+DEBUG 2025-08-05 08:26:07,182 Image Importing FpxImagePlugin
+DEBUG 2025-08-05 08:26:07,186 Image Image: failed to import FpxImagePlugin: No module named 'olefile'
+DEBUG 2025-08-05 08:26:07,187 Image Importing FtexImagePlugin
+DEBUG 2025-08-05 08:26:07,191 Image Importing GbrImagePlugin
+DEBUG 2025-08-05 08:26:07,200 Image Importing GifImagePlugin
+DEBUG 2025-08-05 08:26:07,201 Image Importing GribStubImagePlugin
+DEBUG 2025-08-05 08:26:07,215 Image Importing Hdf5StubImagePlugin
+DEBUG 2025-08-05 08:26:07,222 Image Importing IcnsImagePlugin
+DEBUG 2025-08-05 08:26:07,247 Image Importing IcoImagePlugin
+DEBUG 2025-08-05 08:26:07,255 Image Importing ImImagePlugin
+DEBUG 2025-08-05 08:26:07,264 Image Importing ImtImagePlugin
+DEBUG 2025-08-05 08:26:07,271 Image Importing IptcImagePlugin
+DEBUG 2025-08-05 08:26:07,285 Image Importing JpegImagePlugin
+DEBUG 2025-08-05 08:26:07,286 Image Importing Jpeg2KImagePlugin
+DEBUG 2025-08-05 08:26:07,286 Image Importing McIdasImagePlugin
+DEBUG 2025-08-05 08:26:07,290 Image Importing MicImagePlugin
+DEBUG 2025-08-05 08:26:07,300 Image Image: failed to import MicImagePlugin: No module named 'olefile'
+DEBUG 2025-08-05 08:26:07,302 Image Importing MpegImagePlugin
+DEBUG 2025-08-05 08:26:07,319 Image Importing MpoImagePlugin
+DEBUG 2025-08-05 08:26:07,339 Image Importing MspImagePlugin
+DEBUG 2025-08-05 08:26:07,355 Image Importing PalmImagePlugin
+DEBUG 2025-08-05 08:26:07,363 Image Importing PcdImagePlugin
+DEBUG 2025-08-05 08:26:07,377 Image Importing PcxImagePlugin
+DEBUG 2025-08-05 08:26:07,378 Image Importing PdfImagePlugin
+DEBUG 2025-08-05 08:26:07,420 Image Importing PixarImagePlugin
+DEBUG 2025-08-05 08:26:07,428 Image Importing PngImagePlugin
+DEBUG 2025-08-05 08:26:07,430 Image Importing PpmImagePlugin
+DEBUG 2025-08-05 08:26:07,433 Image Importing PsdImagePlugin
+DEBUG 2025-08-05 08:26:07,443 Image Importing QoiImagePlugin
+DEBUG 2025-08-05 08:26:07,464 Image Importing SgiImagePlugin
+DEBUG 2025-08-05 08:26:07,479 Image Importing SpiderImagePlugin
+DEBUG 2025-08-05 08:26:07,491 Image Importing SunImagePlugin
+DEBUG 2025-08-05 08:26:07,504 Image Importing TgaImagePlugin
+DEBUG 2025-08-05 08:26:07,517 Image Importing TiffImagePlugin
+DEBUG 2025-08-05 08:26:07,519 Image Importing WebPImagePlugin
+DEBUG 2025-08-05 08:26:07,558 Image Importing WmfImagePlugin
+DEBUG 2025-08-05 08:26:07,570 Image Importing XbmImagePlugin
+DEBUG 2025-08-05 08:26:07,586 Image Importing XpmImagePlugin
+DEBUG 2025-08-05 08:26:07,605 Image Importing XVThumbImagePlugin
+DEBUG 2025-08-05 08:26:07,618 views Business instance before save: {'_state': <django.db.models.base.ModelState object at 0x0000022F147E21B0>, 'id': None, 'name': 'TV Technology', 'contact': 'tamilmctv81@gmail.com', 'state': 'mkjnkk', 'district': 'knkn', 'business_mode': 'online', 'category': 'healthcare_wellness', 'contact_number': '+915655684128', 'applier_designation': 'm lmkm', 'registration_proof': <FieldFile: Certificate TAMIL M.pdf>, 'address_proof': <FieldFile: final doc batch 8.pdf>, 'logo': <ImageFieldFile: WhatsApp Image 2023-08-05 at 08.01.03.jpg>, 'status': 'pending', 'approved_date': None, 'suspended_date': None, 'created_at': None}
+INFO 2025-08-05 08:26:07,750 views Business saved: TV Technology, tamilmctv81@gmail.com
+INFO 2025-08-05 08:26:07,777 settings Loaded email configuration for general: tamil08mctv@gmail.com
+INFO 2025-08-05 08:26:12,490 views Business email sent to tamilmctv81@gmail.com from tamil08mctv@gmail.com
+INFO 2025-08-05 13:46:05,457 autoreload Watching for file changes with StatReloader
+INFO 2025-08-05 17:59:08,768 autoreload Watching for file changes with StatReloader
+WARNING 2025-08-05 18:02:39,646 log Not Found: /favicon.ico
+INFO 2025-08-05 21:20:56,956 autoreload Watching for file changes with StatReloader
+INFO 2025-08-05 21:21:56,060 autoreload Watching for file changes with StatReloader
+INFO 2025-08-05 21:26:27,061 autoreload Watching for file changes with StatReloader

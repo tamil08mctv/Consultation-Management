@@ -278,4 +278,16 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // Image Hover Effect for Modal
+    document.querySelectorAll('.blog-modal-image').forEach(image => {
+        image.addEventListener('mouseenter', () => {
+            image.style.transform = 'scale(1.5)';
+            image.style.zIndex = '1';
+        });
+        image.addEventListener('mouseleave', () => {
+            image.style.transform = 'scale(1)';
+            image.style.zIndex = '0';
+        });
+    });
 });

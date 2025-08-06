@@ -6,8 +6,11 @@
     <div id="particles-js" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 0; opacity: 0.4;"></div>
     <div class="container text-center">
         <div class="hero-content" data-aos="fade-up">
-            <h1 class="display-4 fw-bold text-white" style="text-shadow: 0 0 15px #90caf9, 0 0 30px #3f51b5;">Welcome to NTLS Group</h1>
-            <p class="lead text-white mt-3" style="text-shadow: 0 0 10px #90caf9;">Connecting You with Trusted Services</p>
+            <h1 class="display-4 fw-bold text-white" style="text-shadow: 0 0 15px #90caf9, 0 0 30px #3f51b5;">Welcome to NTLS Groups</h1>
+            <h5 class="lead text-white mt-3" style="text-shadow: 0 0 10px #90caf9;">The Future is Built on the Foundation of Trust —
+without it, even the Strongest Plans Collapse</h5>
+<p class="lead text-white mt-3" >Connecting You with Trusted Services</p>
+            
             <div class="mt-4 d-flex flex-wrap justify-content-center gap-3">
                 <button class="btn btn-light btn-custom" data-bs-toggle="modal" data-bs-target="#consumerModal" data-aos="zoom-in">Submit Your Needs</button>
                 <button class="btn btn-outline-light btn-custom" data-bs-toggle="modal" data-bs-target="#businessModal" data-aos="zoom-in" data-aos-delay="100">Become a Partner</button>
@@ -25,7 +28,7 @@
     <div class="container">
         <h2 class="text-center mb-5 fw-bold" data-aos="fade-up">Our Services</h2>
         {% if services %}
-            <div id="servicesCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+            <div id="servicesCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="1000">
                 <div class="carousel-inner">
                     {% for service in services %}
                         {% if forloop.counter0|divisibleby:6 %}
@@ -52,13 +55,15 @@
                     {% endfor %}
                 </div>
                 {% if services|length > 6 %}
-                    <button class="carousel-control-prev" type="button" data-bs-target="#servicesCarousel" data-bs-slide="prev" aria-label="Previous">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#servicesCarousel" data-bs-slide="next" aria-label="Next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    </button>
-                {% endif %}
+                <button class="carousel-control-prev" type="button" data-bs-target="#blogCarousel-{{ blog.id }}" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#blogCarousel-{{ blog.id }}" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                    {% endif %}
             </div>
         {% else %}
             <p class="text-center text-muted">No services available yet.</p>
@@ -68,7 +73,7 @@
 
 <section id="testimonials" class="testimonials-section">
     <div class="container">
-        <h2 class="text-center mb-5 fw-bold" data-aos="fade-up">What Our Clients Say</h2>
+        <h2 class="text-center mb-4 fw-bold" data-aos="fade-up">What Our Clients Say</h2>
         {% if testimonials %}
             <div id="testimonialsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
                 <div class="carousel-inner">
@@ -92,12 +97,14 @@
                     {% endfor %}
                 </div>
                 {% if testimonials|length > 3 %}
-                    <button class="carousel-control-prev" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="prev" aria-label="Previous">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="next" aria-label="Next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    </button>
+                     <button class="carousel-control-prev" type="button" data-bs-target="#blogCarousel-{{ blog.id }}" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#blogCarousel-{{ blog.id }}" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
                 {% endif %}
             </div>
         {% else %}
@@ -108,7 +115,7 @@
 
 <section id="partners" class="partners-section">
     <div class="container">
-        <h2 class="text-center mb-5 fw-bold" data-aos="fade-up">Our Trusted Partners</h2>
+        <h2 class="text-center mb-4 fw-bold" data-aos="fade-up">Our Trusted Partners</h2>
         <p class="text-center text-muted mb-4">{{ partner_count }} Partners Joined</p>
         <form method="get" class="mb-4 text-center">
             <select name="category" onchange="this.form.submit()" class="form-select w-auto mx-auto" style="max-width: 250px;" aria-label="Filter by category">
@@ -143,12 +150,14 @@
                     {% endfor %}
                 </div>
                 {% if partners|length > 4 %}
-                    <button class="carousel-control-prev" type="button" data-bs-target="#partnersCarousel" data-bs-slide="prev" aria-label="Previous">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#partnersCarousel" data-bs-slide="next" aria-label="Next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    </button>
+                     <button class="carousel-control-prev" type="button" data-bs-target="#blogCarousel-{{ blog.id }}" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#blogCarousel-{{ blog.id }}" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
                 {% endif %}
             </div>
         {% else %}
@@ -161,7 +170,7 @@
     <div class="container">
         <h2 class="text-center mb-5 fw-bold" data-aos="fade-up">Explore Our Latest Blogs</h2>
         {% if blogs %}
-            <div id="blogsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+            <div id="blogsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
                 <div class="carousel-inner">
                     {% for blog in blogs %}
                         {% if forloop.counter0|divisibleby:3 %}
@@ -185,11 +194,13 @@
                     {% endfor %}
                 </div>
                 {% if blogs|length > 3 %}
-                    <button class="carousel-control-prev" type="button" data-bs-target="#blogsCarousel" data-bs-slide="prev" aria-label="Previous">
+                    <button class="carousel-control-prev" type="button" data-bs-target="#blogsCarousel" data-bs-slide="prev" >
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#blogsCarousel" data-bs-slide="next" aria-label="Next">
+                    <button class="carousel-control-next" type="button" data-bs-target="#blogsCarousel" data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Next</span>
                     </button>
                 {% endif %}
             </div>
@@ -198,41 +209,46 @@
                     <div class="modal-dialog modal-dialog-scrollable">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="blogModalLabel-{{ blog.id }}">{{ blog.title }}</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <div class="modal-body row">
-                                <div class="col-md-8">
-                                    <p class="text-dark">{{ blog.content|linebreaks }}</p>
-                                    <p class="text-muted"><strong>Created by:</strong> {{ blog.created_by.username|default:"Admin" }}</p>
-                                </div>
-                                <div class="col-md-4">
-                                    {% if blog.images.all %}
-                                        <div id="blogCarousel-{{ blog.id }}" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
-                                            <div class="carousel-inner">
-                                                {% for image in blog.images.all %}
-                                                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                                                        <img src="{{ image.image.url }}" alt="{{ image.caption|default:blog.title }}" class="d-block w-100" style="border-radius: 10px; height: 300px; object-fit: cover;">
-                                                        {% if image.caption %}
-                                                            <div class="carousel-caption d-md-block">
-                                                                <p class="bg-dark bg-opacity-75 text-white p-2 rounded">{{ image.caption }}</p>
-                                                            </div>
-                                                        {% endif %}
-                                                    </div>
-                                                {% endfor %}
+                            <div class="modal-body">
+                                <div class="blog-modal-content row g-0">
+                                    <div class="col-12 col-md-6 blog-content text-center">
+                                        <p class="text-dark">{{ blog.content|linebreaks }}</p>
+                                         </div>
+                                    <div class="col-12 col-md-6 blog-images">
+                                        {% if blog.images.all %}
+                                            <div id="blogCarousel-{{ blog.id }}" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+                                                <div class="carousel-inner">
+                                                    {% for image in blog.images.all %}
+                                                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                                            <img src="{{ image.image.url }}" alt="{{ image.caption|default:blog.title }}" class="img-fluid blog-modal-image" style="border-radius: 10px; width: 100%; height: 100%; object-fit: cover;">
+                                                            {% if image.caption %}
+                                                                <div class="carousel-caption d-md-block">
+                                                                    <p class="bg-dark bg-opacity-75 text-white p-2 rounded">{{ image.caption }}</p>
+                                                                </div>
+                                                            {% endif %}
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                                {% if blog.images.all|length > 1 %}
+                                                    <button class="carousel-control-prev" type="button" data-bs-target="#blogCarousel-{{ blog.id }}" data-bs-slide="prev">
+                                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Previous</span>
+                                                    </button>
+                                                    <button class="carousel-control-next" type="button" data-bs-target="#blogCarousel-{{ blog.id }}" data-bs-slide="next">
+                                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Next</span>
+                                                    </button>
+                                                {% endif %}
                                             </div>
-                                            {% if blog.images.all|length > 1 %}
-                                                <button class="carousel-control-prev" type="button" data-bs-target="#blogCarousel-{{ blog.id }}" data-bs-slide="prev" aria-label="Previous">
-                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                </button>
-                                                <button class="carousel-control-next" type="button" data-bs-target="#blogCarousel-{{ blog.id }}" data-bs-slide="next" aria-label="Next">
-                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                </button>
-                                            {% endif %}
-                                        </div>
-                                    {% else %}
-                                        <p class="text-muted">No images available for this blog.</p>
-                                    {% endif %}
+                                        {% else %}
+                                            <p class="text-muted">No images available for this blog.</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="text-center mt-3">
+                                    <h5 class="modal-title" id="blogModalLabel-{{ blog.id }}">{{ blog.title }}</h5>
                                 </div>
                             </div>
                         </div>

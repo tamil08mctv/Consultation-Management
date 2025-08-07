@@ -6,10 +6,10 @@
     <div id="particles-js" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 0; opacity: 0.4;"></div>
     <div class="container text-center">
         <div class="hero-content" data-aos="fade-up">
-            <h1 class="display-4 fw-bold text-white" style="text-shadow: 0 0 15px #90caf9, 0 0 30px #3f51b5;">Welcome to NTLS Groups</h1>
-            <h5 class="lead text-white mt-3" style="text-shadow: 0 0 10px #90caf9;">The Future is Built on the Foundation of Trust —
+            <h1 class="display-4 fw-bold text-shadow" style="text-shadow: 0  #90caf9, 0 0 30px #3f51b5;">Welcome to NTLS Groups</h1>
+            <h5 class="lead text-white mt-3" style="text-shadow: 0 0 10px #0287f3;">The Future is Built on the Foundation of Trust —
 without it, even the Strongest Plans Collapse</h5>
-<p class="lead text-white mt-3" >Connecting You with Trusted Services</p>
+<p class="lead text-white mt-3" style="text-shadow: 0 0 10px #0287f3;">Connecting You with Trusted Services</p>
             
             <div class="mt-4 d-flex flex-wrap justify-content-center gap-3">
                 <button class="btn btn-light btn-custom" data-bs-toggle="modal" data-bs-target="#consumerModal" data-aos="zoom-in">Submit Your Needs</button>
@@ -28,7 +28,7 @@ without it, even the Strongest Plans Collapse</h5>
     <div class="container">
         <h2 class="text-center mb-5 fw-bold" data-aos="fade-up">Our Services</h2>
         {% if services %}
-            <div id="servicesCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="1000">
+            <div id="servicesCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
                 <div class="carousel-inner">
                     {% for service in services %}
                         {% if forloop.counter0|divisibleby:6 %}
@@ -75,7 +75,7 @@ without it, even the Strongest Plans Collapse</h5>
     <div class="container">
         <h2 class="text-center mb-4 fw-bold" data-aos="fade-up">What Our Clients Say</h2>
         {% if testimonials %}
-            <div id="testimonialsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+            <div id="testimonialsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
                 <div class="carousel-inner">
                     {% for testimonial in testimonials %}
                         {% if forloop.counter0|divisibleby:3 %}
@@ -126,7 +126,7 @@ without it, even the Strongest Plans Collapse</h5>
             </select>
         </form>
         {% if partners %}
-            <div id="partnersCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+            <div id="partnersCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
                 <div class="carousel-inner">
                     {% for partner in partners %}
                         {% if forloop.counter0|divisibleby:4 %}
@@ -170,7 +170,7 @@ without it, even the Strongest Plans Collapse</h5>
     <div class="container">
         <h2 class="text-center mb-5 fw-bold" data-aos="fade-up">Explore Our Latest Blogs</h2>
         {% if blogs %}
-            <div id="blogsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+            <div id="blogsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
                 <div class="carousel-inner">
                     {% for blog in blogs %}
                         {% if forloop.counter0|divisibleby:3 %}

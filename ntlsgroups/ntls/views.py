@@ -6,7 +6,7 @@ from django.utils import timezone
 import logging
 import smtplib
 from .forms import ConsumerForm, BusinessForm, FeedbackForm
-from .models import Consumer, Business, Testimonial, Feedback, EmailConfig, Blog, SocialPlatform, Service
+from .models import Consumer, Business, Testimonial, Feedback, EmailConfig, Blog, SocialPlatform, Service, PaymentLink
 from ntlsgroups.settings import get_email_config
 from django.shortcuts import render
 
@@ -26,6 +26,15 @@ def home(request):
     blogs = Blog.objects.using('server').all().order_by('-created_at').prefetch_related('images')
     social_platforms = SocialPlatform.objects.using('server').filter(is_active=True)
     services = Service.objects.using('server').filter(is_active=True)
+    payment_link = None
+
+    try:
+        payment_link = PaymentLink.objects.using('server').filter(is_active=True).first()
+        if not payment_link:
+            logger.info("No active payment link found in the database.")
+    except Exception as e:
+        logger.error(f"Failed to query PaymentLink table: {str(e)}. Continuing without payment link.")
+        payment_link = None
 
     if request.method == 'POST':
         try:
@@ -49,8 +58,8 @@ def home(request):
                                 use_tls=email_config['EMAIL_USE_TLS']
                             )
                             send_mail(
-                                subject='Consumer Form Submission Confirmation',
-                                message=f'Dear {consumer.name},\n\nThank you for submitting your needs to NTLS Group.\n\nDetails:\n- Services: {consumer.services}\n\nWe will connect you with a suitable partner soon.\n\nBest regards,\nNTLS Group',
+                                subject='Confirmation of Submission – Thank You',
+                                message=f'Dear {consumer.name},\n\nWe have received your request/submission and would like to thank you for choosing NTLS GROUPS.\nYour submission is currently under processing. Our team will connect with you shortly to take the next steps or to provide further assistance.\n\nIf you need support or have any concerns, please write to:\nSujeeth Vishnu\nChief Business Development Executive\nsujeeth.cbde@ntlsgroups.org\n\nThis email is intended only for the recipient and should not be shared or replied to directly. All rights reserved. NTLS CONSULTANCY OPC PRIVATE LIMITED holds all legal rights over the content and communication.',
                                 from_email=email_config['EMAIL_HOST_USER'],
                                 recipient_list=[consumer.contact],
                                 fail_silently=False,
@@ -91,8 +100,8 @@ def home(request):
                                 use_tls=email_config['EMAIL_USE_TLS']
                             )
                             send_mail(
-                                subject='Business Application Received',
-                                message=f'Dear {business.name},\n\nThank you for applying to become a partner with NTLS Group.\n\nDetails:\n- Category: {business.get_category_display()}\n- Location: {business.district}, {business.state}\n- Mode: {business.get_business_mode_display()}\n- Contact Number: {business.contact_number}\n- Applier Designation: {business.applier_designation}\n\nWe will review your application and notify you of the status.\n\nBest regards,\nNTLS Group',
+                                subject='Submission Received – Under Review',
+                                message=f'Dear {business.name},\n\nThis is to acknowledge that your application to partner with NTLS GROUPS has been received successfully.\nOur team is currently reviewing the information submitted. You will receive a follow-up email regarding the status of your application within 3–5 working days.\n\nIf you need to update any information or have questions during this review process, please contact:\nSujeeth Vishnu\nChief Business Development Executive\nsujeeth.cbde@ntlsgroups.org\n\nThis email is intended only for the recipient and should not be shared or replied to directly. All rights reserved. NTLS CONSULTANCY OPC PRIVATE LIMITED holds all legal rights over the content and communication.',
                                 from_email=email_config['EMAIL_HOST_USER'],
                                 recipient_list=[business.contact],
                                 fail_silently=False,
@@ -131,8 +140,8 @@ def home(request):
                                 use_tls=email_config['EMAIL_USE_TLS']
                             )
                             send_mail(
-                                subject='Feedback Submission Confirmation',
-                                message=f'Dear {feedback.name},\n\nThank you for your feedback to NTLS Group.\n\nMessage:\n{feedback.message}\n\nWe value your input and will get back to you soon.\n\nBest regards,\nNTLS Group',
+                                subject='Thank You for Your Feedback',
+                                message=f'Dear {feedback.name},\n\nThank you for taking the time to share your feedback with NTLS GROUPS. We truly value your input and will use it to improve our services and offerings.\nIf your feedback requires a response, one of our representatives will be in touch with you shortly.\n\nFor assistance or complaints, please reach out to:\nSujeeth Vishnu\nChief Business Development Executive\nsujeeth.cbde@ntlsgroups.org\n\nThis email is intended only for the recipient and should not be shared or replied to directly. All rights reserved. NTLS CONSULTANCY OPC PRIVATE LIMITED holds all legal rights over the content and communication.',
                                 from_email=email_config['EMAIL_HOST_USER'],
                                 recipient_list=[feedback.email],
                                 fail_silently=False,
@@ -170,13 +179,27 @@ def home(request):
         'blogs': blogs,
         'social_platforms': social_platforms,
         'services': services,
+        'payment_link': payment_link,
     })
 
-
 def privacy(request):
-    return render(request, 'ntls/privacy.html')
-
-
+    payment_link = None
+    try:
+        payment_link = PaymentLink.objects.using('server').filter(is_active=True).first()
+        if not payment_link:
+            logger.info("No active payment link found in the database.")
+    except Exception as e:
+        logger.error(f"Failed to query PaymentLink table: {str(e)}. Continuing without payment link.")
+        payment_link = None
+    return render(request, 'ntls/privacy.html', {'payment_link': payment_link})
 
 def terms(request):
-    return render(request, 'ntls/terms.html')
+    payment_link = None
+    try:
+        payment_link = PaymentLink.objects.using('server').filter(is_active=True).first()
+        if not payment_link:
+            logger.info("No active payment link found in the database.")
+    except Exception as e:
+        logger.error(f"Failed to query PaymentLink table: {str(e)}. Continuing without payment link.")
+        payment_link = None
+    return render(request, 'ntls/terms.html', {'payment_link': payment_link})

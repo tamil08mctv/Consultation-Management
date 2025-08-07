@@ -1,16 +1,16 @@
 from django.conf import settings
-from .models import Testimonial, Business, Blog, SocialPlatform, Service
+from .models import Testimonial, Business, Blog, SocialPlatform, Service, PaymentLink
 
 class DualWriteRouter:
     def db_for_read(self, model, **hints):
-        if model._meta.app_label == 'ntls' and any(model._meta.model_name == m._meta.model_name for m in [Testimonial, Business, Blog, SocialPlatform, Service]):
+        if model._meta.app_label == 'ntls' and any(model._meta.model_name == m._meta.model_name for m in [Testimonial, Business, Blog, SocialPlatform, Service, PaymentLink]):
             return 'server'
         if model._meta.app_label == 'sessions':
             return 'default'
         return 'default'
 
     def db_for_write(self, model, **hints):
-        if model._meta.app_label == 'ntls' and any(model._meta.model_name == m._meta.model_name for m in [Testimonial, Business, Blog, SocialPlatform, Service]):
+        if model._meta.app_label == 'ntls' and any(model._meta.model_name == m._meta.model_name for m in [Testimonial, Business, Blog, SocialPlatform, Service, PaymentLink]):
             return 'server'
         if model._meta.app_label == 'sessions':
             return 'default'

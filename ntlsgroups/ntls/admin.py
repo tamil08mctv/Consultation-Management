@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.core.mail import send_mail, get_connection
 from django.utils import timezone
 from django import forms
-from .models import Consumer, Business, Testimonial, Feedback, EmailConfig, Blog, BlogImage, SocialPlatform, Service
+from .models import Consumer, Business, Testimonial, Feedback, EmailConfig, Blog, BlogImage, SocialPlatform, Service, PaymentLink
 import logging
 import smtplib
 import re
@@ -76,7 +76,7 @@ class EmailConfigAdmin(admin.ModelAdmin):
                         use_tls=config.use_tls
                     )
                     send_mail(
-                        subject='Test Email from NTLS Group',
+                        subject='Test Email from NTLS GROUPS',
                         message=f'This is a test email sent using {config.email_id}.',
                         from_email=config.email_id,
                         recipient_list=[config.email_id],
@@ -186,8 +186,8 @@ class BusinessAdmin(admin.ModelAdmin):
                             use_tls=email_config['EMAIL_USE_TLS']
                         )
                         send_mail(
-                            subject='Business Application Approved',
-                            message=f'Dear {business.name},\n\nCongratulations! Your application to become a partner with NTLS Group has been approved.\n\nYou can now be matched with customers seeking your services.\n\nBest regards,\nNTLS Group',
+                            subject='Welcome to NTLS GROUPS – Partnership Approved',
+                            message=f'Dear {business.name},\n\nWe are pleased to inform you that your application to become a partner with NTLS GROUPS has been approved.\nYour submitted details and credentials have been reviewed and accepted. All the information provided will be retained and treated confidentially until the termination of the partnership, as per our privacy policy.\nYou are now officially part of our partner network, and we look forward to building a valuable and mutually beneficial relationship.\n\nIf you have any queries, complaints, or require future assistance, please contact:\nSujeeth Vishnu\nChief Business Development Executive\nsujeeth.cbde@ntlsgroups.org\n\nThis email is intended only for the recipient and should not be shared or replied to directly. All rights reserved. NTLS CONSULTANCY OPC PRIVATE LIMITED holds all legal rights over the content and communication.',
                             from_email=email_config['EMAIL_HOST_USER'],
                             recipient_list=[business.contact],
                             fail_silently=False,
@@ -239,8 +239,8 @@ class BusinessAdmin(admin.ModelAdmin):
                             use_tls=email_config['EMAIL_USE_TLS']
                         )
                         send_mail(
-                            subject='Business Application Suspended',
-                            message=f'Dear {business.name},\n\nYour partnership with NTLS Group has been suspended.\n\nPlease contact us for further details.\n\nBest regards,\nNTLS Group',
+                            subject='Account Suspended – Action Required',
+                            message=f'Dear {business.name},\n\nWe would like to inform you that your business partnership account with NTLS GROUPS has been temporarily suspended due to the following reason(s):\n• Incomplete compliance with required documentation\n• Misuse of partnership privileges\n• Breach of terms and conditions\nPlease reach out to our support team to resolve this matter. Failure to address the issue within 7 working days may lead to permanent termination.\n\nIf you need clarification or guidance, please get in touch with:\nSujeeth Vishnu\nChief Business Development Executive\nsujeeth.cbde@ntlsgroups.org\n\nThis email is intended only for the recipient and should not be shared or replied to directly. All rights reserved. NTLS CONSULTANCY OPC PRIVATE LIMITED holds all legal rights over the content and communication.',
                             from_email=email_config['EMAIL_HOST_USER'],
                             recipient_list=[business.contact],
                             fail_silently=False,
@@ -292,8 +292,8 @@ class BusinessAdmin(admin.ModelAdmin):
                             use_tls=email_config['EMAIL_USE_TLS']
                         )
                         send_mail(
-                            subject='Business Application Rejected',
-                            message=f'Dear {business.name},\n\nWe regret to inform you that your application to become a partner with NTLS Group has been rejected.\n\nPlease contact us for feedback.\n\nBest regards,\nNTLS Group',
+                            subject='Application Status – Not Approved',
+                            message=f'Dear {business.name},\n\nThank you for your interest in partnering with NTLS GROUPS.\nAfter careful review of your application, we regret to inform you that we are unable to approve your request at this time due to one or more of the following reasons:\n• Business listing name mismatch\n• Incomplete or unverifiable communication address\n• Missing or unclear documentation\n• Failure to meet our eligibility criteria\nYou are welcome to reapply after resolving the above issues. We appreciate your time and understanding.\n\nIf you believe this is a mistake or need further support, feel free to contact:\nSujeeth Vishnu\nChief Business Development Executive\nsujeeth.cbde@ntlsgroups.org\n\nThis email is intended only for the recipient and should not be shared or replied to directly. All rights reserved. NTLS CONSULTANCY OPC PRIVATE LIMITED holds all legal rights over the content and communication.',
                             from_email=email_config['EMAIL_HOST_USER'],
                             recipient_list=[business.contact],
                             fail_silently=False,
@@ -354,3 +354,10 @@ class ServiceAdmin(admin.ModelAdmin):
     list_filter = ('is_active',)
     search_fields = ('name', 'icon')
     fields = ('name', 'icon', 'icon_image', 'description', 'is_active')
+
+@admin.register(PaymentLink)
+class PaymentLinkAdmin(admin.ModelAdmin):
+    list_display = ('link', 'is_active', 'created_at', 'updated_at')
+    list_filter = ('is_active',)
+    search_fields = ('link',)
+    fields = ('link', 'is_active')

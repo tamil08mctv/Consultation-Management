@@ -246,3 +246,20 @@ class Service(models.Model):
         except Exception as e:
             logger.error(f"Failed to save to local database: {str(e)}")
             raise
+
+class PaymentLink(models.Model):
+    link = models.URLField(max_length=200, unique=True, help_text="Enter the payment link to redirect users.")
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.link
+
+    def save(self, *args, **kwargs):
+        super().save(using='server', *args, **kwargs)
+        try:
+            super().save(using='default', *args, **kwargs)
+        except Exception as e:
+            logger.error(f"Failed to save to local database: {str(e)}")
+            raise

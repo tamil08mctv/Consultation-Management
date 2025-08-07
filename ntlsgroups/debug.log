@@ -2142,3 +2142,34 @@ DEBUG 2025-08-06 21:48:01,439 PngImagePlugin STREAM b'IHDR' 16 13
 DEBUG 2025-08-06 21:48:01,444 PngImagePlugin STREAM b'sRGB' 41 1
 DEBUG 2025-08-06 21:48:01,445 PngImagePlugin STREAM b'gAMA' 54 4
 DEBUG 2025-08-06 21:48:01,446 PngImagePlugin STREAM b'IDAT' 70 65466
+INFO 2025-08-07 07:37:44,670 autoreload Watching for file changes with StatReloader
+WARNING 2025-08-07 07:37:49,554 log Not Found: /favicon.ico
+WARNING 2025-08-07 07:37:57,226 log Not Found: /favicon.ico
+INFO 2025-08-07 07:54:17,261 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-07 07:54:19,531 autoreload Watching for file changes with StatReloader
+INFO 2025-08-07 07:54:30,492 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-07 07:54:31,759 autoreload Watching for file changes with StatReloader
+INFO 2025-08-07 07:54:36,154 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-07 07:54:37,202 autoreload Watching for file changes with StatReloader
+INFO 2025-08-07 07:54:43,611 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-07 07:54:44,460 autoreload Watching for file changes with StatReloader
+INFO 2025-08-07 07:54:45,906 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-07 07:54:46,703 autoreload Watching for file changes with StatReloader
+WARNING 2025-08-07 07:55:00,719 log Not Found: /favicon.ico
+INFO 2025-08-07 07:55:04,175 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-07 07:55:05,273 autoreload Watching for file changes with StatReloader
+INFO 2025-08-07 08:00:03,450 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-07 08:00:04,822 autoreload Watching for file changes with StatReloader
+INFO 2025-08-07 08:17:09,591 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-07 08:17:12,483 autoreload Watching for file changes with StatReloader
+INFO 2025-08-07 08:17:41,061 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-07 08:17:42,456 autoreload Watching for file changes with StatReloader
+INFO 2025-08-07 08:17:45,888 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-07 08:17:47,392 autoreload Watching for file changes with StatReloader
+WARNING 2025-08-07 08:18:10,930 log Not Found: /favicon.ico
+INFO 2025-08-07 08:18:20,935 settings Loaded email configuration for general: tamil08mctv@gmail.com
+INFO 2025-08-07 08:18:20,936 admin Using email config for tamil08mctv@gmail.com
+INFO 2025-08-07 08:18:23,502 admin SMTP validation successful for tamil08mctv@gmail.com
+INFO 2025-08-07 08:18:29,541 admin Status change email sent to tamilmctv02@gmail.com from tamil08mctv@gmail.com for status approved
+INFO 2025-08-07 08:23:30,171 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-07 08:23:32,158 autoreload Watching for file changes with StatReloader

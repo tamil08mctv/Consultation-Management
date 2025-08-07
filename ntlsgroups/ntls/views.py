@@ -6,9 +6,8 @@ from django.utils import timezone
 import logging
 import smtplib
 from .forms import ConsumerForm, BusinessForm, FeedbackForm
-from .models import Consumer, Business, Testimonial, Feedback, EmailConfig, Blog, SocialPlatform, Service, PaymentLink
+from .models import Consumer, Business, Testimonial, Feedback, EmailConfig, Blog, SocialPlatform, Service, PaymentLink, ContactInfo
 from ntlsgroups.settings import get_email_config
-from django.shortcuts import render
 
 # Set up logging
 logger = logging.getLogger(__name__)
@@ -27,6 +26,7 @@ def home(request):
     social_platforms = SocialPlatform.objects.using('server').filter(is_active=True)
     services = Service.objects.using('server').filter(is_active=True)
     payment_link = None
+    contact_info = ContactInfo.objects.using('server').filter(is_active=True).first()
 
     try:
         payment_link = PaymentLink.objects.using('server').filter(is_active=True).first()
@@ -85,9 +85,16 @@ def home(request):
                 form = BusinessForm(request.POST, request.FILES)
                 if form.is_valid():
                     business = form.save(commit=False)
+                    # Update contact_number with the validated full_contact
+                    full_contact = form.cleaned_data.get('full_contact')
+                    if full_contact:
+                        business.contact_number = full_contact  # Map to existing field
+                        logger.debug(f"Updated business.contact_number with full_contact: {full_contact}")
+                    else:
+                        logger.warning("No full_contact found in cleaned_data")
                     logger.debug(f"Business instance before save: {business.__dict__}")
                     business.save()  # Router handles dual writes
-                    logger.info(f"Business saved: {business.name}, {business.contact}")
+                    logger.info(f"Business saved: {business.name}, {business.contact_number}")
                     email_config = get_email_config()
                     if email_config and email_config['EMAIL_HOST_PASSWORD']:
                         try:
@@ -180,6 +187,7 @@ def home(request):
         'social_platforms': social_platforms,
         'services': services,
         'payment_link': payment_link,
+        'contact_info': contact_info,
     })
 
 def privacy(request):

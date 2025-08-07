@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.core.mail import send_mail, get_connection
 from django.utils import timezone
 from django import forms
-from .models import Consumer, Business, Testimonial, Feedback, EmailConfig, Blog, BlogImage, SocialPlatform, Service
+from .models import Consumer, Business, Testimonial, Feedback, EmailConfig, Blog, BlogImage, SocialPlatform, Service, ContactInfo
 import logging
 import smtplib
 import re
@@ -309,3 +309,10 @@ class ServiceAdmin(admin.ModelAdmin):
     list_filter = ('is_active',)
     search_fields = ('name', 'icon')
     fields = ('name', 'icon', 'icon_image', 'description', 'is_active')
+
+@admin.register(ContactInfo)
+class ContactInfoAdmin(admin.ModelAdmin):
+    list_display = ('phone', 'email', 'is_active', 'updated_at')
+    list_filter = ('is_active',)
+    search_fields = ('phone', 'email')
+    fields = ('phone', 'email', 'is_active')

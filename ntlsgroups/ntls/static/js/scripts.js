@@ -95,8 +95,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Form Submission Handling
-    const forms = document.querySelectorAll('#consumerForm, #businessForm, #feedbackForm');
+    // Form Submission Handling (excluding businessForm, handled in template)
+    const forms = document.querySelectorAll('#consumerForm, #feedbackForm');
     forms.forEach(form => {
         form.addEventListener('submit', function(event) {
             event.preventDefault();
@@ -105,7 +105,6 @@ document.addEventListener('DOMContentLoaded', function() {
             let formStatus;
 
             if (form.id === 'consumerForm') formStatus = document.getElementById('consumerFormStatus');
-            else if (form.id === 'businessForm') formStatus = document.getElementById('businessFormStatus');
             else if (form.id === 'feedbackForm') formStatus = document.getElementById('feedbackFormStatus');
             else formStatus = form.parentElement.querySelector('.form-status');
 
@@ -145,80 +144,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
 
-            if (form.id === 'businessForm') {
-                const contactNumber = form.querySelector('#id_contact_number');
-                if (contactNumber) {
-                    const contactPattern = /^\+\d{1,3}[- ]?\d{6,12}$/;
-                    const normalizedValue = contactNumber.value.replace(/[- ]/g, '');
-                    if (!contactPattern.test(contactNumber.value) || normalizedValue.length < 10 || normalizedValue.length > 15) {
-                        isValid = false;
-                        contactNumber.classList.add('is-invalid');
-                        const feedback = contactNumber.nextElementSibling;
-                        if (feedback && feedback.classList.contains('invalid-feedback')) {
-                            feedback.textContent = 'Contact number must be in a valid international format (e.g., +911234567890, +1-123-456-7890, or +442071234567).';
-                        }
-                    } else {
-                        contactNumber.classList.remove('is-invalid');
-                    }
-                }
-            }
-
-            const registrationProof = form.querySelector('#id_registration_proof');
-            if (registrationProof) {
-                const file = registrationProof.files[0];
-                if (file && !file.name.toLowerCase().endsWith('.pdf')) {
-                    isValid = false;
-                    registrationProof.classList.add('is-invalid');
-                    const feedback = registrationProof.nextElementSibling;
-                    if (feedback && feedback.classList.contains('invalid-feedback')) {
-                        feedback.textContent = 'Please upload a PDF file.';
-                    }
-                }
-            }
-
-            const addressProof = form.querySelector('#id_address_proof');
-            if (addressProof) {
-                const file = addressProof.files[0];
-                const validExtensions = ['.pdf', '.jpg', '.jpeg', '.png'];
-                if (file && !validExtensions.some(ext => file.name.toLowerCase().endsWith(ext))) {
-                    isValid = false;
-                    addressProof.classList.add('is-invalid');
-                    const feedback = addressProof.nextElementSibling;
-                    if (feedback && feedback.classList.contains('invalid-feedback')) {
-                        feedback.textContent = 'Please upload a PDF, JPG, or PNG file.';
-                    }
-                }
-            }
-
-            const logo = form.querySelector('#id_logo');
-            if (logo && logo.files[0]) {
-                const file = logo.files[0];
-                const validExtensions = ['.jpg', '.jpeg', '.png'];
-                if (!validExtensions.some(ext => file.name.toLowerCase().endsWith(ext))) {
-                    isValid = false;
-                    logo.classList.add('is-invalid');
-                    const feedback = logo.nextElementSibling;
-                    if (feedback && feedback.classList.contains('invalid-feedback')) {
-                        feedback.textContent = 'Please upload a JPG or PNG file.';
-                    }
-                }
-                if (file.size > 5 * 1024 * 1024) {
-                    isValid = false;
-                    logo.classList.add('is-invalid');
-                    const feedback = logo.nextElementSibling;
-                    if (feedback && feedback.classList.contains('invalid-feedback')) {
-                        feedback.textContent = 'File size must be under 5MB.';
-                    }
-                }
-            }
-
             if (!isValid) {
                 formStatus.innerHTML = '<div class="alert alert-danger">Please correct the errors in the form.</div>';
                 return;
             }
 
             submitBtn.disabled = true;
-            submitBtn.innerHTML = form.id === 'consumerForm' ? 'Submitting...' : form.id === 'businessForm' ? 'Applying...' : 'Submitting Feedback...';
+            submitBtn.innerHTML = form.id === 'consumerForm' ? 'Submitting...' : 'Submitting Feedback...';
             formStatus.innerHTML = '';
 
             const formData = new FormData(form);
@@ -240,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(data => {
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = form.id === 'consumerForm' ? 'Submit' : form.id === 'businessForm' ? 'Submit Application' : 'Submit Feedback';
+                submitBtn.innerHTML = form.id === 'consumerForm' ? 'Submit' : 'Submit Feedback';
                 if (data.success) {
                     formStatus.innerHTML = '<div class="alert alert-success">' + data.message + '</div>';
                     form.reset();
@@ -252,12 +184,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     }, 2000);
                 } else {
                     formStatus.innerHTML = '<div class="alert alert-danger">' + data.message + (data.errors ? '<ul>' + Object.entries(data.errors).map(([field, error]) => `<li>${field}: ${error}</li>`).join('') + '</ul>' : '') + '</div>';
+                    console.log('Server response errors:', data.errors);
                 }
             })
             .catch(error => {
                 clearTimeout(timeoutId);
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = form.id === 'consumerForm' ? 'Submit' : form.id === 'businessForm' ? 'Submit Application' : 'Submit Feedback';
+                submitBtn.innerHTML = form.id === 'consumerForm' ? 'Submit' : 'Submit Feedback';
                 formStatus.innerHTML = '<div class="alert alert-danger">An error occurred: ' + (error.name === 'AbortError' ? 'Request timed out after 30 seconds.' : error.message) + ' Check console for details.</div>';
                 console.error('Fetch error:', error);
             });

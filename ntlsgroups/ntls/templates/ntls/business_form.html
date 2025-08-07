@@ -1,4 +1,5 @@
 {% load static %}
+{% block content %}
 <div class="container my-5" data-aos="fade-up">
     <form id="businessForm" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
         {% csrf_token %}
@@ -41,9 +42,16 @@
         </div>
         <div class="row">
             <div class="col-md-6 mb-3">
-                <label for="{{ business_form.contact_number.id_for_label }}" class="form-label">Contact Number</label>
-                {{ business_form.contact_number }}
-                <div class="invalid-feedback">Please enter a valid contact number (+91XXXXXXXXXX).</div>
+                <label for="contact_number" class="form-label">Contact Number</label>
+                <div class="input-group">
+                    <select class="form-select" id="country_code" name="country_code" required>
+                        {% for value, label in business_form.fields.country_code.choices %}
+                            <option value="{{ value }}">{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                    {{ business_form.contact_number }}
+                    <div class="invalid-feedback">Please enter a valid contact number.</div>
+                </div>
             </div>
             <div class="col-md-6 mb-3">
                 <label for="{{ business_form.applier_designation.id_for_label }}" class="form-label">Applier Designation</label>
@@ -72,17 +80,126 @@
             <button type="submit" class="btn btn-primary" id="businessSubmitBtn">Submit Application</button>
         </div>
     </form>
+    <div id="businessFormStatus"></div>
 </div>
 <script>
     (function () {
         'use strict';
         const form = document.getElementById('businessForm');
+        const modal = document.querySelector('#businessModal');
+        const formStatus = document.getElementById('businessFormStatus');
+
+        // Reset form when modal is hidden
+        if (modal) {
+            modal.addEventListener('hidden.bs.modal', function () {
+                form.reset();
+                form.classList.remove('was-validated');
+                const countryCode = document.getElementById('country_code');
+                if (countryCode) countryCode.value = '+91'; // Reset to default country code
+            });
+        }
+
         form.addEventListener('submit', function (event) {
             if (!form.checkValidity()) {
                 event.preventDefault();
                 event.stopPropagation();
             }
             form.classList.add('was-validated');
+
+            const contactNumber = document.querySelector('#id_contact_number');
+            const countryCode = document.getElementById('country_code');
+            if (contactNumber && countryCode) {
+                const fullNumber = countryCode.value + contactNumber.value.replace(/[^0-9]/g, '');
+                // Improved pattern to match common international formats more closely
+                const pattern = /^\+([1-9][0-9]{0,2})[0-9]{6,14}$/; // Allows country codes 1-3 digits, total 7-15 digits
+                if (contactNumber.value && !pattern.test(fullNumber)) {
+                    event.preventDefault();
+                    contactNumber.setCustomValidity('Please enter a valid international phone number (e.g., +911234567890 or +12025550123).');
+                    contactNumber.reportValidity();
+                    console.log('Client-side validation failed for:', fullNumber);
+                    return;
+                } else {
+                    contactNumber.setCustomValidity('');
+                }
+            }
+
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                formStatus.innerHTML = '<div class="alert alert-danger">Please correct the errors in the form.</div>';
+                return;
+            }
+
+            let isValid = true;
+            const submitBtn = form.querySelector('#businessSubmitBtn');
+
+            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]')?.value;
+            if (!csrfToken) {
+                formStatus.innerHTML = '<div class="alert alert-danger">CSRF token missing. Please refresh the page.</div>';
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Applying...';
+            formStatus.innerHTML = '';
+
+            const formData = new FormData(form);
+            formData.append('csrfmiddlewaretoken', csrfToken);
+            const contactNumberValue = document.querySelector('#id_contact_number').value;
+            const countryCodeValue = document.getElementById('country_code').value;
+            const fullContact = countryCodeValue + contactNumberValue.replace(/[^0-9]/g, '');
+            formData.set('full_contact', fullContact);
+            console.log('Submitting form data:', Object.fromEntries(formData)); // Debug log
+
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 30000);
+
+            fetch(form.action || '/', {
+                method: 'POST',
+                body: formData,
+                headers: { 'X-Requested-With': 'XMLHttpRequest' },
+                signal: controller.signal
+            })
+            .then(response => {
+                clearTimeout(timeoutId);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                return response.json();
+            })
+            .then(data => {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Submit Application';
+                if (data.success) {
+                    formStatus.innerHTML = '<div class="alert alert-success">' + data.message + '</div>';
+                    form.reset();
+                    form.classList.remove('was-validated');
+                    setTimeout(() => {
+                        const modal = bootstrap.Modal.getInstance(form.closest('.modal'));
+                        if (modal) modal.hide();
+                        formStatus.innerHTML = '';
+                    }, 2000);
+                } else {
+                    formStatus.innerHTML = '<div class="alert alert-danger">' + data.message + (data.errors ? '<ul>' + Object.entries(data.errors).map(([field, error]) => `<li>${field}: ${error}</li>`).join('') + '</ul>' : '') + '</div>';
+                    console.log('Server response errors:', data.errors);
+                }
+            })
+            .catch(error => {
+                clearTimeout(timeoutId);
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Submit Application';
+                formStatus.innerHTML = '<div class="alert alert-danger">An error occurred: ' + (error.name === 'AbortError' ? 'Request timed out after 30 seconds.' : error.message) + ' Check console for details.</div>';
+                console.error('Fetch error:', error);
+            });
         }, false);
     })();
 </script>
+<style>
+    .input-group .form-select {
+        max-width: 150px;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    .input-group .form-control {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+</style>
+{% endblock %}

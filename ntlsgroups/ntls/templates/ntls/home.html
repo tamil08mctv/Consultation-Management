@@ -55,15 +55,15 @@ without it, even the Strongest Plans Collapse</h5>
                     {% endfor %}
                 </div>
                 {% if services|length > 6 %}
-                <button class="carousel-control-prev" type="button" data-bs-target="#blogCarousel-{{ blog.id }}" data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Previous</span>
-                                </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#blogCarousel-{{ blog.id }}" data-bs-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Next</span>
-                                </button>
-                    {% endif %}
+                    <button class="carousel-control-prev" type="button" data-bs-target="#servicesCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#servicesCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                {% endif %}
             </div>
         {% else %}
             <p class="text-center text-muted">No services available yet.</p>
@@ -97,14 +97,14 @@ without it, even the Strongest Plans Collapse</h5>
                     {% endfor %}
                 </div>
                 {% if testimonials|length > 3 %}
-                     <button class="carousel-control-prev" type="button" data-bs-target="#blogCarousel-{{ blog.id }}" data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Previous</span>
-                                </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#blogCarousel-{{ blog.id }}" data-bs-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Next</span>
-                                </button>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 {% endif %}
             </div>
         {% else %}
@@ -150,14 +150,14 @@ without it, even the Strongest Plans Collapse</h5>
                     {% endfor %}
                 </div>
                 {% if partners|length > 4 %}
-                     <button class="carousel-control-prev" type="button" data-bs-target="#blogCarousel-{{ blog.id }}" data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Previous</span>
-                                </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#blogCarousel-{{ blog.id }}" data-bs-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Next</span>
-                                </button>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#partnersCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#partnersCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 {% endif %}
             </div>
         {% else %}
@@ -194,13 +194,13 @@ without it, even the Strongest Plans Collapse</h5>
                     {% endfor %}
                 </div>
                 {% if blogs|length > 3 %}
-                    <button class="carousel-control-prev" type="button" data-bs-target="#blogsCarousel" data-bs-slide="prev" >
+                    <button class="carousel-control-prev" type="button" data-bs-target="#blogsCarousel" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
                     <button class="carousel-control-next" type="button" data-bs-target="#blogsCarousel" data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                          <span class="visually-hidden">Next</span>
+                        <span class="visually-hidden">Next</span>
                     </button>
                 {% endif %}
             </div>
@@ -215,7 +215,7 @@ without it, even the Strongest Plans Collapse</h5>
                                 <div class="blog-modal-content row g-0">
                                     <div class="col-12 col-md-6 blog-content text-center">
                                         <p class="text-dark">{{ blog.content|linebreaks }}</p>
-                                         </div>
+                                    </div>
                                     <div class="col-12 col-md-6 blog-images">
                                         {% if blog.images.all %}
                                             <div id="blogCarousel-{{ blog.id }}" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
@@ -262,8 +262,24 @@ without it, even the Strongest Plans Collapse</h5>
 </section>
 
 <section id="contact" class="py-5 bg-light">
-    <div class="container text-center">
+    <div class="container text-center " style="position: relative;">
         <h2 class="mb-4 fw-bold" data-aos="fade-up">Contact Us</h2>
+        {% if contact_info and contact_info.is_active %}
+            <div class="mt-4 contact-icons">
+                {% if contact_info.phone %}
+                    <a href="tel:{{ contact_info.phone }}" class="contact-link" aria-label="Call Us">
+                        <i class="fas fa-phone fa-lg"></i>
+                        <span class="contact-text">{{ contact_info.phone }}</span>
+                    </a>
+                {% endif %}
+                {% if contact_info.email %}    
+                    <a href="mailto:{{ contact_info.email }}" class="contact-link" aria-label="Email Us">
+                        <i class="fas fa-envelope fa-lg"></i>
+                        <span class="contact-text">{{ contact_info.email }}</span>
+                    </a>
+                {% endif %}
+            </div>
+        {% endif %}
         <p class="lead mb-4 text-muted">Have questions? We'd love to hear from you!</p>
         <button class="btn btn-custom btn-primary" data-bs-toggle="modal" data-bs-target="#feedbackModal">Send Feedback</button>
     </div>

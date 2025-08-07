@@ -115,7 +115,7 @@ class Business(models.Model):
     district = models.CharField(max_length=50, null=True, blank=True)
     business_mode = models.CharField(max_length=20, choices=MODE_CHOICES, null=True, blank=True)
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, null=True, blank=True)
-    contact_number = models.CharField(max_length=15, null=True, blank=True)
+    contact_number = models.CharField(max_length=21, null=True, blank=True)
     applier_designation = models.CharField(max_length=100, null=True, blank=True)
     registration_proof = models.FileField(upload_to='uploads/registration/', validators=[validate_pdf], null=True, blank=True)
     address_proof = models.FileField(upload_to='uploads/address/', validators=[validate_address_proof], null=True, blank=True)
@@ -255,6 +255,24 @@ class PaymentLink(models.Model):
 
     def __str__(self):
         return self.link
+
+    def save(self, *args, **kwargs):
+        super().save(using='server', *args, **kwargs)
+        try:
+            super().save(using='default', *args, **kwargs)
+        except Exception as e:
+            logger.error(f"Failed to save to local database: {str(e)}")
+            raise
+
+class ContactInfo(models.Model):
+    phone = models.CharField(max_length=15, unique=True, help_text="Enter the contact phone number (e.g., +91-123-456-7890)")
+    email = models.EmailField(max_length=254, unique=True, help_text="Enter the contact email address")
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.phone} - {self.email}"
 
     def save(self, *args, **kwargs):
         super().save(using='server', *args, **kwargs)

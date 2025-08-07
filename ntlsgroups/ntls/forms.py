@@ -164,22 +164,20 @@ class BusinessForm(forms.ModelForm):
             full_contact = f"{country_code}{contact_number}"
             logger.debug(f"Validating full contact number: {full_contact}")
             try:
-                # Extract the country code prefix (e.g., +91) to infer the region
                 country_code_prefix = country_code.lstrip('+')
                 region = phonenumbers.region_code_for_country_code(int(country_code_prefix)) if country_code_prefix.isdigit() else None
                 parsed_number = phonenumbers.parse(full_contact, region) if region else phonenumbers.parse(full_contact, None)
                 if not phonenumbers.is_valid_number(parsed_number):
                     logger.warning(f"Invalid phone number for region {region}: {full_contact}")
-                    raise ValidationError('The full contact number is not a valid international phone number. Contact number must be in a valid international format (e.g., +911234567890, +1-123-456-7890, or +442071234567).')
-                # Format the number for storage (e.g., E.164 format)
+                    raise ValidationError({'contact_number': ['The full contact number is not a valid international phone number. Contact number must be in a valid international format (e.g., +911234567890, +1-123-456-7890, or +442071234567).']})
                 cleaned_data['full_contact'] = phonenumbers.format_number(parsed_number, phonenumbers.PhoneNumberFormat.E164)
                 logger.debug(f"Validated and formatted full contact: {cleaned_data['full_contact']}")
             except phonenumbers.phonenumberutil.NumberParseException as e:
                 logger.error(f"Phone number parse error for {full_contact} with region {region}: {str(e)}")
-                raise ValidationError('The full contact number could not be parsed. Please check the format and ensure it matches the selected country code.')
+                raise ValidationError({'contact_number': ['The full contact number could not be parsed. Please check the format and ensure it matches the selected country code.']})
             except ValueError as e:
                 logger.error(f"Value error during parsing {full_contact}: {str(e)}")
-                raise ValidationError('Invalid country code or number format.')
+                raise ValidationError({'contact_number': ['Invalid country code or number format.']})
         return cleaned_data
 
 class FeedbackForm(forms.ModelForm):

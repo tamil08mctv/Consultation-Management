@@ -170,6 +170,13 @@ class BusinessAdmin(admin.ModelAdmin):
         # Save the object with the new status
         super().save_model(request, obj, form, change)
 
+        # Handle dual write to 'default' database if needed
+        try:
+            obj.save(using='default')
+        except Exception as e:
+            logger.error(f"Failed to save to local database: {str(e)}")
+            self.message_user(request, f'Failed to save to local database: {str(e)}.', level='error')
+
         # Check if the status has changed and send email accordingly
         if change and original_status != obj.status:
             email_config = self.get_email_config()
@@ -237,7 +244,7 @@ class BusinessAdmin(admin.ModelAdmin):
                 business.status = 'approved'
                 business.approved_date = timezone.now()
                 business.suspended_date = None
-                business.save(using='server')
+                business.save()  # Let router handle 'server', then save to 'default'
                 try:
                     business.save(using='default')
                 except Exception as e:
@@ -252,7 +259,7 @@ class BusinessAdmin(admin.ModelAdmin):
                 business.status = 'suspended'
                 business.suspended_date = timezone.now()
                 business.approved_date = None
-                business.save(using='server')
+                business.save()  # Let router handle 'server', then save to 'default'
                 try:
                     business.save(using='default')
                 except Exception as e:
@@ -267,7 +274,7 @@ class BusinessAdmin(admin.ModelAdmin):
                 business.status = 'rejected'
                 business.approved_date = None
                 business.suspended_date = None
-                business.save(using='server')
+                business.save()  # Let router handle 'server', then save to 'default'
                 try:
                     business.save(using='default')
                 except Exception as e:

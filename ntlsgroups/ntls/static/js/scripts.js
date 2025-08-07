@@ -98,6 +98,19 @@ document.addEventListener('DOMContentLoaded', function() {
     // Form Submission Handling (excluding businessForm, handled in template)
     const forms = document.querySelectorAll('#consumerForm, #feedbackForm');
     forms.forEach(form => {
+        // Reset form on page load or modal close
+        window.addEventListener('load', function () {
+            form.reset();
+            form.classList.remove('was-validated');
+        });
+        const modal = form.closest('.modal');
+        if (modal) {
+            modal.addEventListener('hidden.bs.modal', function () {
+                form.reset();
+                form.classList.remove('was-validated');
+            });
+        }
+
         form.addEventListener('submit', function(event) {
             event.preventDefault();
             let isValid = true;

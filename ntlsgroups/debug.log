@@ -3413,3 +3413,326 @@ INFO 2025-08-07 17:20:43,503 autoreload Watching for file changes with StatReloa
 INFO 2025-08-07 17:21:02,448 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\models.py changed, reloading.
 INFO 2025-08-07 17:21:03,326 autoreload Watching for file changes with StatReloader
 INFO 2025-08-07 17:33:38,696 autoreload Watching for file changes with StatReloader
+INFO 2025-08-07 21:05:25,398 autoreload Watching for file changes with StatReloader
+INFO 2025-08-07 21:06:10,780 views Business form POST data: <QueryDict: {'csrfmiddlewaretoken': ['y4hOBcKaFEqMpB7cWZodyjebiDMMo2cFC409Dsae5R5d0rhgVwodlGrSld1zcZvP', 'y4hOBcKaFEqMpB7cWZodyjebiDMMo2cFC409Dsae5R5d0rhgVwodlGrSld1zcZvP'], 'business_form': ['1'], 'name': ['Tamil'], 'contact': ['tamilmctv02@gmail.com'], 'state': ['tn'], 'district': ['cd'], 'business_mode': [''], 'category': [''], 'country_code': ['+93'], 'contact_number': [''], 'applier_designation': [''], 'registration_proof': [''], 'address_proof': [''], 'logo': [''], 'full_contact': ['+93']}>, FILES: <MultiValueDict: {}>
+WARNING 2025-08-07 21:06:10,877 views No full_contact found in cleaned_data
+DEBUG 2025-08-07 21:06:10,878 views Business instance before save: {'_state': <django.db.models.base.ModelState object at 0x000002C1853C4230>, 'id': None, 'name': 'Tamil', 'contact': 'tamilmctv02@gmail.com', 'state': 'tn', 'district': 'cd', 'business_mode': None, 'category': None, 'contact_number': None, 'applier_designation': None, 'registration_proof': <FieldFile: None>, 'address_proof': <FieldFile: None>, 'logo': <ImageFieldFile: None>, 'status': 'pending', 'approved_date': None, 'suspended_date': None, 'created_at': None}
+INFO 2025-08-07 21:06:10,921 views Business saved: Tamil, None
+INFO 2025-08-07 21:06:10,939 settings Loaded email configuration for general: tamil08mctv@gmail.com
+INFO 2025-08-07 21:06:17,386 views Business email sent to tamilmctv02@gmail.com from tamil08mctv@gmail.com
+INFO 2025-08-07 21:24:44,157 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\views.py changed, reloading.
+INFO 2025-08-07 21:24:46,086 autoreload Watching for file changes with StatReloader
+INFO 2025-08-07 21:25:22,443 views Business form POST data: <QueryDict: {'csrfmiddlewaretoken': ['4r5OMtAjTPzz35eo5IxzK6NlDKOvwu2f8rO9OJ0nj2e0EVos4fxzxt02Gk3ikrlp', '4r5OMtAjTPzz35eo5IxzK6NlDKOvwu2f8rO9OJ0nj2e0EVos4fxzxt02Gk3ikrlp'], 'business_form': ['1'], 'name': ['the '], 'contact': ['tamilmctv82@gmail.com'], 'state': ['jnb'], 'district': ['cbe'], 'business_mode': [''], 'category': [''], 'country_code': ['+91'], 'contact_number': [''], 'applier_designation': [''], 'registration_proof': [''], 'address_proof': [''], 'logo': [''], 'full_contact': ['+91']}>, FILES: <MultiValueDict: {}>
+WARNING 2025-08-07 21:25:22,535 views No full_contact found in cleaned_data
+DEBUG 2025-08-07 21:25:22,536 views Business instance before save: {'_state': <django.db.models.base.ModelState object at 0x0000020D36614110>, 'id': None, 'name': 'the', 'contact': 'tamilmctv82@gmail.com', 'state': 'jnb', 'district': 'cbe', 'business_mode': None, 'category': None, 'contact_number': None, 'applier_designation': None, 'registration_proof': <FieldFile: None>, 'address_proof': <FieldFile: None>, 'logo': <ImageFieldFile: None>, 'status': 'pending', 'approved_date': None, 'suspended_date': None, 'created_at': None}
+INFO 2025-08-07 21:25:22,584 views Business saved: the, None
+INFO 2025-08-07 21:25:22,607 settings Loaded email configuration for general: tamil08mctv@gmail.com
+INFO 2025-08-07 21:25:27,142 views Business email sent to tamilmctv82@gmail.com from tamil08mctv@gmail.com
+ERROR 2025-08-07 21:31:17,976 log Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\views.py", line 177, in home
+    return render(request, 'ntls/home.html', {
+        'testimonials': testimonials,
+    ...<10 lines>...
+        'contact_info': contact_info,
+    })
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 199, in render
+    template = context.template.engine.select_template(template_name)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 208, in select_template
+    return self.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 489, in parse
+    raise self.error(token, e)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 487, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 609, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 705, in __init__
+    filter_func = parser.find_filter(filter_name)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 615, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'add_class'
+INFO 2025-08-07 21:34:54,799 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\forms.py changed, reloading.
+INFO 2025-08-07 21:34:58,267 autoreload Watching for file changes with StatReloader
+INFO 2025-08-07 21:53:54,033 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\models.py changed, reloading.
+INFO 2025-08-07 21:53:55,105 autoreload Watching for file changes with StatReloader
+INFO 2025-08-07 21:53:56,649 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\models.py changed, reloading.
+INFO 2025-08-07 21:53:57,364 autoreload Watching for file changes with StatReloader
+INFO 2025-08-07 21:54:05,027 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\models.py changed, reloading.
+INFO 2025-08-07 21:54:05,846 autoreload Watching for file changes with StatReloader
+INFO 2025-08-07 21:57:16,191 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\forms.py changed, reloading.
+INFO 2025-08-07 21:57:17,051 autoreload Watching for file changes with StatReloader
+INFO 2025-08-07 21:57:19,518 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\forms.py changed, reloading.
+INFO 2025-08-07 21:57:20,338 autoreload Watching for file changes with StatReloader
+INFO 2025-08-07 22:04:45,462 views Business form POST data: <QueryDict: {'csrfmiddlewaretoken': ['xo57Kk97tb4RwaUqfCI9Vj533o8PLuPcBoOsMAzbToJi704ue9I9IGiK6YnCzr8m', 'xo57Kk97tb4RwaUqfCI9Vj533o8PLuPcBoOsMAzbToJi704ue9I9IGiK6YnCzr8m'], 'business_form': ['1'], 'name': ['tnj'], 'contact': ['tamilmctv82@gmail.com'], 'state': ['ts'], 'district': ['m m'], 'business_mode': ['online'], 'category': ['manufacturing'], 'country_code': ['+91'], 'contact_number': ['845228656232'], 'applier_designation': ['fsn '], 'full_contact': ['+91845228656232']}>, FILES: <MultiValueDict: {'registration_proof': [<InMemoryUploadedFile: income.pdf (application/pdf)>], 'address_proof': [<InMemoryUploadedFile: community .pdf (application/pdf)>], 'logo': [<InMemoryUploadedFile: photo.jpg (image/jpeg)>]}>
+DEBUG 2025-08-07 22:04:45,837 Image Importing AvifImagePlugin
+DEBUG 2025-08-07 22:04:45,841 Image Importing BlpImagePlugin
+DEBUG 2025-08-07 22:04:45,846 Image Importing BmpImagePlugin
+DEBUG 2025-08-07 22:04:45,847 Image Importing BufrStubImagePlugin
+DEBUG 2025-08-07 22:04:45,851 Image Importing CurImagePlugin
+DEBUG 2025-08-07 22:04:45,857 Image Importing DcxImagePlugin
+DEBUG 2025-08-07 22:04:45,867 Image Importing DdsImagePlugin
+DEBUG 2025-08-07 22:04:45,882 Image Importing EpsImagePlugin
+DEBUG 2025-08-07 22:04:45,889 Image Importing FitsImagePlugin
+DEBUG 2025-08-07 22:04:45,893 Image Importing FliImagePlugin
+DEBUG 2025-08-07 22:04:45,897 Image Importing FpxImagePlugin
+DEBUG 2025-08-07 22:04:45,900 Image Image: failed to import FpxImagePlugin: No module named 'olefile'
+DEBUG 2025-08-07 22:04:45,901 Image Importing FtexImagePlugin
+DEBUG 2025-08-07 22:04:45,911 Image Importing GbrImagePlugin
+DEBUG 2025-08-07 22:04:45,915 Image Importing GifImagePlugin
+DEBUG 2025-08-07 22:04:45,915 Image Importing GribStubImagePlugin
+DEBUG 2025-08-07 22:04:45,923 Image Importing Hdf5StubImagePlugin
+DEBUG 2025-08-07 22:04:45,930 Image Importing IcnsImagePlugin
+DEBUG 2025-08-07 22:04:45,942 Image Importing IcoImagePlugin
+DEBUG 2025-08-07 22:04:45,952 Image Importing ImImagePlugin
+DEBUG 2025-08-07 22:04:45,961 Image Importing ImtImagePlugin
+DEBUG 2025-08-07 22:04:45,965 Image Importing IptcImagePlugin
+DEBUG 2025-08-07 22:04:45,971 Image Importing JpegImagePlugin
+DEBUG 2025-08-07 22:04:45,972 Image Importing Jpeg2KImagePlugin
+DEBUG 2025-08-07 22:04:45,973 Image Importing McIdasImagePlugin
+DEBUG 2025-08-07 22:04:45,976 Image Importing MicImagePlugin
+DEBUG 2025-08-07 22:04:45,982 Image Image: failed to import MicImagePlugin: No module named 'olefile'
+DEBUG 2025-08-07 22:04:45,985 Image Importing MpegImagePlugin
+DEBUG 2025-08-07 22:04:45,991 Image Importing MpoImagePlugin
+DEBUG 2025-08-07 22:04:46,011 Image Importing MspImagePlugin
+DEBUG 2025-08-07 22:04:46,016 Image Importing PalmImagePlugin
+DEBUG 2025-08-07 22:04:46,033 Image Importing PcdImagePlugin
+DEBUG 2025-08-07 22:04:46,043 Image Importing PcxImagePlugin
+DEBUG 2025-08-07 22:04:46,044 Image Importing PdfImagePlugin
+DEBUG 2025-08-07 22:04:46,070 Image Importing PixarImagePlugin
+DEBUG 2025-08-07 22:04:46,078 Image Importing PngImagePlugin
+DEBUG 2025-08-07 22:04:46,078 Image Importing PpmImagePlugin
+DEBUG 2025-08-07 22:04:46,079 Image Importing PsdImagePlugin
+DEBUG 2025-08-07 22:04:46,084 Image Importing QoiImagePlugin
+DEBUG 2025-08-07 22:04:46,093 Image Importing SgiImagePlugin
+DEBUG 2025-08-07 22:04:46,098 Image Importing SpiderImagePlugin
+DEBUG 2025-08-07 22:04:46,105 Image Importing SunImagePlugin
+DEBUG 2025-08-07 22:04:46,110 Image Importing TgaImagePlugin
+DEBUG 2025-08-07 22:04:46,115 Image Importing TiffImagePlugin
+DEBUG 2025-08-07 22:04:46,116 Image Importing WebPImagePlugin
+DEBUG 2025-08-07 22:04:46,239 Image Importing WmfImagePlugin
+DEBUG 2025-08-07 22:04:46,243 Image Importing XbmImagePlugin
+DEBUG 2025-08-07 22:04:46,249 Image Importing XpmImagePlugin
+DEBUG 2025-08-07 22:04:46,257 Image Importing XVThumbImagePlugin
+DEBUG 2025-08-07 22:04:46,262 forms Validating full contact number: +91845228656232
+WARNING 2025-08-07 22:04:46,276 forms Invalid phone number for region IN: +91845228656232
+ERROR 2025-08-07 22:04:46,298 views Business form errors: <ul class="errorlist"><li>contact_number<ul class="errorlist" id="id_contact_number_error"><li>The full contact number is not a valid international phone number. Contact number must be in a valid international format (e.g., +911234567890, +1-123-456-7890, or +442071234567).</li></ul></li></ul>
+INFO 2025-08-07 22:04:59,538 views Business form POST data: <QueryDict: {'csrfmiddlewaretoken': ['xo57Kk97tb4RwaUqfCI9Vj533o8PLuPcBoOsMAzbToJi704ue9I9IGiK6YnCzr8m', 'xo57Kk97tb4RwaUqfCI9Vj533o8PLuPcBoOsMAzbToJi704ue9I9IGiK6YnCzr8m'], 'business_form': ['1'], 'name': ['tnj'], 'contact': ['tamilmctv82@gmail.com'], 'state': ['ts'], 'district': ['m m'], 'business_mode': ['online'], 'category': ['manufacturing'], 'country_code': ['+91'], 'contact_number': ['8452286564'], 'applier_designation': ['fsn '], 'full_contact': ['+918452286564']}>, FILES: <MultiValueDict: {'registration_proof': [<InMemoryUploadedFile: income.pdf (application/pdf)>], 'address_proof': [<InMemoryUploadedFile: community .pdf (application/pdf)>], 'logo': [<InMemoryUploadedFile: photo.jpg (image/jpeg)>]}>
+DEBUG 2025-08-07 22:04:59,542 forms Validating full contact number: +918452286564
+DEBUG 2025-08-07 22:04:59,555 forms Validated and formatted full contact: +918452286564
+DEBUG 2025-08-07 22:04:59,561 views Updated business.contact_number with full_contact: +918452286564
+DEBUG 2025-08-07 22:04:59,564 views Business instance before save: {'_state': <django.db.models.base.ModelState object at 0x000001FF88D78EF0>, 'id': None, 'name': 'tnj', 'contact': 'tamilmctv82@gmail.com', 'state': 'ts', 'district': 'm m', 'business_mode': 'online', 'category': 'manufacturing', 'contact_number': '+918452286564', 'applier_designation': 'fsn', 'registration_proof': <FieldFile: income.pdf>, 'address_proof': <FieldFile: community .pdf>, 'logo': <ImageFieldFile: photo.jpg>, 'status': 'pending', 'approved_date': None, 'suspended_date': None, 'created_at': None}
+INFO 2025-08-07 22:04:59,657 views Business saved: tnj, +918452286564
+INFO 2025-08-07 22:04:59,669 settings Loaded email configuration for general: tamil08mctv@gmail.com
+INFO 2025-08-07 22:05:05,771 views Business email sent to tamilmctv82@gmail.com from tamil08mctv@gmail.com
+WARNING 2025-08-07 22:26:10,260 log Not Found: /favicon.ico
+INFO 2025-08-07 22:29:24,754 views Feedback form POST data: <QueryDict: {'csrfmiddlewaretoken': ['kzADay6DkV7RmX6kTnrx3xXdo0E2kKmtozjYcOwHK8MiXNgoSUrxQUaUrATP8HFD', 'kzADay6DkV7RmX6kTnrx3xXdo0E2kKmtozjYcOwHK8MiXNgoSUrxQUaUrATP8HFD'], 'name': ['sefa'], 'email': ['tamilmctv82@gmail.com'], 'message': ['dfsg'], 'feedback_form': ['1']}>
+INFO 2025-08-07 22:29:24,815 settings Loaded email configuration for general: tamil08mctv@gmail.com
+INFO 2025-08-07 22:29:29,487 views Feedback email sent to tamilmctv82@gmail.com from tamil08mctv@gmail.com
+INFO 2025-08-07 22:29:45,036 views Consumer form POST data: <QueryDict: {'csrfmiddlewaretoken': ['kzADay6DkV7RmX6kTnrx3xXdo0E2kKmtozjYcOwHK8MiXNgoSUrxQUaUrATP8HFD', 'kzADay6DkV7RmX6kTnrx3xXdo0E2kKmtozjYcOwHK8MiXNgoSUrxQUaUrATP8HFD'], 'consumer_form': ['1'], 'name': ['daf'], 'contact': ['tamilmctv81@gmail.com'], 'services': ['seg']}>
+DEBUG 2025-08-07 22:29:45,038 views Consumer instance before save: {'_state': <django.db.models.base.ModelState object at 0x000001FF88EFF770>, 'id': None, 'name': 'daf', 'contact': 'tamilmctv81@gmail.com', 'services': 'seg', 'created_at': None}
+INFO 2025-08-07 22:29:45,067 views Consumer saved: daf, tamilmctv81@gmail.com
+INFO 2025-08-07 22:29:45,075 settings Loaded email configuration for general: tamil08mctv@gmail.com
+INFO 2025-08-07 22:29:50,865 views Consumer email sent to tamilmctv81@gmail.com from tamil08mctv@gmail.com
+INFO 2025-08-07 22:31:05,129 views Business form POST data: <QueryDict: {'csrfmiddlewaretoken': ['kzADay6DkV7RmX6kTnrx3xXdo0E2kKmtozjYcOwHK8MiXNgoSUrxQUaUrATP8HFD', 'kzADay6DkV7RmX6kTnrx3xXdo0E2kKmtozjYcOwHK8MiXNgoSUrxQUaUrATP8HFD'], 'business_form': ['1'], 'name': ['SD'], 'contact': ['tamilmctv02@gmail.com'], 'state': ['ef'], 'district': ['dfdf'], 'business_mode': ['offline'], 'category': ['education_training'], 'country_code': ['+91'], 'contact_number': ['01234567890'], 'applier_designation': ['df'], 'full_contact': ['+9101234567890']}>, FILES: <MultiValueDict: {'registration_proof': [<TemporaryUploadedFile: 5 th sem.pdf (application/pdf)>], 'address_proof': [<TemporaryUploadedFile: 11 th.pdf (application/pdf)>], 'logo': [<TemporaryUploadedFile: profile 2.jpg (image/jpeg)>]}>
+DEBUG 2025-08-07 22:31:05,194 forms Validating full contact number: +9101234567890
+DEBUG 2025-08-07 22:31:05,200 forms Validated and formatted full contact: +911234567890
+DEBUG 2025-08-07 22:31:05,203 views Updated business.contact_number with full_contact: +911234567890
+DEBUG 2025-08-07 22:31:05,204 views Business instance before save: {'_state': <django.db.models.base.ModelState object at 0x000001FF88EFF1D0>, 'id': None, 'name': 'SD', 'contact': 'tamilmctv02@gmail.com', 'state': 'ef', 'district': 'dfdf', 'business_mode': 'offline', 'category': 'education_training', 'contact_number': '+911234567890', 'applier_designation': 'df', 'registration_proof': <FieldFile: 5 th sem.pdf>, 'address_proof': <FieldFile: 11 th.pdf>, 'logo': <ImageFieldFile: profile 2.jpg>, 'status': 'pending', 'approved_date': None, 'suspended_date': None, 'created_at': None}
+INFO 2025-08-07 22:31:05,368 views Business saved: SD, +911234567890
+INFO 2025-08-07 22:31:05,376 settings Loaded email configuration for general: tamil08mctv@gmail.com
+INFO 2025-08-07 22:31:10,266 views Business email sent to tamilmctv02@gmail.com from tamil08mctv@gmail.com
+INFO 2025-08-07 22:31:48,926 views Business form POST data: <QueryDict: {'csrfmiddlewaretoken': ['kzADay6DkV7RmX6kTnrx3xXdo0E2kKmtozjYcOwHK8MiXNgoSUrxQUaUrATP8HFD', 'kzADay6DkV7RmX6kTnrx3xXdo0E2kKmtozjYcOwHK8MiXNgoSUrxQUaUrATP8HFD'], 'business_form': ['1'], 'name': ['jbjkn'], 'contact': ['tamilmctv02@gmail.com'], 'state': ['awf'], 'district': ['af'], 'business_mode': ['online'], 'category': ['it_ites'], 'country_code': ['+91'], 'contact_number': ['65453132135454'], 'applier_designation': ['edsf'], 'full_contact': ['+9165453132135454']}>, FILES: <MultiValueDict: {'registration_proof': [<InMemoryUploadedFile: community .pdf (application/pdf)>], 'address_proof': [<InMemoryUploadedFile: 5 th sem.pdf (application/pdf)>], 'logo': [<InMemoryUploadedFile: profile 2.jpg (image/jpeg)>]}>
+DEBUG 2025-08-07 22:31:48,931 forms Validating full contact number: +9165453132135454
+WARNING 2025-08-07 22:31:48,931 forms Invalid phone number for region IN: +9165453132135454
+ERROR 2025-08-07 22:31:48,953 views Business form errors: <ul class="errorlist"><li>contact_number<ul class="errorlist" id="id_contact_number_error"><li>The full contact number is not a valid international phone number. Contact number must be in a valid international format (e.g., +911234567890, +1-123-456-7890, or +442071234567).</li></ul></li></ul>
+INFO 2025-08-07 22:31:56,417 views Business form POST data: <QueryDict: {'csrfmiddlewaretoken': ['kzADay6DkV7RmX6kTnrx3xXdo0E2kKmtozjYcOwHK8MiXNgoSUrxQUaUrATP8HFD', 'kzADay6DkV7RmX6kTnrx3xXdo0E2kKmtozjYcOwHK8MiXNgoSUrxQUaUrATP8HFD'], 'business_form': ['1'], 'name': ['jbjkn'], 'contact': ['tamilmctv02@gmail.com'], 'state': ['awf'], 'district': ['af'], 'business_mode': ['online'], 'category': ['it_ites'], 'country_code': ['+91'], 'contact_number': ['654531321354'], 'applier_designation': ['edsf'], 'full_contact': ['+91654531321354']}>, FILES: <MultiValueDict: {'registration_proof': [<InMemoryUploadedFile: community .pdf (application/pdf)>], 'address_proof': [<InMemoryUploadedFile: 5 th sem.pdf (application/pdf)>], 'logo': [<InMemoryUploadedFile: profile 2.jpg (image/jpeg)>]}>
+DEBUG 2025-08-07 22:31:56,422 forms Validating full contact number: +91654531321354
+WARNING 2025-08-07 22:31:56,423 forms Invalid phone number for region IN: +91654531321354
+ERROR 2025-08-07 22:31:56,425 views Business form errors: <ul class="errorlist"><li>contact_number<ul class="errorlist" id="id_contact_number_error"><li>The full contact number is not a valid international phone number. Contact number must be in a valid international format (e.g., +911234567890, +1-123-456-7890, or +442071234567).</li></ul></li></ul>
+INFO 2025-08-07 22:32:08,036 views Business form POST data: <QueryDict: {'csrfmiddlewaretoken': ['kzADay6DkV7RmX6kTnrx3xXdo0E2kKmtozjYcOwHK8MiXNgoSUrxQUaUrATP8HFD', 'kzADay6DkV7RmX6kTnrx3xXdo0E2kKmtozjYcOwHK8MiXNgoSUrxQUaUrATP8HFD'], 'business_form': ['1'], 'name': ['jbjkn'], 'contact': ['tamilmctv02@gmail.com'], 'state': ['awf'], 'district': ['af'], 'business_mode': ['online'], 'category': ['it_ites'], 'country_code': ['+91'], 'contact_number': ['654531'], 'applier_designation': ['edsf'], 'full_contact': ['+91654531']}>, FILES: <MultiValueDict: {'registration_proof': [<InMemoryUploadedFile: community .pdf (application/pdf)>], 'address_proof': [<InMemoryUploadedFile: 5 th sem.pdf (application/pdf)>], 'logo': [<InMemoryUploadedFile: profile 2.jpg (image/jpeg)>]}>
+DEBUG 2025-08-07 22:32:08,043 forms Validating full contact number: +91654531
+WARNING 2025-08-07 22:32:08,043 forms Invalid phone number for region IN: +91654531
+ERROR 2025-08-07 22:32:08,045 views Business form errors: <ul class="errorlist"><li>contact_number<ul class="errorlist" id="id_contact_number_error"><li>The full contact number is not a valid international phone number. Contact number must be in a valid international format (e.g., +911234567890, +1-123-456-7890, or +442071234567).</li></ul></li></ul>
+INFO 2025-08-07 22:32:15,047 views Business form POST data: <QueryDict: {'csrfmiddlewaretoken': ['kzADay6DkV7RmX6kTnrx3xXdo0E2kKmtozjYcOwHK8MiXNgoSUrxQUaUrATP8HFD', 'kzADay6DkV7RmX6kTnrx3xXdo0E2kKmtozjYcOwHK8MiXNgoSUrxQUaUrATP8HFD'], 'business_form': ['1'], 'name': ['jbjkn'], 'contact': ['tamilmctv02@gmail.com'], 'state': ['awf'], 'district': ['af'], 'business_mode': ['online'], 'category': ['it_ites'], 'country_code': ['+91'], 'contact_number': ['65453145621'], 'applier_designation': ['edsf'], 'full_contact': ['+9165453145621']}>, FILES: <MultiValueDict: {'registration_proof': [<InMemoryUploadedFile: community .pdf (application/pdf)>], 'address_proof': [<InMemoryUploadedFile: 5 th sem.pdf (application/pdf)>], 'logo': [<InMemoryUploadedFile: profile 2.jpg (image/jpeg)>]}>
+DEBUG 2025-08-07 22:32:15,051 forms Validating full contact number: +9165453145621
+WARNING 2025-08-07 22:32:15,052 forms Invalid phone number for region IN: +9165453145621
+ERROR 2025-08-07 22:32:15,053 views Business form errors: <ul class="errorlist"><li>contact_number<ul class="errorlist" id="id_contact_number_error"><li>The full contact number is not a valid international phone number. Contact number must be in a valid international format (e.g., +911234567890, +1-123-456-7890, or +442071234567).</li></ul></li></ul>
+INFO 2025-08-07 22:32:16,653 views Business form POST data: <QueryDict: {'csrfmiddlewaretoken': ['kzADay6DkV7RmX6kTnrx3xXdo0E2kKmtozjYcOwHK8MiXNgoSUrxQUaUrATP8HFD', 'kzADay6DkV7RmX6kTnrx3xXdo0E2kKmtozjYcOwHK8MiXNgoSUrxQUaUrATP8HFD'], 'business_form': ['1'], 'name': ['jbjkn'], 'contact': ['tamilmctv02@gmail.com'], 'state': ['awf'], 'district': ['af'], 'business_mode': ['online'], 'category': ['it_ites'], 'country_code': ['+91'], 'contact_number': ['65453145621'], 'applier_designation': ['edsf'], 'full_contact': ['+9165453145621']}>, FILES: <MultiValueDict: {'registration_proof': [<InMemoryUploadedFile: community .pdf (application/pdf)>], 'address_proof': [<InMemoryUploadedFile: 5 th sem.pdf (application/pdf)>], 'logo': [<InMemoryUploadedFile: profile 2.jpg (image/jpeg)>]}>
+DEBUG 2025-08-07 22:32:16,656 forms Validating full contact number: +9165453145621
+WARNING 2025-08-07 22:32:16,657 forms Invalid phone number for region IN: +9165453145621
+ERROR 2025-08-07 22:32:16,659 views Business form errors: <ul class="errorlist"><li>contact_number<ul class="errorlist" id="id_contact_number_error"><li>The full contact number is not a valid international phone number. Contact number must be in a valid international format (e.g., +911234567890, +1-123-456-7890, or +442071234567).</li></ul></li></ul>
+INFO 2025-08-07 22:32:21,093 views Business form POST data: <QueryDict: {'csrfmiddlewaretoken': ['kzADay6DkV7RmX6kTnrx3xXdo0E2kKmtozjYcOwHK8MiXNgoSUrxQUaUrATP8HFD', 'kzADay6DkV7RmX6kTnrx3xXdo0E2kKmtozjYcOwHK8MiXNgoSUrxQUaUrATP8HFD'], 'business_form': ['1'], 'name': ['jbjkn'], 'contact': ['tamilmctv02@gmail.com'], 'state': ['awf'], 'district': ['af'], 'business_mode': ['online'], 'category': ['it_ites'], 'country_code': ['+91'], 'contact_number': ['6545314562'], 'applier_designation': ['edsf'], 'full_contact': ['+916545314562']}>, FILES: <MultiValueDict: {'registration_proof': [<InMemoryUploadedFile: community .pdf (application/pdf)>], 'address_proof': [<InMemoryUploadedFile: 5 th sem.pdf (application/pdf)>], 'logo': [<InMemoryUploadedFile: profile 2.jpg (image/jpeg)>]}>
+DEBUG 2025-08-07 22:32:21,097 forms Validating full contact number: +916545314562
+DEBUG 2025-08-07 22:32:21,097 forms Validated and formatted full contact: +916545314562
+DEBUG 2025-08-07 22:32:21,098 views Updated business.contact_number with full_contact: +916545314562
+DEBUG 2025-08-07 22:32:21,099 views Business instance before save: {'_state': <django.db.models.base.ModelState object at 0x000001FF88EFF5F0>, 'id': None, 'name': 'jbjkn', 'contact': 'tamilmctv02@gmail.com', 'state': 'awf', 'district': 'af', 'business_mode': 'online', 'category': 'it_ites', 'contact_number': '+916545314562', 'applier_designation': 'edsf', 'registration_proof': <FieldFile: community .pdf>, 'address_proof': <FieldFile: 5 th sem.pdf>, 'logo': <ImageFieldFile: profile 2.jpg>, 'status': 'pending', 'approved_date': None, 'suspended_date': None, 'created_at': None}
+INFO 2025-08-07 22:32:21,160 views Business saved: jbjkn, +916545314562
+INFO 2025-08-07 22:32:21,170 settings Loaded email configuration for general: tamil08mctv@gmail.com
+INFO 2025-08-07 22:32:26,017 views Business email sent to tamilmctv02@gmail.com from tamil08mctv@gmail.com
+ERROR 2025-08-07 22:33:11,068 log Internal Server Error: /admin/ntls/business/
+Traceback (most recent call last):
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\options.py", line 719, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 246, in inner
+    return view(request, *args, **kwargs)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\options.py", line 2057, in changelist_view
+    response = self.response_action(
+        request, queryset=cl.get_queryset(request)
+    )
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\options.py", line 1686, in response_action
+    response = func(self, request, queryset)
+  File "C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py", line 240, in approve_business
+    business.save(using='server')
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\models.py", line 132, in save
+    super().save(using='server', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: django.db.models.base.Model.save() got multiple values for keyword argument 'using'
+INFO 2025-08-07 22:33:31,626 settings Loaded email configuration for general: tamil08mctv@gmail.com
+INFO 2025-08-07 22:33:31,627 admin Using email config for tamil08mctv@gmail.com
+INFO 2025-08-07 22:33:34,588 admin SMTP validation successful for tamil08mctv@gmail.com
+INFO 2025-08-07 22:33:39,833 admin Status change email sent to tamilmctv02@gmail.com from tamil08mctv@gmail.com for status approved
+ERROR 2025-08-07 22:34:04,957 log Internal Server Error: /admin/ntls/business/
+Traceback (most recent call last):
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\options.py", line 719, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 246, in inner
+    return view(request, *args, **kwargs)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\options.py", line 2057, in changelist_view
+    response = self.response_action(
+        request, queryset=cl.get_queryset(request)
+    )
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\options.py", line 1686, in response_action
+    response = func(self, request, queryset)
+  File "C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py", line 270, in reject_business
+    business.save(using='server')
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\models.py", line 132, in save
+    super().save(using='server', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: django.db.models.base.Model.save() got multiple values for keyword argument 'using'
+INFO 2025-08-07 22:40:23,647 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-07 22:40:25,617 autoreload Watching for file changes with StatReloader
+INFO 2025-08-07 22:40:27,308 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-07 22:40:28,674 autoreload Watching for file changes with StatReloader
+INFO 2025-08-07 22:40:34,700 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-07 22:40:35,933 autoreload Watching for file changes with StatReloader
+INFO 2025-08-07 22:40:38,360 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-07 22:40:39,633 autoreload Watching for file changes with StatReloader
+INFO 2025-08-07 22:43:43,057 autoreload Watching for file changes with StatReloader
+ERROR 2025-08-07 22:43:48,294 admin Failed to save to local database for rejection: django.db.models.base.Model.save() got multiple values for keyword argument 'using'
+ERROR 2025-08-07 22:43:48,308 admin Failed to save to local database for rejection: django.db.models.base.Model.save() got multiple values for keyword argument 'using'
+WARNING 2025-08-07 22:43:49,016 log Not Found: /favicon.ico
+ERROR 2025-08-07 22:44:45,583 admin Failed to save to local database: django.db.models.base.Model.save() got multiple values for keyword argument 'using'
+ERROR 2025-08-07 22:44:59,592 admin Failed to save to local database: django.db.models.base.Model.save() got multiple values for keyword argument 'using'
+INFO 2025-08-07 22:44:59,614 settings Loaded email configuration for general: tamil08mctv@gmail.com
+INFO 2025-08-07 22:44:59,614 admin Using email config for tamil08mctv@gmail.com
+INFO 2025-08-07 22:45:01,619 admin SMTP validation successful for tamil08mctv@gmail.com
+INFO 2025-08-07 22:45:05,673 admin Status change email sent to tamilmctv02@gmail.com from tamil08mctv@gmail.com for status suspended
+ERROR 2025-08-07 22:45:23,513 admin Failed to save to local database for suspension: django.db.models.base.Model.save() got multiple values for keyword argument 'using'
+ERROR 2025-08-07 22:45:23,530 admin Failed to save to local database for suspension: django.db.models.base.Model.save() got multiple values for keyword argument 'using'

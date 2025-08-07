@@ -78,17 +78,16 @@ def home(request):
                         return JsonResponse({'success': False, 'message': 'Form submitted, but no email configuration found. Please contact support.'})
                 else:
                     logger.error(f"Consumer form errors: {form.errors}")
-                    return JsonResponse({'success': False, 'message': 'Form submission failed.', 'errors': form.errors.as_json()})
+                    return JsonResponse({'success': False, 'message': 'Form submission failed.', 'errors': form.errors})
 
             elif 'business_form' in request.POST:
                 logger.info(f"Business form POST data: {request.POST}, FILES: {request.FILES}")
                 form = BusinessForm(request.POST, request.FILES)
                 if form.is_valid():
                     business = form.save(commit=False)
-                    # Update contact_number with the validated full_contact
                     full_contact = form.cleaned_data.get('full_contact')
                     if full_contact:
-                        business.contact_number = full_contact  # Map to existing field
+                        business.contact_number = full_contact
                         logger.debug(f"Updated business.contact_number with full_contact: {full_contact}")
                     else:
                         logger.warning("No full_contact found in cleaned_data")
@@ -127,7 +126,7 @@ def home(request):
                         return JsonResponse({'success': False, 'message': 'Application submitted, but no email configuration found. Please contact support.'})
                 else:
                     logger.error(f"Business form errors: {form.errors}")
-                    return JsonResponse({'success': False, 'message': 'Application submission failed.', 'errors': form.errors.as_json()})
+                    return JsonResponse({'success': False, 'message': 'Application submission failed.', 'errors': {k: [{'message': v[0]}] for k, v in form.errors.items()}})
 
             elif 'feedback_form' in request.POST:
                 logger.info(f"Feedback form POST data: {request.POST}")
@@ -167,7 +166,7 @@ def home(request):
                         return JsonResponse({'success': False, 'message': 'Feedback submitted, but no email configuration found. Please contact support.'})
                 else:
                     logger.error(f"Feedback form errors: {form.errors}")
-                    return JsonResponse({'success': False, 'message': 'Feedback submission failed.', 'errors': form.errors.as_json()})
+                    return JsonResponse({'success': False, 'message': 'Feedback submission failed.', 'errors': form.errors})
         except Exception as e:
             logger.error(f"Unexpected error in POST request: {str(e)}", exc_info=True)
             return JsonResponse({'success': False, 'message': 'An unexpected server error occurred. Please try again or contact support.'})

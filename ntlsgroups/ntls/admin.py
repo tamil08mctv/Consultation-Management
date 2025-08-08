@@ -167,15 +167,16 @@ class BusinessAdmin(admin.ModelAdmin):
         original = Business.objects.using('server').get(pk=obj.pk) if change else None
         original_status = original.status if original else None
 
-        # Save the object with the new status
+        # Save the object (router handles 'server')
         super().save_model(request, obj, form, change)
 
-        # Handle dual write to 'default' database if needed
-        try:
-            obj.save(using='default')
-        except Exception as e:
-            logger.error(f"Failed to save to local database: {str(e)}")
-            self.message_user(request, f'Failed to save to local database: {str(e)}.', level='error')
+        # Explicitly save to 'default' database only if not already handled
+        if not obj._state.adding:  # Avoid duplicate save on creation
+            try:
+                obj.save_to_default()  # Use the custom method
+            except Exception as e:
+                logger.error(f"Failed to save to local database: {str(e)}")
+                self.message_user(request, f'Failed to save to local database: {str(e)}.', level='error')
 
         # Check if the status has changed and send email accordingly
         if change and original_status != obj.status:
@@ -194,16 +195,16 @@ class BusinessAdmin(admin.ModelAdmin):
                     message = ''
                     if obj.status == 'approved':
                         subject = 'Welcome to NTLS GROUPS – Partnership Approved'
-                        message = f'Dear {obj.name},\n\nWe are pleased to inform you that your application to become a partner with NTLS GROUPS has been approved.\nYour submitted details and credentials have been reviewed and accepted. All the information provided will be retained and treated confidentially until the termination of the partnership, as per our privacy policy.\nYou are now officially part of our partner network, and we look forward to building a valuable and mutually beneficial relationship.\n\nIf you have any queries, complaints, or require future assistance, please contact:\nSujeeth Vishnu\nChief Business Development Executive\nsujeeth.cbde@ntlsgroups.org\n\nThis email is intended only for the recipient and should not be shared or replied to directly. All rights reserved. NTLS CONSULTANCY OPC PRIVATE LIMITED holds all legal rights over the content and communication.'
+                        message = f'Dear {obj.name},\n\nWe are pleased to inform you that your application to become a partner with NTLS GROUPS has been approved.\nYour submitted details and credentials have been reviewed and accepted. All the information provided will be retained and treated confidentially until the termination of the partnership, as per our privacy policy.\nYou are now officially part of our partner network, and we look forward to building a valuable and mutually beneficial relationship.\n\nIf you have any queries, complaints, or require future assistance, please contact:\nSujeeth Vishnu\nChief Business Development Executive\nsujeeth.cbde@ntlsgroups.org\n\nThis email is intended only for the recipient and should not be shared or replied to directly. All rights reserved. NTLS CONSULTANCY OPC PRIVATE LIMITED holds all legal rights over the content and communication.\n\nBest Regards, \nNTLS Groups'
                     elif obj.status == 'suspended':
                         subject = 'Account Suspended – Action Required'
-                        message = f'Dear {obj.name},\n\nWe would like to inform you that your business partnership account with NTLS GROUPS has been temporarily suspended due to the following reason(s):\n• Incomplete compliance with required documentation\n• Misuse of partnership privileges\n• Breach of terms and conditions\nPlease reach out to our support team to resolve this matter. Failure to address the issue within 7 working days may lead to permanent termination.\n\nIf you need clarification or guidance, please get in touch with:\nSujeeth Vishnu\nChief Business Development Executive\nsujeeth.cbde@ntlsgroups.org\n\nThis email is intended only for the recipient and should not be shared or replied to directly. All rights reserved. NTLS CONSULTANCY OPC PRIVATE LIMITED holds all legal rights over the content and communication.'
+                        message = f'Dear {obj.name},\n\nWe would like to inform you that your business partnership account with NTLS GROUPS has been temporarily suspended due to the following reason(s):\n• Incomplete compliance with required documentation\n• Misuse of partnership privileges\n• Breach of terms and conditions\nPlease reach out to our support team to resolve this matter. Failure to address the issue within 7 working days may lead to permanent termination.\n\nIf you need clarification or guidance, please get in touch with:\nSujeeth Vishnu\nChief Business Development Executive\nsujeeth.cbde@ntlsgroups.org\n\nThis email is intended only for the recipient and should not be shared or replied to directly. All rights reserved. NTLS CONSULTANCY OPC PRIVATE LIMITED holds all legal rights over the content and communication.\n\nBest Regards, \nNTLS Groups'
                     elif obj.status == 'rejected':
                         subject = 'Application Status – Not Approved'
-                        message = f'Dear {obj.name},\n\nThank you for your interest in partnering with NTLS GROUPS.\nAfter careful review of your application, we regret to inform you that we are unable to approve your request at this time due to one or more of the following reasons:\n• Business listing name mismatch\n• Incomplete or unverifiable communication address\n• Missing or unclear documentation\n• Failure to meet our eligibility criteria\nYou are welcome to reapply after resolving the above issues. We appreciate your time and understanding.\n\nIf you believe this is a mistake or need further support, feel free to contact:\nSujeeth Vishnu\nChief Business Development Executive\nsujeeth.cbde@ntlsgroups.org\n\nThis email is intended only for the recipient and should not be shared or replied to directly. All rights reserved. NTLS CONSULTANCY OPC PRIVATE LIMITED holds all legal rights over the content and communication.'
+                        message = f'Dear {obj.name},\n\nThank you for your interest in partnering with NTLS GROUPS.\nAfter careful review of your application, we regret to inform you that we are unable to approve your request at this time due to one or more of the following reasons:\n• Business listing name mismatch\n• Incomplete or unverifiable communication address\n• Missing or unclear documentation\n• Failure to meet our eligibility criteria\nYou are welcome to reapply after resolving the above issues. We appreciate your time and understanding.\n\nIf you believe this is a mistake or need further support, feel free to contact:\nSujeeth Vishnu\nChief Business Development Executive\nsujeeth.cbde@ntlsgroups.org\n\nThis email is intended only for the recipient and should not be shared or replied to directly. All rights reserved. NTLS CONSULTANCY OPC PRIVATE LIMITED holds all legal rights over the content and communication.\n\nBest Regards, \nNTLS Groups'
                     elif obj.status == 'pending':
                         subject = 'Submission Received – Under Review'
-                        message = f'Dear {obj.name},\n\nThis is to acknowledge that your application to partner with NTLS GROUPS has been received successfully.\nOur team is currently reviewing the information submitted. You will receive a follow-up email regarding the status of your application within 3–5 working days.\n\nIf you need to update any information or have questions during this review process, please contact:\nSujeeth Vishnu\nChief Business Development Executive\nsujeeth.cbde@ntlsgroups.org\n\nThis email is intended only for the recipient and should not be shared or replied to directly. All rights reserved. NTLS CONSULTANCY OPC PRIVATE LIMITED holds all legal rights over the content and communication.'
+                        message = f'Dear {obj.name},\n\nThis is to acknowledge that your application to partner with NTLS GROUPS has been received successfully.\nOur team is currently reviewing the information submitted. You will receive a follow-up email regarding the status of your application within 3–5 working days.\n\nIf you need to update any information or have questions during this review process, please contact:\nSujeeth Vishnu\nChief Business Development Executive\nsujeeth.cbde@ntlsgroups.org\n\nThis email is intended only for the recipient and should not be shared or replied to directly. All rights reserved. NTLS CONSULTANCY OPC PRIVATE LIMITED holds all legal rights over the content and communication.\n\nBest Regards, \nNTLS Groups'
 
                     if subject and message:
                         send_mail(
@@ -239,48 +240,138 @@ class BusinessAdmin(admin.ModelAdmin):
                 self.message_user(request, f'Status changed for {obj.name}, but no valid email configuration found.', level='error')
 
     def approve_business(self, request, queryset):
+        success_count = 0
         for business in queryset:
             if business.status != 'approved':
                 business.status = 'approved'
                 business.approved_date = timezone.now()
                 business.suspended_date = None
-                business.save()  # Let router handle 'server', then save to 'default'
+                business.save()  # Router handles 'server'
                 try:
-                    business.save(using='default')
+                    business.save_to_default()  # Explicitly save to 'default' using custom method
+                    success_count += 1
+                    # Send email after successful save
+                    email_config = self.get_email_config()
+                    if email_config:
+                        try:
+                            connection = get_connection(
+                                backend='django.core.mail.backends.smtp.EmailBackend',
+                                host=email_config['EMAIL_HOST'],
+                                port=email_config['EMAIL_PORT'],
+                                username=email_config['EMAIL_HOST_USER'],
+                                password=email_config['EMAIL_HOST_PASSWORD'],
+                                use_tls=email_config['EMAIL_USE_TLS']
+                            )
+                            send_mail(
+                                subject='Welcome to NTLS GROUPS – Partnership Approved',
+                                message=f'Dear {business.name},\n\nWe are pleased to inform you that your application to become a partner with NTLS GROUPS has been approved.\nYour submitted details and credentials have been reviewed and accepted. All the information provided will be retained and treated confidentially until the termination of the partnership, as per our privacy policy.\nYou are now officially part of our partner network, and we look forward to building a valuable and mutually beneficial relationship.\n\nIf you have any queries, complaints, or require future assistance, please contact:\nSujeeth Vishnu\nChief Business Development Executive\nsujeeth.cbde@ntlsgroups.org\n\nThis email is intended only for the recipient and should not be shared or replied to directly. All rights reserved. NTLS CONSULTANCY OPC PRIVATE LIMITED holds all legal rights over the content and communication.\n\nBest Regards, \nNTLS Groups',
+                                from_email=email_config['EMAIL_HOST_USER'],
+                                recipient_list=[business.contact],
+                                fail_silently=False,
+                                connection=connection
+                            )
+                            logger.info(f"Approval email sent to {business.contact} from {email_config['EMAIL_HOST_USER']}")
+                        except smtplib.SMTPException as e:
+                            logger.error(f"Email failed for approval to {business.contact}: {str(e)}")
+                            self.message_user(request, f'Approval email failed for {business.contact}: {str(e)}.', level='error')
+                        except Exception as e:
+                            logger.error(f"Unexpected email error for approval to {business.contact}: {str(e)}")
+                            self.message_user(request, f'Unexpected email error for approval to {business.contact}: {str(e)}.', level='error')
                 except Exception as e:
                     logger.error(f"Failed to save to local database for approval: {str(e)}")
-                    self.message_user(request, f'Business approved on server, but failed to save to local: {str(e)}.', level='error')
-        self.message_user(request, f'{queryset.count()} business(es) approved.')
+                    self.message_user(request, f'Business approved on server, but failed to save to local for {business.name}: {str(e)}.', level='error')
+        self.message_user(request, f'{success_count} business(es) approved successfully.')
+
     approve_business.short_description = 'Approve selected businesses'
 
     def suspend_business(self, request, queryset):
+        success_count = 0
         for business in queryset:
             if business.status != 'suspended':
                 business.status = 'suspended'
                 business.suspended_date = timezone.now()
                 business.approved_date = None
-                business.save()  # Let router handle 'server', then save to 'default'
+                business.save()  # Router handles 'server'
                 try:
-                    business.save(using='default')
+                    business.save_to_default()  # Explicitly save to 'default' using custom method
+                    success_count += 1
+                    # Send email after successful save
+                    email_config = self.get_email_config()
+                    if email_config:
+                        try:
+                            connection = get_connection(
+                                backend='django.core.mail.backends.smtp.EmailBackend',
+                                host=email_config['EMAIL_HOST'],
+                                port=email_config['EMAIL_PORT'],
+                                username=email_config['EMAIL_HOST_USER'],
+                                password=email_config['EMAIL_HOST_PASSWORD'],
+                                use_tls=email_config['EMAIL_USE_TLS']
+                            )
+                            send_mail(
+                                subject='Account Suspended – Action Required',
+                                message=f'Dear {business.name},\n\nWe would like to inform you that your business partnership account with NTLS GROUPS has been temporarily suspended due to the following reason(s):\n• Incomplete compliance with required documentation\n• Misuse of partnership privileges\n• Breach of terms and conditions\nPlease reach out to our support team to resolve this matter. Failure to address the issue within 7 working days may lead to permanent termination.\n\nIf you need clarification or guidance, please get in touch with:\nSujeeth Vishnu\nChief Business Development Executive\nsujeeth.cbde@ntlsgroups.org\n\nThis email is intended only for the recipient and should not be shared or replied to directly. All rights reserved. NTLS CONSULTANCY OPC PRIVATE LIMITED holds all legal rights over the content and communication.\n\nBest Regards, \nNTLS Groups',
+                                from_email=email_config['EMAIL_HOST_USER'],
+                                recipient_list=[business.contact],
+                                fail_silently=False,
+                                connection=connection
+                            )
+                            logger.info(f"Suspension email sent to {business.contact} from {email_config['EMAIL_HOST_USER']}")
+                        except smtplib.SMTPException as e:
+                            logger.error(f"Email failed for suspension to {business.contact}: {str(e)}")
+                            self.message_user(request, f'Suspension email failed for {business.contact}: {str(e)}.', level='error')
+                        except Exception as e:
+                            logger.error(f"Unexpected email error for suspension to {business.contact}: {str(e)}")
+                            self.message_user(request, f'Unexpected email error for suspension to {business.contact}: {str(e)}.', level='error')
                 except Exception as e:
                     logger.error(f"Failed to save to local database for suspension: {str(e)}")
-                    self.message_user(request, f'Business suspended on server, but failed to save to local: {str(e)}.', level='error')
-        self.message_user(request, f'{queryset.count()} business(es) suspended.')
+                    self.message_user(request, f'Business suspended on server, but failed to save to local for {business.name}: {str(e)}.', level='error')
+        self.message_user(request, f'{success_count} business(es) suspended successfully.')
+
     suspend_business.short_description = 'Suspend selected businesses'
 
     def reject_business(self, request, queryset):
+        success_count = 0
         for business in queryset:
             if business.status != 'rejected':
                 business.status = 'rejected'
                 business.approved_date = None
                 business.suspended_date = None
-                business.save()  # Let router handle 'server', then save to 'default'
+                business.save()  # Router handles 'server'
                 try:
-                    business.save(using='default')
+                    business.save_to_default()  # Explicitly save to 'default' using custom method
+                    success_count += 1
+                    # Send email after successful save
+                    email_config = self.get_email_config()
+                    if email_config:
+                        try:
+                            connection = get_connection(
+                                backend='django.core.mail.backends.smtp.EmailBackend',
+                                host=email_config['EMAIL_HOST'],
+                                port=email_config['EMAIL_PORT'],
+                                username=email_config['EMAIL_HOST_USER'],
+                                password=email_config['EMAIL_HOST_PASSWORD'],
+                                use_tls=email_config['EMAIL_USE_TLS']
+                            )
+                            send_mail(
+                                subject='Application Status – Not Approved',
+                                message=f'Dear {business.name},\n\nThank you for your interest in partnering with NTLS GROUPS.\nAfter careful review of your application, we regret to inform you that we are unable to approve your request at this time due to one or more of the following reasons:\n• Business listing name mismatch\n• Incomplete or unverifiable communication address\n• Missing or unclear documentation\n• Failure to meet our eligibility criteria\nYou are welcome to reapply after resolving the above issues. We appreciate your time and understanding.\n\nIf you believe this is a mistake or need further support, feel free to contact:\nSujeeth Vishnu\nChief Business Development Executive\nsujeeth.cbde@ntlsgroups.org\n\nThis email is intended only for the recipient and should not be shared or replied to directly. All rights reserved. NTLS CONSULTANCY OPC PRIVATE LIMITED holds all legal rights over the content and communication.\n\nBest Regards, \nNTLS Groups',
+                                from_email=email_config['EMAIL_HOST_USER'],
+                                recipient_list=[business.contact],
+                                fail_silently=False,
+                                connection=connection
+                            )
+                            logger.info(f"Rejection email sent to {business.contact} from {email_config['EMAIL_HOST_USER']}")
+                        except smtplib.SMTPException as e:
+                            logger.error(f"Email failed for rejection to {business.contact}: {str(e)}")
+                            self.message_user(request, f'Rejection email failed for {business.contact}: {str(e)}.', level='error')
+                        except Exception as e:
+                            logger.error(f"Unexpected email error for rejection to {business.contact}: {str(e)}")
+                            self.message_user(request, f'Unexpected email error for rejection to {business.contact}: {str(e)}.', level='error')
                 except Exception as e:
                     logger.error(f"Failed to save to local database for rejection: {str(e)}")
-                    self.message_user(request, f'Business rejected on server, but failed to save to local: {str(e)}.', level='error')
-        self.message_user(request, f'{queryset.count()} business(es) rejected.')
+                    self.message_user(request, f'Business rejected on server, but failed to save to local for {business.name}: {str(e)}.', level='error')
+        self.message_user(request, f'{success_count} business(es) rejected successfully.')
+
     reject_business.short_description = 'Reject selected businesses'
 
 @admin.register(Testimonial)

@@ -51,7 +51,10 @@ class EmailConfig(models.Model):
         return f"{self.email_id} ({self.get_purpose_display()})"
 
     def save(self, *args, **kwargs):
-        super().save(using='server', *args, **kwargs)
+        super().save(*args, **kwargs)  # Let router handle the database
+
+    def save_to_default(self, *args, **kwargs):
+        """Force save to 'default' database."""
         try:
             super().save(using='default', *args, **kwargs)
         except Exception as e:
@@ -68,7 +71,10 @@ class Consumer(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        super().save(using='server', *args, **kwargs)
+        super().save(*args, **kwargs)  # Let router handle the database
+
+    def save_to_default(self, *args, **kwargs):
+        """Force save to 'default' database."""
         try:
             super().save(using='default', *args, **kwargs)
         except Exception as e:
@@ -118,7 +124,7 @@ class Business(models.Model):
     contact_number = models.CharField(max_length=21, null=False, blank=False)
     applier_designation = models.CharField(max_length=100, null=False, blank=False)
     registration_proof = models.FileField(upload_to='uploads/registration/', validators=[validate_pdf], null=False, blank=False)
-    address_proof = models.FileField(upload_to='uploads/address/', validators=[validate_address_proof], null=False, blank=False)
+    address_proof = models.FileField(upload_to='uploads/address/', validators=[validate_address_proof], null=True, blank=True)  # Temporarily nullable
     logo = models.ImageField(upload_to='logos/', validators=[validate_image], null=False, blank=False)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
     approved_date = models.DateTimeField(blank=True, null=True)
@@ -129,7 +135,10 @@ class Business(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        super().save(using='server', *args, **kwargs)
+        super().save(*args, **kwargs)  # Let router handle the database
+
+    def save_to_default(self, *args, **kwargs):
+        """Force save to 'default' database."""
         try:
             super().save(using='default', *args, **kwargs)
         except Exception as e:
@@ -146,7 +155,10 @@ class Testimonial(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        super().save(using='server', *args, **kwargs)
+        super().save(*args, **kwargs)  # Let router handle the database
+
+    def save_to_default(self, *args, **kwargs):
+        """Force save to 'default' database."""
         try:
             super().save(using='default', *args, **kwargs)
         except Exception as e:
@@ -163,7 +175,10 @@ class Feedback(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        super().save(using='server', *args, **kwargs)
+        super().save(*args, **kwargs)  # Let router handle the database
+
+    def save_to_default(self, *args, **kwargs):
+        """Force save to 'default' database."""
         try:
             super().save(using='default', *args, **kwargs)
         except Exception as e:
@@ -179,7 +194,10 @@ class BlogImage(models.Model):
         return f"{self.blog.title} - Image {self.id}"
 
     def save(self, *args, **kwargs):
-        super().save(using='server', *args, **kwargs)
+        super().save(*args, **kwargs)  # Let router handle the database
+
+    def save_to_default(self, *args, **kwargs):
+        """Force save to 'default' database."""
         try:
             super().save(using='default', *args, **kwargs)
         except Exception as e:
@@ -195,7 +213,10 @@ class Blog(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        super().save(using='server', *args, **kwargs)
+        super().save(*args, **kwargs)  # Let router handle the database
+
+    def save_to_default(self, *args, **kwargs):
+        """Force save to 'default' database."""
         try:
             super().save(using='default', *args, **kwargs)
         except Exception as e:
@@ -221,7 +242,10 @@ class SocialPlatform(models.Model):
         return f"{self.get_name_display()} - {self.link}"
 
     def save(self, *args, **kwargs):
-        super().save(using='server', *args, **kwargs)
+        super().save(*args, **kwargs)  # Let router handle the database
+
+    def save_to_default(self, *args, **kwargs):
+        """Force save to 'default' database."""
         try:
             super().save(using='default', *args, **kwargs)
         except Exception as e:
@@ -240,7 +264,10 @@ class Service(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        super().save(using='server', *args, **kwargs)
+        super().save(*args, **kwargs)  # Let router handle the database
+
+    def save_to_default(self, *args, **kwargs):
+        """Force save to 'default' database."""
         try:
             super().save(using='default', *args, **kwargs)
         except Exception as e:
@@ -257,7 +284,10 @@ class PaymentLink(models.Model):
         return self.link
 
     def save(self, *args, **kwargs):
-        super().save(using='server', *args, **kwargs)
+        super().save(*args, **kwargs)  # Let router handle the database
+
+    def save_to_default(self, *args, **kwargs):
+        """Force save to 'default' database."""
         try:
             super().save(using='default', *args, **kwargs)
         except Exception as e:
@@ -275,7 +305,10 @@ class ContactInfo(models.Model):
         return f"{self.phone} - {self.email}"
 
     def save(self, *args, **kwargs):
-        super().save(using='server', *args, **kwargs)
+        super().save(*args, **kwargs)  # Let router handle the database
+
+    def save_to_default(self, *args, **kwargs):
+        """Force save to 'default' database."""
         try:
             super().save(using='default', *args, **kwargs)
         except Exception as e:

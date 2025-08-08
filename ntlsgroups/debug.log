@@ -3736,3 +3736,236 @@ INFO 2025-08-07 22:45:01,619 admin SMTP validation successful for tamil08mctv@gm
 INFO 2025-08-07 22:45:05,673 admin Status change email sent to tamilmctv02@gmail.com from tamil08mctv@gmail.com for status suspended
 ERROR 2025-08-07 22:45:23,513 admin Failed to save to local database for suspension: django.db.models.base.Model.save() got multiple values for keyword argument 'using'
 ERROR 2025-08-07 22:45:23,530 admin Failed to save to local database for suspension: django.db.models.base.Model.save() got multiple values for keyword argument 'using'
+INFO 2025-08-08 09:15:02,667 autoreload Watching for file changes with StatReloader
+WARNING 2025-08-08 09:15:26,444 log Not Found: /favicon.ico
+ERROR 2025-08-08 09:16:54,841 admin Failed to save to local database for rejection: django.db.models.base.Model.save() got multiple values for keyword argument 'using'
+ERROR 2025-08-08 09:16:54,854 admin Failed to save to local database for rejection: django.db.models.base.Model.save() got multiple values for keyword argument 'using'
+INFO 2025-08-08 09:22:23,985 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-08 09:22:25,135 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 09:22:32,888 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-08 09:22:33,694 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 09:22:37,090 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-08 09:22:37,808 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 09:22:40,156 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-08 09:22:40,892 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 09:22:42,316 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-08 09:22:43,050 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 09:28:55,042 autoreload Watching for file changes with StatReloader
+WARNING 2025-08-08 09:28:58,236 log Not Found: /favicon.ico
+ERROR 2025-08-08 09:29:07,905 log Internal Server Error: /admin/ntls/business/
+Traceback (most recent call last):
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\options.py", line 719, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 246, in inner
+    return view(request, *args, **kwargs)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\options.py", line 2057, in changelist_view
+    response = self.response_action(
+        request, queryset=cl.get_queryset(request)
+    )
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\options.py", line 1686, in response_action
+    response = func(self, request, queryset)
+  File "C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py", line 247, in approve_business
+    business.save(using='server')  # Explicitly save to 'server'
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\models.py", line 132, in save
+    super().save(using='server', *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: django.db.models.base.Model.save() got multiple values for keyword argument 'using'
+INFO 2025-08-08 09:33:19,023 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-08 09:33:20,331 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 09:33:21,813 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-08 09:33:22,658 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 09:33:28,130 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-08 09:33:28,944 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 09:33:33,336 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-08 09:33:34,093 autoreload Watching for file changes with StatReloader
+ERROR 2025-08-08 09:33:41,532 admin Failed to save to local database for approval: django.db.models.base.Model.save() got multiple values for keyword argument 'using'
+ERROR 2025-08-08 09:33:41,540 admin Failed to save to local database for approval: django.db.models.base.Model.save() got multiple values for keyword argument 'using'
+WARNING 2025-08-08 09:33:41,852 log Not Found: /favicon.ico
+ERROR 2025-08-08 09:33:57,510 admin Failed to save to local database for rejection: django.db.models.base.Model.save() got multiple values for keyword argument 'using'
+ERROR 2025-08-08 09:33:57,519 admin Failed to save to local database for rejection: django.db.models.base.Model.save() got multiple values for keyword argument 'using'
+INFO 2025-08-08 09:45:29,583 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\models.py changed, reloading.
+INFO 2025-08-08 09:45:31,690 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 09:46:16,434 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-08 09:46:17,424 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 09:46:21,858 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-08 09:46:22,851 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 09:46:25,368 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-08 09:46:26,338 autoreload Watching for file changes with StatReloader
+WARNING 2025-08-08 09:46:36,782 log Not Found: /favicon.ico
+ERROR 2025-08-08 09:46:54,117 models Failed to save to local database: django.db.models.base.Model.save() got multiple values for keyword argument 'using'
+ERROR 2025-08-08 09:46:54,118 admin Failed to save to local database for approval: django.db.models.base.Model.save() got multiple values for keyword argument 'using'
+ERROR 2025-08-08 09:46:54,138 models Failed to save to local database: django.db.models.base.Model.save() got multiple values for keyword argument 'using'
+ERROR 2025-08-08 09:46:54,138 admin Failed to save to local database for approval: django.db.models.base.Model.save() got multiple values for keyword argument 'using'
+INFO 2025-08-08 09:54:28,319 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\models.py changed, reloading.
+INFO 2025-08-08 09:54:30,055 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 09:54:32,912 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\models.py changed, reloading.
+INFO 2025-08-08 09:54:34,009 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 09:54:35,502 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\models.py changed, reloading.
+INFO 2025-08-08 09:54:36,666 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 09:56:07,622 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-08 09:56:08,864 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 09:56:55,577 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\models.py changed, reloading.
+INFO 2025-08-08 09:56:56,799 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 09:56:58,338 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\models.py changed, reloading.
+INFO 2025-08-08 09:56:59,537 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 09:57:16,778 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\models.py changed, reloading.
+INFO 2025-08-08 09:57:17,859 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 09:59:17,236 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\models.py changed, reloading.
+INFO 2025-08-08 09:59:18,516 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 09:59:20,075 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\models.py changed, reloading.
+INFO 2025-08-08 09:59:21,276 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 10:00:54,881 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\models.py changed, reloading.
+INFO 2025-08-08 10:00:56,208 autoreload Watching for file changes with StatReloader
+WARNING 2025-08-08 10:01:13,272 log Not Found: /favicon.ico
+INFO 2025-08-08 10:01:27,120 settings Loaded email configuration for general: tamil08mctv@gmail.com
+INFO 2025-08-08 10:01:27,121 admin Using email config for tamil08mctv@gmail.com
+INFO 2025-08-08 10:01:29,864 admin SMTP validation successful for tamil08mctv@gmail.com
+INFO 2025-08-08 10:01:35,228 admin Suspension email sent to tamilmctv02@gmail.com from tamil08mctv@gmail.com
+INFO 2025-08-08 10:01:35,249 settings Loaded email configuration for general: tamil08mctv@gmail.com
+INFO 2025-08-08 10:01:35,250 admin Using email config for tamil08mctv@gmail.com
+INFO 2025-08-08 10:01:37,128 admin SMTP validation successful for tamil08mctv@gmail.com
+INFO 2025-08-08 10:01:42,596 admin Suspension email sent to tamilmctv02@gmail.com from tamil08mctv@gmail.com
+INFO 2025-08-08 10:03:15,417 settings Loaded email configuration for general: tamil08mctv@gmail.com
+INFO 2025-08-08 10:03:15,420 admin Using email config for tamil08mctv@gmail.com
+INFO 2025-08-08 10:03:19,254 admin SMTP validation successful for tamil08mctv@gmail.com
+INFO 2025-08-08 10:03:23,326 admin Approval email sent to tamilmctv82@gmail.com from tamil08mctv@gmail.com
+INFO 2025-08-08 10:03:23,345 settings Loaded email configuration for general: tamil08mctv@gmail.com
+INFO 2025-08-08 10:03:23,346 admin Using email config for tamil08mctv@gmail.com
+INFO 2025-08-08 10:03:25,485 admin SMTP validation successful for tamil08mctv@gmail.com
+INFO 2025-08-08 10:03:30,442 admin Approval email sent to tamilmctv02@gmail.com from tamil08mctv@gmail.com
+INFO 2025-08-08 10:05:14,319 views Consumer form POST data: <QueryDict: {'csrfmiddlewaretoken': ['dUlaM1LUTp7epvbZfAnr5N4yfTbZIOmHhU4vOhbYjCMF0ll3e7nrSahfitqMwLFR', 'dUlaM1LUTp7epvbZfAnr5N4yfTbZIOmHhU4vOhbYjCMF0ll3e7nrSahfitqMwLFR'], 'consumer_form': ['1'], 'name': ['tank'], 'contact': ['tamilmctv84@gmail.com'], 'services': ['sm v fj s']}>
+DEBUG 2025-08-08 10:05:14,416 views Consumer instance before save: {'_state': <django.db.models.base.ModelState object at 0x00000181979AA870>, 'id': None, 'name': 'tank', 'contact': 'tamilmctv84@gmail.com', 'services': 'sm v fj s', 'created_at': None}
+INFO 2025-08-08 10:05:14,445 views Consumer saved: tank, tamilmctv84@gmail.com
+INFO 2025-08-08 10:05:14,467 settings Loaded email configuration for general: tamil08mctv@gmail.com
+INFO 2025-08-08 10:05:18,845 views Consumer email sent to tamilmctv84@gmail.com from tamil08mctv@gmail.com
+INFO 2025-08-08 10:05:59,751 views Feedback form POST data: <QueryDict: {'csrfmiddlewaretoken': ['dUlaM1LUTp7epvbZfAnr5N4yfTbZIOmHhU4vOhbYjCMF0ll3e7nrSahfitqMwLFR', 'dUlaM1LUTp7epvbZfAnr5N4yfTbZIOmHhU4vOhbYjCMF0ll3e7nrSahfitqMwLFR'], 'name': ['de'], 'email': ['tamilmctv84@gmail.com'], 'message': ['slms'], 'feedback_form': ['1']}>
+INFO 2025-08-08 10:05:59,784 settings Loaded email configuration for general: tamil08mctv@gmail.com
+INFO 2025-08-08 10:06:03,722 views Feedback email sent to tamilmctv84@gmail.com from tamil08mctv@gmail.com
+INFO 2025-08-08 10:07:08,157 views Business form POST data: <QueryDict: {'csrfmiddlewaretoken': ['dUlaM1LUTp7epvbZfAnr5N4yfTbZIOmHhU4vOhbYjCMF0ll3e7nrSahfitqMwLFR', 'dUlaM1LUTp7epvbZfAnr5N4yfTbZIOmHhU4vOhbYjCMF0ll3e7nrSahfitqMwLFR'], 'business_form': ['1'], 'name': ['dc'], 'contact': ['tamilmctv84@gmail.com'], 'state': ['tg'], 'district': ['ms '], 'business_mode': ['online'], 'category': ['education_training'], 'country_code': ['+91'], 'contact_number': ['6562644874269'], 'applier_designation': ['s'], 'full_contact': ['+916562644874269']}>, FILES: <MultiValueDict: {'registration_proof': [<InMemoryUploadedFile: e-pan.pdf (application/pdf)>], 'address_proof': [<InMemoryUploadedFile: intern.pdf (application/pdf)>], 'logo': [<InMemoryUploadedFile: profile2.jpg (image/jpeg)>]}>
+DEBUG 2025-08-08 10:07:08,964 Image Importing AvifImagePlugin
+DEBUG 2025-08-08 10:07:08,988 Image Importing BlpImagePlugin
+DEBUG 2025-08-08 10:07:09,003 Image Importing BmpImagePlugin
+DEBUG 2025-08-08 10:07:09,005 Image Importing BufrStubImagePlugin
+DEBUG 2025-08-08 10:07:09,023 Image Importing CurImagePlugin
+DEBUG 2025-08-08 10:07:09,036 Image Importing DcxImagePlugin
+DEBUG 2025-08-08 10:07:09,058 Image Importing DdsImagePlugin
+DEBUG 2025-08-08 10:07:09,092 Image Importing EpsImagePlugin
+DEBUG 2025-08-08 10:07:09,104 Image Importing FitsImagePlugin
+DEBUG 2025-08-08 10:07:09,119 Image Importing FliImagePlugin
+DEBUG 2025-08-08 10:07:09,132 Image Importing FpxImagePlugin
+DEBUG 2025-08-08 10:07:09,153 Image Image: failed to import FpxImagePlugin: No module named 'olefile'
+DEBUG 2025-08-08 10:07:09,156 Image Importing FtexImagePlugin
+DEBUG 2025-08-08 10:07:09,176 Image Importing GbrImagePlugin
+DEBUG 2025-08-08 10:07:09,193 Image Importing GifImagePlugin
+DEBUG 2025-08-08 10:07:09,196 Image Importing GribStubImagePlugin
+DEBUG 2025-08-08 10:07:09,219 Image Importing Hdf5StubImagePlugin
+DEBUG 2025-08-08 10:07:09,237 Image Importing IcnsImagePlugin
+DEBUG 2025-08-08 10:07:09,295 Image Importing IcoImagePlugin
+DEBUG 2025-08-08 10:07:09,314 Image Importing ImImagePlugin
+DEBUG 2025-08-08 10:07:09,323 Image Importing ImtImagePlugin
+DEBUG 2025-08-08 10:07:09,336 Image Importing IptcImagePlugin
+DEBUG 2025-08-08 10:07:09,351 Image Importing JpegImagePlugin
+DEBUG 2025-08-08 10:07:09,352 Image Importing Jpeg2KImagePlugin
+DEBUG 2025-08-08 10:07:09,354 Image Importing McIdasImagePlugin
+DEBUG 2025-08-08 10:07:09,371 Image Importing MicImagePlugin
+DEBUG 2025-08-08 10:07:09,385 Image Image: failed to import MicImagePlugin: No module named 'olefile'
+DEBUG 2025-08-08 10:07:09,389 Image Importing MpegImagePlugin
+DEBUG 2025-08-08 10:07:09,406 Image Importing MpoImagePlugin
+DEBUG 2025-08-08 10:07:09,474 Image Importing MspImagePlugin
+DEBUG 2025-08-08 10:07:09,483 Image Importing PalmImagePlugin
+DEBUG 2025-08-08 10:07:09,507 Image Importing PcdImagePlugin
+DEBUG 2025-08-08 10:07:09,515 Image Importing PcxImagePlugin
+DEBUG 2025-08-08 10:07:09,517 Image Importing PdfImagePlugin
+DEBUG 2025-08-08 10:07:09,585 Image Importing PixarImagePlugin
+DEBUG 2025-08-08 10:07:09,596 Image Importing PngImagePlugin
+DEBUG 2025-08-08 10:07:09,598 Image Importing PpmImagePlugin
+DEBUG 2025-08-08 10:07:09,600 Image Importing PsdImagePlugin
+DEBUG 2025-08-08 10:07:09,614 Image Importing QoiImagePlugin
+DEBUG 2025-08-08 10:07:09,623 Image Importing SgiImagePlugin
+DEBUG 2025-08-08 10:07:09,641 Image Importing SpiderImagePlugin
+DEBUG 2025-08-08 10:07:09,656 Image Importing SunImagePlugin
+DEBUG 2025-08-08 10:07:09,670 Image Importing TgaImagePlugin
+DEBUG 2025-08-08 10:07:09,685 Image Importing TiffImagePlugin
+DEBUG 2025-08-08 10:07:09,688 Image Importing WebPImagePlugin
+DEBUG 2025-08-08 10:07:10,008 Image Importing WmfImagePlugin
+DEBUG 2025-08-08 10:07:10,022 Image Importing XbmImagePlugin
+DEBUG 2025-08-08 10:07:10,034 Image Importing XpmImagePlugin
+DEBUG 2025-08-08 10:07:10,050 Image Importing XVThumbImagePlugin
+DEBUG 2025-08-08 10:07:10,067 forms Validating full contact number: +916562644874269
+WARNING 2025-08-08 10:07:10,119 forms Invalid phone number for region IN: +916562644874269
+ERROR 2025-08-08 10:07:10,275 views Business form errors: <ul class="errorlist"><li>contact_number<ul class="errorlist" id="id_contact_number_error"><li>The full contact number is not a valid international phone number. Contact number must be in a valid international format (e.g., +911234567890, +1-123-456-7890, or +442071234567).</li></ul></li></ul>
+INFO 2025-08-08 10:07:20,469 views Business form POST data: <QueryDict: {'csrfmiddlewaretoken': ['dUlaM1LUTp7epvbZfAnr5N4yfTbZIOmHhU4vOhbYjCMF0ll3e7nrSahfitqMwLFR', 'dUlaM1LUTp7epvbZfAnr5N4yfTbZIOmHhU4vOhbYjCMF0ll3e7nrSahfitqMwLFR'], 'business_form': ['1'], 'name': ['dc'], 'contact': ['tamilmctv84@gmail.com'], 'state': ['tg'], 'district': ['ms '], 'business_mode': ['online'], 'category': ['education_training'], 'country_code': ['+91'], 'contact_number': ['6562644874'], 'applier_designation': ['s'], 'full_contact': ['+916562644874']}>, FILES: <MultiValueDict: {'registration_proof': [<InMemoryUploadedFile: e-pan.pdf (application/pdf)>], 'address_proof': [<InMemoryUploadedFile: intern.pdf (application/pdf)>], 'logo': [<InMemoryUploadedFile: profile2.jpg (image/jpeg)>]}>
+DEBUG 2025-08-08 10:07:20,476 forms Validating full contact number: +916562644874
+DEBUG 2025-08-08 10:07:20,493 forms Validated and formatted full contact: +916562644874
+DEBUG 2025-08-08 10:07:20,499 views Updated business.contact_number with full_contact: +916562644874
+DEBUG 2025-08-08 10:07:20,502 views Business instance before save: {'_state': <django.db.models.base.ModelState object at 0x00000181979AB050>, 'id': None, 'name': 'dc', 'contact': 'tamilmctv84@gmail.com', 'state': 'tg', 'district': 'ms', 'business_mode': 'online', 'category': 'education_training', 'contact_number': '+916562644874', 'applier_designation': 's', 'registration_proof': <FieldFile: e-pan.pdf>, 'address_proof': <FieldFile: intern.pdf>, 'logo': <ImageFieldFile: profile2.jpg>, 'status': 'pending', 'approved_date': None, 'suspended_date': None, 'created_at': None}
+INFO 2025-08-08 10:07:20,662 views Business saved: dc, +916562644874
+INFO 2025-08-08 10:07:20,686 settings Loaded email configuration for general: tamil08mctv@gmail.com
+INFO 2025-08-08 10:07:25,565 views Business email sent to tamilmctv84@gmail.com from tamil08mctv@gmail.com
+INFO 2025-08-08 10:08:36,821 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-08 10:08:38,615 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 10:08:44,442 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-08 10:08:45,749 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 10:08:48,410 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-08 10:08:49,652 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 10:08:54,274 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-08 10:08:55,498 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 10:08:57,068 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-08 10:08:58,166 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 10:08:59,746 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-08 10:09:00,928 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 10:09:33,695 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-08 10:09:35,109 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 10:09:56,450 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-08 10:09:57,668 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 10:09:59,266 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-08 10:10:00,564 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 10:10:42,717 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-08 10:10:43,978 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 10:11:03,344 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-08 10:11:04,602 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 10:11:30,225 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-08 10:11:31,501 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 10:11:33,153 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-08 10:11:34,294 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 10:11:36,914 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-08 10:11:38,094 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 10:11:56,380 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-08 10:11:57,766 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 10:12:46,288 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-08 10:12:47,867 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 10:13:06,548 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\views.py changed, reloading.
+INFO 2025-08-08 10:13:07,521 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 10:13:34,550 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\views.py changed, reloading.
+INFO 2025-08-08 10:13:35,862 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 10:13:55,215 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\views.py changed, reloading.
+INFO 2025-08-08 10:13:56,490 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 10:14:06,429 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\views.py changed, reloading.
+INFO 2025-08-08 10:14:07,582 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 10:16:28,222 autoreload Watching for file changes with StatReloader
+INFO 2025-08-08 10:16:46,793 settings Loaded email configuration for general: tamil08mctv@gmail.com
+INFO 2025-08-08 10:16:46,794 admin Using email config for tamil08mctv@gmail.com
+INFO 2025-08-08 10:16:49,306 admin SMTP validation successful for tamil08mctv@gmail.com
+INFO 2025-08-08 10:16:55,209 admin Approval email sent to tamilmctv84@gmail.com from tamil08mctv@gmail.com
+INFO 2025-08-08 10:16:55,232 settings Loaded email configuration for general: tamil08mctv@gmail.com
+INFO 2025-08-08 10:16:55,233 admin Using email config for tamil08mctv@gmail.com
+INFO 2025-08-08 10:16:57,743 admin SMTP validation successful for tamil08mctv@gmail.com
+INFO 2025-08-08 10:17:03,083 admin Approval email sent to tamilmctv02@gmail.com from tamil08mctv@gmail.com

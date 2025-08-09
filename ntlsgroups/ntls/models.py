@@ -232,6 +232,7 @@ class SocialPlatform(models.Model):
         ('youtube', 'YouTube'),
         ('pinterest', 'Pinterest'),
         ('tiktok', 'TikTok'),
+        ('whatsapp','Whatsapp')
     )
     name = models.CharField(max_length=50, choices=PLATFORM_CHOICES, unique=True)
     link = models.URLField(max_length=200)

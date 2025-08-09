@@ -3969,3 +3969,75 @@ INFO 2025-08-08 10:16:55,232 settings Loaded email configuration for general: ta
 INFO 2025-08-08 10:16:55,233 admin Using email config for tamil08mctv@gmail.com
 INFO 2025-08-08 10:16:57,743 admin SMTP validation successful for tamil08mctv@gmail.com
 INFO 2025-08-08 10:17:03,083 admin Approval email sent to tamilmctv02@gmail.com from tamil08mctv@gmail.com
+INFO 2025-08-09 18:43:26,971 autoreload Watching for file changes with StatReloader
+INFO 2025-08-09 18:48:26,445 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\models.py changed, reloading.
+INFO 2025-08-09 18:48:27,558 autoreload Watching for file changes with StatReloader
+INFO 2025-08-09 18:48:46,626 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\models.py changed, reloading.
+INFO 2025-08-09 18:48:47,562 autoreload Watching for file changes with StatReloader
+INFO 2025-08-09 18:48:50,074 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\models.py changed, reloading.
+INFO 2025-08-09 18:48:50,945 autoreload Watching for file changes with StatReloader
+INFO 2025-08-09 18:48:54,557 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\models.py changed, reloading.
+INFO 2025-08-09 18:48:55,615 autoreload Watching for file changes with StatReloader
+INFO 2025-08-09 18:48:56,933 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\models.py changed, reloading.
+INFO 2025-08-09 18:48:57,696 autoreload Watching for file changes with StatReloader
+INFO 2025-08-09 18:49:01,143 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\models.py changed, reloading.
+INFO 2025-08-09 18:49:01,942 autoreload Watching for file changes with StatReloader
+INFO 2025-08-09 18:49:06,310 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\models.py changed, reloading.
+INFO 2025-08-09 18:49:07,211 autoreload Watching for file changes with StatReloader
+INFO 2025-08-09 18:49:09,687 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\models.py changed, reloading.
+INFO 2025-08-09 18:49:10,565 autoreload Watching for file changes with StatReloader
+INFO 2025-08-09 18:50:58,356 autoreload Watching for file changes with StatReloader
+WARNING 2025-08-09 18:51:14,968 log Not Found: /favicon.ico
+WARNING 2025-08-09 18:51:18,186 log Not Found: /favicon.ico
+WARNING 2025-08-09 18:56:19,693 log Not Found: /404
+INFO 2025-08-09 18:57:32,596 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\views.py changed, reloading.
+INFO 2025-08-09 18:57:33,787 autoreload Watching for file changes with StatReloader
+INFO 2025-08-09 18:57:56,466 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\urls.py changed, reloading.
+INFO 2025-08-09 18:57:57,280 autoreload Watching for file changes with StatReloader
+INFO 2025-08-09 18:58:08,146 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\urls.py changed, reloading.
+INFO 2025-08-09 18:58:09,381 autoreload Watching for file changes with StatReloader
+ERROR 2025-08-09 18:58:12,640 log Internal Server Error: /404/
+Traceback (most recent call last):
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+TypeError: custom_404() missing 1 required positional argument: 'exception'
+INFO 2025-08-09 18:59:28,498 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntlsgroups\urls.py changed, reloading.
+INFO 2025-08-09 18:59:29,324 autoreload Watching for file changes with StatReloader
+INFO 2025-08-09 18:59:31,889 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntlsgroups\urls.py changed, reloading.
+INFO 2025-08-09 18:59:32,769 autoreload Watching for file changes with StatReloader
+INFO 2025-08-09 18:59:59,008 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\urls.py changed, reloading.
+INFO 2025-08-09 18:59:59,861 autoreload Watching for file changes with StatReloader
+INFO 2025-08-09 19:00:21,106 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\views.py changed, reloading.
+INFO 2025-08-09 19:00:21,999 autoreload Watching for file changes with StatReloader
+WARNING 2025-08-09 19:00:25,113 log Not Found: /404/
+INFO 2025-08-09 19:02:21,101 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\urls.py changed, reloading.
+INFO 2025-08-09 19:02:21,976 autoreload Watching for file changes with StatReloader
+ERROR 2025-08-09 19:02:27,389 log Internal Server Error: /404/
+Traceback (most recent call last):
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+TypeError: custom_404() missing 1 required positional argument: 'exception'
+INFO 2025-08-09 19:02:51,952 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\views.py changed, reloading.
+INFO 2025-08-09 19:02:52,835 autoreload Watching for file changes with StatReloader
+INFO 2025-08-09 19:02:56,299 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\views.py changed, reloading.
+INFO 2025-08-09 19:02:57,292 autoreload Watching for file changes with StatReloader
+INFO 2025-08-09 19:03:21,197 autoreload Watching for file changes with StatReloader
+INFO 2025-08-09 19:03:27,621 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\views.py changed, reloading.
+INFO 2025-08-09 19:03:28,421 autoreload Watching for file changes with StatReloader
+ERROR 2025-08-09 19:03:30,786 log Internal Server Error: /404/
+Traceback (most recent call last):
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+TypeError: custom_404() missing 1 required positional argument: 'exception'
+INFO 2025-08-09 19:05:08,308 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\views.py changed, reloading.
+INFO 2025-08-09 19:05:09,284 autoreload Watching for file changes with StatReloader
+INFO 2025-08-09 19:05:20,256 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\views.py changed, reloading.
+INFO 2025-08-09 19:05:21,304 autoreload Watching for file changes with StatReloader
+WARNING 2025-08-09 19:05:23,345 log Not Found: /404/
+WARNING 2025-08-09 19:06:54,188 log Not Found: /favicon.ico

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Server Under Progression</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            text-align: center;
+        }
+        .container {
+            padding: 2rem;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            font-size: 6rem;
+            margin: 0;
+            color: #ff6b6b;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        h2 {
+            font-size: 2rem;
+            margin: 1rem 0;
+            color: #4ecdc4;
+        }
+        p {
+            font-size: 1.2rem;
+            margin: 1rem 0;
+        }
+        .progress {
+            width: 200px;
+            height: 20px;
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 2rem auto;
+        }
+        .progress-bar {
+            width: 50%;
+            height: 100%;
+            background: #ffeb3b;
+            animation: progress 3s infinite;
+        }
+        @keyframes progress {
+            0% { width: 0%; }
+            50% { width: 50%; }
+            100% { width: 100%; }
+        }
+        a {
+            color: #ffeb3b;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        a:hover {
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>404</h1>
+        <h2>Server Under Progression</h2>
+        <p>Oops! The page you're looking for is not available right now. Our server is undergoing maintenance and upgrades.</p>
+        <p>Please check back later or return to the <a href="/">homepage</a>.</p>
+        <div class="progress">
+            <div class="progress-bar"></div>
+        </div>
+        <p>Estimated time: A few hours. Thank you for your patience!</p>
+    </div>
+</body>
+</html>

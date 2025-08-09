@@ -210,3 +210,6 @@ def terms(request):
         logger.error(f"Failed to query PaymentLink table: {str(e)}. Continuing without payment link.")
         payment_link = None
     return render(request, 'ntls/terms.html', {'payment_link': payment_link})
+
+def custom_404(request, exception= None):
+    return render(request, 'ntls/404.html', status=404)

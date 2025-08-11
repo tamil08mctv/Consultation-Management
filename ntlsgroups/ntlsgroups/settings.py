@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-l(&&+6d+g#)lo1_2t7vlzp)+)h#e$onroczjxeen=-n^h=f9v0'  # Replace with a secure key in production
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ntlsgroups.org', 'www.ntlsgroups.org']
 
 # Application definition
 INSTALLED_APPS = [
@@ -77,15 +77,15 @@ DATABASES = {
     'server': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'ntlsgroups_db',  # Replace with your database name
-        'USER': 'postgres',  # Replace with your PostgreSQL username
-        'PASSWORD': 'mctv@2002',  # Replace with your PostgreSQL password
-        'HOST': '127.0.0.1',  # Replace with your PostgreSQL host if different
+        'USER': 'ntls_admin',  # Replace with your PostgreSQL username
+        'PASSWORD': 'N!T@L#S$G%R^O&U*P(s',  # Replace with your PostgreSQL password
+        'HOST': 'localhost',  # Replace with your PostgreSQL host if different
         'PORT': '5432',  # Replace with your PostgreSQL port if different
     },
 }
 
 # Database Router
-DATABASE_ROUTERS = ['ntls.db_routers.DualWriteRouter']
+# DATABASE_ROUTERS = ['ntls.db_routers.DualWriteRouter']
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [

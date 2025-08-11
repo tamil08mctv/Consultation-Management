@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-l(&&+6d+g#)lo1_2t7vlzp)+)h#e$onroczjxeen=-n^h=f9v0'  # Replace with a secure key in production
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['ntlsgroups.org', 'www.ntlsgroups.org']
+ALLOWED_HOSTS = []
 
 # Application definition
 INSTALLED_APPS = [
@@ -68,24 +68,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ntlsgroups.wsgi.application'
 
-# Multiple Databases
+# Database
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',  # Local backup database
-    },
-    'server': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'ntlsgroups_db',  # Replace with your database name
-        'USER': 'ntls_admin',  # Replace with your PostgreSQL username
-        'PASSWORD': 'N!T@L#S$G%R^O&U*P(s',  # Replace with your PostgreSQL password
+        'USER': 'postgres',  # Replace with your PostgreSQL username
+        'PASSWORD': 'mctv@2002',  # Replace with your PostgreSQL password
         'HOST': 'localhost',  # Replace with your PostgreSQL host if different
         'PORT': '5432',  # Replace with your PostgreSQL port if different
-    },
+    }
 }
-
-# Database Router
-# DATABASE_ROUTERS = ['ntls.db_routers.DualWriteRouter']
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
@@ -164,7 +157,7 @@ EMAIL_HOST_PASSWORD = ''  # Will be overridden by get_email_config
 def get_email_config(purpose='general'):
     try:
         from ntls.models import EmailConfig
-        config = EmailConfig.objects.using('server').filter(purpose=purpose, is_active=True).first()
+        config = EmailConfig.objects.filter(purpose=purpose, is_active=True).first()
         if config:
             logger.info(f"Loaded email configuration for {purpose}: {config.email_id}")
             return {
@@ -175,9 +168,9 @@ def get_email_config(purpose='general'):
                 'EMAIL_HOST_PASSWORD': config.password,
             }
         else:
-            logger.warning(f"No active EmailConfig found for '{purpose}' purpose on server. Using fallback settings.")
+            logger.warning(f"No active EmailConfig found for '{purpose}' purpose. Using fallback settings.")
     except Exception as e:
-        logger.error(f"Failed to load EmailConfig for {purpose} from server: {str(e)}")
+        logger.error(f"Failed to load EmailConfig for {purpose}: {str(e)}")
     return {
         'EMAIL_HOST': 'smtp.gmail.com',
         'EMAIL_PORT': 587,

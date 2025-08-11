@@ -4155,3 +4155,179 @@ INFO 2025-08-11 08:48:25,277 admin Approval email sent to tamilmctv82@gmail.com 
 WARNING 2025-08-11 08:48:25,540 log Not Found: /favicon.ico
 INFO 2025-08-11 08:49:32,022 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntlsgroups\settings.py changed, reloading.
 INFO 2025-08-11 10:03:46,464 autoreload Watching for file changes with StatReloader
+INFO 2025-08-11 18:37:15,231 autoreload Watching for file changes with StatReloader
+ERROR 2025-08-11 18:37:21,337 log Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+ERROR 2025-08-11 18:37:21,474 log Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+INFO 2025-08-11 18:38:01,077 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntlsgroups\settings.py changed, reloading.
+INFO 2025-08-11 18:38:01,841 autoreload Watching for file changes with StatReloader
+INFO 2025-08-11 18:38:04,425 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntlsgroups\settings.py changed, reloading.
+INFO 2025-08-11 18:38:05,200 autoreload Watching for file changes with StatReloader
+INFO 2025-08-11 18:38:11,836 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntlsgroups\settings.py changed, reloading.
+INFO 2025-08-11 18:38:37,890 autoreload Watching for file changes with StatReloader
+ERROR 2025-08-11 18:38:41,573 log Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\backends\base\base.py", line 279, in ensure_connection
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\backends\base\base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\backends\postgresql\base.py", line 332, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\psycopg2\__init__.py", line 135, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: FATAL:  password authentication failed for user "posgres"
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\views.py", line 24, in home
+    partner_count = partners.count()
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 604, in count
+    return self.query.get_count(using=self.db)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 644, in get_count
+    return obj.get_aggregation(using, {"__count": Count("*")})["__count"]
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\query.py", line 626, in get_aggregation
+    result = compiler.execute_sql(SINGLE)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\compiler.py", line 1621, in execute_sql
+    cursor = self.connection.cursor()
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\backends\base\base.py", line 320, in cursor
+    return self._cursor()
+           ~~~~~~~~~~~~^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\backends\base\base.py", line 296, in _cursor
+    self.ensure_connection()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\backends\base\base.py", line 278, in ensure_connection
+    with self.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\backends\base\base.py", line 279, in ensure_connection
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\backends\base\base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\backends\postgresql\base.py", line 332, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "C:\Users\Tamiltech08\AppData\Local\Programs\Python\Python313\Lib\site-packages\psycopg2\__init__.py", line 135, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+django.db.utils.OperationalError: connection to server at "localhost" (::1), port 5432 failed: FATAL:  password authentication failed for user "posgres"
+
+INFO 2025-08-11 18:38:53,294 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntlsgroups\settings.py changed, reloading.
+INFO 2025-08-11 18:38:54,122 autoreload Watching for file changes with StatReloader
+WARNING 2025-08-11 18:39:00,457 log Not Found: /media/logos/photo_yZRv2GQ.jpg
+WARNING 2025-08-11 18:39:00,457 log Not Found: /media/logos/profile_2_bTTwro3.jpg
+WARNING 2025-08-11 18:39:00,457 log Not Found: /media/logos/profile2.jpg
+WARNING 2025-08-11 18:39:00,457 log Not Found: /media/logos/profile_bR6Tcdk.jpg
+INFO 2025-08-11 18:39:22,070 views Consumer form POST data: <QueryDict: {'csrfmiddlewaretoken': ['Wg3pCE7jBLZ3p0Zx53hKMDNf5NEOpRyvEYkHennpDsEb8cZgRpVIMLaDe1rNzPuk', 'Wg3pCE7jBLZ3p0Zx53hKMDNf5NEOpRyvEYkHennpDsEb8cZgRpVIMLaDe1rNzPuk'], 'consumer_form': ['1'], 'name': ['csdc'], 'contact': ['tamilmctv82@gmail.com'], 'services': ['aadca']}>
+DEBUG 2025-08-11 18:39:22,119 views Consumer instance before save: {'_state': <django.db.models.base.ModelState object at 0x00000155611A1B50>, 'id': None, 'name': 'csdc', 'contact': 'tamilmctv82@gmail.com', 'services': 'aadca', 'created_at': None}
+INFO 2025-08-11 18:39:22,162 views Consumer saved: csdc, tamilmctv82@gmail.com
+INFO 2025-08-11 18:39:22,230 settings Loaded email configuration for general: tamil08mctv@gmail.com
+INFO 2025-08-11 18:39:27,056 views Consumer email sent to tamilmctv82@gmail.com from tamil08mctv@gmail.com
+WARNING 2025-08-11 18:39:44,862 log Not Found: /favicon.ico
+WARNING 2025-08-11 18:40:17,771 log Not Found: /favicon.ico
+WARNING 2025-08-11 18:40:29,259 log Not Found: /favicon.ico
+INFO 2025-08-11 21:22:54,410 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntlsgroups\settings.py changed, reloading.
+INFO 2025-08-11 21:22:55,916 autoreload Watching for file changes with StatReloader
+INFO 2025-08-11 21:22:57,446 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntlsgroups\settings.py changed, reloading.
+INFO 2025-08-11 21:22:58,528 autoreload Watching for file changes with StatReloader
+INFO 2025-08-11 21:23:47,494 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\models.py changed, reloading.
+INFO 2025-08-11 21:23:48,543 autoreload Watching for file changes with StatReloader
+INFO 2025-08-11 21:23:51,072 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\models.py changed, reloading.
+INFO 2025-08-11 21:23:52,309 autoreload Watching for file changes with StatReloader
+INFO 2025-08-11 21:24:07,254 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\models.py changed, reloading.
+INFO 2025-08-11 21:24:08,239 autoreload Watching for file changes with StatReloader
+INFO 2025-08-11 21:24:14,924 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\models.py changed, reloading.
+INFO 2025-08-11 21:24:16,105 autoreload Watching for file changes with StatReloader
+INFO 2025-08-11 21:24:42,918 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-11 21:24:43,990 autoreload Watching for file changes with StatReloader
+INFO 2025-08-11 21:24:45,467 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-11 21:24:46,531 autoreload Watching for file changes with StatReloader
+INFO 2025-08-11 21:25:13,669 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\views.py changed, reloading.
+INFO 2025-08-11 21:25:14,651 autoreload Watching for file changes with StatReloader
+INFO 2025-08-11 21:25:16,142 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\views.py changed, reloading.
+INFO 2025-08-11 21:25:17,078 autoreload Watching for file changes with StatReloader
+INFO 2025-08-11 21:25:29,974 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\views.py changed, reloading.
+INFO 2025-08-11 21:25:31,043 autoreload Watching for file changes with StatReloader
+INFO 2025-08-11 21:27:40,249 autoreload Watching for file changes with StatReloader
+WARNING 2025-08-11 21:27:42,651 log Not Found: /media/blogs/Screenshot_2022-10-12_220000_AvV3R1R.jpg
+WARNING 2025-08-11 21:27:42,652 log Not Found: /media/logos/profile_bR6Tcdk.jpg
+WARNING 2025-08-11 21:27:42,653 log Not Found: /media/logos/profile2.jpg
+WARNING 2025-08-11 21:27:42,653 log Not Found: /media/blogs/Screenshot_2022-10-12_220000_vpDiK0x.jpg
+WARNING 2025-08-11 21:27:42,654 log Not Found: /media/logos/profile_2_bTTwro3.jpg
+WARNING 2025-08-11 21:27:42,654 log Not Found: /media/blogs/data.jpg
+WARNING 2025-08-11 21:27:42,665 log Not Found: /media/logos/photo_yZRv2GQ.jpg
+WARNING 2025-08-11 21:27:42,672 log Not Found: /media/logos/Screenshot_21.png
+WARNING 2025-08-11 21:27:42,684 log Not Found: /media/blogs/Screenshot_9_qWVuK6a.png
+WARNING 2025-08-11 21:27:52,664 log Not Found: /media/logos/photo_yZRv2GQ.jpg
+WARNING 2025-08-11 21:27:52,684 log Not Found: /media/logos/Screenshot_21.png
+WARNING 2025-08-11 21:27:52,686 log Not Found: /media/logos/profile_bR6Tcdk.jpg
+WARNING 2025-08-11 21:27:52,695 log Not Found: /media/logos/profile_2_bTTwro3.jpg
+WARNING 2025-08-11 21:27:52,699 log Not Found: /media/logos/profile2.jpg
+WARNING 2025-08-11 21:27:52,703 log Not Found: /media/blogs/Screenshot_2022-10-12_220000_AvV3R1R.jpg
+WARNING 2025-08-11 21:27:52,717 log Not Found: /media/blogs/data.jpg
+WARNING 2025-08-11 21:27:52,720 log Not Found: /media/blogs/Screenshot_9_qWVuK6a.png
+WARNING 2025-08-11 21:28:04,051 log Not Found: /media/service_icons/WhatsApp_Image_2023-08-05_at_08.01.03.jpg
+WARNING 2025-08-11 21:28:04,057 log Not Found: /media/logos/WhatsApp_Image_2023-08-05_at_08.01.03.jpg
+WARNING 2025-08-11 21:28:04,063 log Not Found: /media/logos/IMG20230405163441.jpg
+WARNING 2025-08-11 21:28:04,071 log Not Found: /media/service_icons/Screenshot_2022-10-13_214932.jpg
+WARNING 2025-08-11 21:28:04,080 log Not Found: /media/logos/Screenshot_2022-10-12_220000.jpg
+WARNING 2025-08-11 21:28:05,303 log Not Found: /media/blogs/Screenshot_2022-10-12_220000_AvV3R1R.jpg
+WARNING 2025-08-11 21:28:05,309 log Not Found: /media/logos/Screenshot_21.png
+WARNING 2025-08-11 21:28:05,320 log Not Found: /media/logos/photo_yZRv2GQ.jpg
+WARNING 2025-08-11 21:28:05,323 log Not Found: /media/logos/profile2.jpg
+WARNING 2025-08-11 21:28:05,328 log Not Found: /media/logos/profile_2_bTTwro3.jpg
+WARNING 2025-08-11 21:28:05,335 log Not Found: /media/blogs/Screenshot_2022-10-12_220000_vpDiK0x.jpg
+WARNING 2025-08-11 21:28:05,352 log Not Found: /media/service_icons/tam_7h46nAc.jpg
+WARNING 2025-08-11 21:28:05,362 log Not Found: /media/blogs/Screenshot_9_qWVuK6a.png
+WARNING 2025-08-11 21:28:05,376 log Not Found: /media/blogs/data.jpg
+WARNING 2025-08-11 21:28:05,402 log Not Found: /media/logos/profile_bR6Tcdk.jpg
+WARNING 2025-08-11 21:28:05,426 log Not Found: /media/blogs/tam_VBPXqIh.jpg
+WARNING 2025-08-11 21:28:05,441 log Not Found: /media/blogs/qr_jEySjrv.jpg
+WARNING 2025-08-11 21:28:05,482 log Not Found: /media/blogs/WhatsApp_Image_2023-08-05_at_08_9GYTMuX.01.03.jpg
+WARNING 2025-08-11 21:28:32,233 log Not Found: /favicon.ico
+INFO 2025-08-11 21:37:50,921 autoreload C:\Users\Tamiltech08\PycharmProjects\NTLS_Groups\ntlsgroups\ntls\admin.py changed, reloading.
+INFO 2025-08-11 21:37:52,304 autoreload Watching for file changes with StatReloader
+WARNING 2025-08-11 21:38:01,811 log Not Found: /favicon.ico

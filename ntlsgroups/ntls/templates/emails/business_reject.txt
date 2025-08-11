@@ -1,8 +1,0 @@
-Dear {{ name }},
-
-We regret to inform you that your application to become a partner with NTLS Group has been rejected.
-
-Please contact us for feedback.
-
-Best regards,
-NTLS Group

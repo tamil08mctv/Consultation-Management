@@ -14,22 +14,22 @@ logger = logging.getLogger(__name__)
 
 @csrf_exempt
 def home(request):
-    testimonials = Testimonial.objects.using('server').all()
-    categories = Business.objects.using('server').filter(status='approved').values_list('category', flat=True).distinct()
+    testimonials = Testimonial.objects.all()
+    categories = Business.objects.filter(status='approved').values_list('category', flat=True).distinct()
     selected_category = request.GET.get('category', '')
     if selected_category:
-        partners = Business.objects.using('server').filter(status='approved', category=selected_category)
+        partners = Business.objects.filter(status='approved', category=selected_category)
     else:
-        partners = Business.objects.using('server').filter(status='approved')
+        partners = Business.objects.filter(status='approved')
     partner_count = partners.count()
-    blogs = Blog.objects.using('server').all().order_by('-created_at').prefetch_related('images')
-    social_platforms = SocialPlatform.objects.using('server').filter(is_active=True)
-    services = Service.objects.using('server').filter(is_active=True)
+    blogs = Blog.objects.all().order_by('-created_at').prefetch_related('images')
+    social_platforms = SocialPlatform.objects.filter(is_active=True)
+    services = Service.objects.filter(is_active=True)
     payment_link = None
-    contact_info = ContactInfo.objects.using('server').filter(is_active=True).first()
+    contact_info = ContactInfo.objects.filter(is_active=True).first()
 
     try:
-        payment_link = PaymentLink.objects.using('server').filter(is_active=True).first()
+        payment_link = PaymentLink.objects.filter(is_active=True).first()
         if not payment_link:
             logger.info("No active payment link found in the database.")
     except Exception as e:
@@ -42,9 +42,7 @@ def home(request):
                 logger.info(f"Consumer form POST data: {request.POST}")
                 form = ConsumerForm(request.POST)
                 if form.is_valid():
-                    consumer = form.save(commit=False)
-                    logger.debug(f"Consumer instance before save: {consumer.__dict__}")
-                    consumer.save()  # Router handles dual writes
+                    consumer = form.save()
                     logger.info(f"Consumer saved: {consumer.name}, {consumer.contact}")
                     email_config = get_email_config()
                     if email_config and email_config['EMAIL_HOST_PASSWORD']:
@@ -91,8 +89,7 @@ def home(request):
                         logger.debug(f"Updated business.contact_number with full_contact: {full_contact}")
                     else:
                         logger.warning("No full_contact found in cleaned_data")
-                    logger.debug(f"Business instance before save: {business.__dict__}")
-                    business.save()  # Router handles dual writes
+                    business.save()
                     logger.info(f"Business saved: {business.name}, {business.contact_number}")
                     email_config = get_email_config()
                     if email_config and email_config['EMAIL_HOST_PASSWORD']:
@@ -132,8 +129,7 @@ def home(request):
                 logger.info(f"Feedback form POST data: {request.POST}")
                 form = FeedbackForm(request.POST)
                 if form.is_valid():
-                    feedback = form.save(commit=False)
-                    feedback.save()  # Router handles dual writes
+                    feedback = form.save()
                     email_config = get_email_config()
                     if email_config and email_config['EMAIL_HOST_PASSWORD']:
                         try:
@@ -192,7 +188,7 @@ def home(request):
 def privacy(request):
     payment_link = None
     try:
-        payment_link = PaymentLink.objects.using('server').filter(is_active=True).first()
+        payment_link = PaymentLink.objects.filter(is_active=True).first()
         if not payment_link:
             logger.info("No active payment link found in the database.")
     except Exception as e:
@@ -203,7 +199,7 @@ def privacy(request):
 def terms(request):
     payment_link = None
     try:
-        payment_link = PaymentLink.objects.using('server').filter(is_active=True).first()
+        payment_link = PaymentLink.objects.filter(is_active=True).first()
         if not payment_link:
             logger.info("No active payment link found in the database.")
     except Exception as e:
@@ -211,5 +207,5 @@ def terms(request):
         payment_link = None
     return render(request, 'ntls/terms.html', {'payment_link': payment_link})
 
-def custom_404(request, exception= None):
+def custom_404(request, exception=None):
     return render(request, 'ntls/404.html', status=404)

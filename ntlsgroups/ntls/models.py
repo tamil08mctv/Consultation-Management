@@ -50,17 +50,6 @@ class EmailConfig(models.Model):
     def __str__(self):
         return f"{self.email_id} ({self.get_purpose_display()})"
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)  # Let router handle the database
-
-    def save_to_default(self, *args, **kwargs):
-        """Force save to 'default' database."""
-        try:
-            super().save(using='default', *args, **kwargs)
-        except Exception as e:
-            logger.error(f"Failed to save to local database: {str(e)}")
-            raise
-
 class Consumer(models.Model):
     name = models.CharField(max_length=100)
     contact = models.EmailField(max_length=254)
@@ -69,17 +58,6 @@ class Consumer(models.Model):
 
     def __str__(self):
         return self.name
-
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)  # Let router handle the database
-
-    def save_to_default(self, *args, **kwargs):
-        """Force save to 'default' database."""
-        try:
-            super().save(using='default', *args, **kwargs)
-        except Exception as e:
-            logger.error(f"Failed to save to local database: {str(e)}")
-            raise
 
 class Business(models.Model):
     STATUS_CHOICES = (
@@ -124,7 +102,7 @@ class Business(models.Model):
     contact_number = models.CharField(max_length=21, null=False, blank=False)
     applier_designation = models.CharField(max_length=100, null=False, blank=False)
     registration_proof = models.FileField(upload_to='uploads/registration/', validators=[validate_pdf], null=False, blank=False)
-    address_proof = models.FileField(upload_to='uploads/address/', validators=[validate_address_proof], null=True, blank=True)  # Temporarily nullable
+    address_proof = models.FileField(upload_to='uploads/address/', validators=[validate_address_proof], null=True, blank=True)
     logo = models.ImageField(upload_to='logos/', validators=[validate_image], null=False, blank=False)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
     approved_date = models.DateTimeField(blank=True, null=True)
@@ -133,17 +111,6 @@ class Business(models.Model):
 
     def __str__(self):
         return self.name
-
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)  # Let router handle the database
-
-    def save_to_default(self, *args, **kwargs):
-        """Force save to 'default' database."""
-        try:
-            super().save(using='default', *args, **kwargs)
-        except Exception as e:
-            logger.error(f"Failed to save to local database: {str(e)}")
-            raise
 
 class Testimonial(models.Model):
     name = models.CharField(max_length=100)
@@ -154,17 +121,6 @@ class Testimonial(models.Model):
     def __str__(self):
         return self.name
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)  # Let router handle the database
-
-    def save_to_default(self, *args, **kwargs):
-        """Force save to 'default' database."""
-        try:
-            super().save(using='default', *args, **kwargs)
-        except Exception as e:
-            logger.error(f"Failed to save to local database: {str(e)}")
-            raise
-
 class Feedback(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField(max_length=254)
@@ -174,17 +130,6 @@ class Feedback(models.Model):
     def __str__(self):
         return self.name
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)  # Let router handle the database
-
-    def save_to_default(self, *args, **kwargs):
-        """Force save to 'default' database."""
-        try:
-            super().save(using='default', *args, **kwargs)
-        except Exception as e:
-            logger.error(f"Failed to save to local database: {str(e)}")
-            raise
-
 class BlogImage(models.Model):
     blog = models.ForeignKey('Blog', related_name='images', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='blogs/', validators=[validate_image])
@@ -193,17 +138,6 @@ class BlogImage(models.Model):
     def __str__(self):
         return f"{self.blog.title} - Image {self.id}"
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)  # Let router handle the database
-
-    def save_to_default(self, *args, **kwargs):
-        """Force save to 'default' database."""
-        try:
-            super().save(using='default', *args, **kwargs)
-        except Exception as e:
-            logger.error(f"Failed to save to local database: {str(e)}")
-            raise
-
 class Blog(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
@@ -211,17 +145,6 @@ class Blog(models.Model):
 
     def __str__(self):
         return self.title
-
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)  # Let router handle the database
-
-    def save_to_default(self, *args, **kwargs):
-        """Force save to 'default' database."""
-        try:
-            super().save(using='default', *args, **kwargs)
-        except Exception as e:
-            logger.error(f"Failed to save to local database: {str(e)}")
-            raise
 
 class SocialPlatform(models.Model):
     PLATFORM_CHOICES = (
@@ -232,7 +155,7 @@ class SocialPlatform(models.Model):
         ('youtube', 'YouTube'),
         ('pinterest', 'Pinterest'),
         ('tiktok', 'TikTok'),
-        ('whatsapp','Whatsapp')
+        ('whatsapp', 'Whatsapp')
     )
     name = models.CharField(max_length=50, choices=PLATFORM_CHOICES, unique=True)
     link = models.URLField(max_length=200)
@@ -241,17 +164,6 @@ class SocialPlatform(models.Model):
 
     def __str__(self):
         return f"{self.get_name_display()} - {self.link}"
-
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)  # Let router handle the database
-
-    def save_to_default(self, *args, **kwargs):
-        """Force save to 'default' database."""
-        try:
-            super().save(using='default', *args, **kwargs)
-        except Exception as e:
-            logger.error(f"Failed to save to local database: {str(e)}")
-            raise
 
 class Service(models.Model):
     icon = models.CharField(max_length=50, blank=True, null=True, help_text="Enter Font Awesome icon class (e.g., 'fas fa-handshake') or leave blank if uploading an icon image.")
@@ -264,17 +176,6 @@ class Service(models.Model):
     def __str__(self):
         return self.name
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)  # Let router handle the database
-
-    def save_to_default(self, *args, **kwargs):
-        """Force save to 'default' database."""
-        try:
-            super().save(using='default', *args, **kwargs)
-        except Exception as e:
-            logger.error(f"Failed to save to local database: {str(e)}")
-            raise
-
 class PaymentLink(models.Model):
     link = models.URLField(max_length=200, unique=True, help_text="Enter the payment link to redirect users.")
     is_active = models.BooleanField(default=True)
@@ -283,17 +184,6 @@ class PaymentLink(models.Model):
 
     def __str__(self):
         return self.link
-
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)  # Let router handle the database
-
-    def save_to_default(self, *args, **kwargs):
-        """Force save to 'default' database."""
-        try:
-            super().save(using='default', *args, **kwargs)
-        except Exception as e:
-            logger.error(f"Failed to save to local database: {str(e)}")
-            raise
 
 class ContactInfo(models.Model):
     phone = models.CharField(max_length=15, unique=True, help_text="Enter the contact phone number (e.g., +91-123-456-7890)")
@@ -304,14 +194,3 @@ class ContactInfo(models.Model):
 
     def __str__(self):
         return f"{self.phone} - {self.email}"
-
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)  # Let router handle the database
-
-    def save_to_default(self, *args, **kwargs):
-        """Force save to 'default' database."""
-        try:
-            super().save(using='default', *args, **kwargs)
-        except Exception as e:
-            logger.error(f"Failed to save to local database: {str(e)}")
-            raise

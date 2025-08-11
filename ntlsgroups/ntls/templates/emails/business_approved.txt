@@ -1,8 +1,0 @@
-Dear {{ name }},
-
-Congratulations! Your application to become a partner with NTLS Group has been approved.
-
-You can now be matched with consumers seeking your services.
-
-Best regards,
-NTLS Group

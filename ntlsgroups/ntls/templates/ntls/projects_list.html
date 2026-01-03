@@ -1,0 +1,58 @@
+{% extends 'ntls/base.html' %}
+{% load static %}
+
+{% block title %} - Projects {% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center mb-5">
+        <div class="col-lg-8 text-center">
+            <h1 class="display-5 fw-bold text-primary mb-3">
+                Project Submission Portal
+            </h1>
+            <p class="lead text-muted">Select your project and submit your report</p>
+            <hr class="w-50 mx-auto">
+        </div>
+    </div>
+
+    <div class="row g-4">
+        {% for project in projects %}
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 border-0 shadow-sm hover-shadow transition">
+                <div class="card-body text-center p-4">
+                    <div class="mb-4">
+                        <div class="bg-primary text-white rounded-circle mx-auto d-flex align-items-center justify-content-center mb-3" 
+                             style="width: 70px; height: 70px;">
+                            <i class="fas fa-folder-open fa-2x"></i>
+                        </div>
+                        <h5 class="card-title fw-bold text-dark">{{ project.project_name }}</h5>
+                        <p class="text-muted small">{{ project.college_name }}</p>
+                    </div>
+                    <a href="{% url 'project_detail' project.pk %}" 
+                       class="btn btn-outline-primary rounded-pill px-4">
+                        Open Project →
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center py-5">
+            <div class="bg-light rounded-3 p-5">
+                <i class="fas fa-info-circle fa-3x text-secondary mb-3"></i>
+                <h4 class="text-muted">No active projects</h4>
+                <p class="text-muted">Please check back later</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+.hover-shadow:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+}
+.transition { transition: all 0.3s ease; }
+.card { border-radius: 16px; }
+</style>
+{% endblock %}

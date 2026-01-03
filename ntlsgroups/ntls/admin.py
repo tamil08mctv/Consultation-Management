@@ -395,3 +395,121 @@ class PaymentLinkAdmin(admin.ModelAdmin):
     list_filter = ('is_active',)
     search_fields = ('link',)
     fields = ('link', 'is_active')
+
+# ntls/admin.py
+# === ADD THIS AT THE END OF YOUR admin.py ===
+
+from django.contrib import admin
+from django.utils.html import format_html
+from django.http import HttpResponse
+import csv
+from .models import Project, ProjectField, ProjectFile, Submission
+
+
+class ProjectFieldInline(admin.TabularInline):
+    model = ProjectField
+    extra = 3
+    fields = ('order', 'label', 'field_type', 'options', 'required', 'unique_key')
+    sortable_field_name = "order"
+
+
+class ProjectFileInline(admin.TabularInline):
+    model = ProjectFile
+    extra = 2
+
+
+class SubmissionInline(admin.TabularInline):
+    model = Submission
+    extra = 0
+    readonly_fields = ('submitted_at', 'preview_submission')
+    
+    def preview_submission(self, obj):
+        items = []
+        for field in obj.project.fields.all():
+            value = obj.data.get(field.label, '')
+            if isinstance(value, str) and value.startswith('/media/'):
+                items.append(f'<strong>{field.label}:</strong> <a href="{value}" target="_blank">Download File</a>')
+            else:
+                items.append(f'<strong>{field.label}:</strong> {value or "-"}')
+        return format_html("<br>".join(items))
+    preview_submission.short_description = "Submission Details"
+
+
+@admin.register(Project)
+class ProjectAdmin(admin.ModelAdmin):
+    list_display = ('college_name', 'project_name', 'is_active', 'created_at')
+    inlines = [ProjectFileInline, ProjectFieldInline, SubmissionInline]
+
+    actions = ['export_all_submissions_csv']
+
+    def export_all_submissions_csv(self, request, queryset):
+        if queryset.count() != 1:
+            self.message_user(request, "Please select exactly ONE project to export.", level='error')
+            return
+
+        project = queryset.first()
+        response = HttpResponse(content_type='text/csv; charset=utf-8')
+        response['Content-Disposition'] = f'attachment; filename="{project.project_name}_All_Students.csv"'
+
+        # Get field labels in correct order
+        field_labels = [field.label for field in project.fields.all()]
+        writer = csv.writer(response)
+        writer.writerow(field_labels + ['Submitted At'])  # Header row
+
+        for submission in project.submissions.all():
+            row = [submission.data.get(label, '') for label in field_labels]
+            row.append(submission.submitted_at.strftime('%Y-%m-%d %H:%M:%S'))
+            writer.writerow(row)
+
+        return response
+    export_all_submissions_csv.short_description = "Export All Students (Perfect CSV)"
+
+
+@admin.register(Submission)
+class SubmissionAdmin(admin.ModelAdmin):
+    list_display = ('project', 'student_name', 'roll_number', 'submitted_at', 'view_files')
+    list_filter = ('project__college_name', 'project__project_name', 'submitted_at')
+    search_fields = ('data__Full Name', 'data__Roll Number', 'data__Name', 'data__Regno')
+    date_hierarchy = 'submitted_at'
+
+    def get_queryset(self, request):
+        return super().get_queryset(request).select_related('project')
+
+    def student_name(self, obj):
+        return obj.data.get('Full Name') or obj.data.get('Name') or '—'
+    student_name.short_description = "Student Name"
+
+    def roll_number(self, obj):
+        return obj.data.get('Roll Number') or obj.data.get('Regno') or '—'
+    roll_number.short_description = "Roll No"
+
+    def view_files(self, obj):
+        links = obj.get_file_links()
+        if not links:
+            return "No files"
+        return format_html('<br>'.join([
+            f'<a href="{url}" target="_blank">Download {label}</a>' for label, url in links
+        ]))
+    view_files.short_description = "Files"
+
+    actions = ['export_selected_as_csv']
+
+    def export_selected_as_csv(self, request, queryset):
+        response = HttpResponse(content_type='text/csv; charset=utf-8')
+        response['Content-Disposition'] = 'attachment; filename="Selected_Submissions.csv"'
+
+        if not queryset.exists():
+            return response
+
+        project = queryset.first().project
+        field_labels = [f.label for f in project.fields.all()]
+        writer = csv.writer(response)
+        writer.writerow(field_labels + ['Submitted At'])
+
+        for sub in queryset:
+            row = [sub.data.get(label, '') for label in field_labels]
+            row.append(sub.submitted_at.strftime('%Y-%m-%d %H:%M:%S'))
+            writer.writerow(row)
+
+        return response
+    export_selected_as_csv.short_description = "Export Selected (Perfect Columns)"

@@ -6,7 +6,7 @@ from django.utils import timezone
 import logging
 import smtplib
 from .forms import ConsumerForm, BusinessForm, FeedbackForm
-from .models import Consumer, Business, Testimonial, Feedback, EmailConfig, Blog, SocialPlatform, Service, PaymentLink, ContactInfo
+from .models import Consumer, Business, Testimonial, Feedback, EmailConfig, Blog, SocialPlatform, Service, PaymentLink, ContactInfo, Submission
 from ntlsgroups.settings import get_email_config
 
 # Set up logging
@@ -209,3 +209,161 @@ def terms(request):
 
 def custom_404(request, exception=None):
     return render(request, 'ntls/404.html', status=404)
+
+# # ntls/views.py
+# from django.shortcuts import render, get_object_or_404, redirect
+# from django.contrib import messages
+# from django.utils import timezone
+# from django.conf import settings
+# import os
+# import csv
+# from .models import Project, Submission
+
+
+# def projects_list(request):
+#     projects = Project.objects.filter(is_active=True).order_by('-created_at')
+#     return render(request, 'ntls/projects_list.html', {'projects': projects})
+
+
+# def project_detail(request, pk):
+    # project = get_object_or_404(Project, pk=pk, is_active=True)
+
+    # if request.method == 'POST':
+    #     missing = []
+    #     for field in project.fields.all():
+    #         if field.required and not request.POST.get(field.label) and not request.FILES.get(field.label):
+    #             missing.append(field.label)
+    #     if missing:
+    #         messages.error(request, f"Please fill: {', '.join(missing)}")
+    #         return redirect('project_detail', pk=pk)
+
+    #     # Build data
+    #     data = {}
+    #     unique_combo = {}
+
+    #     for field in project.fields.all():
+    #         label = field.label
+    #         if field.field_type == 'file' and label in request.FILES:
+    #             file = request.FILES[label]
+    #             folder = os.path.join(settings.MEDIA_ROOT, 'student_files', str(project.id))
+    #             os.makedirs(folder, exist_ok=True)
+    #             # Use roll number in filename if available
+    #             roll = request.POST.get('Roll Number', 'unknown') or request.POST.get('Reg No', 'unknown')
+    #             safe_roll = "".join(c for c in roll if c.isalnum() or c in '_-')
+    #             filename = f"{safe_roll}_{file.name}"
+    #             path = os.path.join(folder, filename)
+    #             with open(path, 'wb+') as f:
+    #                 for chunk in file.chunks():
+    #                     f.write(chunk)
+    #             data[label] = f"/media/student_files/{project.id}/{filename}"
+    #         else:
+    #             value = request.POST.get(label, '')
+    #             data[label] = value
+
+    #         # Collect values for unique_key fields
+    #         if field.unique_key:
+    #             unique_combo[label] = value
+
+    #     # Block duplicate if same unique values exist
+    #     if unique_combo:
+    #         if Submission.objects.filter(project=project, data__contains=unique_combo).exists():
+    #             messages.error(request, "You have already submitted with this data (duplicate not allowed)!")
+    #             return redirect('project_detail', pk=pk)
+
+    #     # Save submission
+    #     Submission.objects.create(project=project, data=data)
+
+    #     # Append to CSV
+    #     csv_path = project.csv_path()
+    #     os.makedirs(os.path.dirname(csv_path), exist_ok=True)
+    #     file_exists = os.path.exists(csv_path)
+    #     with open(csv_path, 'a', newline='', encoding='utf-8') as f:
+    #         writer = csv.DictWriter(f, fieldnames=data.keys())
+    #         if not file_exists:
+    #             writer.writeheader()
+    #         writer.writerow(data)
+
+    #     messages.success(request, "Submitted Successfully!")
+    #     return redirect('project_detail', pk=pk)
+
+    # return render(request, 'ntls/project_detail.html', {'project': project})
+
+# === ADD THIS AT THE END OF YOUR views.py ===
+
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib import messages
+from django.utils import timezone
+from django.conf import settings
+import os
+import csv
+from .models import Project, Submission
+
+
+def projects_list(request):
+    projects = Project.objects.filter(is_active=True).order_by('-created_at')
+    return render(request, 'ntls/projects_list.html', {'projects': projects})
+
+
+def project_detail(request, pk):
+    project = get_object_or_404(Project, pk=pk, is_active=True)
+
+    if request.method == 'POST':
+        # Validate required fields
+        missing = [f.label for f in project.fields.all() if f.required and not request.POST.get(f.label) and not request.FILES.get(f.label)]
+        if missing:
+            messages.error(request, f"Required fields missing: {', '.join(missing)}")
+            return redirect('project_detail', pk=pk)
+
+        data = {}
+        unique_values = {}
+
+        for field in project.fields.all():
+            label = field.label
+            if field.field_type == 'file' and label in request.FILES:
+                file = request.FILES[label]
+                folder = os.path.join(settings.MEDIA_ROOT, 'student_files', str(project.id))
+                os.makedirs(folder, exist_ok=True)
+                
+                roll = request.POST.get('Roll Number') or request.POST.get('Regno') or "unknown"
+                safe_roll = "".join(c for c in str(roll) if c.isalnum() or c in "_-")
+                filename = f"{safe_roll}_{file.name}"
+                path = os.path.join(folder, filename)
+                
+                with open(path, 'wb+') as f:
+                    for chunk in file.chunks():
+                        f.write(chunk)
+                data[label] = f"/media/student_files/{project.id}/{filename}"
+            else:
+                value = request.POST.get(label, '')
+                data[label] = value
+
+            # Collect unique key values
+            if field.unique_key:
+                unique_values[label] = value
+
+        # Prevent duplicate submission
+        if unique_values:
+            if Submission.objects.filter(
+                project=project,
+                data__contains=unique_values
+            ).exists():
+                messages.error(request, "You already submitted with these details!")
+                return redirect('project_detail', pk=pk)
+
+        # Save
+        Submission.objects.create(project=project, data=data)
+
+        # Append to CSV
+        csv_path = project.csv_path()
+        os.makedirs(os.path.dirname(csv_path), exist_ok=True)
+        file_exists = os.path.exists(csv_path)
+        with open(csv_path, 'a', newline='', encoding='utf-8') as f:
+            writer = csv.DictWriter(f, fieldnames=data.keys())
+            if not file_exists:
+                writer.writeheader()
+            writer.writerow(data)
+
+        messages.success(request, "Submitted successfully!")
+        return redirect('project_detail', pk=pk)
+
+    return render(request, 'ntls/project_detail.html', {'project': project})

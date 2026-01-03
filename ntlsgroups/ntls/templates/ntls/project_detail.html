@@ -1,0 +1,155 @@
+{% extends 'ntls/base.html' %}
+{% load static %}
+
+{% block title %} - {{ project.project_name }} {% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+
+            <!-- Project Header -->
+            <div class="text-center mb-5">
+                <h1 class="display-5 fw-bold text-primary">{{ project.project_name }}</h1>
+                <p class="lead text-muted">{{ project.college_name }}</p>
+                <hr class="w-25 mx-auto border-primary">
+            </div>
+
+            <!-- Instructions -->
+            {% if project.instructions %}
+            <div class="card border-0 shadow-sm mb-5">
+                <div class="card-body p-4">
+                    <h5 class="text-primary mb-3">
+                        <i class="fas fa-info-circle me-2"></i>Instructions
+                    </h5>
+                    <div class="bg-light p-4 rounded-3">
+                        {{ project.instructions|linebreaks }}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Guidelines -->
+            {% if project.guidelines.all %}
+            <div class="card border-0 shadow-sm mb-5">
+                <div class="card-body p-4">
+                    <h5 class="text-success mb-3">
+                        <i class="fas fa-download me-2"></i>Download Resources
+                    </h5>
+                    <div class="row g-3">
+                        {% for g in project.guidelines.all %}
+                        <div class="col-md-6">
+                            <a href="{{ g.file.url }}" target="_blank" 
+                               class="btn btn-outline-success w-100 d-flex align-items-center justify-content-between p-3 rounded-3 shadow-sm hover-shadow">
+                                <span><i class="fas fa-file-pdf me-2"></i>{{ g.title }}</span>
+                                <i class="fas fa-arrow-down"></i>
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Submission Form -->
+            <div class="card border-0 shadow">
+                <div class="card-header bg-primary text-white text-center py-4">
+                    <h4 class="mb-0 fw-bold">
+                        <i class="fas fa-upload me-2"></i>Submit Your Report
+                    </h4>
+                </div>
+                <div class="card-body p-5">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        {% for field in project.fields.all %}
+                        <div class="mb-4">
+                            <label class="form-label fw-bold text-dark">
+                                {{ field.label }}
+                                {% if field.required %}
+                                    <span class="text-danger ms-1">*</span>
+                                {% endif %}
+                            </label>
+
+                            {% if field.field_type == "text" or field.field_type == "email" or field.field_type == "number" or field.field_type == "date" or field.field_type == "url" %}
+                                <input type="{{ field.field_type }}" 
+                                       name="{{ field.label }}" 
+                                       class="form-control form-control-lg rounded-3 border-secondary-subtle" 
+                                       {% if field.required %}required{% endif %}
+                                       {% if field.field_type == "url" %}placeholder="https://github.com/yourname/project"{% endif %}>
+                                
+                            {% elif field.field_type == "textarea" %}
+                                <textarea name="{{ field.label }}" 
+                                          class="form-control rounded-3 border-secondary-subtle" 
+                                          rows="5" 
+                                          placeholder="Enter your details here..." 
+                                          {% if field.required %}required{% endif %}></textarea>
+                                
+                            {% elif field.field_type == "select" %}
+                                <select name="{{ field.label }}" class="form-select form-select-lg rounded-3" {% if field.required %}required{% endif %}>
+                                    <option value="">— Select {{ field.label }} —</option>
+                                    {% for opt in field.options.splitlines %}
+                                        {% if opt.strip %}
+                                        <option>{{ opt.strip }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                                
+                            {% elif field.field_type == "file" %}
+                                <div class="border-2 border-dashed border-primary rounded-3 p-5 text-center bg-light hover-bg">
+                                    <input type="file" name="{{ field.label }}" class="form-control d-none" 
+                                           id="file-{{ forloop.counter }}" {% if field.required %}required{% endif %}>
+                                    <label for="file-{{ forloop.counter }}" class="cursor-pointer">
+                                        <i class="fas fa-cloud-upload-alt fa-3x text-primary mb-3"></i>
+                                        <p class="mb-2 fw-bold text-primary">Click to upload {{ field.label }}</p>
+                                        <small class="text-muted">PDF, DOCX, ZIP • Max 10MB</small>
+                                    </label>
+                                </div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+
+                        <div class="text-center mt-5">
+                            <button type="submit" 
+                                    class="btn btn-primary btn-lg px-5 py-3 rounded-pill shadow-lg hover-shadow">
+                                Submit Report
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <small class="text-muted">
+                    <i class="fas fa-shield-alt me-1"></i>
+                    Your submission is secure and confidential
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.hover-shadow:hover { 
+    transform: translateY(-3px); 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important; 
+}
+.hover-bg:hover { background-color: #f8f9fa !important; }
+.form-control:focus, .form-select:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13,110,253,0.15);
+}
+.cursor-pointer { cursor: pointer; }
+</style>
+
+<script>
+document.querySelectorAll('input[type="file"]').forEach(input => {
+    input.addEventListener('change', function() {
+        const label = this.parentElement;
+        if (this.files.length > 0) {
+            label.querySelector('p').innerHTML = `<strong class="text-success">${this.files[0].name}</strong>`;
+        }
+    });
+});
+</script>
+{% endblock %}

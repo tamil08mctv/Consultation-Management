@@ -194,3 +194,81 @@ class ContactInfo(models.Model):
 
     def __str__(self):
         return f"{self.phone} - {self.email}"
+
+# ntls/models.py
+from django.db import models
+from django.conf import settings
+import os
+
+# === AT THE END OF YOUR models.py ===
+
+class Project(models.Model):
+    college_name = models.CharField("College Name", max_length=200)
+    project_name = models.CharField("Project Name", max_length=200)
+    instructions = models.TextField("Instructions for Students", blank=True)
+    is_active = models.BooleanField("Show to Students", default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.college_name} - {self.project_name}"
+
+    def csv_path(self):
+        safe = "".join(c for c in f"{self.college_name}_{self.project_name}" if c.isalnum() or c in (" ", "_", "-"))
+        return os.path.join(settings.MEDIA_ROOT, 'submissions', f"{safe}_submissions.csv")
+
+
+class ProjectField(models.Model):
+    TYPE_CHOICES = [
+        ('text', 'Short Text'), ('textarea', 'Long Text'), ('email', 'Email'),
+        ('number', 'Number'), ('date', 'Date'), ('select', 'Dropdown'),
+        ('file', 'File Upload'), ('url', 'Link/URL'),
+    ]
+
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='fields')
+    label = models.CharField("Field Label (e.g. Full Name)", max_length=200)
+    field_type = models.CharField("Field Type", max_length=20, choices=TYPE_CHOICES)
+    options = models.TextField("Dropdown Options (one per line)", blank=True)
+    required = models.BooleanField("Required", default=False)
+    unique_key = models.BooleanField(
+        "Unique Key - Prevent Duplicate",
+        default=False,
+        help_text="Check this for Roll Number, Month, etc. Student cannot submit twice with same value"
+    )
+    order = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return self.label
+
+
+class ProjectFile(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='guidelines')
+    title = models.CharField("File Title", max_length=200)
+    file = models.FileField(upload_to='guidelines/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+
+class Submission(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='submissions')
+    submitted_at = models.DateTimeField(auto_now_add=True)
+    data = models.JSONField(default=dict)
+
+    def __str__(self):
+        name = self.data.get('Full Name') or self.data.get('Name') or 'Unknown'
+        roll = self.data.get('Roll Number') or self.data.get('Regno') or 'N/A'
+        return f"{name} ({roll})"
+
+    def get_file_links(self):
+        links = []
+        for key, value in self.data.items():
+            if isinstance(value, str) and value.startswith('/media/'):
+                links.append((key, value))
+        return links
+
+    class Meta:
+        ordering = ['-submitted_at']

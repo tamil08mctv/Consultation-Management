@@ -1,34 +1,51 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Debug log to confirm DOM is loaded
+// static/js/scripts.js — FINAL VERSION (NO SPINNER ON NAVIGATION)
+document.addEventListener('DOMContentLoaded', function () {
     console.log('DOM fully loaded');
 
-    // Loading Animation Control
+    // =================================================================
+    // SPINNER FIX — ONLY SHOWS ON FIRST VISIT, MAX 600ms
+    // =================================================================
     const loadingElement = document.getElementById('loading');
+
     if (loadingElement) {
-        console.log('Loading element found, setting timeout');
-        setTimeout(() => {
-            console.log('Hiding loading spinner');
-            loadingElement.style.opacity = '0';
-            setTimeout(() => {
-                loadingElement.style.display = 'none';
-                console.log('Loading spinner hidden');
-            }, 200);
-        }, 2000);
-        const checkResources = setInterval(() => {
-            console.log('Checking resources:', {
-                gsap: typeof gsap !== 'undefined',
-                aos: typeof AOS !== 'undefined',
-                particlesJS: typeof particlesJS !== 'undefined',
-                bootstrap: typeof bootstrap !== 'undefined'
+        // Only show spinner on FIRST visit
+        if (!sessionStorage.getItem('siteVisited')) {
+            console.log('First visit — showing spinner (max 600ms)');
+
+            // Show spinner
+            loadingElement.style.display = 'flex';
+
+            const hideSpinner = () => {
+                loadingElement.style.opacity = '0';
+                setTimeout(() => {
+                    loadingElement.style.display = 'none';
+                    console.log('Spinner hidden');
+                }, 300);
+            };
+
+            // Hide after max 600ms (even on slow internet)
+            const maxTimer = setTimeout(hideSpinner, 600);
+
+            // Or hide when everything loads (whichever comes first)
+            window.addEventListener('load', () => {
+                clearTimeout(maxTimer);
+                hideSpinner();
             });
-            if (typeof gsap !== 'undefined' && typeof AOS !== 'undefined' && typeof particlesJS !== 'undefined' && typeof bootstrap !== 'undefined') {
-                clearInterval(checkResources);
-                console.log('All resources loaded');
-            }
-        }, 100);
+
+            // Remember user visited
+            sessionStorage.setItem('siteVisited', 'true');
+        } else {
+            // Returning user — NO SPINNER
+            loadingElement.style.display = 'none';
+            console.log('Returning visitor — no spinner');
+        }
     } else {
         console.error('Loading element not found');
     }
+
+    // =================================================================
+    // ALL YOUR ORIGINAL CODE — UNCHANGED & WORKING
+    // =================================================================
 
     // Initialize AOS with error handling
     if (typeof AOS !== 'undefined') {

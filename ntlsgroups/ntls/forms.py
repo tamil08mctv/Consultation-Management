@@ -197,3 +197,45 @@ class FeedbackForm(forms.ModelForm):
         if not re.match(email_pattern, email):
             raise ValidationError('Please enter a valid email address.')
         return email
+
+
+from django import forms
+
+class EventRegistrationForm(forms.Form):
+    leader_name = forms.CharField(max_length=200, label="Team Leader Full Name")
+    leader_email = forms.EmailField(label="Team Leader Email")
+    leader_phone = forms.CharField(max_length=15, label="Team Leader Phone")
+    leader_institution = forms.CharField(max_length=200, label="School/College")
+
+    year = forms.ChoiceField(
+        choices=[
+            ('', '-- Select Year --'),
+            ('1', '1st Year'),
+            ('2', '2nd Year'),
+            ('3', '3rd Year'),
+            ('4', '4th Year'),
+            ('other', 'Others'),
+        ],
+        label="Year of Study"
+    )
+    department = forms.CharField(max_length=200, label="Department")
+  
+    team_size = forms.ChoiceField(choices=[], required=False, label="Team Size")
+
+    def __init__(self, *args, event=None, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.event = event
+        if event and event.price_type == 'team':
+            choices = [('', '-- Select Team Size --')]
+            for i in range(1, event.max_team_size + 1):
+                choices.append((i, f"{i} Member{'s' if i > 1 else ''}"))
+            self.fields['team_size'].choices = choices
+            self.fields['team_size'].required = True
+
+    # Only validate static fields — dynamic members validated in view
+    def clean(self):
+        cleaned_data = super().clean()
+        if self.event and self.event.price_type == 'team':
+            if not cleaned_data.get('team_size'):
+                raise forms.ValidationError("Please select team size")
+        return cleaned_data

@@ -2,11 +2,17 @@ from django.contrib import admin
 from django.core.mail import send_mail, get_connection
 from django.utils import timezone
 from django import forms
-from .models import Consumer, Business, Testimonial, Feedback, EmailConfig, Blog, BlogImage, SocialPlatform, Service, ContactInfo, PaymentLink
+from .models import (
+    Consumer, Business, Testimonial, Feedback, EmailConfig,
+    Blog, BlogImage, SocialPlatform, Service, ContactInfo, PaymentLink,
+    Project, ProjectField, ProjectFile, Submission,
+    Event, EventRegistration, RazorpayConfig  # <-- ADD THESE
+)
 import logging
 import smtplib
 import re
 from ntlsgroups.settings import get_email_config
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 # Set up logging
 logger = logging.getLogger(__name__)
@@ -510,6 +516,182 @@ class SubmissionAdmin(admin.ModelAdmin):
             row = [sub.data.get(label, '') for label in field_labels]
             row.append(sub.submitted_at.strftime('%Y-%m-%d %H:%M:%S'))
             writer.writerow(row)
-
         return response
     export_selected_as_csv.short_description = "Export Selected (Perfect Columns)"
+
+# ==================== CUSTOM FORMS ====================
+
+class EventAdminForm(forms.ModelForm):
+    class Meta:
+        model = Event
+        fields = '__all__'
+        widgets = {
+            'description': CKEditorUploadingWidget(config_name='default'),  # Rich text editor
+        }
+from django.contrib import admin
+from django import forms
+from django.http import HttpResponse
+from django.utils import timezone
+from django.utils.html import format_html
+import csv
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
+from .models import Event, EventRegistration, RazorpayConfig
+
+class EventAdminForm(forms.ModelForm):
+    class Meta:
+        model = Event
+        fields = '__all__'
+        widgets = {
+            'description': CKEditorUploadingWidget(),
+        }
+
+# Inline to show registrations under event with team info
+class EventRegistrationInline(admin.TabularInline):
+    model = EventRegistration
+    extra = 0
+    fields = ('get_team_display', 'team_size', 'amount', 'payment_status', 'created_at')
+    readonly_fields = ('get_team_display', 'created_at')
+    can_delete = False
+    show_change_link = True
+    ordering = ('-created_at',)
+
+    def get_team_display(self, obj):
+        if obj.team_size == 1:
+            return format_html(
+                "<strong>Single:</strong> {}<br><small>{} • {}</small>",
+                obj.name, obj.email, obj.phone
+            )
+        else:
+            members = obj.members or []
+            team_list = [obj.name] + [m.get('name', 'Unknown') for m in members]
+            return format_html(
+                "<strong>Team ({}):</strong><br>{}",
+                obj.team_size,
+                "<br>".join(team_list)
+            )
+    get_team_display.short_description = "Team Members"
+
+@admin.register(Event)
+class EventAdmin(admin.ModelAdmin):
+    form = EventAdminForm
+    list_display = ('title', 'is_active', 'registration_start', 'registration_end', 'price_type', 'max_team_size', 'total_registrations')
+    list_filter = ('is_active', 'price_type', 'registration_start', 'registration_end')
+    search_fields = ('title', 'short_description')
+    prepopulated_fields = {"slug": ("title",)}
+    inlines = [EventRegistrationInline]
+
+    fieldsets = (
+        (None, {
+            'fields': ('title', 'slug', 'short_description', 'is_active')
+        }),
+        ('Registration Dates', {
+            'fields': ('registration_start', 'registration_end')
+        }),
+        ('Pricing', {
+            'fields': ('price_type', 'fixed_price', 'team_price_slabs', 'max_team_size')
+        }),
+        ('Description', {
+            'fields': ('description',),
+        }),
+    )
+
+    def total_registrations(self, obj):
+        return obj.registrations.count()
+    total_registrations.short_description = "Total Registrations"
+
+    actions = ['export_registrations_csv']
+
+    def export_registrations_csv(self, request, queryset):
+        if queryset.count() != 1:
+            self.message_user(request, "Please select exactly ONE event to export.", level='error')
+            return
+
+        event = queryset.first()
+        response = HttpResponse(content_type='text/csv; charset=utf-8')
+        response['Content-Disposition'] = f'attachment; filename="{event.slug}_registrations_{timezone.now().strftime("%Y%m%d")}.csv"'
+
+        writer = csv.writer(response)
+        writer.writerow([
+            'Reg ID', 'Leader Name', 'Leader Email', 'Leader Phone', 'Institution', 'Year', 'Department',
+            'Team Size', 'Amount', 'Status', 'Date',
+            'Member 2 Name', 'Member 2 Email', 'Member 2 Phone',
+            'Member 3 Name', 'Member 3 Email', 'Member 3 Phone',
+            'Member 4 Name', 'Member 4 Email', 'Member 4 Phone'
+        ])
+
+        for reg in event.registrations.all().order_by('-created_at'):
+            members = reg.members or []
+            row = [
+                reg.id,
+                reg.name,
+                reg.email,
+                reg.phone,
+                reg.institution,
+                reg.get_year_display(),
+                reg.department or '-',
+                reg.team_size,
+                f"₹{reg.amount}",
+                reg.get_payment_status_display(),
+                reg.created_at.strftime('%d %b %Y, %I:%M %p')
+            ]
+            for i in range(3):
+                if i < len(members):
+                    m = members[i]
+                    row.extend([
+                        m.get('name', ''),
+                        m.get('email', ''),
+                        m.get('phone', '')
+                    ])
+                else:
+                    row.extend(['', '', ''])
+            writer.writerow(row)
+
+        return response
+    export_registrations_csv.short_description = "Export Registrations (CSV)"
+
+
+# Better display for individual registration detail
+@admin.register(EventRegistration)
+class EventRegistrationAdmin(admin.ModelAdmin):
+    list_display = ('name', 'event', 'team_size', 'amount', 'payment_status', 'created_at')
+    list_filter = ('event', 'payment_status', 'created_at')
+    search_fields = ('name', 'email', 'phone', 'event__title')
+    readonly_fields = ('created_at', 'payment_id', 'razorpay_payment_id', 'team_members_display')
+
+    fieldsets = (
+        ('Event & Leader', {
+            'fields': ('event', 'name', 'email', 'phone', 'institution', 'year', 'department')
+        }),
+        ('Team Details', {
+            'fields': ('team_size', 'team_members_display')
+        }),
+        ('Payment', {
+            'fields': ('amount', 'payment_status', 'payment_id', 'razorpay_payment_id')
+        }),
+        ('Timestamp', {
+            'fields': ('created_at',),
+            'classes': ('collapse',)
+        }),
+    )
+
+    def team_members_display(self, obj):
+        if obj.team_size <= 1:
+            return "Single participant"
+        
+        members = obj.members or []
+        if not members:
+            return "No team members added"
+        
+        html = "<table style='width:100%; border-collapse: collapse;'>"
+        html += "<tr><th style='border:1px solid #ccc; padding:8px; background:#f0f0f0;'>Name</th><th style='border:1px solid #ccc; padding:8px; background:#f0f0f0;'>Email</th><th style='border:1px solid #ccc; padding:8px; background:#f0f0f0;'>Phone</th></tr>"
+        for m in members:
+            html += f"<tr><td style='border:1px solid #ccc; padding:8px;'>{m.get('name', '-')}</td><td style='border:1px solid #ccc; padding:8px;'>{m.get('email', '-')}</td><td style='border:1px solid #ccc; padding:8px;'>{m.get('phone', '-')}</td></tr>"
+        html += "</table>"
+        return format_html(html)
+    team_members_display.short_description = "Team Members"
+
+
+@admin.register(RazorpayConfig)
+class RazorpayConfigAdmin(admin.ModelAdmin):
+    list_display = ('key_id', 'is_active', 'updated_at')
+    readonly_fields = ('updated_at',)

@@ -1,0 +1,13 @@
+{% extends 'ntls/base.html' %}
+
+{% block title %}Payment Failed{% endblock %}
+
+{% block content %}
+<div class="container py-5 text-center">
+    <i class="fas fa-times-circle text-danger" style="font-size: 6rem;"></i>
+    <h1 class="text-danger mt-4">Payment Failed</h1>
+    <p class="lead">Your payment could not be processed.</p>
+    <p>Please try again or contact support.</p>
+    <a href="{% url 'events_list' %}" class="btn btn-primary btn-lg mt-4">Back to Events</a>
+</div>
+{% endblock %}

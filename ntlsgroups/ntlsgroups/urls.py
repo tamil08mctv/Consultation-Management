@@ -23,6 +23,7 @@ from django.conf.urls import handler404
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('ntls.urls')),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = 'ntls.views.custom_404'

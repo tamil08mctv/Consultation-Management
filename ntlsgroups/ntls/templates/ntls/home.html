@@ -13,7 +13,16 @@ without it, even the Strongest Plans Collapse</h5>
             
             <div class="mt-4 d-flex flex-wrap justify-content-center gap-3">
                 <button class="btn btn-light btn-custom" data-bs-toggle="modal" data-bs-target="#consumerModal" data-aos="zoom-in">Submit Your Needs</button>
+               
                 <button class="btn btn-outline-light btn-custom" data-bs-toggle="modal" data-bs-target="#businessModal" data-aos="zoom-in" data-aos-delay="100">Become a Partner</button>
+
+               <a href="{% url 'events_list' %}"
+   class="btn btn-outline-light btn-custom nav-link"
+   data-aos="zoom-in"
+   data-aos-delay="100">
+    Explore Events
+</a>
+
             </div>
             <div class="mt-4 social-icons">
                 {% for social in social_platforms %}

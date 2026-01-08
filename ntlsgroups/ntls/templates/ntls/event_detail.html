@@ -1,0 +1,360 @@
+{% extends 'ntls/base.html' %}
+{% load static %}
+
+{% block title %}{{ event.title }} - Registration{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="bg-gradient-primary text-white py-3">
+    <div class="container">
+        <div class="row align-items-center g-4">
+            <div class="col-lg-9">
+                <h1 class=" fw-bold mb-3">{{ event.title }}</h1>
+                <p class="lead mb-4 opacity-90">{{ event.short_description }}</p>
+                <div class="d-flex flex-wrap gap-3">
+                    <span class="badge bg-white text-primary px-4 py-2 fs-6">
+                        <i class="far fa-calendar-alt me-2"></i>
+                        {{ event.registration_start|date:"d M" }} — {{ event.registration_end|date:"d M Y" }}
+                    </span>
+                    {% if event.price_type == 'free' %}
+                        <span class="badge bg-success px-4 py-2 fs-6">FREE EVENT</span>
+                    {% elif event.price_type == 'fixed' %}
+                        <span class="badge bg-warning text-dark px-4 py-2 fs-6">₹{{ event.fixed_price }}</span>
+                    {% else %}
+                        <span class="badge bg-info text-white px-4 py-2 fs-6">Team Pricing</span>
+                    {% endif %}
+                    {% if event.is_registration_open %}
+                        <span class="badge bg-success px-4 py-2 fs-6">Registration Open</span>
+                    {% else %}
+                        <span class="badge bg-secondary px-4 py-2 fs-6">Registration Closed</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container py-3">
+    <div class="row g-5">
+        <!-- Event Description -->
+        <div class="col-lg-8">
+            <div class="bg-white rounded-4 shadow-sm p-4 p-lg-5">
+                <h2 class="h4 fw-bold text-primary mb-4">About This Event</h2>
+                <div class="prose prose-lg max-w-none text-dark">
+                    {{ event.description|safe }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Registration Card -->
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-lg rounded-4 sticky-top" style="top: 100px;">
+                <div class="card-header bg-primary text-white text-center py-4 rounded-top-4">
+                    <h4 class="mb-0 fw-bold fs-5">Register Now</h4>
+                </div>
+                <div class="card-body p-4">
+                    {% if not event.is_registration_open %}
+                        <div class="alert alert-warning text-center rounded-3">
+                            <i class="fas fa-clock fa-lg me-2"></i>
+                            <strong>Registration is currently closed</strong>
+                        </div>
+                    {% else %}
+                        <form id="registration-form">
+                            {% csrf_token %}
+
+                            <h6 class="fw-bold text-primary mb-3">Team Leader Details</h6>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" name="name" placeholder="Full Name *" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="email" class="form-control" name="email" placeholder="Email Address *" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="tel" class="form-control phone-input" name="phone" placeholder="Phone/WhatsApp (10 digits) *" maxlength="10" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" name="institution" placeholder="College/School *" required>
+                            </div>
+                            <div class="mb-3">
+                                <select class="form-select" name="year" required>
+                                    <option value="">Year of Study *</option>
+                                    <option value="1">1st Year</option>
+                                    <option value="2">2nd Year</option>
+                                    <option value="3">3rd Year</option>
+                                    <option value="4">4th Year</option>
+                                    <option value="other">Others</option>
+                                </select>
+                            </div>
+                            <div class="mb-4">
+                                <input type="text" class="form-control" name="department" placeholder="Department (Optional)">
+                            </div>
+
+                            <hr class="my-4 border-secondary">
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Team Size (including leader)</label>
+                                <select class="form-select form-select-lg" id="team-size" required>
+                                    {% for i in "1"|rjust:event.max_team_size %}
+                                        <option value="{{ forloop.counter }}">{{ forloop.counter }} member{{ forloop.counter|pluralize }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div id="team-members-container" class="mb-4"></div>
+
+                            <div id="price-display" class="alert alert-info text-center fw-bold rounded-3 py-3 d-none">
+                                Total Amount: ₹<span id="amount" class="fs-4">0</span>
+                            </div>
+
+                            <button type="button" id="submit-btn" class="btn btn-success btn-lg w-100 mt-3 shadow">
+                                {% if event.price_type == "free" %}Register for Free{% else %}Proceed to Pay{% endif %}
+                            </button>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Razorpay Script -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+const config = {
+    priceType: "{{ event.price_type }}",
+    fixedPrice: {{ event.fixed_price|default:"0" }},
+    slabs: {{ event.team_price_slabs|default:"{}"|safe }}
+};
+
+function renderMembers() {
+    const size = parseInt(document.getElementById('team-size').value) || 1;
+    const container = document.getElementById('team-members-container');
+    container.innerHTML = '';
+
+    updatePrice(size);
+
+    if (size <= 1) return;
+
+    let html = `<h6 class="fw-bold text-primary mt-4 mb-3">Additional Team Members (${size - 1})</h6>`;
+    for (let i = 2; i <= size; i++) {
+        html += `
+        <div class="border rounded-3 p-4 mb-4 bg-light">
+            <h6 class="text-secondary fw-bold">Member ${i} <span class="text-danger">*</span></h6>
+            <div class="row g-3">
+                <div class="col-md-6"><input type="text" class="form-control" placeholder="Full Name *" required></div>
+                <div class="col-md-6"><input type="email" class="form-control" placeholder="Email *" required></div>
+                <div class="col-md-6"><input type="tel" class="form-control phone-input" placeholder="Phone/WhatsApp (10 digits) *" maxlength="10" required></div>
+                <div class="col-md-6"><input type="text" class="form-control" placeholder="College/School *" required></div>
+                <div class="col-md-6">
+                    <select class="form-select" required>
+                        <option value="">Year *</option>
+                        <option value="1">1st Year</option>
+                        <option value="2">2nd Year</option>
+                        <option value="3">3rd Year</option>
+                        <option value="4">4th Year</option>
+                        <option value="other">Others</option>
+                    </select>
+                </div>
+                <div class="col-md-6"><input type="text" class="form-control" placeholder="Department"></div>
+            </div>
+        </div>`;
+    }
+    container.innerHTML = html;
+}
+
+function updatePrice(size) {
+    let price = 0;
+    if (config.priceType === "fixed") {
+        price = config.fixedPrice;
+    } else if (config.priceType === "team") {
+        price = config.slabs[size] || 0;
+    }
+
+    const display = document.getElementById("price-display");
+    const amount = document.getElementById("amount");
+    const btn = document.getElementById("submit-btn");
+
+    if (price > 0) {
+        display.classList.remove("d-none");
+        amount.textContent = price;
+        btn.textContent = `Pay ₹${price}`;
+    } else {
+        display.classList.add("d-none");
+        btn.textContent = "Register for Free";
+    }
+}
+
+function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function isValidPhone(phone) {
+    return /^\d{10}$/.test(phone);
+}
+
+document.getElementById("submit-btn").addEventListener("click", function () {
+    const leader = {
+        name: document.querySelector("[name=name]").value.trim(),
+        email: document.querySelector("[name=email]").value.trim(),
+        phone: document.querySelector("[name=phone]").value.trim(),
+        institution: document.querySelector("[name=institution]").value.trim(),
+        year: document.querySelector("[name=year]").value,
+        department: document.querySelector("[name=department]").value.trim()
+    };
+
+    if (!leader.name || !leader.email || !leader.phone || !leader.institution || !leader.year) {
+        alert("Please fill all Team Leader fields.");
+        return;
+    }
+    if (!isValidEmail(leader.email)) {
+        alert("Invalid email address.");
+        return;
+    }
+    if (!isValidPhone(leader.phone)) {
+        alert("Team Leader phone must be exactly 10 digits.");
+        return;
+    }
+
+    const teamSize = parseInt(document.getElementById("team-size").value);
+    const members = [];
+
+    if (teamSize > 1) {
+        const blocks = document.querySelectorAll('#team-members-container > div');
+        if (blocks.length !== teamSize - 1) {
+            alert("Please wait for member fields to load.");
+            return;
+        }
+
+        blocks.forEach((block, index) => {
+            const inputs = block.querySelectorAll("input, select");
+            const member = {
+                name: inputs[0].value.trim(),
+                email: inputs[1].value.trim(),
+                phone: inputs[2].value.trim(),
+                institution: inputs[3].value.trim(),
+                year: inputs[4].value,
+                department: inputs[5].value.trim()
+            };
+
+            if (!member.name || !member.email || !member.phone || !member.institution || !member.year) {
+                alert(`Please fill all fields for Member ${index + 2}`);
+                throw "stop";
+            }
+            if (!isValidEmail(member.email)) {
+                alert(`Invalid email for Member ${index + 2}`);
+                throw "stop";
+            }
+            if (!isValidPhone(member.phone)) {
+                alert(`Member ${index + 2} phone must be exactly 10 digits.`);
+                throw "stop";
+            }
+            members.push(member);
+        });
+    }
+
+    const payload = {
+        name: leader.name,
+        email: leader.email,
+        phone: leader.phone,
+        institution: leader.institution,
+        year: leader.year,
+        department: leader.department,
+        team_size: teamSize,
+        members: members
+    };
+
+    fetch("{% url 'create_razorpay_order' event.slug %}", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]").value
+        },
+        body: JSON.stringify(payload)
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.free) {
+            alert("Registration successful! Check your email.");
+            location.reload();
+            return;
+        }
+        if (data.error) {
+            alert("Error: " + data.error);
+            return;
+        }
+
+        const options = {
+            key: data.key_id,
+            amount: data.amount,
+            currency: "INR",
+            name: "{{ event.title|escapejs }}",
+            description: "Event Registration Fee",
+            order_id: data.order_id,
+            handler: function (response) {
+                // Send data to backend and redirect immediately
+                const fd = new FormData();
+                fd.append("razorpay_payment_id", response.razorpay_payment_id);
+                fd.append("razorpay_order_id", response.razorpay_order_id);
+                fd.append("razorpay_signature", response.razorpay_signature);
+                fd.append("temp_data", JSON.stringify({
+                    ...payload,
+                    event_slug: "{{ event.slug }}",
+                    amount: data.amount / 100
+                }));
+
+                fetch("{% url 'payment_success' %}", {
+                    method: "POST",
+                    body: fd
+                })
+                .then(res => res.text())
+                .then(() => {
+                    // Immediate redirect — no delay!
+                    window.location.href = "{% url 'payment_success' %}?reg_id=" + response.razorpay_payment_id;
+                })
+                .catch(() => {
+                    alert("Payment recorded. Redirecting...");
+                    window.location.href = "{% url 'payment_success' %}";
+                });
+            },
+            prefill: {
+                name: payload.name,
+                email: payload.email,
+                contact: payload.phone
+            },
+            theme: { color: "#0d6efd" }
+        };
+
+        new Razorpay(options).open();
+    })
+    .catch(() => alert("Network error. Please try again."));
+});
+
+// Initialize
+document.getElementById("team-size").addEventListener("change", renderMembers);
+renderMembers();
+
+// Restrict phone inputs to numbers only
+document.querySelectorAll('.phone-input').forEach(input => {
+    input.addEventListener('input', function () {
+        this.value = this.value.replace(/\D/g, '').slice(0, 10);
+    });
+});
+</script>
+
+<style>
+    .bg-gradient-primary {
+        background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+    }
+    .prose img {
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        max-width: 100%;
+        height: auto;
+    }
+    @media (max-width: 992px) {
+        .sticky-top { position: static !important; }
+    }
+</style>
+
+{% endblock %}

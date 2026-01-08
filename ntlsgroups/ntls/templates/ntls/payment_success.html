@@ -1,0 +1,26 @@
+{% extends 'ntls/base.html' %}
+
+{% block title %}Payment Successful{% endblock %}
+
+{% block content %}
+<div class="container py-5 text-center">
+    <i class="fas fa-check-circle text-success" style="font-size: 6rem;"></i>
+    <h1 class="text-success mt-4">Payment Successful!</h1>
+
+    {% if registration %}
+        <p class="lead mt-3">Thank you, <strong>{{ registration.name }}</strong>!</p>
+        <p>Your registration for <strong>{{ registration.event.title }}</strong> is confirmed.</p>
+        <p><strong>Amount Paid:</strong> ₹{{ registration.amount }}</p>
+        <p>A confirmation email has been sent to <strong>{{ registration.email }}</strong></p>
+    {% else %}
+        <!-- This shows when Razorpay redirects with GET (no registration object) -->
+        <p class="lead mt-3">Payment completed successfully!</p>
+        <p>Thank you for registering with NTLS Groups.</p>
+        <p>You can check your email for confirmation details.</p>
+    {% endif %}
+
+    <div class="mt-5">
+        <a href="{% url 'events_list' %}" class="btn btn-primary btn-lg">Back to Events</a>
+    </div>
+</div>
+{% endblock %}

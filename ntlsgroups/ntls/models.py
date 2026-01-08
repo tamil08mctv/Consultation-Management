@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.core.exceptions import ValidationError
 import os
 import logging
+from ckeditor_uploader.fields import RichTextUploadingField
 
 logger = logging.getLogger(__name__)
 
@@ -272,3 +273,116 @@ class Submission(models.Model):
 
     class Meta:
         ordering = ['-submitted_at']
+
+
+from django.db import models
+from django.utils import timezone
+from decimal import Decimal
+
+
+class Event(models.Model):
+    PRICE_TYPE_CHOICES = (
+        ("free", "Free"),
+        ("fixed", "Fixed Price"),
+        ("team", "Team-based Pricing"),
+    )
+
+    title = models.CharField(max_length=255)
+    slug = models.SlugField(unique=True, help_text="Unique URL identifier")
+    short_description = models.CharField(max_length=300)
+    description = RichTextUploadingField(  # ← CHANGE THIS LINE
+        help_text="Write detailed event description with formatting, images, links, etc."
+    )
+    registration_start = models.DateTimeField()
+    registration_end = models.DateTimeField()
+    price_type = models.CharField(max_length=10, choices=PRICE_TYPE_CHOICES, default="free")
+    fixed_price = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
+    team_price_slabs = models.JSONField(
+        null=True,
+        blank=True,
+        help_text="Example: {'2': 400, '3': 550, '4': 700} → price for team size"
+    )
+    max_team_size = models.PositiveIntegerField(default=1, help_text="Maximum members including leader")
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def is_registration_open(self):
+        now = timezone.now()
+        return self.registration_start <= now <= self.registration_end
+
+    def get_price(self, team_size=1):
+        if self.price_type == "free":
+            return Decimal('0')
+        elif self.price_type == "fixed":
+            return self.fixed_price or Decimal('0')
+        elif self.price_type == "team":
+            return Decimal(self.team_price_slabs.get(str(team_size), 0))
+        return Decimal('0')
+
+    def __str__(self):
+        return self.title
+
+
+YEAR_CHOICES = [
+    ('1', '1st Year'),
+    ('2', '2nd Year'),
+    ('3', '3rd Year'),
+    ('4', '4th Year'),
+    ('other', 'Others'),
+]
+
+
+class EventRegistration(models.Model):
+    PAYMENT_STATUS_CHOICES = (
+        ("paid", "Paid"),
+        ("failed", "Failed"),
+    )
+
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name="registrations")
+    name = models.CharField("Leader Full Name", max_length=150)
+    email = models.EmailField()
+    phone = models.CharField("Phone/WhatsApp", max_length=20)
+    institution = models.CharField("College/School", max_length=255)
+    year = models.CharField(max_length=10, choices=YEAR_CHOICES)
+    department = models.CharField(max_length=200, blank=True)
+
+    team_size = models.PositiveIntegerField(default=1)
+    members = models.JSONField(
+        null=True,
+        blank=True,
+        help_text="List of additional members: [{'name': ..., 'email': ..., ...}]"
+    )
+
+    amount = models.DecimalField(max_digits=8, decimal_places=2, default=0)
+    payment_status = models.CharField(max_length=10, choices=PAYMENT_STATUS_CHOICES, default="paid")
+    payment_id = models.CharField(max_length=255, blank=True)  # Razorpay order ID
+    razorpay_payment_id = models.CharField(max_length=255, blank=True, null=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.name} – {self.event.title} ({self.get_payment_status_display()})"
+
+
+class RazorpayConfig(models.Model):
+    key_id = models.CharField("Razorpay Key ID", max_length=100)
+    key_secret = models.CharField("Razorpay Key Secret", max_length=100)
+    is_active = models.BooleanField(default=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Razorpay ({'Active' if self.is_active else 'Inactive'})"
+
+    class Meta:
+        verbose_name_plural = "Razorpay Configuration"
+
+    def save(self, *args, **kwargs):
+        if self.is_active:
+            RazorpayConfig.objects.exclude(pk=self.pk).update(is_active=False)
+        super().save(*args, **kwargs)
